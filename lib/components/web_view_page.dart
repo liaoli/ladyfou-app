@@ -104,8 +104,8 @@ class _WebViewPageState extends State<WebViewPage> {
         return WebView(
           // initialUrl: 'https://flutter.dev',
           // initialUrl: 'http://cocos-games.fir.show/yanshi-huafang/index.html',
-          initialUrl: 'http://api.erp.orderc.vip:4333/index.html',
-          // initialUrl: widget.url,
+          // initialUrl: 'http://api.erp.orderc.vip:4333/index.html',
+          initialUrl: widget.url,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
