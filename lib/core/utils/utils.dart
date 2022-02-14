@@ -20,6 +20,30 @@ class Utils {
     }
   }
 
+  // 处理url
+  static String url(String url) {
+    if (url == null || url.length == 0 || url.isEmpty) {
+      return "";
+    }
+    if (url.contains('http://')) {
+      return url;
+    }
+    if (url.contains('https://')) {
+      return url;
+    }
+    if (url.contains('ftp://')) {
+      return url;
+    }
+    if (url.contains("file://")) {
+      return url;
+    }
+    if (url.substring(0, 4).contains('www.')) {
+      return 'http:' + url;
+    }
+    return 'http:' + url;
+  }
+
+
   //=============package_info==================//
 
   ///获取应用包信息

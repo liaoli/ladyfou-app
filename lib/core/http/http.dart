@@ -7,12 +7,18 @@ import 'dart:io';
 
 import 'package:ladyfou/utils/sputils.dart';
 
+/// 生产环境域名
+// const String baseUrl = "http://aashop.neverdown.cc";
+
+/// 开发环境域名
+const String baseUrl = "http://192.168.1.174";
+
 class XHttp {
   XHttp._internal();
 
   ///网络请求配置
   static final Dio dio = Dio(BaseOptions(
-    baseUrl: "https://www.wanandroid.com",
+    baseUrl: baseUrl,
     connectTimeout: 5000,
     sendTimeout:5000,
     receiveTimeout: 5000,

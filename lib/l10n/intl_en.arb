@@ -48,5 +48,7 @@
   "agreePrivacy": "Privacy agreement agreed!",
   "darkTheme": "Dark Theme",
   "phoneNum": "phoneNum",
-  "common_button_continue": "Continue"
+  "common_button_continue": "Continue",
+  "erro_message": "请求出错，这里可以设置个缺省页",
+  "home_search_name": "当前热搜词"
 }

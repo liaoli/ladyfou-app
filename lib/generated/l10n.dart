@@ -549,6 +549,26 @@ class S {
       args: [],
     );
   }
+
+  /// `请求出错，这里可以设置个缺省页`
+  String get erro_message {
+    return Intl.message(
+      '请求出错，这里可以设置个缺省页',
+      name: 'erro_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `当前热搜词`
+  String get home_search_name {
+    return Intl.message(
+      '当前热搜词',
+      name: 'home_search_name',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

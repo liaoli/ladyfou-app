@@ -1,28 +1,107 @@
+import 'package:flutter/cupertino.dart';
+import 'package:ladyfou/core/model/sort_model.dart';
+
 import '../model/user_info_model.dart';
 
 class MyResponse<T> {
   MyResponse({
-    required this.code,
-    this.data,
-    required this.msg,
+    required this.common,
+    required this.response,
   });
 
-  int code;
-  T? data;
-  String msg;
+  Common common;
+  Response<T>? response;
 
   factory MyResponse.fromJson(Map<String, dynamic> json) => MyResponse(
-        code: json["code"],
-        data: json["data"] == null ? null : fromJson<T>(json['data']),
-        msg: json["msg"],
-      );
+    common: Common.fromJson(json["common"]),
+    response: Response<T>.fromJson(json['response']),
+  );
 }
 
-T fromJson<T>(Map<String, dynamic> json) {
+T fromJson<T>(dynamic json) {
+  debugPrint("====>${T.toString()}");
   switch (T.toString()) {
     case "UserInfoModel":
       return UserInfoModel.fromMap(json) as T;
+    case "List<SortModel>":
+      return SortModel.fromList(json) as T;
     default:
       return [] as T;
   }
 }
+
+
+class Response<T> {
+  Response({
+    required this.data,
+  });
+
+  T? data;
+
+  factory Response.fromJson(Map<String, dynamic> json) => Response(
+    data: json["data"] == null ? null : fromJson<T>(json['data']),
+  );
+}
+
+class Common {
+  Common({
+    this.statusCode = 0,
+    this.debugMessage = '',
+    this.releaseMessage = '',
+    this.domain = '',
+    this.currencySymbol = '',
+    this.encryptionEnabled = false,
+    this.currentTimeStamp = 0,
+    required this.pageEnabled,
+  });
+
+  int statusCode;
+  String debugMessage;
+  String releaseMessage;
+  String domain;
+  String currencySymbol;
+  bool encryptionEnabled;
+  int currentTimeStamp;
+  PageEnabled pageEnabled;
+
+  factory Common.fromJson(Map<String, dynamic> json) => Common(
+    statusCode: json["statusCode"],
+    debugMessage: json["debugMessage"],
+    releaseMessage: json["releaseMessage"],
+    domain: json["domain"],
+    currencySymbol: json["currencySymbol"],
+    encryptionEnabled: json["encryptionEnabled"],
+    currentTimeStamp: json["currentTimeStamp"],
+    pageEnabled: PageEnabled.fromJson(json["pageEnabled"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "statusCode": statusCode,
+    "debugMessage": debugMessage,
+    "releaseMessage": releaseMessage,
+    "domain": domain,
+    "currencySymbol": currencySymbol,
+    "encryptionEnabled": encryptionEnabled,
+    "currentTimeStamp": currentTimeStamp,
+    "pageEnabled": pageEnabled.toJson(),
+  };
+
+}
+
+class PageEnabled {
+  PageEnabled({
+    this.pageEnabled = false,
+  });
+
+  bool pageEnabled;
+
+  factory PageEnabled.fromJson(Map<String, dynamic> json) => PageEnabled(
+    pageEnabled: json["pageEnabled"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "pageEnabled": pageEnabled,
+  };
+}
+
+

@@ -172,11 +172,11 @@ class _RegisterPageState extends State<RegisterPage> {
       repassword: _pwdRepeatController.text,
     ).then((value) {
       Navigator.pop(context);
-      if (value.code == 0) {
+      if (value.common.statusCode == 0) {
         ToastUtils.toast(S.of(context).registerSuccess);
         Navigator.of(context).pop();
       } else {
-        ToastUtils.error(value.msg);
+        ToastUtils.error(value.common.debugMessage);
       }
     }).catchError((onError) {
       Navigator.of(context).pop();

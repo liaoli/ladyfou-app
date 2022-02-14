@@ -48,6 +48,7 @@
   "agreePrivacy": "已同意隐私协议!",
   "darkTheme": "深色主题",
   "phoneNum": "手机号码",
-  "common_button_continue": "继续"
-
+  "common_button_continue": "继续",
+  "erro_message": "请求出错，这里可以设置个缺省页",
+  "home_search_name": "当前热搜词"
 }

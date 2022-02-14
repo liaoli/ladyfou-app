@@ -73,6 +73,8 @@ dependencies:
   # 播放器
   video_player: ^2.1.6
   flutter_svg: ^0.23.0+1
+  # 自适应文本大小
+  auto_size_text:
 
   #  im_flutter_sdk:
   #    path: /Users/hfy/flutter/im_flutter_sdk-3.8.3+4
@@ -103,6 +105,14 @@ flutter:
     - assets/sample_video.mp4
     - assets/www/index.html
     - assets/www/styles/style.css
+
+    # Sort
+    - assets/images/sort/news_icon_black.png
+    - assets/images/sort/good_test_icon.png
+    - assets/images/sort/sort_section_title_icon.png
+    - assets/images/sort/search_icon_black.png
+    - assets/images/sort/camera_icon_black.png
+    - assets/images/sort/search_delete_icon.png
 
 
   fonts:

@@ -3,6 +3,7 @@
 
 
 import 'package:ladyfou/core/http/response.dart';
+import 'package:ladyfou/core/model/sort_model.dart';
 
 import '../model/user_info_model.dart';
 import 'http.dart';
@@ -45,3 +46,13 @@ Future<MyResponse<UserInfoModel>> login(
 
   return response;
 }
+
+
+/////////////////////////////////thw-start////////////////////////////////////
+/// 分类接口
+Future<MyResponse<List<SortModel>>> getSortData() async {
+  Map<String, dynamic> result = await XHttp.get("/otonastyle/catalog/category");
+  MyResponse<List<SortModel>> response = MyResponse<List<SortModel>>.fromJson(result);
+  return response;
+}
+/////////////////////////////////thw-end//////////////////////////////////////
