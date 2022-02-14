@@ -7,8 +7,6 @@
  * @LastEditors: tang
  */
 
-import 'dart:convert';
-
 class SortModel {
   SortModel({
     this.id = 0,
@@ -47,10 +45,10 @@ class SortModel {
     parentId: json["parent_id"],
     name: json["name"],
     name2: json["name2"],
-    slug: json["slug"],
+    slug: json["slug"] == null ? '' : json["slug"],
     isEnabled: json["is_enabled"],
     thumb: json["thumb"],
-    icon: json["icon"],
+    icon: json["icon"] == null ? '' : json["icon"],
     children: json["children"] == null ? [] : SortDataChild.fromList(json["children"]),
   );
 
@@ -77,7 +75,7 @@ class SortDataChild {
     this.isEnabled = 0,
     this.thumb = '',
     this.icon = '',
-    required this.children,
+    this.children = const [],
     this.clickId = 0,
   });
 
@@ -89,7 +87,7 @@ class SortDataChild {
   int isEnabled;
   String thumb;
   String icon;
-  Map<String,dynamic> children;
+  List<SortDataChildItem> children;
   int clickId;
 
   static List<SortDataChild> fromList(List json) {
@@ -107,11 +105,11 @@ class SortDataChild {
     parentId: json["parent_id"],
     name: json["name"],
     name2: json["name2"],
-    slug: json["slug"],
+    slug: json["slug"] == null ? '' : json["slug"],
     isEnabled: json["is_enabled"],
     thumb: json["thumb"],
-    icon: json["icon"],
-    children: json["children"] == null ? {} : json["children"],
+    icon: json["icon"] == null ? '' : json["icon"],
+    children: json["children"] == null ? [] : SortDataChildItem.fromList(json["children"]),
     clickId: json["clickId"] == null ? 0 : json["clickId"],
   );
 
@@ -124,7 +122,7 @@ class SortDataChild {
     "is_enabled": isEnabled,
     "thumb": thumb,
     "icon": icon,
-    "children": children == null ? {} : children,
+    "children": children == null ? [] : children,
     "clickId": clickId == null ? 0 : clickId,
   };
 }
@@ -150,15 +148,25 @@ class SortDataChildItem {
   String thumb;
   String icon;
 
+  static List<SortDataChildItem> fromList(List json) {
+    List<SortDataChildItem> sorts = [];
+    json.forEach((element) {
+      if (element is Map<String,dynamic>) {
+        sorts.add(SortDataChildItem.fromJson(element));
+      }
+    });
+    return sorts;
+  }
+
   factory SortDataChildItem.fromJson(Map<String, dynamic> json) => SortDataChildItem(
     id: json["id"],
     parentId: json["parent_id"],
     name: json["name"],
     name2: json["name2"],
-    slug: json["slug"],
+    slug: json["slug"] == null ? '' : json["slug"],
     isEnabled: json["is_enabled"],
     thumb: json["thumb"],
-    icon: json["icon"],
+    icon: json["icon"] == null ? '' : json["icon"],
   );
 
   Map<String, dynamic> toJson() => {
