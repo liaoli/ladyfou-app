@@ -88,9 +88,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/2.0x/
-    - assets/images/3.0x/
-    - assets/images/
 
     - assets/images/bottom_tab/tab_category_defualt.png
     - assets/images/bottom_tab/tab_category_selected.png
