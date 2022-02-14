@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:ladyfou/page/home/components/home_banner_swiper.dart';
 
+import 'components/game_entry.dart';
+import 'components/limited_time_discount.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -23,6 +26,18 @@ class _HomePageState extends State<HomePage> {
         onLoad: () async {},
         slivers: <Widget>[
           SliverToBoxAdapter(child: homeBanner()),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 12,
+            ),
+          ),
+          SliverToBoxAdapter(child: gameEntry()),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 12,
+            ),
+          ),
+          SliverToBoxAdapter(child: limitedTimeDiscount()),
         ],
       ),
     );
@@ -30,5 +45,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget homeBanner() {
     return HomeBannerSwiper();
+  }
+
+  Widget gameEntry() {
+    return GameEntrySwiper();
+  }
+
+  Widget limitedTimeDiscount() {
+    return LimitedTimeDiscount();
   }
 }

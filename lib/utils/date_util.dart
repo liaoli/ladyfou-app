@@ -60,3 +60,25 @@ String timestampToDate(int timestamp) {
 int dateToTimestamp(DateTime date) {
   return date.millisecondsSinceEpoch ~/ 1000;
 }
+
+
+String formatTime(int timeNum) {
+  return timeNum < 10 ? "0" + timeNum.toString() : timeNum.toString();
+}
+
+String formatSecond2HHMMSS(int seconds) {
+  int hour = seconds ~/ 3600;
+  int minute = seconds % 3600 ~/ 60;
+  int second = seconds % 60;
+  return formatTime(hour) +
+      ":" +
+      formatTime(minute) +
+      ":" +
+      formatTime(second);
+}
+
+String constructTime(int seconds) {
+  int minute = seconds % 3600 ~/ 60;
+  int second = seconds % 60;
+  return formatTime(minute) + ":" + formatTime(second);
+}
