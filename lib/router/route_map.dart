@@ -12,7 +12,7 @@ class RouteMap {
   static List<GetPage> getPages = [
     // GetPage(name: '/', page: () => GuidePage()),
     GetPage(name: '/login', page: () => LoginPage()),
-    GetPage(name: '/home', page: () => MainHomePage()),
+    GetPage(name: '/home', page: () => IndexPage()),
     GetPage(name: '/web', page: () => WebViewPage()),
     GetPage(name: '/menu/settings-page', page: () => SettingsPage()),
     GetPage(name: '/menu/about-page', page: () => AboutPage()),
