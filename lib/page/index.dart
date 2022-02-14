@@ -13,14 +13,14 @@ import '../generated/l10n.dart';
 import '../style/Color.dart';
 import 'menu/menu_drawer.dart';
 
-class MainHomePage extends StatefulWidget {
-  MainHomePage({Key? key}) : super(key: key);
+class IndexPage extends StatefulWidget {
+  IndexPage({Key? key}) : super(key: key);
 
   @override
-  _MainHomePageState createState() => _MainHomePageState();
+  _IndexPageState createState() => _IndexPageState();
 }
 
-class _MainHomePageState extends State<MainHomePage> {
+class _IndexPageState extends State<IndexPage> {
   List<TabBarModel> tabs = [
     TabBarModel(
         title: S.current.home,

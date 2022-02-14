@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
       if (response.code == 0) {
         userProfile.nickName = response.data!.username;
         ToastUtils.toast(S.of(context).loginSuccess);
-        Get.off(() => MainHomePage());
+        Get.off(() => IndexPage());
       } else {
         ToastUtils.error(response.msg);
       }

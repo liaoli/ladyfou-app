@@ -38,7 +38,7 @@ class DefaultApp {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    RouteMap.getPages.insert(0, GetPage(name: '/', page: () => MainHomePage()));
+    RouteMap.getPages.insert(0, GetPage(name: '/', page: () => IndexPage()));
     // if (SPUtils.isLogined()) {
     //
     // } else {
