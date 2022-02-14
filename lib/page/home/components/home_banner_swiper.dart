@@ -155,11 +155,8 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
       scrollDirection: _scrollDirection,
       indicatorLayout: PageIndicatorLayout.COLOR,
       autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
-      pagination: new SwiperPagination(
-          builder: const FractionPaginationBuilder(
-              activeColor: AppColors.black,
-              color: AppColors.white,
-            )),
+      pagination:
+          new SwiperPagination(builder: const MyFractionPaginationBuilder()),
     );
   }
 
@@ -174,5 +171,84 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
         child: new SizedBox(height: 351, width: 351, child: buildSwiper()),
       ),
     );
+  }
+}
+
+class MyFractionPaginationBuilder extends SwiperPlugin {
+  ///color ,if set null , will be Theme.of(context).scaffoldBackgroundColor
+  final Color? color;
+
+  ///color when active,if set null , will be Theme.of(context).primaryColor
+  final Color? activeColor;
+
+  ////font size
+  final double fontSize;
+
+  ///font size when active
+  final double activeFontSize;
+
+  final Key? key;
+
+  const MyFractionPaginationBuilder(
+      {this.color = AppColors.white,
+      this.fontSize: 12.0,
+      this.key,
+      this.activeColor = AppColors.white,
+      this.activeFontSize: 12.0});
+
+  @override
+  Widget build(BuildContext context, SwiperPluginConfig config) {
+    ThemeData themeData = Theme.of(context);
+    Color activeColor = this.activeColor ?? themeData.primaryColor;
+    Color color = this.color ?? themeData.scaffoldBackgroundColor;
+
+    if (Axis.vertical == config.scrollDirection) {
+      return new Column(
+        key: key,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new Text(
+            "${config.activeIndex + 1}",
+            style: TextStyle(color: activeColor, fontSize: activeFontSize),
+          ),
+          new Text(
+            "/",
+            style: TextStyle(color: color, fontSize: fontSize),
+          ),
+          new Text(
+            "${config.itemCount}",
+            style: TextStyle(color: color, fontSize: fontSize),
+          )
+        ],
+      );
+    } else {
+      return new Row(
+        key: key,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Expanded(child: SizedBox()),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+              color: AppColors.color_66000000,
+              child: Row(
+                children: [
+                  new Text(
+                    "${config.activeIndex + 1}",
+                    style:
+                        TextStyle(color: activeColor, fontSize: activeFontSize),
+                  ),
+                  new Text(
+                    " / ${config.itemCount}",
+                    style: TextStyle(color: color, fontSize: fontSize),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    }
   }
 }
