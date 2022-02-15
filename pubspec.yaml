@@ -104,6 +104,9 @@ flutter:
     - assets/images/home/daily_new_icon.png
     - assets/images/home/daily_new_arrow.png
 
+    
+    - assets/images/mine/mine_bg.png
+
     - assets/sample_audio.ogg
     - assets/sample_video.mp4
     - assets/www/index.html
