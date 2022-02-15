@@ -101,6 +101,8 @@ flutter:
 
     - assets/images/home/limit_time_discount_arrow.png
     - assets/images/home/limit_time_discount_head_bg.png
+    - assets/images/home/daily_new_icon.png
+    - assets/images/home/daily_new_arrow.png
 
     - assets/sample_audio.ogg
     - assets/sample_video.mp4

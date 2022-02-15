@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/page/home/components/home_banner_swiper.dart';
 import 'package:ladyfou/style/Color.dart';
 
+import 'components/daily_new_product.dart';
 import 'components/game_entry.dart';
 import 'components/limited_time_discount.dart';
 
@@ -34,6 +35,8 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: gameEntry()),
             buildSliverToBoxAdapter(12.w),
             SliverToBoxAdapter(child: limitedTimeDiscount()),
+            buildSliverToBoxAdapter(12.w),
+            SliverToBoxAdapter(child: dailyNewProduct()),
           ],
         ),
       ),
@@ -58,5 +61,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget limitedTimeDiscount() {
     return LimitedTimeDiscount();
+  }
+
+  Widget dailyNewProduct() {
+    return DailyNewProduct();
   }
 }
