@@ -70,8 +70,8 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
     double rightListViewHeight = MediaQuery.of(context).size.height -
         ScreenUtil().statusBarHeight -
         ScreenUtil().bottomBarHeight -
-        44 -
-        49;
+        44.sp -
+        49.sp;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -94,7 +94,7 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
         // 没数据，说明还在请求中
         if (child.categoryList.isEmpty) {
           return Container(
-            width: 750.sp,
+            width: 375.sp,
             height: listHeight - 2,
             child: Center(
               child: SpinKitDualRing(
@@ -109,7 +109,7 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
                 CategoryWidget(
                   key: categoryMenueKey,
                   items: child.categoryList,
-                  itemHeight: 60,
+                  itemHeight: 60.sp,
                   showHeight: listHeight,
                   menueTaped: menueItemTap,
                 ),

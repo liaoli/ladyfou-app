@@ -106,6 +106,9 @@ flutter:
     - assets/www/index.html
     - assets/www/styles/style.css
 
+    # Common
+    - assets/images/home/placeholder.jpg
+
     # Sort
     - assets/images/sort/news_icon_black.png
     - assets/images/sort/good_test_icon.png

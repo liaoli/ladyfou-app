@@ -44,7 +44,7 @@ class CategoryMenueState extends State<CategoryWidget>
       context: context,
       child: Container(
         color: AppColors.primaryBackground,
-        width: 180.sp,
+        width: 100.sp,
         height: widget.showHeight,
         child: ListView.builder(
             itemCount: widget.items.length,
@@ -53,13 +53,13 @@ class CategoryMenueState extends State<CategoryWidget>
                 onTap: () => _menueTaped(index),
                 child: Container(
                   height: widget.itemHeight,
-                  padding: EdgeInsets.only(left: 5, right: 5),
+                  padding: EdgeInsets.only(left: 5.sp, right: 5.sp),
                   color: currentItemIndex == index
                       ? Colors.white
                       : Color.fromRGBO(147, 149, 151, 0.1),
                   child: Center(
                     child: Text(
-                      widget.items[index].name,
+                      widget.items[index].name2,
                       style: BaseText.style(
                         fontSize: 14,
                         color: currentItemIndex == index

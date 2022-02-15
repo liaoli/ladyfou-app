@@ -20,11 +20,11 @@ typedef CallbackAction = void Function();
 class ImagePlaceholdWidget extends StatelessWidget {
   ImagePlaceholdWidget(
       {required this.url,
-        this.w,
-        this.imgError,
-        this.h,
-        this.defImagePath = 'assets/images/home/placeholder.jpg',
-        this.fill = BoxFit.fill});
+      this.w,
+      this.imgError,
+      this.h,
+      this.defImagePath = 'assets/images/home/placeholder.jpg',
+      this.fill = BoxFit.fill});
   final CallbackAction? imgError;
   final String url;
   final double? w;
@@ -50,10 +50,10 @@ class ImagePlaceholdWidget extends StatelessWidget {
           },
           // 请求失败
           errorWidget: (
-              _,
-              __,
-              ___,
-              ) {
+            _,
+            __,
+            ___,
+          ) {
             if (imgError != null) imgError!();
             return Icon(Icons.error);
           });

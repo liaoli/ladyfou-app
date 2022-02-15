@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/image_placehold_widget.dart';
+import '../../../components/image_placehold_widget.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -21,7 +21,8 @@ class SubCategoryList extends StatefulWidget {
   final double height;
   final SortModel data;
   final void Function(String)? goPage;
-  SubCategoryList({Key? key,required this.height, this.goPage, required this.data})
+  SubCategoryList(
+      {Key? key, required this.height, this.goPage, required this.data})
       : super(key: key);
 
   @override
@@ -39,17 +40,17 @@ class SubCategoryListState extends State<SubCategoryList> {
         height: widget.height,
         child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.only(top: 16),
+            padding: EdgeInsets.only(top: 16.sp),
             controller: controller,
             child: Container(
               child: widget.data != null
                   ? SecondryCategory(
-                data: widget.data,
-              )
+                      data: widget.data,
+                    )
                   : Center(
-                child: CircularProgressIndicator(),
-              ),
-              constraints: BoxConstraints(minHeight: widget.height + 5),
+                      child: CircularProgressIndicator(),
+                    ),
+              constraints: BoxConstraints(minHeight: widget.height + 5.sp),
             )),
       ),
     );
@@ -84,49 +85,58 @@ class SecondryCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     List<SortDataChild> items = data.children;
 
-    final _childAspectRatio = 136.sp / (88.sp + 23.sp);
+    final _childAspectRatio = 68.sp / (44.sp + 23.sp);
 
     return Column(
       children: <Widget>[
-        ImagePlaceholdWidget(url: data.thumb, w: 506, h: 90.sp),
-        this.data.name.isEmpty
-            ? SizedBox(height: 13)
+        // ImagePlaceholdWidget(url: data.thumb, w: 506, h: 90.sp),
+        this.data.name2.isEmpty
+            ? SizedBox(height: 13.sp)
             : Container(
-          height: 46,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                  'assets/images/sort/sort_section_title_icon.png'),
-              Container(
-                margin: EdgeInsets.only(left: 8.sp, right: 8.sp),
-                constraints: BoxConstraints(
-                  maxWidth: 410.sp,
-                ),
-                child: AutoSizeText(
-                  this.data.name,
-                  style: BaseText.style(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primaryBlackText,
-                      fontSize: 14),
-                  minFontSize: 10,
-                  maxFontSize: 14,
-                  maxLines: 1,
+                height: 46.sp,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Image.asset(
+                    //     'assets/images/sort/sort_section_title_icon.png'),
+                    Container(
+                      margin: EdgeInsets.only(left: 20.sp, right: 20.sp),
+                      constraints: BoxConstraints(
+                        maxWidth: 205.sp,
+                      ),
+                      child: AutoSizeText(
+                        this.data.name2,
+                        textAlign: TextAlign.left,
+                        style: BaseText.style(
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.primaryBlackText,
+                            fontSize: 14),
+                        minFontSize: 10,
+                        maxFontSize: 14,
+                        maxLines: 1,
+                      ),
+                    ),
+                    // Image.asset(
+                    //   'assets/images/sort/sort_section_title_icon.png',
+                    // ),
+                    Container(
+                      child: Text(
+                        'All >      ',
+                        style: BaseText.style(
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.primaryBlackText,
+                            fontSize: 14),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Image.asset(
-                'assets/images/sort/sort_section_title_icon.png',
-              ),
-            ],
-          ),
-        ),
         GridView.builder(
-          padding: EdgeInsets.only(
-              left: 32.sp, right: 32.sp),
+          padding: EdgeInsets.only(left: 8.sp, right: 8.sp),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 50.sp,
-            mainAxisSpacing: 52.sp,
+            crossAxisSpacing: 25.sp,
+            mainAxisSpacing: 26.sp,
             childAspectRatio: _childAspectRatio,
           ),
           itemCount: items.length,
@@ -143,7 +153,8 @@ class SecondryCategory extends StatelessWidget {
   Widget _goodsItemWidget(BuildContext context, SortDataChild goodModel) {
     return GestureDetector(
       onTap: () {
-        String titleStr = Uri.encodeComponent(goodModel.name);
+        String titleStr = Uri.encodeComponent(goodModel.name2);
+
         /// 跳转搜索
         // BaseNavigation.present("search?id=$titleStr");
       },
@@ -152,13 +163,13 @@ class SecondryCategory extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 12.sp),
-              height: 88.sp,
-              width: 88.sp,
+              margin: EdgeInsets.only(bottom: 6.sp),
+              height: 54.sp,
+              width: 54.sp,
               child: ImagePlaceholdWidget(url: goodModel.thumb),
             ),
             Text(
-              goodModel.name,
+              goodModel.name2,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: BaseText.style(
