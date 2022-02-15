@@ -87,7 +87,7 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: Size(350, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: () => Consumer(
@@ -97,11 +97,13 @@ class _IndexPageState extends State<IndexPage> {
                 key: _scaffoldKey,
                 drawer: MenuDrawer(),
                 endDrawer: MenuDrawer(),
-                body: Stack(
+                body: Column(
                   children: [
-                    IndexedStack(
-                      index: status.tabIndex,
-                      children: getTabWidget(context),
+                    Expanded(
+                      child: IndexedStack(
+                        index: status.tabIndex,
+                        children: getTabWidget(context),
+                      ),
                     ),
                     MyBlurBottomView(
                         tabModels: tabs,

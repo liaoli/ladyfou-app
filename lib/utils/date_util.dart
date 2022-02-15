@@ -61,24 +61,55 @@ int dateToTimestamp(DateTime date) {
   return date.millisecondsSinceEpoch ~/ 1000;
 }
 
-
 String formatTime(int timeNum) {
   return timeNum < 10 ? "0" + timeNum.toString() : timeNum.toString();
 }
 
 String formatSecond2HHMMSS(int seconds) {
-  int hour = seconds ~/ 3600;
+  int day = seconds ~/ 86400;
+  int hour = seconds % 86400 ~/ 3600;
   int minute = seconds % 3600 ~/ 60;
   int second = seconds % 60;
-  return formatTime(hour) +
-      ":" +
-      formatTime(minute) +
-      ":" +
-      formatTime(second);
+  return formatTime(hour) + ":" + formatTime(minute) + ":" + formatTime(second);
+}
+
+DayHourMinSec getDayHourMinSec(int seconds) {
+  int day = seconds ~/ 86400;
+  int hour = seconds % 86400 ~/ 3600;
+  int minute = seconds % 3600 ~/ 60;
+  int second = seconds % 60;
+  return DayHourMinSec(
+    day: day,
+    hour: hour,
+    min: minute,
+    sec: second,
+  );
 }
 
 String constructTime(int seconds) {
   int minute = seconds % 3600 ~/ 60;
   int second = seconds % 60;
   return formatTime(minute) + ":" + formatTime(second);
+}
+
+class DayHourMinSec {
+  int day;
+  int min;
+  int sec;
+  int hour;
+
+  DayHourMinSec({
+    this.day = 0,
+    this.min = 0,
+    this.sec = 0,
+    this.hour = 0,
+  });
+
+  String get formatDay => formatTime(day);
+
+  String get formatMin => formatTime(min);
+
+  String get formatHour => formatTime(hour);
+
+  String get formatSec => formatTime(sec);
 }
