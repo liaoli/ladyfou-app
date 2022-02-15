@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
     return Consumer2<AppTheme, LocaleModel>(
       builder: (context, appTheme, localeModel, _) {
         return ScreenUtilInit(
-          designSize: Size(360, 690),
+          designSize: Size(375, 812),
           minTextAdapt: true,
           splitScreenMode: true,
           builder: () => GetMaterialApp(

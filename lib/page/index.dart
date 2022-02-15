@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../components/web_view_page.dart';
 import '../generated/l10n.dart';
 import '../style/Color.dart';
+import 'home/home_page.dart';
 import 'menu/menu_drawer.dart';
 
 class IndexPage extends StatefulWidget {
@@ -56,11 +57,11 @@ class _IndexPageState extends State<IndexPage> {
   ];
 
   List<Widget> getTabWidget(BuildContext context) => [
-        // HomePage(),
+        HomePage(),
         // DiscoverPage(),
         // TabActivityPage(),
         // TabMePage(),
-        Center(child: Text(S.current.home)),
+        // Center(child: Text(S.current.home)),
         Center(child: Text(S.current.category)),
         Center(child: Text(S.current.game)),
         Center(child: Text(S.current.me)),
@@ -86,7 +87,7 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: Size(350, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: () => Consumer(
@@ -96,11 +97,13 @@ class _IndexPageState extends State<IndexPage> {
                 key: _scaffoldKey,
                 drawer: MenuDrawer(),
                 endDrawer: MenuDrawer(),
-                body: Stack(
+                body: Column(
                   children: [
-                    IndexedStack(
-                      index: status.tabIndex,
-                      children: getTabWidget(context),
+                    Expanded(
+                      child: IndexedStack(
+                        index: status.tabIndex,
+                        children: getTabWidget(context),
+                      ),
                     ),
                     MyBlurBottomView(
                         tabModels: tabs,

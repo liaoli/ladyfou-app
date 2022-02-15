@@ -99,6 +99,11 @@ flutter:
     - assets/images/bottom_tab/tab_profile_selected.png
     - assets/images/bottom_tab/tab_game_defalult.png
 
+    - assets/images/home/limit_time_discount_arrow.png
+    - assets/images/home/limit_time_discount_head_bg.png
+    - assets/images/home/daily_new_icon.png
+    - assets/images/home/daily_new_arrow.png
+
     - assets/sample_audio.ogg
     - assets/sample_video.mp4
     - assets/www/index.html
