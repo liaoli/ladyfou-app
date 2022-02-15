@@ -112,6 +112,9 @@ flutter:
     - assets/images/home/your_like_bottom.png
     - assets/images/home/recommend_bottom_line.png
 
+    
+    - assets/images/mine/mine_bg.png
+
     - assets/sample_audio.ogg
     - assets/sample_video.mp4
     - assets/www/index.html
