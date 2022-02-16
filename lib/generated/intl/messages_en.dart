@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "game": MessageLookupByLibrary.simpleMessage("game"),
         "history": MessageLookupByLibrary.simpleMessage("history"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "home_new_products": MessageLookupByLibrary.simpleMessage("新品"),
         "home_search_name": MessageLookupByLibrary.simpleMessage("当前热搜词"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -79,6 +80,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sponsor": MessageLookupByLibrary.simpleMessage("Sponsor"),
         "stillDisagree": MessageLookupByLibrary.simpleMessage("Still Disagree"),
+        "store_classification": MessageLookupByLibrary.simpleMessage("全部分类"),
+        "store_comprehensive": MessageLookupByLibrary.simpleMessage("综合"),
+        "store_conditions": MessageLookupByLibrary.simpleMessage("全部条件"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "thinkAboutItAgain": MessageLookupByLibrary.simpleMessage(
             "  Do you want to think about it again？"),

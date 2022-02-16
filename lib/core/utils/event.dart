@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:event_bus/event_bus.dart';
 
+import '../constant/base_enum.dart';
+
 //EventBus工具类
 class XEvent {
   XEvent._internal();
@@ -66,5 +68,14 @@ class XEvent {
       subscription.cancel();
       streams.remove(subscription);
     }
+  }
+
+
+/// ---------------------全局变量存储------------------------------
+/// 获取用户选择的列表展示模式
+  DisplayType _displayType = DisplayType.grid_shape;
+  DisplayType get displayType => _displayType;
+  set displayType(DisplayType type) {
+    _displayType = type;
   }
 }

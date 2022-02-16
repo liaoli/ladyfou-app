@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 
+import '../model/good_info_model.dart';
 import '../model/user_info_model.dart';
 
 class MyResponse<T> {
@@ -25,6 +26,8 @@ T fromJson<T>(dynamic json) {
       return UserInfoModel.fromMap(json) as T;
     case "List<SortModel>":
       return SortModel.fromList(json) as T;
+    case "List<GoodsInfoModel>":
+      return GoodsInfoModel.fromList(json) as T;
     default:
       return [] as T;
   }
@@ -91,16 +94,28 @@ class Common {
 class PageEnabled {
   PageEnabled({
     this.pageEnabled = false,
+    this.currentPage = 0,
+    this.totalPage = 0,
+    this.pageSize = 0,
   });
 
   bool pageEnabled;
+  int currentPage;
+  int totalPage;
+  int pageSize;
 
   factory PageEnabled.fromJson(Map<String, dynamic> json) => PageEnabled(
-    pageEnabled: json["pageEnabled"],
+    pageEnabled: json["pageEnabled"] == null ? false : json["pageEnabled"],
+    currentPage: json["currentPage"] == null ? 0 : json["currentPage"],
+    totalPage: json["totalPage"] == null ? 0 : json["totalPage"],
+    pageSize: json["pageSize"] == null ? 0 : json["pageSize"],
   );
 
   Map<String, dynamic> toJson() => {
     "pageEnabled": pageEnabled,
+    "currentPage": currentPage,
+    "totalPage": totalPage,
+    "pageSize": pageSize,
   };
 }
 

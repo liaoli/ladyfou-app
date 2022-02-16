@@ -1,5 +1,6 @@
 
 import 'package:date_format/date_format.dart';
+import 'package:intl/intl.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -77,6 +78,17 @@ class Utils {
     print( strtime );
     var sdatetime = strtime.toLocal().toString().substring(0, 10);
     return sdatetime;
+  }
+
+  //=============常用方法==================//
+  /// 每隔三位加逗号分隔
+  static String formatStepCount(double num) {
+    String priceStr = num.toStringAsFixed(2);
+    if (num >= 1000) {
+      var format = NumberFormat('0,000');
+      return format.format(num);
+    }
+    return priceStr;
   }
 
 }
