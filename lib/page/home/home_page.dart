@@ -8,6 +8,7 @@ import 'package:ladyfou/style/Color.dart';
 
 import 'components/daily_new_product.dart';
 import 'components/game_entry.dart';
+import 'components/heng_fu.dart';
 import 'components/limited_time_discount.dart';
 import 'components/product_rank_bottom.dart';
 import 'components/product_rank_head.dart';
@@ -27,31 +28,54 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.color_FFF5F5F5,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 12.w,
-        ),
-        child: EasyRefresh.custom(
-          header: MaterialHeader(),
-          footer: MaterialFooter(),
-          onRefresh: () async {},
-          slivers: <Widget>[
-            SliverToBoxAdapter(child: homeBanner()),
-            buildSliverToBoxAdapter(12.w),
-            SliverToBoxAdapter(child: gameEntry()),
-            buildSliverToBoxAdapter(12.w),
-            SliverToBoxAdapter(child: limitedTimeDiscount()),
-            buildSliverToBoxAdapter(12.w),
-            SliverToBoxAdapter(child: dailyNewProduct()),
-            buildSliverToBoxAdapter(12.w),
-            productRankHead(),
-            productRankList(),
-            SliverToBoxAdapter(child: productRankBottom()),
-            recommendProductHead(),
-            recommendProductList(),
-            SliverToBoxAdapter(child: recommendProductBottom()),
-          ],
-        ),
+      child: Stack(
+        children: [
+          Image.asset(
+            "assets/images/home/home_head_default_bg.png",
+            width: 375.w,
+            height: 172.w,
+            fit: BoxFit.cover,
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: refresh(),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding refresh() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 12.w,
+      ),
+      child: EasyRefresh.custom(
+        header: MaterialHeader(),
+        footer: MaterialFooter(),
+        onRefresh: () async {},
+        slivers: <Widget>[
+          buildSliverToBoxAdapter(50.w),
+          SliverToBoxAdapter(child: hengFu()),
+          buildSliverToBoxAdapter(12.w),
+          SliverToBoxAdapter(child: homeBanner()),
+          buildSliverToBoxAdapter(12.w),
+          SliverToBoxAdapter(child: gameEntry()),
+          buildSliverToBoxAdapter(12.w),
+          SliverToBoxAdapter(child: limitedTimeDiscount()),
+          buildSliverToBoxAdapter(12.w),
+          SliverToBoxAdapter(child: dailyNewProduct()),
+          buildSliverToBoxAdapter(12.w),
+          productRankHead(),
+          productRankList(),
+          SliverToBoxAdapter(child: productRankBottom()),
+          recommendProductHead(),
+          recommendProductList(),
+          SliverToBoxAdapter(child: recommendProductBottom()),
+        ],
       ),
     );
   }
@@ -62,6 +86,10 @@ class _HomePageState extends State<HomePage> {
         height: height,
       ),
     );
+  }
+
+  Widget hengFu() {
+    return HengFu();
   }
 
   Widget homeBanner() {

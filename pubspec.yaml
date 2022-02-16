@@ -111,6 +111,13 @@ flutter:
     - assets/images/home/your_like.png
     - assets/images/home/your_like_bottom.png
     - assets/images/home/recommend_bottom_line.png
+    - assets/images/home/home_head_heart.png
+    - assets/images/home/home_head_logo.png
+    - assets/images/home/home_head_search.png
+    - assets/images/home/home_shopping_cart.png
+    - assets/images/home/home_volume.png
+    - assets/images/home/home_head_search_bg.png
+    - assets/images/home/home_head_default_bg.png
 
     
     - assets/images/mine/mine_bg.png
