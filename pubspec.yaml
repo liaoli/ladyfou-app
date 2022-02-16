@@ -93,6 +93,7 @@ dependencies:
   flutter_custom_dialog: ^1.2.0 #dialog 统一用这个
   intl: ^0.17.0
   webview_flutter: ^3.0.0
+  sliver_tools: ^0.2.5
 
 dev_dependencies:
   flutter_test:
@@ -131,6 +132,8 @@ flutter:
     - assets/images/home/home_volume.png
     - assets/images/home/home_head_search_bg.png
     - assets/images/home/home_head_default_bg.png
+    - assets/images/home/home_head_search_grey.png
+    - assets/images/home/home_head_message.png
 
     
     - assets/images/mine/mine_bg.png

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
@@ -168,7 +169,7 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
     return ClipRRect(
       borderRadius: new BorderRadius.all(new Radius.circular(_radius)),
       child: Container(
-        child: new SizedBox(height: 351, width: 351, child: buildSwiper()),
+        child: new SizedBox(height: 351.w, width: 351.w, child: buildSwiper()),
       ),
     );
   }

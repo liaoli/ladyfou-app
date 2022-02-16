@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../style/Color.dart';
 
@@ -15,24 +16,50 @@ class ProductRankList extends StatefulWidget {
 class _ProductRankListState extends State<ProductRankList> {
   @override
   Widget build(BuildContext context) {
-    return SliverGrid(
-        //Grid
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, //Grid按两列显示
-          mainAxisSpacing: 13.w,
-          crossAxisSpacing: 14.w,
-          childAspectRatio: 158 / 222,
+
+
+   return SliverStack(
+      insetOnOverlap: false, // defaults to false
+      children: <Widget>[
+        SliverPositioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              // boxShadow: const <BoxShadow>[
+              //   BoxShadow(
+              //     offset: Offset(0, 4),
+              //     blurRadius: 8,
+              //     color: Colors.black26,
+              //   )
+              // ],
+              // borderRadius: BorderRadius.circular(8),
+            ),
+          ),
         ),
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            //创建子widget
-            return RankProductItemView(
-              index: index,
-            );
-          },
-          childCount: 6,
+        SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+          sliver:SliverGrid(
+            //Grid
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, //Grid按两列显示
+              mainAxisSpacing: 12.w,
+              crossAxisSpacing: 12.w,
+              childAspectRatio: 158 / 270,
+            ),
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                //创建子widget
+                return RankProductItemView(
+                  index: index,
+                );
+              },
+              childCount: 6,
+            ),
+          ),
         ),
+      ],
     );
+
   }
 }
 
@@ -84,6 +111,28 @@ class RankProductItemView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Visibility(
+                visible: index < 3,
+                child: Image.asset(
+                  "assets/images/home/rank_${index + 1}.png",
+                  width: 18.w,
+                  height: 18.w,
+                )),
+            Text(
+              "NO.${index + 1}",
+              style: TextStyle(
+                color: AppColors.color_FF333333,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 8.w,
+        ),
         ClipRRect(
           borderRadius: BorderRadius.all(new Radius.circular(10.w)),
           child: CachedNetworkImage(
