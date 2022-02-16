@@ -113,6 +113,24 @@ flutter:
     - assets/images/home/limit_time_discount_head_bg.png
     - assets/images/home/daily_new_icon.png
     - assets/images/home/daily_new_arrow.png
+    - assets/images/home/rank_1.png
+    - assets/images/home/rank_2.png
+    - assets/images/home/rank_3.png
+    - assets/images/home/rank_all_category.png
+    - assets/images/home/rank_icon.png
+    - assets/images/home/your_like.png
+    - assets/images/home/your_like_bottom.png
+    - assets/images/home/recommend_bottom_line.png
+    - assets/images/home/home_head_heart.png
+    - assets/images/home/home_head_logo.png
+    - assets/images/home/home_head_search.png
+    - assets/images/home/home_shopping_cart.png
+    - assets/images/home/home_volume.png
+    - assets/images/home/home_head_search_bg.png
+    - assets/images/home/home_head_default_bg.png
+
+    
+    - assets/images/mine/mine_bg.png
 
     - assets/sample_audio.ogg
     - assets/sample_video.mp4

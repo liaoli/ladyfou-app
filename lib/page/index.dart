@@ -13,6 +13,7 @@ import '../components/web_view_page.dart';
 import '../generated/l10n.dart';
 import '../style/Color.dart';
 import 'home/home_page.dart';
+import 'mine/mine_page.dart';
 import 'menu/menu_drawer.dart';
 
 class IndexPage extends StatefulWidget {
@@ -65,7 +66,7 @@ class _IndexPageState extends State<IndexPage> {
         // Center(child: Text(S.current.category)),
         SortPage(),
         Center(child: Text(S.current.game)),
-        Center(child: Text(S.current.me)),
+        MinePage(),
         Center(child: Text(S.current.history)),
       ];
 
