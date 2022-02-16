@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/search_bar.dart';
 
+import '../../../components/clicked_Image_asset.dart';
+
 class HomeDefaultNavBar extends StatefulWidget {
   const HomeDefaultNavBar({Key? key}) : super(key: key);
 
@@ -35,34 +37,41 @@ class _HomeDefaultNavBarState extends State<HomeDefaultNavBar> {
           fit: BoxFit.cover,
         ),
         Expanded(child: SizedBox()),
-        Image.asset(
-          "assets/images/home/home_head_search.png",
-          width: 20.w,
-          height: 20.w,
-          fit: BoxFit.cover,
-        ),
+        buildImageAsset(
+            image: "assets/images/home/home_head_search.png",
+            onTap: () {
+              //TODO:跳转
+            }),
         SizedBox(
           width: 12.w,
         ),
-        Image.asset(
-          "assets/images/home/home_head_heart.png",
-          width: 20.w,
-          height: 20.w,
-          fit: BoxFit.cover,
-        ),
+        buildImageAsset(
+            image: "assets/images/home/home_head_heart.png",
+            onTap: () {
+              //TODO:跳转
+            }),
         SizedBox(
           width: 12.w,
         ),
-        Image.asset(
-          "assets/images/home/home_shopping_cart.png",
-          width: 20.w,
-          height: 20.w,
-          fit: BoxFit.cover,
-        ),
+        buildImageAsset(
+            image: "assets/images/home/home_shopping_cart.png",
+            onTap: () {
+              //TODO:跳转
+            }),
         SizedBox(
           width: 12.w,
         ),
       ],
     );
   }
+
+}
+
+Widget buildImageAsset({required String image, Function()? onTap}) {
+  return ClickedImageAsset(
+    image: image,
+    height: 20.w,
+    width: 20.w,
+    onTap: onTap,
+  );
 }

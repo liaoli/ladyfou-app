@@ -37,17 +37,27 @@ class _HomePageState extends State<HomePage> {
       debugPrint("controller.offset = ${scrollController.offset}");
 
       if (scrollController.offset >= 503.w) {
-        setState(() {
-          showSearch = true;
-        });
+        if (showSearch == false) {
+          setState(() {
+            showSearch = true;
+          });
+        }
       } else {
-        setState(() {
-          showSearch = false;
-        });
+        if (showSearch == true) {
+          setState(() {
+            showSearch = false;
+          });
+        }
       }
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
