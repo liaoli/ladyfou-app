@@ -128,6 +128,8 @@ flutter:
     - assets/images/home/home_volume.png
     - assets/images/home/home_head_search_bg.png
     - assets/images/home/home_head_default_bg.png
+    - assets/images/home/home_head_search_grey.png
+    - assets/images/home/home_head_message.png
 
     
     - assets/images/mine/mine_bg.png

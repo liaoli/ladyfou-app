@@ -1,4 +1,3 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +9,8 @@ import 'package:ladyfou/style/Color.dart';
 import 'components/daily_new_product.dart';
 import 'components/game_entry.dart';
 import 'components/heng_fu.dart';
+import 'components/home_default_nav_bar.dart';
+import 'components/home_search_nav_bar.dart';
 import 'components/limited_time_discount.dart';
 import 'components/product_rank_bottom.dart';
 import 'components/product_rank_head.dart';
@@ -25,18 +26,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late ScrollController scrollController;
+
+  bool showSearch = false;
+
+  @override
+  void initState() {
+    scrollController = ScrollController();
+    scrollController.addListener(() {
+      debugPrint("controller.offset = ${scrollController.offset}");
+
+      if (scrollController.offset >= 503.w) {
+        setState(() {
+          showSearch = true;
+        });
+      } else {
+        setState(() {
+          showSearch = false;
+        });
+      }
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.color_FFF5F5F5,
       child: Stack(
         children: [
-          Image.asset(
-            "assets/images/home/home_head_default_bg.png",
-            width: 375.w,
-            height: 172.w,
-            fit: BoxFit.cover,
-          ),
+          Visibility(
+              visible: !showSearch,
+              child: Image.asset(
+                "assets/images/home/home_head_default_bg.png",
+                width: 375.w,
+                height: 172.w,
+                fit: BoxFit.cover,
+              )),
           Column(
             children: [
               homeHead(),
@@ -51,54 +78,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget homeHead() {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
-    final double headHeight = 92.w;
-
-    return Container(
-      height: headHeight,
-      padding: EdgeInsets.only(top: statusBarHeight),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 12.w,
-          ),
-          Image.asset(
-            "assets/images/home/home_head_logo.png",
-            width: 105.w,
-            height: 28.w,
-            fit: BoxFit.cover,
-          ),
-          Expanded(child: SizedBox()),
-          Image.asset(
-            "assets/images/home/home_head_search.png",
-            width: 20.w,
-            height: 20.w,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-          Image.asset(
-            "assets/images/home/home_head_heart.png",
-            width: 20.w,
-            height: 20.w,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-          Image.asset(
-            "assets/images/home/home_shopping_cart.png",
-            width: 20.w,
-            height: 20.w,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-        ],
-      ),
-    );
+    return showSearch ? HomeSearchNavBar() : HomeDefaultNavBar();
   }
 
   Padding refresh() {
@@ -110,14 +90,15 @@ class _HomePageState extends State<HomePage> {
         header: MaterialHeader(),
         footer: MaterialFooter(),
         onRefresh: () async {},
+        scrollController: scrollController,
         slivers: <Widget>[
-          SliverToBoxAdapter(child: hengFu()),
+          SliverToBoxAdapter(child: hengFu()), //28
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: homeBanner()),
+          SliverToBoxAdapter(child: homeBanner()), //351
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: gameEntry()),
+          SliverToBoxAdapter(child: gameEntry()), //100
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: limitedTimeDiscount()),
+          SliverToBoxAdapter(child: limitedTimeDiscount()), //198
           buildSliverToBoxAdapter(12.w),
           SliverToBoxAdapter(child: dailyNewProduct()),
           buildSliverToBoxAdapter(12.w),
