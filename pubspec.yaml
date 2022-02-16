@@ -73,6 +73,16 @@ dependencies:
   # 播放器
   video_player: ^2.1.6
   flutter_svg: ^0.23.0+1
+  # 自适应文本大小
+  auto_size_text:
+  # 响应式编程
+  # https://pub.dev/packages/flutter_bloc
+  flutter_bloc:
+  # 分页瀑布流
+  # https://pub.flutter-io.cn/packages/flutter_staggered_grid_view
+  flutter_staggered_grid_view: ^0.4.0
+  # 列表展示动画
+  flutter_staggered_animations: ^1.0.0
 
   #  im_flutter_sdk:
   #    path: /Users/hfy/flutter/im_flutter_sdk-3.8.3+4
@@ -126,6 +136,22 @@ flutter:
     - assets/sample_video.mp4
     - assets/www/index.html
     - assets/www/styles/style.css
+
+    # Common
+    - assets/images/home/placeholder.jpg
+    - assets/images/home/banner_placehold.png
+    - assets/images/home/love_red.png
+    - assets/images/home/love_black.png
+    - assets/images/home/management_options_false.png
+    - assets/images/home/management_options_true.png
+
+    # Sort
+    - assets/images/sort/news_icon_black.png
+    - assets/images/sort/good_test_icon.png
+    - assets/images/sort/sort_section_title_icon.png
+    - assets/images/sort/search_icon_black.png
+    - assets/images/sort/camera_icon_black.png
+    - assets/images/sort/search_delete_icon.png
 
 
   fonts:

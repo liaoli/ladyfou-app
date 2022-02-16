@@ -549,6 +549,66 @@ class S {
       args: [],
     );
   }
+
+  /// `请求出错，这里可以设置个缺省页`
+  String get erro_message {
+    return Intl.message(
+      '请求出错，这里可以设置个缺省页',
+      name: 'erro_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `当前热搜词`
+  String get home_search_name {
+    return Intl.message(
+      '当前热搜词',
+      name: 'home_search_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `综合`
+  String get store_comprehensive {
+    return Intl.message(
+      '综合',
+      name: 'store_comprehensive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `全部分类`
+  String get store_classification {
+    return Intl.message(
+      '全部分类',
+      name: 'store_classification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `全部条件`
+  String get store_conditions {
+    return Intl.message(
+      '全部条件',
+      name: 'store_conditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `新品`
+  String get home_new_products {
+    return Intl.message(
+      '新品',
+      name: 'home_new_products',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

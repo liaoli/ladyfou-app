@@ -182,12 +182,12 @@ class _LoginPageState extends State<LoginPage> {
     login(username: _unameController.text, password: _pwdController.text)
         .then((response) {
       Navigator.pop(context);
-      if (response.code == 0) {
-        userProfile.nickName = response.data!.username;
+      if (response.common.statusCode == 0) {
+        userProfile.nickName = response.response!.data!.username;
         ToastUtils.toast(S.of(context).loginSuccess);
         Get.off(() => IndexPage());
       } else {
-        ToastUtils.error(response.msg);
+        ToastUtils.error(response.common.debugMessage);
       }
     }).catchError((onError) {
       Navigator.of(context).pop();

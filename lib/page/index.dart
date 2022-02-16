@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ladyfou/components/blur_bottom_bar/my_blur_bottom_bar.dart';
 import 'package:ladyfou/core/utils/click.dart';
 import 'package:ladyfou/core/utils/xupdate.dart';
+import 'package:ladyfou/page/sort/page/sort_page.dart';
 import 'package:ladyfou/utils/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -62,8 +63,8 @@ class _IndexPageState extends State<IndexPage> {
         // DiscoverPage(),
         // TabActivityPage(),
         // TabMePage(),
-        // Center(child: Text(S.current.home)),
-        Center(child: Text(S.current.category)),
+        // Center(child: Text(S.current.category)),
+        SortPage(),
         Center(child: Text(S.current.game)),
         MinePage(),
         Center(child: Text(S.current.history)),
