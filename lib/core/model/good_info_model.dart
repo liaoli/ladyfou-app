@@ -67,7 +67,7 @@ class GoodsInfoModel {
     name: json["name"],
     status: json["status"],
     listPrice: json["list_price"],
-    price: json["price"],
+    price: json["price"].toString(),
     amount: json["amount"],
     saled: json["saled"],
     createdAt: json["created_at"],
@@ -84,7 +84,7 @@ class GoodsInfoModel {
     imgUrl: json["imgUrl"],
     isWished: json["is_wished"],
     point: json["point"],
-    presell: Presell.fromJson(json["presell"]),
+    presell:json["presell"] == null ? Presell() :  Presell.fromJson(json["presell"]),
     isLuckyBag: json["is_lucky_bag"],
     featureImage: List<dynamic>.from(json["feature_image"].map((x) => x)),
   );
@@ -111,7 +111,7 @@ class GoodsInfoModel {
     "imgUrl": imgUrl,
     "is_wished": isWished,
     "point": point,
-    "presell": presell! == null ? {} : presell!.toJson(),
+    "presell": presell == null ? Presell() : presell.toJson(),
     "is_lucky_bag": isLuckyBag,
     "feature_image": List<dynamic>.from(featureImage.map((x) => x)),
   };

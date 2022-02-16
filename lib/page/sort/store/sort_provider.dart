@@ -28,14 +28,19 @@ class SortProvider with ChangeNotifier {
 
   /// 获取分类数据
   Future getSortAllDatas() async {
-    MyResponse<List<SortModel>> response = await getSortData();
-    if(response.common.statusCode == 1000) {
-      categoryList = response.response!.data!;
-      notifyListeners();
-    }
-    else {
-      isRequestError = true;
-      notifyListeners();
+    try {
+      MyResponse<List<SortModel>> response = await getSortData();
+      if(response.common.statusCode == 1000) {
+            categoryList = response.response!.data!;
+            notifyListeners();
+          }
+          else {
+            isRequestError = true;
+            notifyListeners();
+          }
+    } catch (s,e) {
+      print(s);
+      print(e);
     }
   }
 
