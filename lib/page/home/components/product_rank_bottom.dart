@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../components/button/common_button.dart';
 import '../../../style/Color.dart';
 
 class ProductRankBottom extends StatefulWidget {
@@ -26,25 +27,22 @@ class _ProductRankBottomState extends State<ProductRankBottom> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ClipRRect(
-              borderRadius: new BorderRadius.all(Radius.circular(17.w)),
-              child: Container(
-                width: 142.w,
-                height: 33.w,
-                color: AppColors.Color_E34D59,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "查看更多",
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
+            CommonButton(
+              width: 142.w,
+              height: 33.w,
+              bg: AppColors.Color_E34D59,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "查看更多",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
