@@ -10,9 +10,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/utils/utils.dart';
+import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
 import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
 import '../../../components/image_placehold_widget.dart';
@@ -153,9 +155,8 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
               ),
             ),
           ),
-          SizedBox(height: 5.0),
           _priceItem(context),
-          SizedBox(height: 5.0),
+          _ratationItem(context),
         ],
       ),
     );
@@ -181,7 +182,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
               /// 添加5的间距
               WidgetSpan(child: SizedBox(width: 5.0)),
               TextSpan(
-                text: widget.goodsModel.name,
+                text: widget.goodsModel.name == '' ? '小柄長袖カジュアルスウィート清...' : widget.goodsModel.name,
                 style: BaseText.style(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w400,
@@ -193,38 +194,40 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
     );
   }
 
-  /// 新品模块
+  /// 原价
   Widget _newItem(BuildContext context) {
     return Container(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        width: 32.sp,
-        height: 12,
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 1,
-            style: BorderStyle.solid,
-            color: Color.fromRGBO(15, 76, 129, 1),
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: Text(
-          S.current.home_new_products,  /// 新品
-          textAlign: TextAlign.center,
-          style: BaseText.style(
-              height: 1.4,
-              color: Color.fromRGBO(15, 76, 129, 1),
-              fontSize: 8,
-              fontWeight: FontWeight.w400),
-        ),
-      ),
+        margin: EdgeInsets.only(top: 5),
+        child: Row(
+          children: [
+            GradientButton(
+              width: 50.sp,
+              height: 20.sp,
+              fontWeight: FontWeight.bold,
+              text: widget.goodsModel.discount,
+            ),
+            SizedBox(width: 10.sp),
+            double.parse(widget.goodsModel.listPrice) > 0.0
+                ? Text( '￥'+
+                Utils.formatStepCount(
+                    double.parse(widget.goodsModel.listPrice)), // 商品原价
+              style: BaseText.style(
+                  fontSize: 10.0,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.primaryBlackText.withOpacity(0.5),
+                  decoration: TextDecoration.lineThrough
+              ),
+            )
+                : SizedBox(),
+          ],
+        )
     );
   }
 
   /// 价格模块
   Widget _priceItem(BuildContext context) {
     return Container(
-      height: 30.0,
+      height: 25.0.sp,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -233,7 +236,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
               Text(
                 '￥',
                 style: BaseText.style(
-                    color: AppColors.navigationColor,
+                    color: AppColors.primaryBlackText,
                     fontSize: 12,
                     fontWeight: FontWeight.w700),
               ),
@@ -243,18 +246,76 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 /// 商品价格
                 style: BaseText.style(
                     height: 1.0,
-                    color: AppColors.navigationColor,
+                    color: AppColors.primaryBlackText,
                     fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),
             ],
           ),
-          ManagementOptions(
-            onTap: () => widget.onItemLikeClick!(),
-            isOptions: widget.goodsModel.isWished > 0 ? true : false,
-            selectUrl: 'assets/images/home/love_red.png',
-            unchecked: 'assets/images/home/love_black.png',
-            width: 24,
+        ],
+      ),
+    );
+  }
+
+  /// 评分
+  Widget _ratationItem(BuildContext context) {
+    return Container(
+      height: 30.0.sp,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              RatingBar.builder(
+                initialRating: double.parse(widget.goodsModel.reviewsTotal),
+                direction: Axis.horizontal,
+                allowHalfRating: false,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                itemSize: 16.sp,
+                itemBuilder: (context, _) =>
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                // ratingWidget: RatingWidget(
+                //   full: Container(child: Image.asset('assets/images/home/icon_star.png')),
+                //   half: Container(child: Image.asset('assets/images/home/icon_star.png')),
+                //   empty: Container(child: Image.asset('assets/images/home/icon_star_nor.png')),
+                // ),
+                onRatingUpdate: (double value) {},
+              ),
+              Text(
+                widget.goodsModel.reviewsTotal,
+                style: BaseText.style(
+                    color: AppColors.jp_color153,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+
+          Row(
+            children: [
+               ManagementOptions(
+                  onTap: () => widget.onItemLikeClick!(),
+                  isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
+                  selectUrl: 'assets/images/home/love_red.png',
+                  unchecked: 'assets/images/home/love_black.png',
+                  width: 24.sp,
+                ),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 30.sp,
+                  height: 30.sp,
+                  child: Image.asset(
+                    'assets/images/home/shop_detail_shopcart.png',
+                    // color: Colors.white,
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),
