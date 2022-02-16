@@ -16,22 +16,22 @@ class _ProductRankListState extends State<ProductRankList> {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-        //Grid
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, //Grid按两列显示
-          mainAxisSpacing: 13.w,
-          crossAxisSpacing: 14.w,
-          childAspectRatio: 158 / 222,
-        ),
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            //创建子widget
-            return RankProductItemView(
-              index: index,
-            );
-          },
-          childCount: 6,
-        ),
+      //Grid
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, //Grid按两列显示
+        mainAxisSpacing: 13.w,
+        crossAxisSpacing: 14.w,
+        childAspectRatio: 158 / 248,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          //创建子widget
+          return RankProductItemView(
+            index: index,
+          );
+        },
+        childCount: 6,
+      ),
     );
   }
 }
@@ -84,6 +84,28 @@ class RankProductItemView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Visibility(
+                visible: index < 3,
+                child: Image.asset(
+                  "assets/images/home/rank_${index+1}.png",
+                  width: 18.w,
+                  height: 18.w,
+                )),
+            Text(
+              "NO.${index + 1}",
+              style: TextStyle(
+                color: AppColors.color_FF333333,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 8.w,
+        ),
         ClipRRect(
           borderRadius: BorderRadius.all(new Radius.circular(10.w)),
           child: CachedNetworkImage(
