@@ -83,6 +83,9 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   # 列表展示动画
   flutter_staggered_animations: ^1.0.0
+  # 星级评分控件
+  # https://pub.flutter-io.cn/packages/flutter_rating_bar
+  flutter_rating_bar:
 
   #  im_flutter_sdk:
   #    path: /Users/hfy/flutter/im_flutter_sdk-3.8.3+4
@@ -150,6 +153,9 @@ flutter:
     - assets/images/home/nav_back.png
     - assets/images/home/store_display.png
     - assets/images/home/store_display_sqr.png
+    - assets/images/home/icon_star.png
+    - assets/images/home/icon_star_nor.png
+    - assets/images/home/shop_detail_shopcart.png
 
     # Sort
     - assets/images/sort/news_icon_black.png

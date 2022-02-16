@@ -39,8 +39,7 @@ class SortProvider with ChangeNotifier {
             notifyListeners();
           }
     } catch (s,e) {
-      print(s);
-      print(e);
+      print('请求报错:$e');
     }
   }
 
@@ -49,9 +48,12 @@ class SortProvider with ChangeNotifier {
         bool isFirst = false,
         bool isRefresh = true,
         int page = CURRENT_PAGE,
-        int size = PAGE_SIZE}) async {
+        int size = PAGE_SIZE,
+        String price = "asc",
+        String saled = "asc"
+  }) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
-    MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(id: id,page: page,size: size);
+    MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(id: id,page: page,size: size,price: price,saled: saled);
     if(response.common.statusCode == 1000) {
       List<GoodsInfoModel> modelList = response.response!.data!;
       /// 第一次请求
