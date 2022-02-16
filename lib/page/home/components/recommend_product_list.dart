@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../components/button/common_button.dart';
 import '../../../style/Color.dart';
 
 class RecommendProductList extends StatefulWidget {
@@ -16,22 +17,22 @@ class _RecommendProductListState extends State<RecommendProductList> {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-        //Grid
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, //Grid按两列显示
-          mainAxisSpacing: 13.w,
-          crossAxisSpacing: 14.w,
-          childAspectRatio: 158 / 222,
-        ),
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            //创建子widget
-            return RankProductItemView(
-              index: index,
-            );
-          },
-          childCount: 6,
-        ),
+      //Grid
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, //Grid按两列显示
+        mainAxisSpacing: 12.w,
+        crossAxisSpacing: 12.w,
+        childAspectRatio: 170 / 216,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          //创建子widget
+          return RankProductItemView(
+            index: index,
+          );
+        },
+        childCount: 6,
+      ),
     );
   }
 }
@@ -87,8 +88,8 @@ class RankProductItemView extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.all(new Radius.circular(10.w)),
           child: CachedNetworkImage(
-            width: 158.w,
-            height: 158.w,
+            width: 170.w,
+            height: 170.w,
             imageUrl:
                 "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
             imageBuilder: (context, imageProvider) => Container(
@@ -112,25 +113,25 @@ class RankProductItemView extends StatelessWidget {
         SizedBox(
           height: 8.w,
         ),
-        Text(
-          "月销量件数200件",
-          style: TextStyle(
-            color: AppColors.color_FF999999,
-            fontSize: 10.sp,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Expanded(
-            child: Text(
-          "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-          style: TextStyle(
-            color: AppColors.color_FF222222,
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w400,
-          ),
-        )),
+        // Text(
+        //   "月销量件数200件",
+        //   style: TextStyle(
+        //     color: AppColors.color_FF999999,
+        //     fontSize: 10.sp,
+        //     fontWeight: FontWeight.w400,
+        //   ),
+        // ),
+        // Expanded(
+        //     child: Text(
+        //   "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
+        //   overflow: TextOverflow.ellipsis,
+        //   maxLines: 2,
+        //   style: TextStyle(
+        //     color: AppColors.color_FF222222,
+        //     fontSize: 12.sp,
+        //     fontWeight: FontWeight.w400,
+        //   ),
+        // )),
         Row(
           children: [
             Text(
@@ -141,13 +142,27 @@ class RankProductItemView extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            Text(
-              "￥8687",
-              style: TextStyle(
-                color: AppColors.color_FF353547,
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w400,
-                decoration: TextDecoration.lineThrough,
+            SizedBox(
+              width: 6.w,
+            ),
+            CommonButton(
+              borderRadius: new BorderRadius.all(Radius.circular(17.w)),
+              width: 32.w,
+              height: 12.w,
+              bg: AppColors.Color_E34D59,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "-21%",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

@@ -28,10 +28,12 @@ class _ProductRankBottomState extends State<ProductRankBottom> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CommonButton(
+              borderRadius: new BorderRadius.all(Radius.circular(17.w)),
               width: 142.w,
               height: 33.w,
               bg: AppColors.Color_E34D59,
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(

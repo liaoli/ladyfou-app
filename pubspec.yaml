@@ -90,6 +90,7 @@ dependencies:
   flutter_custom_dialog: ^1.2.0 #dialog 统一用这个
   intl: ^0.17.0
   webview_flutter: ^3.0.0
+  sliver_tools: ^0.2.5
 
 dev_dependencies:
   flutter_test:
