@@ -31,7 +31,7 @@ class _RecommendProductListState extends State<RecommendProductList> {
             index: index,
           );
         },
-        childCount: 6,
+        childCount: 20,
       ),
     );
   }
