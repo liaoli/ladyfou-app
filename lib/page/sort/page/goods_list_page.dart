@@ -48,7 +48,7 @@ class GoodsListPageFul extends StatefulWidget {
   }
 }
 
-class _GoodsListPageState extends State<GoodsListPageFul>  {
+class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderStateMixin  {
 
   late SortProvider provider;
   bool isDisplay = false;
@@ -56,6 +56,7 @@ class _GoodsListPageState extends State<GoodsListPageFul>  {
   List<String> tabTitles = [];
   bool isSelect = false;
   int currentIndex = 0;
+  late TabController tabController;
 
   @override
   void initState() {
@@ -63,13 +64,26 @@ class _GoodsListPageState extends State<GoodsListPageFul>  {
 
     // 请求分类数据
     Provider.of<SortProvider>(context,listen: false).getCategoryProducts(widget.shopId,isFirst: true);
-    
+
+    tabTitles = getTabTitles();
+    tabController = TabController(length: tabTitles.length, vsync: this);
+
+    if (tabController != null) {
+      tabController.addListener(() {
+        // if (currentIndex != tabController.index) {
+        //   selectTabItem(tabController.index);
+        // }
+        // currentIndex = tabController.index;
+        // bloc.setUpdateIndex(currentIndex);
+      });
+    }
+
     super.initState();
   }
 
   List<String> getTabTitles() {
     List<String> tabs = [
-      S.current!.store_comprehensive, // 综合
+      S.current.store_comprehensive, // 综合
       S.current.store_classification, // 全部分类
       S.current.store_conditions // 全部条件
     ];
@@ -104,8 +118,13 @@ class _GoodsListPageState extends State<GoodsListPageFul>  {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Consumer<SortProvider>(builder: (ctx, child, value) {
+    return Consumer<SortProvider>(builder: (context, child, value) {
       provider = child;
+
+      // return Center(
+      //   child: Text("测试"),
+      // );
+
       return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
@@ -135,9 +154,10 @@ class _GoodsListPageState extends State<GoodsListPageFul>  {
               // ),
             ),
           ),
-          body: Material(
+          body:Material(
             color: AppColors.primaryBackground,
-            child: GestureDetector(
+            child:
+            GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 // 触摸收起键盘
@@ -174,8 +194,8 @@ class _GoodsListPageState extends State<GoodsListPageFul>  {
       onTap: () => checkDisplayAction(context),
       child: Image.asset(
         BaseBloc.instance.displayType == DisplayType.list_form
-            ? 'assets/images/store/store_display.png'
-            : 'assets/images/store/store_display_sqr.png',
+            ? 'assets/images/home/store_display.png'
+            : 'assets/images/home/store_display_sqr.png',
       ),
     );
   }

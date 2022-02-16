@@ -1,6 +1,7 @@
 
 import 'package:date_format/date_format.dart';
 import 'package:intl/intl.dart';
+import 'package:ladyfou/core/http/http.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,6 +42,10 @@ class Utils {
     if (url.substring(0, 4).contains('www.')) {
       return 'http:' + url;
     }
+    if (url.contains("//")) {
+      return 'http:' + url;
+    }
+    return baseUrl + url;
     return 'http:' + url;
   }
 

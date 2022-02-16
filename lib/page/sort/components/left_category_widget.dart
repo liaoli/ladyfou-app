@@ -54,20 +54,30 @@ class CategoryMenueState extends State<CategoryWidget>
                 child: Container(
                   height: widget.itemHeight,
                   padding: EdgeInsets.only(left: 5.sp, right: 5.sp),
-                  color: currentItemIndex == index
-                      ? Colors.white
-                      : Color.fromRGBO(147, 149, 151, 0.1),
+                  color: Colors.white,
+                  // color: currentItemIndex == index
+                  //     ? Colors.white
+                  //     : Color.fromRGBO(147, 149, 151, 0.1),
                   child: Center(
-                    child: Text(
-                      widget.items[index].name2,
-                      style: BaseText.style(
-                        fontSize: 14,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 15.sp,right: 15.sp,top: 2.sp,bottom: 3.sp),
+                      decoration: BoxDecoration(
                         color: currentItemIndex == index
-                            ? AppColors.navigationColor
-                            : AppColors.primaryBlackText,
-                        fontWeight: currentItemIndex == index
-                            ? FontWeight.w700
-                            : FontWeight.w400,
+                            ? Colors.red
+                            : Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(widget.itemHeight / 2)),
+                      ),
+                      child: Text(
+                        widget.items[index].name2,
+                        style: BaseText.style(
+                          fontSize: 14,
+                          color: currentItemIndex == index
+                              ? Colors.white
+                              : AppColors.primaryBlackText,
+                          fontWeight: currentItemIndex == index
+                              ? FontWeight.w700
+                              : FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),

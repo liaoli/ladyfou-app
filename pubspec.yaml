@@ -146,6 +146,9 @@ flutter:
     - assets/images/home/love_black.png
     - assets/images/home/management_options_false.png
     - assets/images/home/management_options_true.png
+    - assets/images/home/nav_back.png
+    - assets/images/home/store_display.png
+    - assets/images/home/store_display_sqr.png
 
     # Sort
     - assets/images/sort/news_icon_black.png

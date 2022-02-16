@@ -33,16 +33,16 @@ class BaseScaffold extends Scaffold {
         BaseAppBar(
           brightness: Brightness.light,
           leadingType: leadType,
-          onWillPop: onWillPop!,
-          actions: actions!,
+          onWillPop: onWillPop ?? onWillPop,
+          actions: actions ?? actions,
           centerTitle: centerTitle,
           title: MyTitle(title ?? '', color: titleColor),
           backgroundColor: appBarBackgroundColor,
         ),
     backgroundColor: AppColors.primaryBackground,
-    body: body,
-    floatingActionButton: floatingActionButton,
-    floatingActionButtonLocation: floatingActionButtonLocation,
+    body: body ?? body,
+    floatingActionButton: floatingActionButton ?? floatingActionButton,
+    floatingActionButtonLocation: floatingActionButtonLocation ?? floatingActionButtonLocation,
     resizeToAvoidBottomInset: isResizeToAvoidBottomInset,
   );
 }
@@ -64,10 +64,10 @@ class BaseAppBar extends AppBar implements PreferredSizeWidget {
         bool centerTitle = true,
         double? elevation})
       : super(
-    key: key,
-    title: title,
-    bottom: bottom,
-    flexibleSpace: flexibleSpace,
+    key: key ?? key,
+    title: title ?? title,
+    bottom: bottom ?? bottom,
+    flexibleSpace: flexibleSpace ?? flexibleSpace,
     centerTitle: centerTitle,
     // brightness: brightness ?? Brightness.light,
     backgroundColor: backgroundColor ?? Color(0xfffefefe),
@@ -76,9 +76,9 @@ class BaseAppBar extends AppBar implements PreferredSizeWidget {
             ? Container()
             : AppBarBack(
           leadingType ?? AppBarBackType.Back,
-          onWillPop: onWillPop!,
+          onWillPop: onWillPop ?? onWillPop,
         )),
-    actions: actions,
+    actions: actions ?? actions,
     elevation: elevation ?? 0.5,
   );
   @override
@@ -109,7 +109,7 @@ class AppBarBack extends StatelessWidget {
           : Container(
         padding: EdgeInsets.only(right: 15, left: 15),
         child: Image.asset(
-          'assets/images/nav/nav_back.png',
+          'assets/images/home/nav_back.png',
           color: color,
         ),
       ),
