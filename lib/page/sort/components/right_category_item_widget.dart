@@ -10,8 +10,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ladyfou/page/sort/page/goods_list_page.dart';
 
 import '../../../components/image_placehold_widget.dart';
 import '../../../style/Color.dart';
@@ -119,13 +122,18 @@ class SecondryCategory extends StatelessWidget {
                     // Image.asset(
                     //   'assets/images/sort/sort_section_title_icon.png',
                     // ),
-                    Container(
-                      child: Text(
-                        'All >      ',
-                        style: BaseText.style(
-                            fontWeight: FontWeight.normal,
-                            color: AppColors.primaryBlackText,
-                            fontSize: 14),
+                    GestureDetector(
+                      onTap: ()=>{
+                        Get.to(() => GoodsListPage(shopId: data.id, sortModel: data))
+                      },
+                      child: Container(
+                        child: Text(
+                          'All >      ',
+                          style: BaseText.style(
+                              fontWeight: FontWeight.normal,
+                              color: AppColors.primaryBlackText,
+                              fontSize: 14),
+                        ),
                       ),
                     ),
                   ],

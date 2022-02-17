@@ -21,7 +21,7 @@ class GoodsInfoModel {
     this.tags = const [],
     this.imgUrl = '',
     this.isWished = 0,
-    this.point = 0,
+    this.point = '',
     required this.presell,
     this.isLuckyBag = 0,
     this.featureImage = const [],
@@ -47,7 +47,7 @@ class GoodsInfoModel {
   List<dynamic> tags;
   String imgUrl;
   int isWished;
-  int point;
+  String point;
   Presell presell;
   int isLuckyBag;
   List<dynamic> featureImage;
@@ -67,12 +67,12 @@ class GoodsInfoModel {
     name: json["name"],
     status: json["status"],
     listPrice: json["list_price"],
-    price: json["price"],
+    price: json["price"].toString(),
     amount: json["amount"],
     saled: json["saled"],
     createdAt: json["created_at"],
-    srcPrice: json["src_price"],
-    promotionPrice: json["promotion_price"],
+    srcPrice: json["src_price"].toString(),
+    promotionPrice: json["promotion_price"].toString(),
     discount: json["discount"],
     url: json["url"],
     fThumb: json["f_thumb"],
@@ -83,8 +83,8 @@ class GoodsInfoModel {
     tags: json["tags"] == null ? [] : List<dynamic>.from(json["tags"].map((x) => x)),
     imgUrl: json["imgUrl"],
     isWished: json["is_wished"],
-    point: json["point"],
-    presell: Presell.fromJson(json["presell"]),
+    point: json["point"].toString(),
+    presell:json["presell"] == null ? Presell() :  Presell.fromJson(json["presell"]),
     isLuckyBag: json["is_lucky_bag"],
     featureImage: List<dynamic>.from(json["feature_image"].map((x) => x)),
   );
@@ -93,8 +93,8 @@ class GoodsInfoModel {
     "id": id,
     "name": name,
     "status": status,
-    "list_price": listPrice,
-    "price": price,
+    "list_price": listPrice.toString(),
+    "price": price.toString(),
     "amount": amount,
     "saled": saled,
     "created_at": createdAt.toString(),
@@ -110,8 +110,8 @@ class GoodsInfoModel {
     "tags": List<dynamic>.from(tags.map((x) => x)),
     "imgUrl": imgUrl,
     "is_wished": isWished,
-    "point": point,
-    "presell": presell! == null ? {} : presell!.toJson(),
+    "point": point.toString(),
+    "presell": presell == null ? Presell() : presell.toJson(),
     "is_lucky_bag": isLuckyBag,
     "feature_image": List<dynamic>.from(featureImage.map((x) => x)),
   };

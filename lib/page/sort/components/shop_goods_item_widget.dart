@@ -10,13 +10,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/utils/utils.dart';
+import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
 import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
 import '../../../components/image_placehold_widget.dart';
-import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -97,12 +98,14 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
             /// 标题文字模块
             _titleItem(context),
 
-            /// 新品模块
-            // widget.goodsModel.isNew == 1 ? _newItem(context) : SizedBox(),
+            /// 原价
             _newItem(context),
 
             /// 价格
             _priceItem(context),
+
+            /// 评分
+            _ratationItem(context),
           ],
         ),
         decoration: new BoxDecoration(
@@ -124,7 +127,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
 
       Container(
         constraints: BoxConstraints(
-          minHeight: 148.sp,
+          minHeight: 128.sp,
         ),
         child: ImagePlaceholdWidget(
           imgError: () {
@@ -140,37 +143,13 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
           defImagePath: 'assets/images/home/banner_placehold.png',
         ),
       ),
-
-      widget.isShowLike
-          ? Positioned(
-        top: 16,
-        right: 12,
-        child: Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-            color: AppColors.bgGreytr,
-            borderRadius: BorderRadius.all(
-              Radius.circular(17),
-            ),
-          ),
-          child: ManagementOptions(
-            onTap: () => widget.onItemLikeClick!(),
-            isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
-            selectUrl: 'assets/images/home/love_red.png',
-            unchecked: 'assets/images/home/love_black.png',
-            width: 24.sp,
-          ),
-        ),
-      )
-          : Padding(padding: EdgeInsets.zero),
     ]);
   }
 
   /// 文字标题模块
   Widget _titleItem(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 12, right: 12, top: 10),
+      margin: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: RichText(
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -189,7 +168,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
               WidgetSpan(child: SizedBox(width: 5.0)),
 
               TextSpan(
-                text: widget.goodsModel.name,
+                text: widget.goodsModel.name == '' ? '小柄長袖カジュアルスウィート清...' : widget.goodsModel.name,
                 style: BaseText.style(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w400,
@@ -204,29 +183,33 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
     );
   }
 
-  /// 新品模块
+  /// 原价
   Widget _newItem(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 12, right: 12, top: 5),
-      width: 32.sp,
-      height: 12,
-      decoration: new BoxDecoration(
-        border: Border.all(
-          width: 1,
-          style: BorderStyle.solid,
-          color: Color.fromRGBO(15, 76, 129, 1),
-        ),
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Text(
-        S.current.home_new_products,  /// 新品
-        textAlign: TextAlign.center,
-        style: BaseText.style(
-            height: 1.4,
-            color: Color.fromRGBO(15, 76, 129, 1),
-            fontSize: 8,
-            fontWeight: FontWeight.w400),
-      ),
+      child: Row(
+        children: [
+          GradientButton(
+            width: 50.sp,
+            height: 20.sp,
+            fontWeight: FontWeight.bold,
+            text: widget.goodsModel.discount,
+          ),
+          SizedBox(width: 10.sp),
+          double.parse(widget.goodsModel.listPrice) > 0.0
+              ? Text( '￥'+
+            Utils.formatStepCount(
+                double.parse(widget.goodsModel.listPrice)), // 商品原价
+            style: BaseText.style(
+                fontSize: 10.0,
+                fontWeight: FontWeight.w400,
+                color: AppColors.primaryBlackText.withOpacity(0.5),
+                decoration: TextDecoration.lineThrough
+            ),
+          )
+              : SizedBox(),
+        ],
+      )
     );
   }
 
@@ -242,18 +225,17 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
               Text(
                 '￥',
                 style: BaseText.style(
-                    color: AppColors.navigationColor,
+                    color: AppColors.primaryBlackText,
                     fontSize: 12,
                     fontWeight: FontWeight.w700),
               ),
               Text(
                 Utils.formatStepCount(double.parse(widget.goodsModel.price)),
-
                 /// 商品价格
                 style: BaseText.style(
                     height: 1.0,
                     color: AppColors.navigationColor,
-                    fontSize: 18,
+                    fontSize: 15.0,
                     fontWeight: FontWeight.w700),
               ),
             ],
@@ -266,6 +248,82 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
           //     height: 20,
           //   ),
           // ),
+        ],
+      ),
+    );
+  }
+
+  /// 评分
+  Widget _ratationItem(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              RatingBar.builder(
+                initialRating: double.parse(widget.goodsModel.reviewsTotal),
+                direction: Axis.horizontal,
+                allowHalfRating: false,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                itemSize: 16.sp,
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                // ratingWidget: RatingWidget(
+                //   full: Container(child: Image.asset('assets/images/home/icon_star.png')),
+                //   half: Container(child: Image.asset('assets/images/home/icon_star.png')),
+                //   empty: Container(child: Image.asset('assets/images/home/icon_star_nor.png')),
+                // ),
+                onRatingUpdate: (double value) {  },
+              ),
+              Text(
+                widget.goodsModel.reviewsTotal,
+                style: BaseText.style(
+                    color: AppColors.jp_color153,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+
+          Row(
+            children: [
+              widget.isShowLike
+                  ? Container(
+                  width: 30.sp,
+                  height: 30.sp,
+                  decoration: BoxDecoration(
+                    color: AppColors.bgGreytr,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(17),
+                    ),
+                  ),
+                  child: ManagementOptions(
+                    onTap: () => widget.onItemLikeClick!(),
+                    isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
+                    selectUrl: 'assets/images/home/love_red.png',
+                    unchecked: 'assets/images/home/love_black.png',
+                    width: 24.sp,
+                  ),
+              )
+                  : Padding(padding: EdgeInsets.zero),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 30.sp,
+                  height: 30.sp,
+                  child: Image.asset(
+                    'assets/images/home/shop_detail_shopcart.png',
+                    // color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );

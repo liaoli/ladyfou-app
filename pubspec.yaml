@@ -83,6 +83,9 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   # 列表展示动画
   flutter_staggered_animations: ^1.0.0
+  # 星级评分控件
+  # https://pub.flutter-io.cn/packages/flutter_rating_bar
+  flutter_rating_bar:
 
   #  im_flutter_sdk:
   #    path: /Users/hfy/flutter/im_flutter_sdk-3.8.3+4
@@ -90,6 +93,7 @@ dependencies:
   flutter_custom_dialog: ^1.2.0 #dialog 统一用这个
   intl: ^0.17.0
   webview_flutter: ^3.0.0
+  sliver_tools: ^0.2.5
 
 dev_dependencies:
   flutter_test:
@@ -128,6 +132,8 @@ flutter:
     - assets/images/home/home_volume.png
     - assets/images/home/home_head_search_bg.png
     - assets/images/home/home_head_default_bg.png
+    - assets/images/home/home_head_search_grey.png
+    - assets/images/home/home_head_message.png
 
     
     - assets/images/mine/mine_bg.png
@@ -160,6 +166,12 @@ flutter:
     - assets/images/home/love_black.png
     - assets/images/home/management_options_false.png
     - assets/images/home/management_options_true.png
+    - assets/images/home/nav_back.png
+    - assets/images/home/store_display.png
+    - assets/images/home/store_display_sqr.png
+    - assets/images/home/icon_star.png
+    - assets/images/home/icon_star_nor.png
+    - assets/images/home/shop_detail_shopcart.png
 
     # Sort
     - assets/images/sort/news_icon_black.png

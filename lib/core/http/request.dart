@@ -62,11 +62,15 @@ Future<MyResponse<List<GoodsInfoModel>>> getCategoryProduct(
   required int id,
   required int page,
   required int size,
+  String price = "asc",
+  String saled = "asc"
 }) async {
   Map<String, dynamic> result = await XHttp.get("/otonastyle/catalog/category_product",{
     "id":id,
     "page":page,
     "size":size,
+    "price":price,
+    "saled":saled,
   });
   MyResponse<List<GoodsInfoModel>> response = MyResponse<List<GoodsInfoModel>>.fromJson(result);
   return response;

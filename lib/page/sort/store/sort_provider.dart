@@ -28,14 +28,18 @@ class SortProvider with ChangeNotifier {
 
   /// 获取分类数据
   Future getSortAllDatas() async {
-    MyResponse<List<SortModel>> response = await getSortData();
-    if(response.common.statusCode == 1000) {
-      categoryList = response.response!.data!;
-      notifyListeners();
-    }
-    else {
-      isRequestError = true;
-      notifyListeners();
+    try {
+      MyResponse<List<SortModel>> response = await getSortData();
+      if(response.common.statusCode == 1000) {
+            categoryList = response.response!.data!;
+            notifyListeners();
+          }
+          else {
+            isRequestError = true;
+            notifyListeners();
+          }
+    } catch (s,e) {
+      print('请求报错:$e');
     }
   }
 
@@ -44,9 +48,12 @@ class SortProvider with ChangeNotifier {
         bool isFirst = false,
         bool isRefresh = true,
         int page = CURRENT_PAGE,
-        int size = PAGE_SIZE}) async {
+        int size = PAGE_SIZE,
+        String price = "asc",
+        String saled = "asc"
+  }) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
-    MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(id: id,page: page,size: size);
+    MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(id: id,page: page,size: size,price: price,saled: saled);
     if(response.common.statusCode == 1000) {
       List<GoodsInfoModel> modelList = response.response!.data!;
       /// 第一次请求

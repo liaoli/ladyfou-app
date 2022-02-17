@@ -15,10 +15,14 @@ class AppColors {
   static const Color primaryBlackText = Color.fromRGBO(3, 3, 25, 1.0);
   /// 灰色153
   static const Color jp_color153 = Color.fromRGBO(153, 153, 153, 1.0);
-  ///半透明背景灰
+  /// 半透明背景灰
   static const Color bgGreytr = Color.fromRGBO(245, 245, 245, 0.4);
     ///半透明黑色
   static const Color transparent_Black = Color.fromRGBO(0, 0, 0, 0.5);
+  /// 渐变色起点
+  static const Color gradientColorStart = Color.fromRGBO(255, 111, 97, 1.0);
+  /// 渐变色终点
+  static const Color gradientColorEnd = Color.fromRGBO(222, 0, 32, 1);
 
   static const Color color_66000000 = Color(0x66000000);
   static const Color color_FFF5F5F5 = Color(0xFFF5F5F5);
