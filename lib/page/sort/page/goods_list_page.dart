@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/base_scaffold.dart';
 import '../../../core/constant/base_enum.dart';
+import '../../../core/constant/constant.dart';
 import '../../../core/model/sort_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
@@ -27,20 +28,20 @@ import '../../../generated/l10n.dart';
 
 class GoodsListPage extends StatelessWidget {
   final int shopId;
-  final SortModel sortModel;
-  GoodsListPage({Key? key, required this.shopId, required this.sortModel}) : super(key: key);
+  final String title;
+  GoodsListPage({Key? key, required this.shopId, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ChangeNotifierProvider(create: (_) => SortProvider(),child: GoodsListPageFul(shopId: shopId,sortModel: sortModel));
+    return ChangeNotifierProvider(create: (_) => SortProvider(),child: GoodsListPageFul(shopId: shopId,title: title));
   }
 }
 
 class GoodsListPageFul extends StatefulWidget {
   final int shopId;
-  final SortModel sortModel;
-  GoodsListPageFul({Key? key,required this.shopId, required this.sortModel}) : super(key: key);
+  final String title;
+  GoodsListPageFul({Key? key,required this.shopId, required this.title}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -146,7 +147,7 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
             preferredSize: Size.fromHeight(44.0 + ScreenUtil().statusBarHeight),
             child: BaseAppBar(
               title: Container(
-                child: Text(widget.sortModel.name2,style: BaseText.style(
+                child: Text(widget.title,style: BaseText.style(
                     fontWeight: FontWeight.w700,
                     color: AppColors.primaryBlackText,
                     fontSize: 14)),
@@ -217,8 +218,14 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
                             /// 商品列表
                             Expanded(child: EasyRefresh.custom(
                               controller: provider.refreshController,
-                              onRefresh: () => provider.getCategoryProducts(widget.shopId, isRefresh: true),
-                              onLoad: () => provider.getCategoryProducts(widget.shopId,isRefresh: false),
+                              onRefresh: () {
+                                provider.currentPage+=CURRENT_PAGE;
+                                return provider.getCategoryProducts(widget.shopId, isRefresh: true,page: provider.currentPage);
+                              },
+                              onLoad: () {
+                                provider.currentPage+=1;
+                                return provider.getCategoryProducts(widget.shopId,isRefresh: false,page: provider.currentPage);
+                              },
                               enableControlFinishLoad: true,
                               enableControlFinishRefresh: true,
                               header: MaterialHeader(),

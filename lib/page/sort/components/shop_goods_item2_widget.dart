@@ -258,7 +258,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
           Row(
             children: [
               RatingBar(
-                initialRating: double.parse(widget.goodsModel.reviewsTotal),
+                initialRating: widget.goodsModel.rating,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
@@ -273,7 +273,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 onRatingUpdate: (double value) {},
               ),
               Text(
-                widget.goodsModel.reviewsTotal,
+                widget.goodsModel.rating.toString(),
                 style: BaseText.style(
                     color: AppColors.jp_color153,
                     fontSize: 15.0,

@@ -125,7 +125,7 @@ class SecondryCategory extends StatelessWidget {
                     Container(
                       child: GestureDetector(
                         onTap: ()=>{
-                          Get.to(() => GoodsListPage(shopId: data.id, sortModel: data))
+                          Get.to(() => GoodsListPage(shopId: data.id, title: data.name2))
                         },
                         child: Row(
                           children: [
@@ -170,7 +170,7 @@ class SecondryCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         String titleStr = Uri.encodeComponent(goodModel.name2);
-
+        Get.to(() => GoodsListPage(shopId: goodModel.id, title: goodModel.name2));
         /// 跳转搜索
         // BaseNavigation.present("search?id=$titleStr");
       },

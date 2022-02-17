@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../style/text.dart';
+import '../../home/components/home_search_nav_bar.dart';
 import '../components/left_category_widget.dart';
 import '../components/right_category_widget.dart';
 import '../store/sort_provider.dart';
@@ -78,7 +79,7 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
         backgroundColor: Colors.white,
         body: Column(children: <Widget>[
           // 输入框
-          _searchBarWidget(),
+          HomeSearchNavBar(),
           _listWidget(context, rightListViewHeight),
         ]),
       ),
