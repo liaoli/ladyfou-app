@@ -9,6 +9,8 @@ import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
 
 import '../../components/sliver_header_delegate.dart';
+import '../../core/constant/constant.dart';
+import '../../core/utils/event.dart';
 import '../../style/Color.dart';
 import '../../utils/date_util.dart';
 import 'components/product_rank_list.dart';
@@ -33,16 +35,11 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
       debugPrint("controller.offset = ${scrollController.offset}");
 
       if (scrollController.offset >= 182.w) {
-        if (showCountdown == false) {
-          setState(() {
-            showCountdown = true;
-          });
-        }
+        showCountdown = true;
       } else {
-          setState(() {
-            showCountdown = false;
-          });
+        showCountdown = false;
       }
+      XEvent.post(EVENT_KEY_SHOW_LIMIT_COUNTDOWN, showCountdown);
     });
 
     super.initState();
@@ -139,7 +136,11 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
           color: AppColors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [LimitTimeDiscountListHead(showCountdown: showCountdown,)],
+            children: [
+              LimitTimeDiscountListHead(
+                showCountdown: showCountdown,
+              )
+            ],
           ),
         ),
       ),
@@ -207,11 +208,41 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
   }
 }
 
-class LimitTimeDiscountListHead extends StatelessWidget {
+class LimitTimeDiscountListHead extends StatefulWidget {
   final bool showCountdown;
 
   const LimitTimeDiscountListHead({Key? key, this.showCountdown = false})
       : super(key: key);
+
+  @override
+  _LimitTimeDiscountListHeadState createState() =>
+      _LimitTimeDiscountListHeadState();
+}
+
+class _LimitTimeDiscountListHeadState extends State<LimitTimeDiscountListHead> {
+  late bool showCountdown = false;
+  late StreamSubscription<bool> homeTabBarViewSubscription;
+
+  @override
+  void initState() {
+    homeTabBarViewSubscription =
+        XEvent.on<bool>(EVENT_KEY_SHOW_LIMIT_COUNTDOWN, (bool value) {
+      if (mounted) {
+        setState(() {
+          showCountdown = value;
+        });
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    homeTabBarViewSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

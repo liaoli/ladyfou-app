@@ -1,4 +1,4 @@
-const String EVENT_KEY_HOME_REFRESH = "home_refresh";
+const String EVENT_KEY_SHOW_LIMIT_COUNTDOWN = "show_limit_countdown";
 
 const String EVENT_KEY_SEARCH = "search";
 
