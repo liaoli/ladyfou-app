@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
+        "address": MessageLookupByLibrary.simpleMessage("地址"),
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "agreePrivacy":
             MessageLookupByLibrary.simpleMessage("Privacy agreement agreed!"),
@@ -38,18 +39,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "category": MessageLookupByLibrary.simpleMessage("category"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
+        "collection": MessageLookupByLibrary.simpleMessage("收藏"),
         "common_button_continue":
             MessageLookupByLibrary.simpleMessage("Continue"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "disagree": MessageLookupByLibrary.simpleMessage("Disagree"),
+        "discount_code": MessageLookupByLibrary.simpleMessage("优惠码"),
+        "distribution": MessageLookupByLibrary.simpleMessage("配送中"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "erro_message": MessageLookupByLibrary.simpleMessage("请求出错，这里可以设置个缺省页"),
         "exitApp": MessageLookupByLibrary.simpleMessage("Exit App"),
+        "footprint": MessageLookupByLibrary.simpleMessage("足迹"),
         "game": MessageLookupByLibrary.simpleMessage("game"),
         "history": MessageLookupByLibrary.simpleMessage("history"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "home_new_products": MessageLookupByLibrary.simpleMessage("新品"),
         "home_search_name": MessageLookupByLibrary.simpleMessage("当前热搜词"),
+        "integral": MessageLookupByLibrary.simpleMessage("积分"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginName": MessageLookupByLibrary.simpleMessage("LoginName"),
@@ -62,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lookAgain": MessageLookupByLibrary.simpleMessage("Look Again"),
         "me": MessageLookupByLibrary.simpleMessage("Profile"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "not_shipped": MessageLookupByLibrary.simpleMessage("未发货"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordError": MessageLookupByLibrary.simpleMessage(
             "Password cannot be less than 6 digits!"),
@@ -71,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyExplainAgain": m0,
         "privacyName": m1,
         "qqgroup": MessageLookupByLibrary.simpleMessage("QQ Group"),
+        "received": MessageLookupByLibrary.simpleMessage("配送中"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("Register Success"),
@@ -78,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatPassword":
             MessageLookupByLibrary.simpleMessage("Repeat Password"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "shipped": MessageLookupByLibrary.simpleMessage("已发货"),
         "sponsor": MessageLookupByLibrary.simpleMessage("Sponsor"),
         "stillDisagree": MessageLookupByLibrary.simpleMessage("Still Disagree"),
         "store_classification": MessageLookupByLibrary.simpleMessage("全部分类"),
