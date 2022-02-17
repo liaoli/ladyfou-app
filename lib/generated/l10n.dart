@@ -600,6 +600,96 @@ class S {
     );
   }
 
+  /// `积分`
+  String get integral {
+    return Intl.message(
+      '积分',
+      name: 'integral',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `收藏`
+  String get collection {
+    return Intl.message(
+      '收藏',
+      name: 'collection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `优惠码`
+  String get discount_code {
+    return Intl.message(
+      '优惠码',
+      name: 'discount_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `足迹`
+  String get footprint {
+    return Intl.message(
+      '足迹',
+      name: 'footprint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `地址`
+  String get address {
+    return Intl.message(
+      '地址',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `未发货`
+  String get not_shipped {
+    return Intl.message(
+      '未发货',
+      name: 'not_shipped',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已发货`
+  String get shipped {
+    return Intl.message(
+      '已发货',
+      name: 'shipped',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `配送中`
+  String get distribution {
+    return Intl.message(
+      '配送中',
+      name: 'distribution',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `配送中`
+  String get received {
+    return Intl.message(
+      '配送中',
+      name: 'received',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `新品`
   String get home_new_products {
     return Intl.message(

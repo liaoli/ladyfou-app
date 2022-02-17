@@ -54,5 +54,14 @@
   "store_comprehensive": "综合",
   "store_classification": "全部分类",
   "store_conditions": "全部条件",
+  "integral":"积分",
+  "collection":"收藏",
+  "discount_code":"优惠码",
+  "footprint":"足迹",
+  "address":"地址",
+  "not_shipped":"未发货",
+  "shipped":"已发货",
+  "distribution":"配送中",
+  "received":"配送中",
   "home_new_products": "新品"
 }

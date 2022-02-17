@@ -34,60 +34,61 @@ class _ProductRankHeadState extends State<ProductRankHead> {
     );
   }
 
-  Container head() {
-    return Container(
-      height: 44.w,
-      width: double.infinity,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 12.w,
-          ),
-          Image.asset(
-            "assets/images/home/rank_icon.png",
-            width: 16.w,
-            height: 16.w,
-          ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Text(
-            "商品排行榜",
-            style: TextStyle(
-              color: AppColors.color_FF333333,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700,
+  Widget head() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        height: 44.w,
+        width: double.infinity,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 12.w,
             ),
-          ),
-          Expanded(
-              child: SizedBox(
-            width: 1,
-          )),
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 6.w,
-                ),
-                Image.asset(
-                  "assets/images/home/daily_new_arrow.png",
-                  width: 7.w,
-                  height: 12.w,
-                ),
-              ],
+            Image.asset(
+              "assets/images/home/rank_icon.png",
+              width: 16.w,
+              height: 16.w,
             ),
-            onTap: () {
-              //TODO:跳转到每日新品列表
-
-              Get.to(() => ProductRankPage());
-            },
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-        ],
+            SizedBox(
+              width: 6.w,
+            ),
+            Text(
+              "商品排行榜",
+              style: TextStyle(
+                color: AppColors.color_FF333333,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Expanded(
+                child: SizedBox(
+              width: 1,
+            )),
+            GestureDetector(
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 6.w,
+                  ),
+                  Image.asset(
+                    "assets/images/home/daily_new_arrow.png",
+                    width: 7.w,
+                    height: 12.w,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+          ],
+        ),
       ),
+      onTap: () {
+        //TODO:跳转到每日新品列表
+        Get.to(() => ProductRankPage());
+      },
     );
   }
 }

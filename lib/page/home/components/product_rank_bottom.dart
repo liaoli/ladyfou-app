@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 import '../../../components/button/common_button.dart';
 import '../../../style/Color.dart';
+import '../product_rank_page.dart';
 
 class ProductRankBottom extends StatefulWidget {
   const ProductRankBottom({Key? key}) : super(key: key);
@@ -46,6 +48,10 @@ class _ProductRankBottomState extends State<ProductRankBottom> {
                   ),
                 ],
               ),
+              onTap: () {
+                //TODO:跳转到每日新品列表
+                Get.to(() => ProductRankPage());
+              },
             ),
           ],
         ),
