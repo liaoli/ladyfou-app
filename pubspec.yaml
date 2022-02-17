@@ -165,6 +165,8 @@ flutter:
     - assets/images/sort/camera_icon_black.png
     - assets/images/sort/search_delete_icon.png
 
+    #通用
+    - assets/images/action_bar_shopping_cart_black.png
 
   fonts:
     - family: xuifont

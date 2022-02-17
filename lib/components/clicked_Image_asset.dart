@@ -21,7 +21,7 @@ class ClickedImageAsset extends StatelessWidget {
         image,
         width: width,
         height: height,
-        fit: BoxFit.cover,
+
       ),
       onTap: onTap,
     );

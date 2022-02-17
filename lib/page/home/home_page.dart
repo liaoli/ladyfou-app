@@ -164,7 +164,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget productRankList() {
-    return ProductRankList();
+    return ProductRankList(
+      padding: EdgeInsets.symmetric(
+        horizontal: 12.w,
+        vertical: 12.w,
+      ),
+      background: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 
   Widget productRankBottom() {

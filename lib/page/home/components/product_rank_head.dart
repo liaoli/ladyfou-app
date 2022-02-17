@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 import '../../../style/Color.dart';
+import '../product_rank_page.dart';
 
 class ProductRankHead extends StatefulWidget {
   const ProductRankHead({Key? key}) : super(key: key);
@@ -62,6 +64,7 @@ class _ProductRankHeadState extends State<ProductRankHead> {
             width: 1,
           )),
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             child: Row(
               children: [
                 SizedBox(
@@ -76,6 +79,8 @@ class _ProductRankHeadState extends State<ProductRankHead> {
             ),
             onTap: () {
               //TODO:跳转到每日新品列表
+
+              Get.to(() => ProductRankPage());
             },
           ),
           SizedBox(

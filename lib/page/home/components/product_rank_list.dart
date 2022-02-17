@@ -7,7 +7,13 @@ import 'package:sliver_tools/sliver_tools.dart';
 import '../../../style/Color.dart';
 
 class ProductRankList extends StatefulWidget {
-  const ProductRankList({Key? key}) : super(key: key);
+  final Widget background;
+  final EdgeInsetsGeometry padding;
+  final int count;
+
+  const ProductRankList(
+      {Key? key, required this.background, required this.padding,this.count = 6,})
+      : super(key: key);
 
   @override
   _ProductRankListState createState() => _ProductRankListState();
@@ -16,29 +22,29 @@ class ProductRankList extends StatefulWidget {
 class _ProductRankListState extends State<ProductRankList> {
   @override
   Widget build(BuildContext context) {
-
-
-   return SliverStack(
+    return SliverStack(
       insetOnOverlap: false, // defaults to false
       children: <Widget>[
         SliverPositioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              // boxShadow: const <BoxShadow>[
-              //   BoxShadow(
-              //     offset: Offset(0, 4),
-              //     blurRadius: 8,
-              //     color: Colors.black26,
-              //   )
-              // ],
-              // borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+          child: widget.background,
+          // child: Container(
+          //   // margin: EdgeInsets.symmetric(horizontal: 12.w,),
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     // boxShadow: const <BoxShadow>[
+          //     //   BoxShadow(
+          //     //     offset: Offset(0, 4),
+          //     //     blurRadius: 8,
+          //     //     color: Colors.black26,
+          //     //   )
+          //     // ],
+          //     // borderRadius: BorderRadius.circular(8),
+          //   ),
+          // ),
         ),
         SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
-          sliver:SliverGrid(
+          padding: widget.padding,
+          sliver: SliverGrid(
             //Grid
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, //Grid按两列显示
@@ -47,30 +53,30 @@ class _ProductRankListState extends State<ProductRankList> {
               childAspectRatio: 158 / 270,
             ),
             delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
+              (BuildContext context, int index) {
                 //创建子widget
                 return RankProductItemView(
                   index: index,
                 );
               },
-              childCount: 6,
+              childCount: widget.count,
             ),
           ),
         ),
       ],
     );
-
   }
 }
 
-class ProductCategoryList extends StatefulWidget {
-  const ProductCategoryList({Key? key}) : super(key: key);
+class ProductCategoryRankList extends StatefulWidget {
+  const ProductCategoryRankList({Key? key}) : super(key: key);
 
   @override
-  _ProductCategoryListState createState() => _ProductCategoryListState();
+  _ProductCategoryRankListState createState() =>
+      _ProductCategoryRankListState();
 }
 
-class _ProductCategoryListState extends State<ProductCategoryList> {
+class _ProductCategoryRankListState extends State<ProductCategoryRankList> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -150,8 +156,8 @@ class RankProductItemView extends StatelessWidget {
             ),
             placeholder: (context, url) => Center(
               child: SizedBox(
-                width: 20.w,
-                height: 20.w,
+                width: 40.w,
+                height: 40.w,
                 child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
               ),
             ),
