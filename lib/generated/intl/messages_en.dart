@@ -83,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "store_classification": MessageLookupByLibrary.simpleMessage("全部分类"),
         "store_comprehensive": MessageLookupByLibrary.simpleMessage("综合"),
         "store_conditions": MessageLookupByLibrary.simpleMessage("全部条件"),
+        "store_sales_volume": MessageLookupByLibrary.simpleMessage("销量"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "thinkAboutItAgain": MessageLookupByLibrary.simpleMessage(
             "  Do you want to think about it again？"),

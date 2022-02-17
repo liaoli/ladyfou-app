@@ -52,6 +52,7 @@
   "erro_message": "请求出错，这里可以设置个缺省页",
   "home_search_name": "当前热搜词",
   "store_comprehensive": "综合",
+  "store_sales_volume": "销量",
   "store_classification": "全部分类",
   "store_conditions": "全部条件",
   "home_new_products": "新品"

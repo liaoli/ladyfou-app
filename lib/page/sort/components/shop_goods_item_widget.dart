@@ -156,19 +156,8 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
         text: TextSpan(
             style: DefaultTextStyle.of(context).style,
             children: <InlineSpan>[
-              // WidgetSpan(
-              //   child: Container(
-              //     child: TipsTitleLab(
-              //       text: _getType(),
-              //     ),
-              //   ),
-              // ),
-
-              // 添加5的间距
-              WidgetSpan(child: SizedBox(width: 5.0)),
-
               TextSpan(
-                text: widget.goodsModel.name == '' ? '小柄長袖カジュアルスウィート清...' : widget.goodsModel.name,
+                text: widget.goodsModel.name,
                 style: BaseText.style(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w400,
@@ -225,7 +214,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
               Text(
                 '￥',
                 style: BaseText.style(
-                    color: AppColors.primaryBlackText,
+                    color: AppColors.navigationColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w700),
               ),
@@ -262,22 +251,23 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
         children: [
           Row(
             children: [
-              RatingBar.builder(
+              RatingBar(
                 initialRating: double.parse(widget.goodsModel.reviewsTotal),
                 direction: Axis.horizontal,
-                allowHalfRating: false,
+                allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                itemSize: 16.sp,
-                itemBuilder: (context, _) => Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                // ratingWidget: RatingWidget(
-                //   full: Container(child: Image.asset('assets/images/home/icon_star.png')),
-                //   half: Container(child: Image.asset('assets/images/home/icon_star.png')),
-                //   empty: Container(child: Image.asset('assets/images/home/icon_star_nor.png')),
+                itemSize: 13.sp,
+                // itemBuilder: (context, _) => Icon(
+                //   Icons.star,
+                //   color: Colors.amber,
                 // ),
+                ratingWidget: RatingWidget(
+                  full: Container(child: Image.asset('assets/images/sort/icon_star_full.png')),
+                  half: Container(child: Image.asset('assets/images/sort/icon_star_half.png')),
+                  empty: Container(child: Image.asset('assets/images/sort/icon_star_empty.png')),
+                ),
+                ignoreGestures: true,
                 onRatingUpdate: (double value) {  },
               ),
               Text(
@@ -305,8 +295,8 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                   child: ManagementOptions(
                     onTap: () => widget.onItemLikeClick!(),
                     isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
-                    selectUrl: 'assets/images/home/love_red.png',
-                    unchecked: 'assets/images/home/love_black.png',
+                    selectUrl: 'assets/images/sort/love_red.png',
+                    unchecked: 'assets/images/sort/love_black.png',
                     width: 24.sp,
                   ),
               )
@@ -317,7 +307,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                   width: 30.sp,
                   height: 30.sp,
                   child: Image.asset(
-                    'assets/images/home/shop_detail_shopcart.png',
+                    'assets/images/sort/shop_detail_shopcart.png',
                     // color: Colors.white,
                   ),
                 ),

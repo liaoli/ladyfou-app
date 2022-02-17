@@ -122,17 +122,25 @@ class SecondryCategory extends StatelessWidget {
                     // Image.asset(
                     //   'assets/images/sort/sort_section_title_icon.png',
                     // ),
-                    GestureDetector(
-                      onTap: ()=>{
-                        Get.to(() => GoodsListPage(shopId: data.id, sortModel: data))
-                      },
-                      child: Container(
-                        child: Text(
-                          'All >      ',
-                          style: BaseText.style(
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.primaryBlackText,
-                              fontSize: 14),
+                    Container(
+                      child: GestureDetector(
+                        onTap: ()=>{
+                          Get.to(() => GoodsListPage(shopId: data.id, sortModel: data))
+                        },
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Text(
+                                'All',
+                                style: BaseText.style(
+                                    fontWeight: FontWeight.normal,
+                                    color: AppColors.primaryBlackText,
+                                    fontSize: 14),
+                              ),
+                            ),
+                            Image.asset("assets/images/sort/fi_chevron-right.png"),
+                            SizedBox(width: 20.sp),
+                          ],
                         ),
                       ),
                     ),

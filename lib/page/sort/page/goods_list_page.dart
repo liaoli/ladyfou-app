@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gzx_dropdown_menu/gzx_dropdown_menu.dart';
 import 'package:ladyfou/core/constant/base_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ import '../../../core/model/sort_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 import '../components/shop_grid_list_view.dart';
+import '../components/shop_top_bar_widget.dart';
 import '../store/sort_provider.dart';
 import '../../../generated/l10n.dart';
 
@@ -57,6 +59,8 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
   bool isSelect = false;
   int currentIndex = 0;
   late TabController tabController;
+  GlobalKey _stackKey = GlobalKey();
+  GZXDropdownMenuController _dropdownMenuController = GZXDropdownMenuController();
 
   @override
   void initState() {
@@ -108,6 +112,10 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
       });
     }
   }
+  /// 点击跳转购物车
+  void checkPushCartAction(BuildContext context) async {
+
+  }
 
   /// 点击tab切换
   void selectTabItem(int index) {
@@ -145,8 +153,18 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
               ),
               elevation: 0,
               actions: <Widget>[
-                /// 切换按钮
-                listTypeItem(context),
+                Container(
+                  padding: EdgeInsets.only(right: 20.sp),
+                  child: Row(
+                    children: [
+                      /// 切换按钮
+                      listTypeItem(context),
+                      SizedBox(width: 20.sp),
+                      /// 购物车按钮
+                      carItem(context),
+                    ],
+                  ),
+                )
               ],
               // bottom: PreferredSize(
               //   preferredSize: Size.fromHeight(35.0),
@@ -163,27 +181,83 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
                 // 触摸收起键盘
                 FocusScope.of(context).requestFocus(FocusNode());
               },
-              child: Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: EasyRefresh.custom(
-                  controller: provider.refreshController,
-                  onRefresh: () => provider.getCategoryProducts(widget.shopId, isRefresh: true),
-                  onLoad: () => provider.getCategoryProducts(widget.shopId,isRefresh: false),
-                  enableControlFinishLoad: true,
-                  enableControlFinishRefresh: true,
-                  header: MaterialHeader(),
-                  footer: MaterialFooter(),
-                  slivers: <Widget>[
-                    /// List
-                    SliverToBoxAdapter(
-                      child: _buildList(context),
+              child:
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Stack(
+                      key: _stackKey,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            /// 综合筛选
+                            GZXDropDownHeader(
+                              items: [
+                                GZXDropDownHeaderItem(tabTitles[0]),
+                                GZXDropDownHeaderItem(tabTitles[1]),
+                                GZXDropDownHeaderItem(tabTitles[2]),
+                              ],
+                              stackKey: _stackKey,
+                              controller: _dropdownMenuController,
+                              height: 40.sp,
+                              color: Colors.white,
+                              borderWidth: 1.sp,
+                              borderColor: AppColors.bgGreytr,
+                              dividerHeight: 0.sp,
+                              dividerColor: Colors.white,
+                              style: BaseText.style(fontSize: 15.sp,fontWeight: FontWeight.w500,color: AppColors.primaryBlackText),
+                              dropDownStyle: BaseText.style(fontSize: 15.sp,fontWeight: FontWeight.w500,color: AppColors.navigationColor),
+                              iconSize: 20.sp,
+                              iconColor: AppColors.bgGreytr,
+                              iconDropDownColor: AppColors.navigationColor,
+                              onItemTap: (index) {
+
+                              },
+                            ),
+                            /// 商品列表
+                            Expanded(child: EasyRefresh.custom(
+                              controller: provider.refreshController,
+                              onRefresh: () => provider.getCategoryProducts(widget.shopId, isRefresh: true),
+                              onLoad: () => provider.getCategoryProducts(widget.shopId,isRefresh: false),
+                              enableControlFinishLoad: true,
+                              enableControlFinishRefresh: true,
+                              header: MaterialHeader(),
+                              footer: MaterialFooter(),
+                              slivers: <Widget>[
+                                /// List
+                                SliverToBoxAdapter(
+                                  child: _buildList(context),
+                                ),
+                              ],
+                            )),
+                          ],
+                        ),
+                        GZXDropDownMenu(
+                            controller: _dropdownMenuController,
+                            animationMilliseconds: 300,
+                            dropdownMenuChanged: (isShow,index){
+                              setState(() {
+                                print("(已经${isShow ? '显示' : '隐藏'}$index)");
+                              });
+                            },
+                            menus: [
+                              GZXDropdownMenuBuilder(
+                                  dropDownHeight: 40.sp * 5.0,
+                                  dropDownWidget: Container(child: Text('第一个界面'))),
+                              GZXDropdownMenuBuilder(
+                                  dropDownHeight: 40.sp * 6.0,
+                                  dropDownWidget: Container(child: Text('第二个界面'))),
+                              GZXDropdownMenuBuilder(
+                                  dropDownHeight: 40.sp * 7.0,
+                                  dropDownWidget: Container(child: Text('第三个界面'))),
+
+                        ])
+                      ],
                     ),
-                  ],
-                ),
+                  ),
               ),
             ),
           ),
-        ),
       );
     });
   }
@@ -194,13 +268,20 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
       onTap: () => checkDisplayAction(context),
       child: Image.asset(
         BaseBloc.instance.displayType == DisplayType.list_form
-            ? 'assets/images/home/store_display.png'
-            : 'assets/images/home/store_display_sqr.png',
+            ? 'assets/images/sort/store_display.png'
+            : 'assets/images/sort/store_display_sqr.png',
       ),
     );
   }
+  /// 购物车按钮
+  Widget carItem(BuildContext context) {
+    return GestureDetector(
+      onTap: () => checkPushCartAction(context),
+      child: Image.asset('assets/images/sort/shop_detail_shopcart.png'),
+    );
+  }
 
-  /*---  List ---*/
+  /// List
   Widget _buildList(BuildContext context) {
     return ShopGridListView(
       displayType: BaseBloc.instance.displayType,
