@@ -22,6 +22,31 @@ class LimitTimeDiscountPage extends StatefulWidget {
 
 class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
   int count = 6;
+  late ScrollController scrollController;
+
+  bool showCountdown = false;
+
+  @override
+  void initState() {
+    scrollController = ScrollController();
+    scrollController.addListener(() {
+      debugPrint("controller.offset = ${scrollController.offset}");
+
+      if (scrollController.offset >= 182.w) {
+        if (showCountdown == false) {
+          setState(() {
+            showCountdown = true;
+          });
+        }
+      } else {
+          setState(() {
+            showCountdown = false;
+          });
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +77,7 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
       child: EasyRefresh.custom(
         header: MaterialHeader(),
         footer: MaterialFooter(),
+        scrollController: scrollController,
         onRefresh: () async {
           await Future.delayed(Duration(seconds: 1), () {
             setState(() {
@@ -113,7 +139,7 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
           color: AppColors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [LimitTimeDiscountListHead()],
+            children: [LimitTimeDiscountListHead(showCountdown: showCountdown,)],
           ),
         ),
       ),
@@ -182,7 +208,10 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
 }
 
 class LimitTimeDiscountListHead extends StatelessWidget {
-  const LimitTimeDiscountListHead({Key? key}) : super(key: key);
+  final bool showCountdown;
+
+  const LimitTimeDiscountListHead({Key? key, this.showCountdown = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +223,10 @@ class LimitTimeDiscountListHead extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              DiscountCountdown(),
+              Visibility(
+                child: DiscountCountdown(),
+                visible: showCountdown,
+              ),
             ],
           ),
         ),

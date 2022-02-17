@@ -16,6 +16,7 @@ class GoodsInfoModel {
     this.fThumb = '',
     this.reviewsTotal = '',
     this.wishlistTotal = 0,
+    this.rating = 0.0,
     this.cids = const [],
     this.options = const [],
     this.tags = const [],
@@ -41,6 +42,7 @@ class GoodsInfoModel {
   String url;
   String fThumb;
   String reviewsTotal;
+  double rating;
   int wishlistTotal;
   List<int> cids;
   List<Option> options;
@@ -77,6 +79,7 @@ class GoodsInfoModel {
     url: json["url"],
     fThumb: json["f_thumb"],
     reviewsTotal: json["reviews_total"],
+      rating: double.parse(json["rating"].toString()),
     wishlistTotal: json["wishlist_total"],
     cids: json["cids"] == null ? [] : List<int>.from(json["cids"].map((x) => x)),
     options: json["options"] == null ? [] : List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
@@ -104,6 +107,7 @@ class GoodsInfoModel {
     "url": url,
     "f_thumb": fThumb,
     "reviews_total": reviewsTotal,
+    "rating": rating,
     "wishlist_total": wishlistTotal,
     "cids": List<dynamic>.from(cids.map((x) => x)),
     "options": List<dynamic>.from(options.map((x) => x.toJson())),

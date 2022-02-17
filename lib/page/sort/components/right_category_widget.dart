@@ -87,9 +87,7 @@ class RightListViewState extends State<RightListView> {
     currentPage = i;
     this.isAnimating = true;
     double offset = widget.height * i;
-    this
-        .controller
-        .animateTo(offset,
+    this.controller.animateTo(offset,
         duration: Duration(milliseconds: 300), curve: Curves.easeOut)
         .then((onValue) => this.isAnimating = false);
   }

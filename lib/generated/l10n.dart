@@ -580,6 +580,16 @@ class S {
     );
   }
 
+  /// `销量`
+  String get store_sales_volume {
+    return Intl.message(
+      '销量',
+      name: 'store_sales_volume',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `全部分类`
   String get store_classification {
     return Intl.message(

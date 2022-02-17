@@ -15,6 +15,8 @@ class AppColors {
   static const Color primaryBlackText = Color.fromRGBO(3, 3, 25, 1.0);
   /// 灰色153
   static const Color jp_color153 = Color.fromRGBO(153, 153, 153, 1.0);
+  /// 灰色196
+  static const Color jp_color196 = Color.fromRGBO(196, 196, 196, 1.0);
   /// 半透明背景灰
   static const Color bgGreytr = Color.fromRGBO(245, 245, 245, 0.4);
     ///半透明黑色

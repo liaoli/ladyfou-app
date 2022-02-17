@@ -86,6 +86,10 @@ dependencies:
   # 星级评分控件
   # https://pub.flutter-io.cn/packages/flutter_rating_bar
   flutter_rating_bar:
+  # Dart 常用工具类库 https://github.com/Sky24n/common_utils
+  common_utils: ^2.1.0
+  # 下拉菜单 https://pub.flutter-io.cn/packages/gzx_dropdown_menu/install
+  gzx_dropdown_menu: ^3.1.0
 
   #  im_flutter_sdk:
   #    path: /Users/hfy/flutter/im_flutter_sdk-3.8.3+4
@@ -162,16 +166,12 @@ flutter:
     # Common
     - assets/images/home/placeholder.jpg
     - assets/images/home/banner_placehold.png
-    - assets/images/home/love_red.png
-    - assets/images/home/love_black.png
     - assets/images/home/management_options_false.png
     - assets/images/home/management_options_true.png
     - assets/images/home/nav_back.png
-    - assets/images/home/store_display.png
-    - assets/images/home/store_display_sqr.png
     - assets/images/home/icon_star.png
     - assets/images/home/icon_star_nor.png
-    - assets/images/home/shop_detail_shopcart.png
+
 
     # Sort
     - assets/images/sort/news_icon_black.png
@@ -180,6 +180,17 @@ flutter:
     - assets/images/sort/search_icon_black.png
     - assets/images/sort/camera_icon_black.png
     - assets/images/sort/search_delete_icon.png
+    - assets/images/sort/fi_chevron-right.png
+    - assets/images/sort/love_red.png
+    - assets/images/sort/love_black.png
+    - assets/images/sort/shop_detail_shopcart.png
+    - assets/images/sort/store_display.png
+    - assets/images/sort/store_display_sqr.png
+    - assets/images/sort/icon_star_full.png
+    - assets/images/sort/icon_star_half.png
+    - assets/images/sort/icon_star_empty.png
+    - assets/images/sort/store_price_down.png
+    - assets/images/sort/store_price_up.png
 
     #通用
     - assets/images/action_bar_shopping_cart_black.png

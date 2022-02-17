@@ -144,15 +144,13 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Flexible(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  _titleItem(context),
-                  SizedBox(height: 2.0),
-                  _newItem(context),
-                ],
-              ),
+          Container(
+            child: Column(
+              children: <Widget>[
+                _titleItem(context),
+                SizedBox(height: 2.0),
+                _newItem(context),
+              ],
             ),
           ),
           _priceItem(context),
@@ -166,23 +164,15 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
   Widget _titleItem(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 8),
       child: RichText(
-        maxLines: 3,
+        maxLines: 2,
         overflow: TextOverflow.ellipsis,
         text: TextSpan(
             style: DefaultTextStyle.of(context).style,
             children: <InlineSpan>[
-              // WidgetSpan(
-              //   child: TipsTitleLab(
-              //     text: _getType(),
-              //   ),
-              // ),
-
-              /// 添加5的间距
-              WidgetSpan(child: SizedBox(width: 5.0)),
               TextSpan(
-                text: widget.goodsModel.name == '' ? '小柄長袖カジュアルスウィート清...' : widget.goodsModel.name,
+                text: widget.goodsModel.name,
                 style: BaseText.style(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w400,
@@ -197,7 +187,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
   /// 原价
   Widget _newItem(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 5),
+        margin: EdgeInsets.only(top: 2),
         child: Row(
           children: [
             GradientButton(
@@ -227,7 +217,8 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
   /// 价格模块
   Widget _priceItem(BuildContext context) {
     return Container(
-      height: 25.0.sp,
+      margin: EdgeInsets.only(top: 2.sp,bottom: 4.sp),
+      height: 16.0.sp,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -237,7 +228,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 '￥',
                 style: BaseText.style(
                     color: AppColors.primaryBlackText,
-                    fontSize: 12,
+                    fontSize: 10,
                     fontWeight: FontWeight.w700),
               ),
               Text(
@@ -247,7 +238,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 style: BaseText.style(
                     height: 1.0,
                     color: AppColors.primaryBlackText,
-                    fontSize: 18,
+                    fontSize: 15,
                     fontWeight: FontWeight.w700),
               ),
             ],
@@ -260,33 +251,29 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
   /// 评分
   Widget _ratationItem(BuildContext context) {
     return Container(
-      height: 30.0.sp,
+      height: 24.0.sp,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              RatingBar.builder(
-                initialRating: double.parse(widget.goodsModel.reviewsTotal),
+              RatingBar(
+                initialRating: widget.goodsModel.rating,
                 direction: Axis.horizontal,
-                allowHalfRating: false,
+                allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                itemSize: 16.sp,
-                itemBuilder: (context, _) =>
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                // ratingWidget: RatingWidget(
-                //   full: Container(child: Image.asset('assets/images/home/icon_star.png')),
-                //   half: Container(child: Image.asset('assets/images/home/icon_star.png')),
-                //   empty: Container(child: Image.asset('assets/images/home/icon_star_nor.png')),
-                // ),
+                itemSize: 13.sp,
+                ignoreGestures: true,
+                ratingWidget: RatingWidget(
+                  full: Container(child: Image.asset('assets/images/sort/icon_star_full.png')),
+                  half: Container(child: Image.asset('assets/images/sort/icon_star_half.png')),
+                  empty: Container(child: Image.asset('assets/images/sort/icon_star_empty.png')),
+                ),
                 onRatingUpdate: (double value) {},
               ),
               Text(
-                widget.goodsModel.reviewsTotal,
+                widget.goodsModel.rating.toString(),
                 style: BaseText.style(
                     color: AppColors.jp_color153,
                     fontSize: 15.0,
@@ -300,17 +287,17 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                ManagementOptions(
                   onTap: () => widget.onItemLikeClick!(),
                   isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
-                  selectUrl: 'assets/images/home/love_red.png',
-                  unchecked: 'assets/images/home/love_black.png',
+                  selectUrl: 'assets/images/sort/love_red.png',
+                  unchecked: 'assets/images/sort/love_black.png',
                   width: 24.sp,
                 ),
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  width: 30.sp,
-                  height: 30.sp,
+                  width: 24.sp,
+                  height: 24.sp,
                   child: Image.asset(
-                    'assets/images/home/shop_detail_shopcart.png',
+                    'assets/images/sort/shop_detail_shopcart.png',
                     // color: Colors.white,
                   ),
                 ),
