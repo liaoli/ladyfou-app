@@ -131,6 +131,22 @@ flutter:
 
     
     - assets/images/mine/mine_bg.png
+    - assets/images/mine/icon_settings.png
+    - assets/images/mine/icon_shopping.png
+    - assets/images/mine/icon_message.png
+    - assets/images/mine/icon_frame.png
+    - assets/images/mine/white_right.png
+    - assets/images/mine/black_right.png
+    - assets/images/mine/menu_icon1.png
+    - assets/images/mine/menu_icon2.png
+    - assets/images/mine/menu_icon3.png
+    - assets/images/mine/menu_icon4.png
+    - assets/images/mine/menu_icon5.png
+    - assets/images/mine/mine_modul_icon1.png
+    - assets/images/mine/mine_modul_icon2.png
+    - assets/images/mine/mine_modul_icon3.png
+    - assets/images/mine/mine_modul_icon4.png
+    
 
     - assets/sample_audio.ogg
     - assets/sample_video.mp4
