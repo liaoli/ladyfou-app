@@ -59,6 +59,7 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
   List<String> tabTitles = [];
   bool isSelect = false;
   int currentIndex = 0;
+  int currentAlertIndex = 0;
   late TabController tabController;
   GlobalKey _stackKey = GlobalKey();
   GZXDropdownMenuController _dropdownMenuController = GZXDropdownMenuController();
@@ -130,10 +131,6 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
     return Consumer<SortProvider>(builder: (context, child, value) {
       provider = child;
 
-      // return Center(
-      //   child: Text("测试"),
-      // );
-
       return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
@@ -194,9 +191,9 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
                             /// 综合筛选
                             GZXDropDownHeader(
                               items: [
-                                GZXDropDownHeaderItem(tabTitles[0]),
-                                GZXDropDownHeaderItem(tabTitles[1]),
-                                GZXDropDownHeaderItem(tabTitles[2]),
+                                GZXDropDownHeaderItem(tabTitles[0],iconData: Icons.arrow_drop_down,iconDropDownData: Icons.arrow_drop_up),
+                                GZXDropDownHeaderItem(tabTitles[1],iconData: Icons.arrow_drop_down,iconDropDownData: Icons.arrow_drop_up),
+                                GZXDropDownHeaderItem(tabTitles[2],iconData: Icons.arrow_drop_down,iconDropDownData: Icons.arrow_drop_up),
                               ],
                               stackKey: _stackKey,
                               controller: _dropdownMenuController,
@@ -209,7 +206,7 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
                               style: BaseText.style(fontSize: 15.sp,fontWeight: FontWeight.w500,color: AppColors.primaryBlackText),
                               dropDownStyle: BaseText.style(fontSize: 15.sp,fontWeight: FontWeight.w500,color: AppColors.navigationColor),
                               iconSize: 20.sp,
-                              iconColor: AppColors.bgGreytr,
+                              iconColor: AppColors.color_FF666666,
                               iconDropDownColor: AppColors.navigationColor,
                               onItemTap: (index) {
 
@@ -239,24 +236,25 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
                             )),
                           ],
                         ),
+
                         GZXDropDownMenu(
                             controller: _dropdownMenuController,
-                            animationMilliseconds: 300,
+                            animationMilliseconds: 100,
                             dropdownMenuChanged: (isShow,index){
-                              setState(() {
-                                print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                              });
+                              // setState(() {
+                              //   print("(已经${isShow ? '显示' : '隐藏'}$index)");
+                              // });
                             },
                             menus: [
                               GZXDropdownMenuBuilder(
                                   dropDownHeight: 40.sp * 5.0,
-                                  dropDownWidget: Container(child: Text('第一个界面'))),
+                                  dropDownWidget: _buildComprehensive(context)),
                               GZXDropdownMenuBuilder(
                                   dropDownHeight: 40.sp * 6.0,
-                                  dropDownWidget: Container(child: Text('第二个界面'))),
+                                  dropDownWidget: _buildClassification(context)),
                               GZXDropdownMenuBuilder(
                                   dropDownHeight: 40.sp * 7.0,
-                                  dropDownWidget: Container(child: Text('第三个界面'))),
+                                  dropDownWidget: _buildConditions(context)),
 
                         ])
                       ],
@@ -301,5 +299,18 @@ class _GoodsListPageState extends State<GoodsListPageFul> with TickerProviderSta
         // }
       },
     );
+  }
+
+  /// 综合筛选
+  Widget _buildComprehensive(BuildContext context) {
+    return Container(child: Text('第一个界面'));
+  }
+  /// 全部分类筛选
+  Widget _buildClassification(BuildContext context) {
+    return Container(child: Text('第二个界面'));
+  }
+  /// 全部条件筛选
+  Widget _buildConditions(BuildContext context) {
+    return Container(child: Text('第三个界面'));
   }
 }

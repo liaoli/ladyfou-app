@@ -36,6 +36,7 @@ class _TopBarWidgetState extends State<TopBarWidget> {
     List barList = _topBarList(context);
     return Container(
       height: 35.sp,
+      padding: EdgeInsets.only(left: 20.sp,right: 20.sp),
       decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
@@ -44,12 +45,18 @@ class _TopBarWidgetState extends State<TopBarWidget> {
               color: AppColors.primaryBackground,
             ),
           )),
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: barList.length,
-          itemBuilder: (context, index) {
-            return _barItemWidget(context, index, barList);
-          }),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: barList.asMap().keys.map((index) {
+          return _barItemWidget(context, index, barList);
+        }).toList(),
+      ),
+      // child: ListView.builder(
+      //     scrollDirection: Axis.horizontal,
+      //     itemCount: barList.length,
+      //     itemBuilder: (context, index) {
+      //       return _barItemWidget(context, index, barList);
+      //     }),
     );
   }
 
@@ -69,7 +76,7 @@ class _TopBarWidgetState extends State<TopBarWidget> {
       },
       child: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.only(left: index == 0 ? 20.sp : 60.sp,right: index == 0 ? 60.sp : 20.sp),
+        // padding: EdgeInsets.only(left: index == 0 ? 20.sp : 60.sp,right: index == 0 ? 40.sp : 20.sp),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -79,7 +86,7 @@ class _TopBarWidgetState extends State<TopBarWidget> {
                 color: selectIndex == index+1
                     ? AppColors.navigationColor
                     : AppColors.primaryBlackText,
-                fontSize: 12,
+                fontSize: 15,
                 fontWeight: FontWeight.w400,
               ),
             ),
