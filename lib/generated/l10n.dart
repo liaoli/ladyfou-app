@@ -709,6 +709,36 @@ class S {
       args: [],
     );
   }
+
+  /// `价格升序`
+  String get price_news_asc {
+    return Intl.message(
+      '价格升序',
+      name: 'price_news_asc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `价格降序`
+  String get price_news_desc {
+    return Intl.message(
+      '价格降序',
+      name: 'price_news_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `最高人气`
+  String get best_high {
+    return Intl.message(
+      '最高人气',
+      name: 'best_high',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

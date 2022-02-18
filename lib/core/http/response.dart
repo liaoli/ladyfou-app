@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 
+import '../model/category_info_model.dart';
 import '../model/good_info_model.dart';
 import '../model/user_info_model.dart';
 
@@ -28,6 +29,8 @@ T fromJson<T>(dynamic json) {
       return SortModel.fromList(json) as T;
     case "List<GoodsInfoModel>":
       return GoodsInfoModel.fromList(json) as T;
+    case "List<CategoryInfoModel>":
+      return CategoryInfoModel.fromList(json) as T;
     default:
       return [] as T;
   }
