@@ -13,7 +13,7 @@ import '../../core/constant/constant.dart';
 import '../../core/utils/event.dart';
 import '../../style/Color.dart';
 import '../../utils/date_util.dart';
-import 'components/product_rank_list.dart';
+import 'components/limit_time_discount_product_list.dart';
 
 class LimitTimeDiscountPage extends StatefulWidget {
   const LimitTimeDiscountPage({Key? key}) : super(key: key);
@@ -94,7 +94,7 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
           SliverToBoxAdapter(child: countdown()),
           productRankHead(),
           buildSliverToBoxAdapter(12.w),
-          productRankList(),
+          limitTimeDiscountProductList(),
         ],
       ),
     );
@@ -147,33 +147,12 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
     );
   }
 
-  Widget productRankList() {
-    return ProductRankList(
+  Widget limitTimeDiscountProductList() {
+    return LimitTimeDiscountProductList(
       count: count,
       padding: EdgeInsets.symmetric(
-        horizontal: 24.w,
-        vertical: 24.w,
-      ),
-      background: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 0.w,
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: 12.w,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            // boxShadow: const <BoxShadow>[
-            //   BoxShadow(
-            //     offset: Offset(0, 4),
-            //     blurRadius: 8,
-            //     color: Colors.black26,
-            //   )
-            // ],
-            borderRadius: BorderRadius.circular(10.w),
-          ),
-        ),
+        horizontal: 12.w,
+        vertical: 12.w,
       ),
     );
   }
@@ -286,10 +265,7 @@ class _LimitTimeDiscountListHeadState extends State<LimitTimeDiscountListHead> {
           bottom: 0,
         ),
         Positioned(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
-            child: Image.asset("assets/images/change_list_style_1.png"),
-          ),
+          child: ChangeStyleView(),
           top: 0,
           right: 0,
           bottom: 0,
@@ -299,6 +275,52 @@ class _LimitTimeDiscountListHeadState extends State<LimitTimeDiscountListHead> {
   }
 }
 
+class ChangeStyleView extends StatefulWidget {
+  final int style;
+
+  const ChangeStyleView({Key? key, this.style = 0}) : super(key: key);
+
+  @override
+  _ChangeStyleViewState createState() => _ChangeStyleViewState();
+}
+
+class _ChangeStyleViewState extends State<ChangeStyleView> {
+  late int style;
+
+  @override
+  void initState() {
+    style = widget.style;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
+        child: Image.asset(
+          style == 0
+              ? "assets/images/change_list_style_1.png"
+              : "assets/images/change_list_style_2.png",
+        ),
+      ),
+      onTap: () {
+        if (style > 0) {
+          style = 0;
+        } else {
+          style = 1;
+        }
+
+        setState(() {
+
+        });
+        XEvent.post(EVENT_KEY_CHANGE_LIMIT_PRODUCT_LIST_STYLE, style);
+      },
+    );
+  }
+}
+
+///倒计时
 class DiscountCountdown extends StatefulWidget {
   final int second;
 
