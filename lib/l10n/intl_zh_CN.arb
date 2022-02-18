@@ -64,5 +64,8 @@
   "shipped":"已发货",
   "distribution":"配送中",
   "received":"配送中",
-  "home_new_products": "新品"
+  "home_new_products": "新品",
+  "price_news_asc": "价格升序",
+  "price_news_desc": "价格降序",
+  "best_high": "最高人气"
 }

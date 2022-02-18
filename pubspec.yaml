@@ -191,6 +191,8 @@ flutter:
     - assets/images/sort/icon_star_empty.png
     - assets/images/sort/store_price_down.png
     - assets/images/sort/store_price_up.png
+    - assets/images/sort/fi_check.png
+    - assets/images/sort/fi_check_nor.png
 
     #通用
     - assets/images/action_bar_shopping_cart_black.png

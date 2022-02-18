@@ -14,14 +14,15 @@ import 'package:ladyfou/core/constant/constant.dart';
 import 'package:ladyfou/core/http/request.dart';
 import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
-import 'package:ladyfou/core/utils/event.dart';
 
 import '../../../core/constant/base_enum.dart';
+import '../../../core/model/category_info_model.dart';
 import '../../../core/model/good_info_model.dart';
 
 class SortProvider with ChangeNotifier {
   List<SortModel> categoryList = [];
   List<GoodsInfoModel> goodsInfoList = [];
+  List<CategoryInfoModel> categoryInfoModels = [];
   bool isRequestError = false;
   int currentPage = CURRENT_PAGE;
   EasyRefreshController refreshController = EasyRefreshController();
@@ -30,58 +31,63 @@ class SortProvider with ChangeNotifier {
   Future getSortAllDatas() async {
     try {
       MyResponse<List<SortModel>> response = await getSortData();
-      if(response.common.statusCode == 1000) {
-            categoryList = response.response!.data!;
-            notifyListeners();
-          }
-          else {
-            isRequestError = true;
-            notifyListeners();
-          }
-    } catch (s,e) {
+      if (response.common.statusCode == 1000) {
+        categoryList = response.response!.data!;
+        notifyListeners();
+      } else {
+        isRequestError = true;
+        categoryList = [];
+        notifyListeners();
+      }
+    } catch (s, e) {
       print('请求报错:$e');
     }
   }
 
   /// 获取二级分类商品列表
-  Future getCategoryProducts(int id, {
-        bool isFirst = false,
-        bool isRefresh = true,
-        int page = CURRENT_PAGE,
-        int size = PAGE_SIZE,
-        String price = "asc",
-        String saled = "asc"
-  }) async {
+  Future getCategoryProducts(int id,
+      {bool isFirst = false,
+      bool isRefresh = true,
+      int page = CURRENT_PAGE,
+      int size = PAGE_SIZE,
+      String order_type = ""}) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
-    MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(id: id,page: page,size: size,price: price,saled: saled);
-    if(response.common.statusCode == 1000) {
-      List<GoodsInfoModel> modelList = response.response!.data!;
-      /// 第一次请求
-      if (isFirst) {
-        goodsInfoList = modelList;
-        currentPage = response.common.pageEnabled.currentPage;
-      }else {
-        if (isRefresh) {
-          goodsInfoList.clear();
+    try {
+      MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(
+          id: id, page: page, size: size, order_type: order_type);
+      if (response.common.statusCode == 1000) {
+        List<GoodsInfoModel> modelList = response.response!.data!;
+
+        /// 第一次请求
+        if (isFirst) {
           goodsInfoList = modelList;
-          refreshController.finishRefresh();
-          refreshController.finishLoad();
-        }else {
-          if (goodsInfoList.length < response.common.pageEnabled.totalPage) {
+          currentPage = response.common.pageEnabled.currentPage;
+        } else {
+          if (isRefresh) {
+            goodsInfoList.clear();
+            goodsInfoList = modelList;
+            refreshController.finishRefresh();
             refreshController.finishLoad();
-          }else{
-            refreshController.finishLoad(noMore: true);
+          } else {
+            if (goodsInfoList.length < response.common.pageEnabled.totalPage) {
+              refreshController.finishLoad();
+            } else {
+              refreshController.finishLoad(noMore: true);
+            }
+            goodsInfoList.addAll(modelList);
           }
-          goodsInfoList.addAll(modelList);
         }
+        notifyListeners();
+      } else {
+        isRequestError = true;
+        goodsInfoList.clear();
+        goodsInfoList = [];
+        refreshController.finishRefresh();
+        refreshController.finishLoad();
+        notifyListeners();
       }
-      notifyListeners();
-    }
-    else {
-      isRequestError = true;
-      refreshController.finishRefresh();
-      refreshController.finishLoad();
-      notifyListeners();
+    } catch (s,e) {
+      print('请求报错:$e');
     }
   }
 
@@ -92,5 +98,19 @@ class SortProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  /// 获取一级二级分类的分类数据
+  Future getCategoryChildDatas(int id) async {
+    try {
+      MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
+      if (response.common.statusCode == 1000) {
+        categoryInfoModels = response.response!.data!;
+        notifyListeners();
+      }else {
+        categoryInfoModels = [];
+        notifyListeners();
+      }
+    } catch (s,e) {
+      print('请求报错:$e');
+    }
+  }
 }
-

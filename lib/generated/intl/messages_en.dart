@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "appupdate": MessageLookupByLibrary.simpleMessage("AppUpdate"),
         "author": MessageLookupByLibrary.simpleMessage("Author"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
+        "best_high": MessageLookupByLibrary.simpleMessage("最高人气"),
         "category": MessageLookupByLibrary.simpleMessage("category"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
         "collection": MessageLookupByLibrary.simpleMessage("收藏"),
@@ -75,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordHint":
             MessageLookupByLibrary.simpleMessage("Please enter your password"),
         "phoneNum": MessageLookupByLibrary.simpleMessage("phoneNum"),
+        "price_news_asc": MessageLookupByLibrary.simpleMessage("价格升序"),
+        "price_news_desc": MessageLookupByLibrary.simpleMessage("价格降序"),
         "privacyExplainAgain": m0,
         "privacyName": m1,
         "qqgroup": MessageLookupByLibrary.simpleMessage("QQ Group"),
