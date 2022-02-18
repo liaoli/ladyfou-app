@@ -196,6 +196,12 @@ flutter:
 
     #通用
     - assets/images/action_bar_shopping_cart_black.png
+    - assets/images/limit_time_discount_clock.png
+    - assets/images/change_list_style_1.png
+    - assets/images/change_list_style_2.png
+    - assets/images/limit_time_discount_clock.png
+    - assets/images/triangle.png
+    - assets/images/limit_time_discount_star.png
 
   fonts:
     - family: xuifont

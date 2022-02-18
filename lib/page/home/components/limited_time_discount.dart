@@ -4,8 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/utils/date_util.dart';
+
+import '../limit_time_discount_page.dart';
 
 class LimitedTimeDiscount extends StatefulWidget {
   const LimitedTimeDiscount({Key? key}) : super(key: key);
@@ -33,44 +36,49 @@ class _LimitedTimeDiscountState extends State<LimitedTimeDiscount> {
     );
   }
 
-  Container head() {
-    return Container(
-      height: 50.w,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image:
-              AssetImage('assets/images/home/limit_time_discount_head_bg.png'),
-          fit: BoxFit.cover,
+  Widget head() {
+    return GestureDetector(
+      child: Container(
+        height: 50.w,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'assets/images/home/limit_time_discount_head_bg.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 12.w,
+            ),
+            Text(
+              "限时折扣",
+              style: TextStyle(color: AppColors.white, fontSize: 14.sp),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            DiscountCountdown(),
+            Expanded(
+                child: SizedBox(
+              width: 1,
+            )),
+            Image.asset(
+              "assets/images/home/limit_time_discount_arrow.png",
+              width: 20.w,
+              height: 20.w,
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+          ],
         ),
       ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 12.w,
-          ),
-          Text(
-            "限时折扣",
-            style: TextStyle(color: AppColors.white, fontSize: 14.sp),
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-          DiscountCountdown(),
-          Expanded(
-              child: SizedBox(
-            width: 1,
-          )),
-          Image.asset(
-            "assets/images/home/limit_time_discount_arrow.png",
-            width: 20.w,
-            height: 20.w,
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-        ],
-      ),
+      onTap: () {
+        Get.to(() => LimitTimeDiscountPage());
+      },
     );
   }
 }
@@ -215,12 +223,11 @@ class DiscountItemView extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.w),
           child: Stack(
             children: [
-
               CachedNetworkImage(
                 width: 86.w,
                 height: 86.w,
                 imageUrl:
-                "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -238,7 +245,6 @@ class DiscountItemView extends StatelessWidget {
                 ),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-
               Container(
                 width: 28.w,
                 height: 14.w,
