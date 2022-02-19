@@ -128,7 +128,7 @@ class _IndexPageState extends State<IndexPage> {
                                   borderRadius: BorderRadius.circular(10.w),
                                   child: Container(
                                     width: double.infinity,
-                                    height: 438.h,
+                                    height: 502.h,
                                     color: AppColors.white,
                                     alignment: Alignment.centerLeft,
                                     child: BrowsingHistoryPage(),

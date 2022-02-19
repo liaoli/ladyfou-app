@@ -63,7 +63,6 @@ class RankProductItemView extends StatelessWidget {
             height: 170.w,
             imageUrl:
                 "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-            // "https://ccshop-test.oss-cn-shenzhen.aliyuncs.com/uploads/public/61d/938/0c9/61d9380c90cc7134502048.webp",
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
