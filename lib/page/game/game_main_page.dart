@@ -12,10 +12,7 @@ import 'package:ladyfou/components/clicked_Image_asset.dart';
 import '../../components/sliver_header_delegate.dart';
 import '../../components/web_view_page.dart';
 import '../../core/constant/base_enum.dart';
-import '../../core/constant/constant.dart';
-import '../../core/utils/event.dart';
 import '../../style/Color.dart';
-import '../../utils/date_util.dart';
 import '../home/components/new_product_list.dart';
 import '../home/components/recommend_product_bottom.dart';
 import '../home/components/recommend_product_head.dart';
@@ -39,7 +36,7 @@ class _GameMainPageState extends State<GameMainPage> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      leadType:AppBarBackType.None,
+      leadType: AppBarBackType.None,
       actions: [
         ClickedImageAsset(
           image: "assets/images/action_bar_shopping_cart_black.png",
