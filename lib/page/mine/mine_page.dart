@@ -56,6 +56,7 @@ class _MinePageState extends State<MinePage> {
           SliverToBoxAdapter(child: mineModul()),
           buildSliverToBoxAdapter(26.w),
           SliverToBoxAdapter(child: game()),
+          buildSliverToBoxAdapter(28.w),
         ],
       ),
     );

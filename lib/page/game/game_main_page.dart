@@ -11,6 +11,7 @@ import 'package:ladyfou/components/clicked_Image_asset.dart';
 
 import '../../components/sliver_header_delegate.dart';
 import '../../components/web_view_page.dart';
+import '../../core/constant/base_enum.dart';
 import '../../core/constant/constant.dart';
 import '../../core/utils/event.dart';
 import '../../style/Color.dart';
@@ -38,6 +39,7 @@ class _GameMainPageState extends State<GameMainPage> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+      leadType:AppBarBackType.None,
       actions: [
         ClickedImageAsset(
           image: "assets/images/action_bar_shopping_cart_black.png",
