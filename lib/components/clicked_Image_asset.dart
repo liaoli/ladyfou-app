@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class ClickedImageAsset extends StatelessWidget {
   final String image;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final Function()? onTap;
 
   const ClickedImageAsset({
     Key? key,
     required this.image,
-    required this.width,
-    required this.height,
+     this.width,
+     this.height,
     this.onTap,
   }) : super(key: key);
 

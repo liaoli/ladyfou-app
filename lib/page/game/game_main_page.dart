@@ -28,8 +28,6 @@ class GameMainPage extends StatefulWidget {
 }
 
 class _GameMainPageState extends State<GameMainPage> {
-  int count = 6;
-
   bool showCountdown = false;
 
   @override
@@ -65,19 +63,10 @@ class _GameMainPageState extends State<GameMainPage> {
       ),
       child: EasyRefresh.custom(
         header: MaterialHeader(),
-        // footer: MaterialFooter(),
+        footer: MaterialFooter(),
         onRefresh: () async {
           await Future.delayed(Duration(seconds: 1), () {
-            setState(() {
-              count = 6;
-            });
-          });
-        },
-        onLoad: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {
-              count += 10;
-            });
+            setState(() {});
           });
         },
         slivers: <Widget>[
@@ -123,7 +112,6 @@ class _GameMainPageState extends State<GameMainPage> {
 
   Widget newProductList() {
     return NewProductList(
-      count: count,
       padding: EdgeInsets.symmetric(
         horizontal: 12.w,
         vertical: 12.w,

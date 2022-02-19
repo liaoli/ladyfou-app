@@ -18,7 +18,7 @@ class NewProductList extends StatefulWidget {
   const NewProductList({
     Key? key,
     required this.padding,
-    this.count = 6,
+    this.count = 20,
   }) : super(key: key);
 
   @override

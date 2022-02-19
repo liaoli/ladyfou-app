@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../components/web_view_page.dart';
 import '../generated/l10n.dart';
 import '../style/Color.dart';
+import 'history/browsing_history_page.dart';
 import 'home/home_page.dart';
 import 'mine/mine_page.dart';
 import 'menu/menu_drawer.dart';
@@ -60,16 +61,17 @@ class _IndexPageState extends State<IndexPage> {
   ];
 
   List<Widget> getTabWidget(BuildContext context) => [
-        HomePage(),
         // DiscoverPage(),
         // TabActivityPage(),
         // TabMePage(),
         // Center(child: Text(S.current.category)),
         // Center(child: Text(S.current.game)),
+        // MinePage Center(child: Text(S.current.history)),
+        HomePage(),
         SortPage(),
         GameMainPage(),
         MinePage(),
-        Center(child: Text(S.current.history)),
+        BrowsingHistoryPage(),
       ];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -113,10 +115,29 @@ class _IndexPageState extends State<IndexPage> {
                         tabModels: tabs,
                         currentIndex: status.tabIndex,
                         onIndexChange: (val) {
-                          // if (val == 2) {
-                          //   go2Game();
-                          //   return;
-                          // }
+                          if (val == 4) {
+                            showModalBottomSheet(
+                              // backgroundColor: AppColors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.w),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return ClipRRect(
+                                  //剪裁为圆角矩形
+                                  borderRadius: BorderRadius.circular(10.w),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 438.h,
+                                    color: AppColors.white,
+                                    alignment: Alignment.centerLeft,
+                                    child: BrowsingHistoryPage(),
+                                  ),
+                                );
+                              },
+                            );
+                            return;
+                          }
 
                           status.tabIndex = val;
                         })
