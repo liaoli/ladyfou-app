@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
 import '../../../style/Color.dart';
+import '../../../utils/provider.dart';
 
 class GameEntrySwiper extends StatefulWidget {
   GameEntrySwiper();
@@ -122,15 +123,10 @@ class _GameEntrySwiperState extends State<GameEntrySwiper> {
   Widget buildSwiper() {
     return new Swiper(
       onTap: (int index) {
-        Navigator.of(context)
-            .push(new MaterialPageRoute(builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("New page"),
-            ),
-            body: Container(),
-          );
-        }));
+
+        AppStatus appStatus = Store.of<AppStatus>(context, listen: false);
+
+        appStatus.tabIndex = TAB_GAME_INDEX;
       },
       customLayoutOption: customLayoutOption,
       fade: _fade,

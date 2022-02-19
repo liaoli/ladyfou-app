@@ -7,7 +7,10 @@ import '../../../components/button/common_button.dart';
 import '../../../style/Color.dart';
 
 class RecommendProductList extends StatefulWidget {
-  const RecommendProductList({Key? key}) : super(key: key);
+  final EdgeInsetsGeometry padding;
+
+  const RecommendProductList({Key? key, this.padding = EdgeInsets.zero})
+      : super(key: key);
 
   @override
   _RecommendProductListState createState() => _RecommendProductListState();
@@ -16,57 +19,25 @@ class RecommendProductList extends StatefulWidget {
 class _RecommendProductListState extends State<RecommendProductList> {
   @override
   Widget build(BuildContext context) {
-    return SliverGrid(
-      //Grid
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, //Grid按两列显示
-        mainAxisSpacing: 12.w,
-        crossAxisSpacing: 12.w,
-        childAspectRatio: 170 / 216,
-      ),
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          //创建子widget
-          return RankProductItemView(
-            index: index,
-          );
-        },
-        childCount: 20,
-      ),
-    );
-  }
-}
-
-class ProductCategoryList extends StatefulWidget {
-  const ProductCategoryList({Key? key}) : super(key: key);
-
-  @override
-  _ProductCategoryListState createState() => _ProductCategoryListState();
-}
-
-class _ProductCategoryListState extends State<ProductCategoryList> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 76.w,
-      child: ListView.separated(
-        padding: EdgeInsets.only(left: 15.w, top: 0.w, bottom: 6.w),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            child: RankProductItemView(
+    return SliverPadding(
+      padding: widget.padding,
+      sliver: SliverGrid(
+        //Grid
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, //Grid按两列显示
+          mainAxisSpacing: 12.w,
+          crossAxisSpacing: 12.w,
+          childAspectRatio: 170 / 216,
+        ),
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            //创建子widget
+            return RankProductItemView(
               index: index,
-            ),
-            onTap: () {},
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            width: 12.w,
-          );
-        },
-        itemCount: 10,
+            );
+          },
+          childCount: 20,
+        ),
       ),
     );
   }
@@ -92,7 +63,6 @@ class RankProductItemView extends StatelessWidget {
             height: 170.w,
             imageUrl:
                 "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-                // "https://ccshop-test.oss-cn-shenzhen.aliyuncs.com/uploads/public/61d/938/0c9/61d9380c90cc7134502048.webp",
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
                 image: DecorationImage(

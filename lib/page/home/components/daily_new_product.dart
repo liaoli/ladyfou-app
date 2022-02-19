@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import '../../../style/Color.dart';
+import '../new_product_page.dart';
 
 class DailyNewProduct extends StatefulWidget {
   const DailyNewProduct({Key? key}) : super(key: key);
@@ -30,91 +32,96 @@ class _DailyNewProductState extends State<DailyNewProduct> {
     );
   }
 
-  Container head() {
-    return Container(
-      height: 44.w,
-      width: double.infinity,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 12.w,
-          ),
-          Image.asset(
-            "assets/images/home/daily_new_icon.png",
-            width: 16.w,
-            height: 16.w,
-          ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Text(
-            "NEW",
-            style: TextStyle(
-              color: AppColors.color_FF333333,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700,
+  Widget head() {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        height: 44.w,
+        width: double.infinity,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 12.w,
             ),
-          ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Container(
-            height: 13.w,
-            width: 1.w,
-            color: AppColors.color_FFDADADA,
-          ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Text(
-            "每日上新",
-            style: TextStyle(
-              color: AppColors.color_FF999999,
-              fontSize: 10.sp,
-              fontWeight: FontWeight.w400,
+            Image.asset(
+              "assets/images/home/daily_new_icon.png",
+              width: 16.w,
+              height: 16.w,
             ),
-          ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Expanded(
-              child: SizedBox(
-            width: 1,
-          )),
-          GestureDetector(
-            child: Row(
-              children: [
-                Text(
-                  "立即查看",
-                  style: TextStyle(
-                    color: AppColors.color_FF999999,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w400,
+            SizedBox(
+              width: 6.w,
+            ),
+            Text(
+              "NEW",
+              style: TextStyle(
+                color: AppColors.color_FF333333,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(
+              width: 6.w,
+            ),
+            Container(
+              height: 13.w,
+              width: 1.w,
+              color: AppColors.color_FFDADADA,
+            ),
+            SizedBox(
+              width: 6.w,
+            ),
+            Text(
+              "每日上新",
+              style: TextStyle(
+                color: AppColors.color_FF999999,
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(
+              width: 6.w,
+            ),
+            Expanded(
+                child: SizedBox(
+              width: 1,
+            )),
+            GestureDetector(
+              child: Row(
+                children: [
+                  Text(
+                    "立即查看",
+                    style: TextStyle(
+                      color: AppColors.color_FF999999,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 6.w,
-                ),
-                Image.asset(
-                  "assets/images/home/daily_new_arrow.png",
-                  width: 7.w,
-                  height: 12.w,
-                ),
-              ],
+                  SizedBox(
+                    width: 6.w,
+                  ),
+                  Image.asset(
+                    "assets/images/home/daily_new_arrow.png",
+                    width: 7.w,
+                    height: 12.w,
+                  ),
+                ],
+              ),
+              onTap: () {
+                //TODO:跳转到每日新品列表
+              },
             ),
-            onTap: () {
-              //TODO:跳转到每日新品列表
-            },
-          ),
-          SizedBox(
-            width: 12.w,
-          ),
-        ],
+            SizedBox(
+              width: 12.w,
+            ),
+          ],
+        ),
       ),
+      onTap: () {
+        Get.to(() => NewProductPage());
+      },
     );
   }
 }
-
 
 class DailyNewProductList extends StatelessWidget {
   const DailyNewProductList({Key? key}) : super(key: key);
@@ -157,11 +164,11 @@ class DailyNewProductItemView extends StatelessWidget {
         ClipRRect(
           //剪裁为圆角矩形
           borderRadius: BorderRadius.circular(10.w),
-          child:  CachedNetworkImage(
+          child: CachedNetworkImage(
             width: 86.w,
             height: 86.w,
             imageUrl:
-            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
                 image: DecorationImage(

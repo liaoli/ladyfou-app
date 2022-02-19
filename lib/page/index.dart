@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ladyfou/components/blur_bottom_bar/my_blur_bottom_bar.dart';
 import 'package:ladyfou/core/utils/click.dart';
 import 'package:ladyfou/core/utils/xupdate.dart';
+import 'package:ladyfou/page/game/game_main_page.dart';
 import 'package:ladyfou/page/sort/page/sort_page.dart';
 import 'package:ladyfou/utils/provider.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../components/web_view_page.dart';
 import '../generated/l10n.dart';
 import '../style/Color.dart';
+import 'history/browsing_history_page.dart';
 import 'home/home_page.dart';
 import 'mine/mine_page.dart';
 import 'menu/menu_drawer.dart';
@@ -41,7 +43,7 @@ class _IndexPageState extends State<IndexPage> {
       title: S.current.game,
       defaultImg: "assets/images/bottom_tab/tab_game_defalult.png",
       selectedImg: "assets/images/bottom_tab/tab_game_defalult.png",
-      selectedTextColor: AppColors.color_FF333333,
+      // selectedTextColor: AppColors.color_FF333333,
       size: 24,
     ),
     TabBarModel(
@@ -59,15 +61,17 @@ class _IndexPageState extends State<IndexPage> {
   ];
 
   List<Widget> getTabWidget(BuildContext context) => [
-        HomePage(),
         // DiscoverPage(),
         // TabActivityPage(),
         // TabMePage(),
         // Center(child: Text(S.current.category)),
+        // Center(child: Text(S.current.game)),
+        // MinePage Center(child: Text(S.current.history)),
+        HomePage(),
         SortPage(),
-        Center(child: Text(S.current.game)),
+        GameMainPage(),
         MinePage(),
-        Center(child: Text(S.current.history)),
+        BrowsingHistoryPage(),
       ];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -111,17 +115,29 @@ class _IndexPageState extends State<IndexPage> {
                         tabModels: tabs,
                         currentIndex: status.tabIndex,
                         onIndexChange: (val) {
-                          if (val == 2) {
-                            go2Game();
+                          if (val == 4) {
+                            showModalBottomSheet(
+                              // backgroundColor: AppColors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.w),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return ClipRRect(
+                                  //剪裁为圆角矩形
+                                  borderRadius: BorderRadius.circular(10.w),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 502.h,
+                                    color: AppColors.white,
+                                    alignment: Alignment.centerLeft,
+                                    child: BrowsingHistoryPage(),
+                                  ),
+                                );
+                              },
+                            );
                             return;
                           }
-                          // setState(() {
-                          //   if (val > 2) {
-                          //     status.tabIndex = val - 1;
-                          //   } else {
-                          //     status.tabIndex = val;
-                          //   }
-                          // });
 
                           status.tabIndex = val;
                         })

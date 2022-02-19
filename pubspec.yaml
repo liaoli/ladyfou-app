@@ -156,6 +156,14 @@ flutter:
     - assets/images/mine/mine_modul_icon2.png
     - assets/images/mine/mine_modul_icon3.png
     - assets/images/mine/mine_modul_icon4.png
+    - assets/images/mine/me_right_arrow.png
+
+
+    #history
+    - assets/images/history/browsing_history_close.png
+    - assets/images/history/browsing_history_delete.png
+    - assets/images/history/browsing_history_like.png
+    - assets/images/history/browsing_history_unlike.png
     
 
     - assets/sample_audio.ogg
