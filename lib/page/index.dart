@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ladyfou/components/blur_bottom_bar/my_blur_bottom_bar.dart';
 import 'package:ladyfou/core/utils/click.dart';
 import 'package:ladyfou/core/utils/xupdate.dart';
+import 'package:ladyfou/page/game/game_main_page.dart';
 import 'package:ladyfou/page/sort/page/sort_page.dart';
 import 'package:ladyfou/utils/provider.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class _IndexPageState extends State<IndexPage> {
       title: S.current.game,
       defaultImg: "assets/images/bottom_tab/tab_game_defalult.png",
       selectedImg: "assets/images/bottom_tab/tab_game_defalult.png",
-      selectedTextColor: AppColors.color_FF333333,
+      // selectedTextColor: AppColors.color_FF333333,
       size: 24,
     ),
     TabBarModel(
@@ -64,8 +65,9 @@ class _IndexPageState extends State<IndexPage> {
         // TabActivityPage(),
         // TabMePage(),
         // Center(child: Text(S.current.category)),
+        // Center(child: Text(S.current.game)),
         SortPage(),
-        Center(child: Text(S.current.game)),
+        GameMainPage(),
         MinePage(),
         Center(child: Text(S.current.history)),
       ];
@@ -111,17 +113,10 @@ class _IndexPageState extends State<IndexPage> {
                         tabModels: tabs,
                         currentIndex: status.tabIndex,
                         onIndexChange: (val) {
-                          if (val == 2) {
-                            go2Game();
-                            return;
-                          }
-                          // setState(() {
-                          //   if (val > 2) {
-                          //     status.tabIndex = val - 1;
-                          //   } else {
-                          //     status.tabIndex = val;
-                          //   }
-                          // });
+                          // if (val == 2) {
+                          //   go2Game();
+                          //   return;
+                          // }
 
                           status.tabIndex = val;
                         })

@@ -3,11 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/style/Color.dart';
 
 class RecommendProductHead extends StatelessWidget {
-  const RecommendProductHead({Key? key}) : super(key: key);
+  final EdgeInsetsGeometry padding;
+
+  const RecommendProductHead({
+    Key? key,
+    this.padding = EdgeInsets.zero,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: padding,
       height: 52.w,
       width: double.infinity,
       child: Row(
