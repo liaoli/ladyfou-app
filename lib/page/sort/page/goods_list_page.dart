@@ -78,12 +78,13 @@ class _GoodsListPageState extends State<GoodsListPageFul>
   void initState() {
     // TODO: implement initState
 
-    SortProvider sortProvider = Provider.of<SortProvider>(context, listen: false);
+    SortProvider sortProvider =
+        Provider.of<SortProvider>(context, listen: false);
 
     // 请求分类数据
     sortProvider.getCategoryProducts(widget.shopId, isFirst: true);
     // 请求筛选的数据
-    // sortProvider.getCategoryChildDatas(widget.shopId);
+    sortProvider.getCategoryChildDatas(widget.shopId);
 
     tabTitles = getTabTitles();
     tabController = TabController(length: tabTitles.length, vsync: this);
@@ -267,9 +268,13 @@ class _GoodsListPageState extends State<GoodsListPageFul>
                         controller: _dropdownMenuController,
                         animationMilliseconds: 300,
                         dropdownMenuChanged: (isShow, index) {
-                          // setState(() {
-                          //   print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                          // });
+                          print("(已经${isShow ? '显示' : '隐藏'}$index)");
+                          if (index == 1) {
+                            BaseBloc.instance.addListenerAlertShow(isShow);
+                          }
+                          if (index == 2) {
+                            BaseBloc.instance.addListenerConditionShow(isShow);
+                          }
                         },
                         menus: [
                           GZXDropdownMenuBuilder(
@@ -334,14 +339,29 @@ class _GoodsListPageState extends State<GoodsListPageFul>
 
   /// 全部分类筛选
   Widget _buildClassification(BuildContext context) {
-    return ClassificationWidget(
-      categoryInfoModels: provider.categoryInfoModels,
-      callBack: (infoModels) {},
-    );
+    return StreamBuilder<bool>(
+        initialData: false,
+        stream: BaseBloc.instance.addListenerAlertShowStream,
+        builder: (ctx, snapshot) {
+          return ClassificationWidget(
+            categoryInfoModels: provider.categoryInfoModels,
+            isShow: snapshot.data ?? false,
+            callBack: (infoModels) {},
+          );
+        });
   }
 
   /// 全部条件筛选
   Widget _buildConditions(BuildContext context) {
-    return ConditionsWidget();
+    return StreamBuilder<bool>(
+        initialData: false,
+        stream: BaseBloc.instance.addListenerConditionStream,
+        builder: (ctx, snapshot) {
+          return ClassificationWidget(
+            categoryInfoModels: provider.categoryInfoModels,
+            isShow: snapshot.data ?? false,
+            callBack: (infoModels) {},
+          );
+        });
   }
 }

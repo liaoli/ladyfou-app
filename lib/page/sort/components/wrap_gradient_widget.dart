@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
-typedef CallBackWidget = void Function(int index);
+typedef CallBackWidget = void Function(List indexs);
 
 class WrapGradientWidget extends StatefulWidget {
   WrapGradientWidget({
@@ -29,10 +29,10 @@ class WrapGradientWidget extends StatefulWidget {
     this.bgSelectGradientColor = const [],
     this.titleSize = 10,
     this.padding = EdgeInsets.zero,
-    this.currentSelect = 0,
+    required this.currentSelects,
   });
 
-  int currentSelect;
+  List currentSelects = [];
   final List itemList;
   final bool isAddBorder; // 是否添加边框
   final Color borderColor; // 边框颜色，要先设置isAddBorder = true
@@ -50,6 +50,14 @@ class WrapGradientWidget extends StatefulWidget {
 }
 
 class _WrapGradientWidgetState extends State<WrapGradientWidget> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -60,12 +68,26 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
     );
   }
 
+  bool isExit(int index) {
+    bool isExit = false;
+    widget.currentSelects.forEach((element) {
+      if(element == index) {
+        isExit = true;
+      }
+    });
+    return isExit;
+  }
+
   Widget _selectItemWidget(String title, int index) {
     return GestureDetector(
       onTap: () {
-        widget.onClick(index);
+        if (isExit(index)) {
+          widget.currentSelects.remove(index);
+        }else {
+          widget.currentSelects.add(index);
+        }
+        widget.onClick(widget.currentSelects);
         setState(() {
-          widget.currentSelect = index;
         });
       },
       child: Container(
@@ -73,15 +95,15 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
         padding: widget.padding,
         decoration: BoxDecoration(
           border: widget.isAddBorder
-              ? widget.currentSelect == index
+              ? isExit(index)
                   ? null
                   : Border.all(
                       width: 0.5.sp,
                       color: AppColors.primaryGreyText,
                     )
               : null,
-          color: widget.currentSelect != index ? widget.bgNormalColor : null,
-          gradient: widget.currentSelect == index
+          color: !isExit(index) ? widget.bgNormalColor : null,
+          gradient: isExit(index)
               ? LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
@@ -93,7 +115,7 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
           '$title',
           style: BaseText.style(
               fontSize: widget.titleSize,
-              color: widget.currentSelect == index
+              color: isExit(index)
                   ? widget.titleSelectColor
                   : widget.titleNormalColor),
         ),

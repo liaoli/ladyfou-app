@@ -8,15 +8,31 @@
  */
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ladyfou/page/sort/components/wrap_gradient_widget.dart';
+
+import '../../../core/model/category_info_model.dart';
+import '../../../style/Color.dart';
+
+typedef CallBackWidget = void Function(List<CategoryInfoModel> infoModels);
 
 class ConditionsWidget extends StatefulWidget {
-  ConditionsWidget({Key? key}) : super(key: key);
+
+  final List<CategoryInfoModel> categoryInfoModels;
+  final CallBackWidget callBack;
+  final bool isShow;
+
+  ConditionsWidget({Key? key,required this.categoryInfoModels,required this.callBack, required this.isShow}) : super(key: key);
 
   @override
   _ConditionsState createState() => _ConditionsState();
 }
 
 class _ConditionsState extends State<ConditionsWidget> {
+
+  List<String> itemList = [];
+  List<String> selectItemList = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -25,7 +41,41 @@ class _ConditionsState extends State<ConditionsWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    itemList = [];
+    widget.categoryInfoModels.forEach((element) {
+      itemList.add(element.name2);
+    });
+
     // TODO: implement build
-    return Container(child: Text('第三个界面'));
+    return Container(
+        padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
+        child: Visibility(
+            visible: widget.isShow,
+            child: Column(
+              children: [
+                Expanded(
+                    child: WrapGradientWidget(
+                        itemList: itemList,
+                        isAddBorder: true,
+                        borderColor: AppColors.navigationColor,
+                        bgNormalColor: AppColors.color_FFF5F5F5,
+                        bgSelectGradientColor: [
+                          AppColors.gradientColorStart,
+                          AppColors.gradientColorEnd
+                        ],
+                        titleNormalColor: AppColors.primaryBlackText,
+                        titleSelectColor: AppColors.white,
+                        titleSize: 12.sp,
+                        currentSelects: [],
+                        padding: EdgeInsets.only(
+                            left: 12.sp, top: 5.sp, bottom: 5.sp, right: 12.sp),
+                        onClick: (idxs) {})),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Text('重置'),
+                ),
+              ],
+            )));
   }
 }
