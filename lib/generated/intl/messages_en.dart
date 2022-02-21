@@ -38,7 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "author": MessageLookupByLibrary.simpleMessage("Author"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "best_high": MessageLookupByLibrary.simpleMessage("最高人气"),
+        "cart_title": MessageLookupByLibrary.simpleMessage("购物车"),
         "category": MessageLookupByLibrary.simpleMessage("category"),
+        "charge_title": MessageLookupByLibrary.simpleMessage("管理"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
         "collection": MessageLookupByLibrary.simpleMessage("收藏"),
         "common_button_continue":
