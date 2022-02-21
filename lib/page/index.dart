@@ -61,12 +61,6 @@ class _IndexPageState extends State<IndexPage> {
   ];
 
   List<Widget> getTabWidget(BuildContext context) => [
-        // DiscoverPage(),
-        // TabActivityPage(),
-        // TabMePage(),
-        // Center(child: Text(S.current.category)),
-        // Center(child: Text(S.current.game)),
-        // MinePage Center(child: Text(S.current.history)),
         HomePage(),
         SortPage(),
         GameMainPage(),
@@ -142,7 +136,6 @@ class _IndexPageState extends State<IndexPage> {
                             );
                             return;
                           }
-
                           status.tabIndex = val;
                         })
                   ],
