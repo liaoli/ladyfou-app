@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/search_bar.dart';
+import 'package:ladyfou/router/router.dart';
 
 import '../../../components/clicked_Image_asset.dart';
 
@@ -56,7 +57,7 @@ class _HomeDefaultNavBarState extends State<HomeDefaultNavBar> {
         buildImageAsset(
             image: "assets/images/home/home_shopping_cart.png",
             onTap: () {
-              //TODO:跳转
+              XRouter.goCartPage();
             }),
         SizedBox(
           width: 12.w,
@@ -64,7 +65,6 @@ class _HomeDefaultNavBarState extends State<HomeDefaultNavBar> {
       ],
     );
   }
-
 }
 
 Widget buildImageAsset({required String image, Function()? onTap}) {

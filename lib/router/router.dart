@@ -5,4 +5,8 @@ class XRouter {
     Get.toNamed(
         "/web?url=${Uri.encodeComponent(url)}&title=${Uri.encodeComponent(title)}");
   }
+
+  static void goCartPage() {
+    Get.toNamed("/cart");
+  }
 }

@@ -180,7 +180,6 @@ flutter:
     - assets/images/home/icon_star.png
     - assets/images/home/icon_star_nor.png
 
-
     # Sort
     - assets/images/sort/news_icon_black.png
     - assets/images/sort/good_test_icon.png
@@ -202,7 +201,12 @@ flutter:
     - assets/images/sort/fi_check.png
     - assets/images/sort/fi_check_nor.png
 
-    #通用
+    # Cart
+    - assets/images/cart/checkbox_select.png # 复选框选中
+    - assets/images/cart/checkbox_unselect.png # 复选框非选中
+    - assets/images/cart/dropdown_arrow.png 
+
+    # 通用
     - assets/images/action_bar_shopping_cart_black.png
     - assets/images/limit_time_discount_clock.png
     - assets/images/change_list_style_1.png

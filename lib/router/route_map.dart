@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ladyfou/components/web_view_page.dart';
+import 'package:ladyfou/page/cart/page/cart_page.dart';
 import 'package:ladyfou/page/index.dart';
 
 import 'package:ladyfou/page/menu/about.dart';
@@ -18,6 +19,7 @@ class RouteMap {
     GetPage(name: '/menu/about-page', page: () => AboutPage()),
     GetPage(name: '/menu/language-page', page: () => LanguagePage()),
     GetPage(name: '/menu/about-page', page: () => AboutPage()),
+    GetPage(name: '/cart', page: () => CartPage()),
   ];
 
   /// 页面切换动画
