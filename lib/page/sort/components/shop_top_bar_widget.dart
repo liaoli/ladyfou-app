@@ -35,13 +35,13 @@ class _TopBarWidgetState extends State<TopBarWidget> {
   Widget build(BuildContext context) {
     List barList = _topBarList(context);
     return Container(
-      height: 35.sp,
-      padding: EdgeInsets.only(left: 20.sp,right: 20.sp),
+      height: 35.w,
+      padding: EdgeInsets.only(left: 20.w,right: 20.w),
       decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
             bottom: BorderSide(
-              width: 0.5,
+              width: 0.5.w,
               color: AppColors.primaryBackground,
             ),
           )),
@@ -76,7 +76,7 @@ class _TopBarWidgetState extends State<TopBarWidget> {
       },
       child: Container(
         alignment: Alignment.center,
-        // padding: EdgeInsets.only(left: index == 0 ? 20.sp : 60.sp,right: index == 0 ? 40.sp : 20.sp),
+        // padding: EdgeInsets.only(left: index == 0 ? 20.w 60.w,right: index == 0 ? 40.w : 20.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -86,7 +86,7 @@ class _TopBarWidgetState extends State<TopBarWidget> {
                 color: selectIndex == index+1
                     ? AppColors.navigationColor
                     : AppColors.primaryBlackText,
-                fontSize: 15,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w400,
               ),
             ),
