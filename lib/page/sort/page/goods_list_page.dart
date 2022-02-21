@@ -167,12 +167,12 @@ class _GoodsListPageState extends State<GoodsListPageFul>
               elevation: 0,
               actions: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(right: 20.sp),
+                  padding: EdgeInsets.only(right: 20.w),
                   child: Row(
                     children: [
                       /// 切换按钮
                       listTypeItem(context),
-                      SizedBox(width: 20.sp),
+                      SizedBox(width: 20.w),
 
                       /// 购物车按钮
                       carItem(context),
@@ -217,11 +217,11 @@ class _GoodsListPageState extends State<GoodsListPageFul>
                           ],
                           stackKey: _stackKey,
                           controller: _dropdownMenuController,
-                          height: 40.sp,
+                          height: 40.w,
                           color: Colors.white,
-                          borderWidth: 1.sp,
+                          borderWidth: 1.w,
                           borderColor: AppColors.bgGreytr,
-                          dividerHeight: 0.sp,
+                          dividerHeight: 0.w,
                           dividerColor: Colors.white,
                           style: BaseText.style(
                               fontSize: 15.sp,
@@ -231,7 +231,7 @@ class _GoodsListPageState extends State<GoodsListPageFul>
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w500,
                               color: AppColors.navigationColor),
-                          iconSize: 20.sp,
+                          iconSize: 20.w,
                           iconColor: AppColors.color_FF666666,
                           iconDropDownColor: AppColors.navigationColor,
                           onItemTap: (index) {},
@@ -278,13 +278,13 @@ class _GoodsListPageState extends State<GoodsListPageFul>
                         },
                         menus: [
                           GZXDropdownMenuBuilder(
-                              dropDownHeight: 40.sp * 5.0,
+                              dropDownHeight: 40.w * 5.0,
                               dropDownWidget: _buildComprehensive(context)),
                           GZXDropdownMenuBuilder(
-                              dropDownHeight: 40.sp * 7.0,
+                              dropDownHeight: 40.w * 7.0,
                               dropDownWidget: _buildClassification(context)),
                           GZXDropdownMenuBuilder(
-                              dropDownHeight: 40.sp * 5.0,
+                              dropDownHeight: 40.w * 5.0,
                               dropDownWidget: _buildConditions(context)),
                         ])
                   ],

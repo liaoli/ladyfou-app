@@ -85,7 +85,7 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   # 星级评分控件
   # https://pub.flutter-io.cn/packages/flutter_rating_bar
-  flutter_rating_bar:
+  flutter_rating_bar: ^4.0.0
   # Dart 常用工具类库 https://github.com/Sky24n/common_utils
   common_utils: ^2.1.0
   # 下拉菜单 https://pub.flutter-io.cn/packages/gzx_dropdown_menu/install
@@ -139,7 +139,7 @@ flutter:
     - assets/images/home/home_head_search_grey.png
     - assets/images/home/home_head_message.png
 
-    
+
     - assets/images/mine/mine_bg.png
     - assets/images/mine/icon_settings.png
     - assets/images/mine/icon_shopping.png
@@ -164,7 +164,7 @@ flutter:
     - assets/images/history/browsing_history_delete.png
     - assets/images/history/browsing_history_like.png
     - assets/images/history/browsing_history_unlike.png
-    
+
 
     - assets/sample_audio.ogg
     - assets/sample_video.mp4
@@ -214,6 +214,13 @@ flutter:
     - assets/images/limit_time_discount_clock.png
     - assets/images/triangle.png
     - assets/images/limit_time_discount_star.png
+    - assets/images/more_icon.png
+    - assets/images/more_icon_white.png
+
+
+    #detail
+    - assets/images/detail/limit_time_discount_bg.png
+    - assets/images/detail/gold_coin.png
 
   fonts:
     - family: xuifont

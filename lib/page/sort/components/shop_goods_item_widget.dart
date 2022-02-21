@@ -127,7 +127,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
 
       Container(
         constraints: BoxConstraints(
-          minHeight: 128.sp,
+          minHeight: 128.w,
         ),
         child: ImagePlaceholdWidget(
           imgError: () {
@@ -179,12 +179,12 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
       child: Row(
         children: [
           GradientButton(
-            width: 50.sp,
-            height: 20.sp,
+            width: 50.w,
+            height: 20.w,
             fontWeight: FontWeight.bold,
             text: widget.goodsModel.discount,
           ),
-          SizedBox(width: 10.sp),
+          SizedBox(width: 10.w),
           double.parse(widget.goodsModel.listPrice) > 0.0
               ? Text( '￥'+
             Utils.formatStepCount(
@@ -257,7 +257,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                itemSize: 13.sp,
+                itemSize: 13.w,
                 // itemBuilder: (context, _) => Icon(
                 //   Icons.star,
                 //   color: Colors.amber,
@@ -284,8 +284,8 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
             children: [
               widget.isShowLike
                   ? Container(
-                  width: 30.sp,
-                  height: 30.sp,
+                  width: 30.w,
+                  height: 30.w,
                   decoration: BoxDecoration(
                     color: AppColors.bgGreytr,
                     borderRadius: BorderRadius.all(
