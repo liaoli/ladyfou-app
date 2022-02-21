@@ -9,7 +9,7 @@ class ScreenAdaper{
     ScreenUtil.init(BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width,
         maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(750, 1624),
+        designSize: Size(375, 812),
         orientation: Orientation.portrait);
 
   }
@@ -42,7 +42,7 @@ class ScreenAdapter{
     ScreenUtil.init(BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width,
         maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(750, 1334),
+        designSize: Size(375, 812),
         orientation: Orientation.portrait);
   }
   static height(double value){
