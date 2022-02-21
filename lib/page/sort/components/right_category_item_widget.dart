@@ -43,7 +43,7 @@ class SubCategoryListState extends State<SubCategoryList> {
         height: widget.height,
         child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.only(top: 16.sp),
+            padding: EdgeInsets.only(top: 16.w),
             controller: controller,
             child: Container(
               child: widget.data != null
@@ -53,7 +53,7 @@ class SubCategoryListState extends State<SubCategoryList> {
                   : Center(
                       child: CircularProgressIndicator(),
                     ),
-              constraints: BoxConstraints(minHeight: widget.height + 5.sp),
+              constraints: BoxConstraints(minHeight: widget.height + 5.w),
             )),
       ),
     );
@@ -88,24 +88,24 @@ class SecondryCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     List<SortDataChild> items = data.children;
 
-    final _childAspectRatio = 68.sp / (44.sp + 23.sp);
+    final _childAspectRatio = 68.w / (50.w + 25.w);
 
     return Column(
       children: <Widget>[
-        // ImagePlaceholdWidget(url: data.thumb, w: 506, h: 90.sp),
+        // ImagePlaceholdWidget(url: data.thumb, w: 506.w, h: 90.w),
         this.data.name2.isEmpty
-            ? SizedBox(height: 13.sp)
+            ? SizedBox(height: 13.w)
             : Container(
-                height: 46.sp,
+                height: 46.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Image.asset(
                     //     'assets/images/sort/sort_section_title_icon.png'),
                     Container(
-                      margin: EdgeInsets.only(left: 20.sp, right: 20.sp),
+                      margin: EdgeInsets.only(left: 20.w, right: 20.w),
                       constraints: BoxConstraints(
-                        maxWidth: 205.sp,
+                        maxWidth: 205.w,
                       ),
                       child: AutoSizeText(
                         this.data.name2,
@@ -135,11 +135,11 @@ class SecondryCategory extends StatelessWidget {
                                 style: BaseText.style(
                                     fontWeight: FontWeight.normal,
                                     color: AppColors.primaryBlackText,
-                                    fontSize: 14),
+                                    fontSize: 14.sp),
                               ),
                             ),
                             Image.asset("assets/images/sort/fi_chevron-right.png"),
-                            SizedBox(width: 20.sp),
+                            SizedBox(width: 20.w),
                           ],
                         ),
                       ),
@@ -148,11 +148,11 @@ class SecondryCategory extends StatelessWidget {
                 ),
               ),
         GridView.builder(
-          padding: EdgeInsets.only(left: 8.sp, right: 8.sp),
+          padding: EdgeInsets.only(left: 8.w, right: 8.w),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 25.sp,
-            mainAxisSpacing: 26.sp,
+            crossAxisSpacing: 20.w,
+            mainAxisSpacing: 20.w,
             childAspectRatio: _childAspectRatio,
           ),
           itemCount: items.length,
@@ -179,20 +179,22 @@ class SecondryCategory extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 6.sp),
-              height: 54.sp,
-              width: 54.sp,
+              margin: EdgeInsets.only(bottom: 10.w),
+              height: 50.w,
+              width: 50.w,
               child: ImagePlaceholdWidget(url: goodModel.thumb),
             ),
-            Text(
-              goodModel.name2,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: BaseText.style(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.primaryBlackText),
-            )
+            Container(
+              child: Text(
+                goodModel.name2,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: BaseText.style(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primaryBlackText),
+              ),
+            ),
           ],
         ),
       ),
