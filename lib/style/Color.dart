@@ -9,22 +9,31 @@ class AppColors {
 
   /// 导航栏背景色<主题红色>
   static const Color navigationColor = Color.fromRGBO(222, 0, 32, 1);
+
   /// 主背景
   static const Color primaryBackground = Color.fromRGBO(245, 245, 245, 1.0);
+
   /// 主文本黑
   static const Color primaryBlackText = Color.fromRGBO(3, 3, 25, 1.0);
+
   /// 主文本灰色
   static const Color primaryGreyText = Color(0xFF9B9B9B);
+
   /// 灰色153
   static const Color jp_color153 = Color.fromRGBO(153, 153, 153, 1.0);
+
   /// 灰色196
   static const Color jp_color196 = Color.fromRGBO(196, 196, 196, 1.0);
+
   /// 半透明背景灰
   static const Color bgGreytr = Color.fromRGBO(245, 245, 245, 0.4);
-    ///半透明黑色
+
+  ///半透明黑色
   static const Color transparent_Black = Color.fromRGBO(0, 0, 0, 0.5);
+
   /// 渐变色起点
   static const Color gradientColorStart = Color.fromRGBO(255, 111, 97, 1.0);
+
   /// 渐变色终点
   static const Color gradientColorEnd = Color.fromRGBO(222, 0, 32, 1);
 
@@ -43,4 +52,5 @@ class AppColors {
 
   static const Color color_F6AD2A = Color(0xFFF6AD2A);
 
+  static var color_FFDE0020 = Color(0xFFDE0020);
 }
