@@ -118,20 +118,24 @@ class _IndexPageState extends State<IndexPage> {
                           if (val == 4) {
                             showModalBottomSheet(
                               // backgroundColor: AppColors.transparent,
+                              isScrollControlled: true,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.w),
                               ),
                               context: context,
                               builder: (context) {
-                                return ClipRRect(
-                                  //剪裁为圆角矩形
-                                  borderRadius: BorderRadius.circular(10.w),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 502.h,
-                                    color: AppColors.white,
-                                    alignment: Alignment.centerLeft,
-                                    child: BrowsingHistoryPage(),
+                                return SizedBox(
+                                  height: 502.w,
+                                  child: ClipRRect(
+                                    //剪裁为圆角矩形
+                                    borderRadius: BorderRadius.circular(10.w),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 502.w,
+                                      color: AppColors.white,
+                                      alignment: Alignment.centerLeft,
+                                      child: BrowsingHistoryPage(),
+                                    ),
                                   ),
                                 );
                               },
