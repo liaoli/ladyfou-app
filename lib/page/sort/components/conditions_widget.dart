@@ -49,7 +49,7 @@ class _ConditionsState extends State<ConditionsWidget> {
 
     // TODO: implement build
     return Container(
-        padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
+        padding: EdgeInsets.only(left: 20.w, right: 20.w),
         child: Visibility(
             visible: widget.isShow,
             child: Column(
@@ -69,7 +69,7 @@ class _ConditionsState extends State<ConditionsWidget> {
                         titleSize: 12.sp,
                         currentSelects: [],
                         padding: EdgeInsets.only(
-                            left: 12.sp, top: 5.sp, bottom: 5.sp, right: 12.sp),
+                            left: 12.w, top: 5.w, bottom: 5.w, right: 12.w),
                         onClick: (idxs) {})),
                 Container(
                   alignment: Alignment.centerRight,

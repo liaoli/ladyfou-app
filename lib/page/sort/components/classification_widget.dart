@@ -52,7 +52,7 @@ class _ClassificationState extends State<ClassificationWidget> {
 
     // TODO: implement build
     return Container(
-        padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
+        padding: EdgeInsets.only(left: 20.w, right: 20.w),
         child: Visibility(
             visible: widget.isShow,
             child: Column(
