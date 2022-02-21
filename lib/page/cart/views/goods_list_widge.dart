@@ -25,6 +25,8 @@ class GoodsListWidget extends StatelessWidget {
                 ),
                 child: GoodItemWidget(),
               ),
+
+              // 侧滑选项
               endActionPane: ActionPane(
                 motion: ScrollMotion(),
                 children: [
@@ -192,6 +194,7 @@ class GoodItemWidget extends StatelessWidget {
                             ),
                           ),
 
+                          // 加减商品
                           Container(
                               width: 20,
                               height: 20,

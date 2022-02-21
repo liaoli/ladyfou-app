@@ -13,6 +13,7 @@ import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/check_box_widget.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
 import 'package:ladyfou/page/cart/views/goods_list_widge.dart';
+import 'package:ladyfou/page/cart/views/preferential_list_widget.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/generated/l10n.dart';
 
@@ -56,6 +57,7 @@ class _CartPageState extends State<CartPage> {
               slivers: <Widget>[
                 _topNumHead(context),
                 GoodsListWidget(),
+                PreferentialListWidget(),
               ]),
         ),
       ),
