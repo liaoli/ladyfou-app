@@ -9,11 +9,14 @@ import 'components/color_and_size_entry_view.dart';
 import 'components/detial_default_head.dart';
 import 'components/hot_comments_view.dart';
 import 'components/limited_time_discount.dart';
+import 'components/common_head.dart';
+import 'components/product_description_list.dart';
 import 'components/product_evaluation_bottom.dart';
 import 'components/product_evaluation_list.dart';
 import 'components/product_image_swiper.dart';
 import 'components/product_info_view.dart';
 import 'components/purchase_instructions_entry_view.dart';
+import 'components/recommend_product_list.dart';
 import 'components/recommend_set_entry_view.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -86,7 +89,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           SliverToBoxAdapter(child: recommendSet()), //120
           buildSliverToBoxAdapter(12.w),
           productEvaluationHead(),
+          productEvaluationList(),
           SliverToBoxAdapter(child: productEvaluationBottom()), //120
+          buildSliverToBoxAdapter(12.w),
+          productDescriptionHead(),
+          productDescription(), //120
+          buildSliverToBoxAdapter(12.w),
+          recommendProductHead(),
+          RecommendProduct(),
+          buildSliverToBoxAdapter(12.w),
         ],
       ),
     );
@@ -132,7 +143,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return RecommendSetEntryView();
   }
 
-
   Widget productEvaluationHead() {
     return SliverPersistentHeader(
       pinned: false,
@@ -148,10 +158,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget productEvaluationList() {
     return ProductEvaluationList(
       padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-        vertical: 12.w,
+        horizontal: 24.w,
+        vertical: 24.w,
       ),
       background: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 12.w,
+        ),
         decoration: BoxDecoration(
           color: Colors.white,
         ),
@@ -161,5 +174,73 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   Widget productEvaluationBottom() {
     return ProductEvaluationBottom();
+  }
+
+  Widget productDescriptionHead() {
+    return SliverPersistentHeader(
+      pinned: false,
+      delegate: SliverHeaderDelegate(
+        //有最大和最小高度
+        maxHeight: 40.w,
+        minHeight: 40.w,
+        child: CommonHead(
+          title: "商品说明",
+        ),
+      ),
+    );
+  }
+
+  Widget productDescription() {
+    return ProductDescriptionList(
+      padding: EdgeInsets.symmetric(
+        horizontal: 24.w,
+        vertical: 12.w,
+      ),
+      background: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 12.w,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10.w),
+              bottomRight: Radius.circular(10.w)),
+        ),
+      ),
+    );
+  }
+
+  Widget recommendProductHead() {
+    return SliverPersistentHeader(
+      pinned: false,
+      delegate: SliverHeaderDelegate(
+        //有最大和最小高度
+        maxHeight: 40.w,
+        minHeight: 40.w,
+        child: CommonHead(
+          title: "推荐商品",
+        ),
+      ),
+    );
+  }
+
+  Widget RecommendProduct() {
+    return RecommendProductList(
+      padding: EdgeInsets.symmetric(
+        horizontal: 24.w,
+        vertical: 12.w,
+      ),
+      background: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 12.w,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10.w),
+              bottomRight: Radius.circular(10.w)),
+        ),
+      ),
+    );
   }
 }
