@@ -224,6 +224,9 @@ flutter:
     - assets/images/detail/thumbs_up_grey.png
     - assets/images/detail/thumbs_up_red.png
     - assets/images/detail/detail_like_black.png
+    - assets/images/detail/mail.png
+    - assets/images/detail/online.png
+    - assets/images/detail/phone.png
 
   fonts:
     - family: xuifont
