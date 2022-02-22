@@ -1,18 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/page/detail/components/thumbs_up_view.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../components/button/common_button.dart';
 import '../../../style/Color.dart';
-import '../../detail/product_detail_page.dart';
+import '../product_detail_page.dart';
 
 class RecommendProductList extends StatefulWidget {
+  final Widget background;
   final EdgeInsetsGeometry padding;
+  final int count;
 
-  const RecommendProductList({Key? key, this.padding = EdgeInsets.zero})
-      : super(key: key);
+  const RecommendProductList({
+    Key? key,
+    required this.background,
+    required this.padding,
+    this.count = 10,
+  }) : super(key: key);
 
   @override
   _RecommendProductListState createState() => _RecommendProductListState();
@@ -21,36 +30,50 @@ class RecommendProductList extends StatefulWidget {
 class _RecommendProductListState extends State<RecommendProductList> {
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: widget.padding,
-      sliver: SliverGrid(
-        //Grid
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, //Grid按两列显示
-          mainAxisSpacing: 12.w,
-          crossAxisSpacing: 12.w,
-          childAspectRatio: 170 / 216,
+    return SliverStack(
+      insetOnOverlap: false, // defaults to false
+      children: <Widget>[
+        SliverPositioned.fill(
+          child: widget.background,
         ),
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            //创建子widget
-            return RecommendProductItemView(
-              index: index,
-            );
-          },
-          childCount: 20,
+        SliverPadding(
+          padding: widget.padding,
+
+          // sliver: SliverFixedExtentList(
+          //   itemExtent: 90.w,
+          //   delegate: SliverChildBuilderDelegate(
+          //     (BuildContext context, int index) {
+          //       //创建列表项
+          //       return ProductEvaluationItemView();
+          //     },
+          //     childCount: 2,
+          //   ),
+          // ),
+          sliver: SliverGrid(
+            //Grid
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, //Grid按两列显示
+              mainAxisSpacing: 12.w,
+              crossAxisSpacing: 12.w,
+              childAspectRatio: 158 / 207,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                //创建子widget
+                return ProductDescriptionItemView();
+              },
+              childCount: widget.count,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
 
-class RecommendProductItemView extends StatelessWidget {
-  final int index;
-
-  const RecommendProductItemView({
+class ProductDescriptionItemView extends StatelessWidget {
+  const ProductDescriptionItemView({
     Key? key,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -62,8 +85,8 @@ class RecommendProductItemView extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.all(new Radius.circular(10.w)),
             child: CachedNetworkImage(
-              width: 170.w,
-              height: 170.w,
+              width: 158.w,
+              height: 158.w,
               imageUrl:
                   "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
               imageBuilder: (context, imageProvider) => Container(
@@ -85,7 +108,7 @@ class RecommendProductItemView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 8.w,
+            height: 6.w,
           ),
           // Text(
           //   "月销量件数200件",
@@ -95,17 +118,21 @@ class RecommendProductItemView extends StatelessWidget {
           //     fontWeight: FontWeight.w400,
           //   ),
           // ),
-          // Expanded(
-          //     child: Text(
-          //   "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
-          //   overflow: TextOverflow.ellipsis,
-          //   maxLines: 2,
-          //   style: TextStyle(
-          //     color: AppColors.color_FF222222,
-          //     fontSize: 12.sp,
-          //     fontWeight: FontWeight.w400,
-          //   ),
-          // )),
+          Expanded(
+              child: Text(
+            "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              color: AppColors.color_FF222222,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+            ),
+          )),
+
+          SizedBox(
+            height: 4.w,
+          ),
           Row(
             children: [
               Text(

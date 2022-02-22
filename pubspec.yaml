@@ -220,6 +220,9 @@ flutter:
     #detail
     - assets/images/detail/limit_time_discount_bg.png
     - assets/images/detail/gold_coin.png
+    - assets/images/detail/thumbs_up_grey.png
+    - assets/images/detail/thumbs_up_red.png
+    - assets/images/detail/detail_like_black.png
 
   fonts:
     - family: xuifont
