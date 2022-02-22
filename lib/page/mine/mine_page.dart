@@ -6,6 +6,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
 
 import '../../components/button/common_button.dart';
@@ -390,6 +391,7 @@ class _MinePageState extends State<MinePage> {
                 GestureDetector(
                   onTap: () {
                     //TODO: 跳转到订单页面
+                    Get.to(() => MineOrderPage());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

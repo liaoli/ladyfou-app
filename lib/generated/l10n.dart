@@ -739,6 +739,86 @@ class S {
       args: [],
     );
   }
+
+  /// `全部`
+  String get mine_page_all {
+    return Intl.message(
+      '全部',
+      name: 'mine_page_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `待付款`
+  String get mine_page_to_be_paid {
+    return Intl.message(
+      '待付款',
+      name: 'mine_page_to_be_paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `等待付款`
+  String get mine_common_wait_paid {
+    return Intl.message(
+      '等待付款',
+      name: 'mine_common_wait_paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `待收货`
+  String get mine_page_to_be_received {
+    return Intl.message(
+      '待收货',
+      name: 'mine_page_to_be_received',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `等待收货`
+  String get mine_common_wait_received {
+    return Intl.message(
+      '等待收货',
+      name: 'mine_common_wait_received',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已完成`
+  String get mine_page_completed {
+    return Intl.message(
+      '已完成',
+      name: 'mine_page_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已取消`
+  String get mine_page_canclled {
+    return Intl.message(
+      '已取消',
+      name: 'mine_page_canclled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `订单号:`
+  String get mine_page_order_sn {
+    return Intl.message(
+      '订单号:',
+      name: 'mine_page_order_sn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

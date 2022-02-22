@@ -3,6 +3,7 @@ import 'package:ladyfou/core/model/sort_model.dart';
 
 import '../model/category_info_model.dart';
 import '../model/good_info_model.dart';
+import '../model/order_info_model.dart';
 import '../model/user_info_model.dart';
 
 class MyResponse<T> {
@@ -31,6 +32,8 @@ T fromJson<T>(dynamic json) {
       return GoodsInfoModel.fromList(json) as T;
     case "List<CategoryInfoModel>":
       return CategoryInfoModel.fromList(json) as T;
+    case "List<OrderInfoModel>":
+      return OrderInfoModel.fromList(json) as T;
     default:
       return [] as T;
   }
@@ -111,7 +114,7 @@ class PageEnabled {
     pageEnabled: json["pageEnabled"] == null ? false : json["pageEnabled"],
     currentPage: json["currentPage"] == null ? 0 : json["currentPage"],
     totalPage: json["totalPage"] == null ? 0 : json["totalPage"],
-    pageSize: json["pageSize"] == null ? 0 : json["pageSize"],
+    pageSize: json["pageSize"] == null ? 0 : int.parse(json["pageSize"]),
   );
 
   Map<String, dynamic> toJson() => {

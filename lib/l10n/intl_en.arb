@@ -67,5 +67,13 @@
   "home_new_products": "新品",
   "price_news_asc": "价格升序",
   "price_news_desc": "价格降序",
-  "best_high": "最高人气"
+  "best_high": "最高人气",
+  "mine_page_all": "全部",
+  "mine_page_to_be_paid": "待付款",
+  "mine_common_wait_paid": "等待付款",
+  "mine_page_to_be_received": "待收货",
+  "mine_common_wait_received": "等待收货",
+  "mine_page_completed": "已完成",
+  "mine_page_canclled": "已取消",
+  "mine_page_order_sn": "订单号:"
 }
