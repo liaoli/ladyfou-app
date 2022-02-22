@@ -158,7 +158,6 @@ flutter:
     - assets/images/mine/mine_modul_icon4.png
     - assets/images/mine/me_right_arrow.png
 
-
     #history
     - assets/images/history/browsing_history_close.png
     - assets/images/history/browsing_history_delete.png
@@ -216,7 +215,7 @@ flutter:
     - assets/images/limit_time_discount_star.png
     - assets/images/more_icon.png
     - assets/images/more_icon_white.png
-
+    - assets/images/close_icon.png
 
     #detail
     - assets/images/detail/limit_time_discount_bg.png
@@ -226,7 +225,6 @@ flutter:
     - family: xuifont
       fonts:
         - asset: assets/fonts/iconfont.ttf
-
 
 ad_launch:
   enabled: true

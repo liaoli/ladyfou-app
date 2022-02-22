@@ -13,7 +13,7 @@ import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/check_box_widget.dart';
 import 'package:ladyfou/components/sliver_header_delegate.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
-import 'package:ladyfou/core/utils/ScreenAdapter.dart';
+import 'package:ladyfou/page/cart/views/bottom_pay_widget.dart';
 import 'package:ladyfou/page/cart/views/goods_list_widge.dart';
 import 'package:ladyfou/page/cart/views/order_detail_widget.dart';
 import 'package:ladyfou/page/cart/views/preferential_list_widget.dart';
@@ -73,7 +73,7 @@ class _CartPageState extends State<CartPage> {
             ),
             Positioned(
               bottom: 0,
-              child: _bottomPayWidget(context, bottomSafeHg),
+              child: BottomPayWidget(),
             ),
           ],
         ),
@@ -144,19 +144,6 @@ class _CartPageState extends State<CartPage> {
           padding: EdgeInsets.only(top: 8),
         ),
       ),
-    );
-  }
-
-  Widget _bottomPayWidget(BuildContext context, double bottomHeight) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          top: BorderSide(width: 0.5, color: AppColors.transparent_Black3),
-        ),
-      ),
-      height: bottomHeight + 76,
-      width: ScreenAdaper.width(750),
     );
   }
 }
