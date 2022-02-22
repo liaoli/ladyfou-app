@@ -20,7 +20,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
       child: ClipRRect(
         borderRadius: BorderRadius.all(new Radius.circular(10.w)),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
           height: 120.w,
           color: AppColors.white,
           child: Column(
@@ -139,6 +139,10 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             fontWeight: FontWeight.w400,
           ),
         ),
+        Expanded(child: SizedBox()),
+        ArrowForward(
+          size: 16.w,
+        ),
       ],
     );
   }
@@ -175,6 +179,10 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             fontSize: 12.sp,
             fontWeight: FontWeight.w400,
           ),
+        ),
+        Expanded(child: SizedBox()),
+        ArrowForward(
+          size: 16.w,
         ),
       ],
     );

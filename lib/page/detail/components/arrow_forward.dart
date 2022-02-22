@@ -26,7 +26,7 @@ class _ArrowForwardState extends State<ArrowForward> {
       behavior: HitTestBehavior.translucent,
       child: Padding(
         padding: widget.padding ??
-            EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
+            EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.w),
         child: Icon(
           Icons.arrow_forward_ios,
           size: widget.size ?? 20.w,
