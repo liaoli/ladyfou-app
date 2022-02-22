@@ -102,13 +102,13 @@ class _HomePageState extends State<HomePage> {
         onRefresh: () async {},
         scrollController: scrollController,
         slivers: <Widget>[
-          SliverToBoxAdapter(child: hengFu()), //28
+          SliverToBoxAdapter(child: hengFu()), // 28
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: homeBanner()), //351
+          SliverToBoxAdapter(child: homeBanner()), // 351
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: gameEntry()), //100
+          SliverToBoxAdapter(child: gameEntry()), // 100
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: limitedTimeDiscount()), //198
+          SliverToBoxAdapter(child: limitedTimeDiscount()), // 198
           buildSliverToBoxAdapter(12.w),
           SliverToBoxAdapter(child: dailyNewProduct()),
           buildSliverToBoxAdapter(12.w),

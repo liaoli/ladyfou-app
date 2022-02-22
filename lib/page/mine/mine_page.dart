@@ -190,7 +190,7 @@ class _MinePageState extends State<MinePage> {
                     height: 24.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: AppColors.transparent_Black),
+                        color: AppColors.transparent_Black5),
                     child: Center(
                       //加上Center让文字居中
                       child: Row(

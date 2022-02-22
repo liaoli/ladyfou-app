@@ -4,7 +4,6 @@ import 'package:ladyfou/style/Color.dart';
 
 class RecommendProductHead extends StatelessWidget {
   final EdgeInsetsGeometry padding;
-
   const RecommendProductHead({
     Key? key,
     this.padding = EdgeInsets.zero,

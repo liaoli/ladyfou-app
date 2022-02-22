@@ -9,8 +9,10 @@ class AppColors {
 
   /// 导航栏背景色<主题红色>
   static const Color navigationColor = Color.fromRGBO(222, 0, 32, 1);
+
   /// 主背景
   static const Color primaryBackground = Color.fromRGBO(245, 245, 245, 1.0);
+
   /// 主文本黑
   static const Color primaryBlackText = Color.fromRGBO(3, 3, 25, 1.0);
 
@@ -19,16 +21,23 @@ class AppColors {
 
   /// 主文本灰色
   static const Color primaryGreyText = Color(0xFF9B9B9B);
+
   /// 灰色153
   static const Color jp_color153 = Color.fromRGBO(153, 153, 153, 1.0);
+
   /// 灰色196
   static const Color jp_color196 = Color.fromRGBO(196, 196, 196, 1.0);
+
   /// 半透明背景灰
   static const Color bgGreytr = Color.fromRGBO(245, 245, 245, 0.4);
-    ///半透明黑色
-  static const Color transparent_Black = Color.fromRGBO(0, 0, 0, 0.5);
+
+  ///半透明黑色
+  static const Color transparent_Black5 = Color.fromRGBO(0, 0, 0, 0.5);
+  static const Color transparent_Black3 = Color.fromRGBO(0, 0, 0, 0.3);
+
   /// 渐变色起点
   static const Color gradientColorStart = Color.fromRGBO(255, 111, 97, 1.0);
+
   /// 渐变色终点
   static const Color gradientColorEnd = Color.fromRGBO(222, 0, 32, 1);
 
@@ -43,10 +52,8 @@ class AppColors {
   static const Color color_FF000000 = Color(0xFF000000);
   static const Color color_FFDCDCDC = Color(0xFFDCDCDC);
   static const Color color_FCE6E9 = Color(0xFFFCE6E9);
-
   static const Color color_9A9AA3 = Color(0xFF9A9AA3);
-
   static const Color color_F6AD2A = Color(0xFFF6AD2A);
-
+  static const Color color_E34D59 = Color(0xFFE34D59);
   static var color_FFDE0020 = Color(0xFFDE0020);
 }
