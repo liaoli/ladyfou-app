@@ -11,9 +11,14 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/check_box_widget.dart';
+import 'package:ladyfou/components/sliver_header_delegate.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
+import 'package:ladyfou/core/utils/ScreenAdapter.dart';
 import 'package:ladyfou/page/cart/views/goods_list_widge.dart';
+import 'package:ladyfou/page/cart/views/order_detail_widget.dart';
 import 'package:ladyfou/page/cart/views/preferential_list_widget.dart';
+import 'package:ladyfou/page/home/components/recommend_product_head.dart';
+import 'package:ladyfou/page/home/components/recommend_product_list.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/generated/l10n.dart';
 
@@ -27,6 +32,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
+    double bottomSafeHg = MediaQuery.of(context).padding.bottom;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -47,18 +53,29 @@ class _CartPageState extends State<CartPage> {
           )
         ],
         title: S.of(context).cart_title,
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(12, 0, 12, 12),
-          child: EasyRefresh.custom(
-              header: MaterialHeader(),
-              footer: MaterialFooter(),
-              onRefresh: () async {},
-              // scrollController: scrollController,
-              slivers: <Widget>[
-                _topNumHead(context),
-                GoodsListWidget(),
-                PreferentialListWidget(),
-              ]),
+        body: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(12, 0, 12, bottomSafeHg + 76),
+              child: EasyRefresh.custom(
+                  header: MaterialHeader(),
+                  footer: MaterialFooter(),
+                  onRefresh: () async {},
+                  // scrollController: scrollController,
+                  slivers: <Widget>[
+                    _topNumHead(context),
+                    GoodsListWidget(),
+                    PreferentialListWidget(),
+                    OrderDetailWidget(),
+                    _recommendProductHead(),
+                    RecommendProductList(),
+                  ]),
+            ),
+            Positioned(
+              bottom: 0,
+              child: _bottomPayWidget(context, bottomSafeHg),
+            ),
+          ],
         ),
       ),
     );
@@ -114,6 +131,32 @@ class _CartPageState extends State<CartPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _recommendProductHead() {
+    return SliverPersistentHeader(
+      pinned: false,
+      delegate: SliverHeaderDelegate(
+        maxHeight: 52.w,
+        minHeight: 52.w,
+        child: RecommendProductHead(
+          padding: EdgeInsets.only(top: 8),
+        ),
+      ),
+    );
+  }
+
+  Widget _bottomPayWidget(BuildContext context, double bottomHeight) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(width: 0.5, color: AppColors.transparent_Black3),
+        ),
+      ),
+      height: bottomHeight + 76,
+      width: ScreenAdaper.width(750),
     );
   }
 }

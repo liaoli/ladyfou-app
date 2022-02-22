@@ -32,7 +32,8 @@ class AppColors {
   static const Color bgGreytr = Color.fromRGBO(245, 245, 245, 0.4);
 
   ///半透明黑色
-  static const Color transparent_Black = Color.fromRGBO(0, 0, 0, 0.5);
+  static const Color transparent_Black5 = Color.fromRGBO(0, 0, 0, 0.5);
+  static const Color transparent_Black3 = Color.fromRGBO(0, 0, 0, 0.3);
 
   /// 渐变色起点
   static const Color gradientColorStart = Color.fromRGBO(255, 111, 97, 1.0);
@@ -53,4 +54,5 @@ class AppColors {
   static const Color color_FCE6E9 = Color(0xFFFCE6E9);
   static const Color color_9A9AA3 = Color(0xFF9A9AA3);
   static const Color color_F6AD2A = Color(0xFFF6AD2A);
+  static const Color color_E34D59 = Color(0xFFE34D59);
 }
