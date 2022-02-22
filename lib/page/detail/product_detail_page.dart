@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ladyfou/page/detail/store/product_detail_provider.dart';
 import 'package:ladyfou/style/Color.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/sliver_header_delegate.dart';
 import 'components/ProductEvaluationHead.dart';
 import 'components/color_and_size_entry_view.dart';
+import 'components/detail_bottom_view.dart';
 import 'components/detial_default_head.dart';
 import 'components/hot_comments_view.dart';
 import 'components/limited_time_discount.dart';
@@ -27,25 +30,22 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  late ScrollController scrollController;
 
+
+  late ProductDetailProvider productDetailProvider;
   @override
   void initState() {
-    scrollController = ScrollController();
-    scrollController.addListener(() {
-      debugPrint("controller.offset = ${scrollController.offset}");
 
-      if (scrollController.offset >= 0) {
-      } else {
-        if (showSearch == true) {}
-      }
-    });
+    productDetailProvider = ProductDetailProvider();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider.value(
+        value: productDetailProvider,
+        child:Scaffold(
       body: Material(
         color: AppColors.color_FFF5F5F5,
         child: Column(
@@ -54,10 +54,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             Expanded(
               child: refresh(),
             ),
+            DetailBottomView(),
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget homeHead() {
@@ -73,7 +74,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         header: MaterialHeader(),
         footer: MaterialFooter(),
         onRefresh: () async {},
-        scrollController: scrollController,
+        scrollController: productDetailProvider.scrollController,
         slivers: <Widget>[
           SliverToBoxAdapter(child: productImageSwiper()), //375
           SliverToBoxAdapter(child: limitTimeDiscount()), //40
@@ -82,20 +83,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           buildSliverToBoxAdapter(12.w),
           SliverToBoxAdapter(child: hotComments()), //120
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: productColorAndSizeEntry()), //120
+          SliverToBoxAdapter(child: productColorAndSizeEntry()), //44
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: purchaseInstructionsEntry()), //120
+          SliverToBoxAdapter(child: purchaseInstructionsEntry()), //44
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: recommendSet()), //120
+          SliverToBoxAdapter(child: recommendSet()), //124
           buildSliverToBoxAdapter(12.w),
-          productEvaluationHead(),
-          productEvaluationList(),
-          SliverToBoxAdapter(child: productEvaluationBottom()), //120
+          productEvaluationHead(),//40  //评论
+          productEvaluationList(),//180
+          SliverToBoxAdapter(child: productEvaluationBottom()), //50
           buildSliverToBoxAdapter(12.w),
-          productDescriptionHead(),
-          productDescription(), //120
-          buildSliverToBoxAdapter(12.w),
-          recommendProductHead(),
+          productDescriptionHead(),//40 //详情
+          productDescription(), //327x2 + 12x 3
+          buildSliverToBoxAdapter(12.w),//
+          recommendProductHead(),// 推荐
           RecommendProduct(),
           buildSliverToBoxAdapter(12.w),
         ],
@@ -159,7 +160,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return ProductEvaluationList(
       padding: EdgeInsets.symmetric(
         horizontal: 24.w,
-        vertical: 24.w,
+        vertical: 0.w,
       ),
       background: Container(
         margin: EdgeInsets.symmetric(

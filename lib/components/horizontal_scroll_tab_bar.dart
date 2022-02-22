@@ -32,8 +32,8 @@ class _HorizontalScrollTabBarState extends State<HorizontalScrollTabBar> {
   List<Widget> tabS() {
     return widget.dataS.map((e) {
       return InkWell(
-
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 5.w,
@@ -91,9 +91,9 @@ class TabData {
     this.selected = false,
     required this.index,
     this.defaultLineColor = AppColors.transparent,
-    this.selectedLineColor = AppColors.black,
-    this.defaultTextColor = AppColors.black,
-    this.selectedTextColor = AppColors.black,
+    this.selectedLineColor = AppColors.white,
+    this.defaultTextColor = AppColors.white,
+    this.selectedTextColor = AppColors.white,
   });
 
   Color getLineColor() {

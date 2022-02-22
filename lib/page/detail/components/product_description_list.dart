@@ -78,8 +78,8 @@ class ProductDescriptionItemView extends StatelessWidget {
     return  ClipRRect(
       borderRadius: BorderRadius.all(new Radius.circular(10.w)),
       child: CachedNetworkImage(
-        width: 170.w,
-        height: 170.w,
+        width: 327.w,
+        height: 327.w,
         imageUrl:
         "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
         imageBuilder: (context, imageProvider) => Container(
