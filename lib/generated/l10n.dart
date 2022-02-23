@@ -839,6 +839,16 @@ class S {
       args: [],
     );
   }
+
+  /// `促销`
+  String get mine_promotion {
+    return Intl.message(
+      '促销',
+      name: 'mine_promotion',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,55 +1,53 @@
 /*
  * @Descripttion: TODO
- * @FileName: shop_goods_item2_widget
+ * @FileName: collection_good_item_widget
  * @version: 1.0.0
  * @Author: ladyfou-app
- * @Date: 2/16/22 11:03 AM
+ * @Date: 2/23/22 3:40 PM
  * @LastEditors: tang
  */
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ladyfou/core/model/good_info_model.dart';
-import 'package:ladyfou/core/utils/utils.dart';
-import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
-import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
-import '../../../components/image_placehold_widget.dart';
-import '../../../generated/l10n.dart';
-import '../../../style/Color.dart';
-import '../../../style/text.dart';
+import '../../../../components/image_placehold_widget.dart';
+import '../../../../core/model/good_info_model.dart';
+import '../../../../core/utils/utils.dart';
+import '../../../../style/Color.dart';
+import '../../../../style/text.dart';
+import '../../../sort/components/shop_gradient_button.dart';
 
 typedef CallBackWidget = void Function();
 
-class ShopGoodsItem2 extends StatefulWidget {
+class CollectionGoodItem extends StatefulWidget {
   // 点击整个item
   final VoidCallback? onItemClick;
+
   // 点击喜欢
   final CallBackWidget? onItemLikeClick;
+
   // 数据model
   final GoodsInfoModel goodsModel;
   bool isShowLike;
 
-
-  ShopGoodsItem2(
+  CollectionGoodItem(
       {Key? key,
-        required this.goodsModel,
-        this.onItemClick,
-        this.onItemLikeClick,
-        this.isShowLike = true})
+      required this.goodsModel,
+      this.onItemClick,
+      this.onItemLikeClick,
+      this.isShowLike = true})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ShopGoodsItem2State();
+    return _CollectionGoodItemState();
   }
 }
 
-class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
+class _CollectionGoodItemState extends State<CollectionGoodItem> {
   var eventBusFn;
   bool isListen = false;
 
@@ -141,8 +139,9 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
   /// 右边内容
   Widget _titlePriceItem(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 8.w,bottom: 8.w),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
             child: Column(
@@ -154,7 +153,6 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
             ),
           ),
           _priceItem(context),
-          _ratationItem(context),
         ],
       ),
     );
@@ -184,126 +182,74 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
     );
   }
 
-  /// 原价
+  /// 积分
   Widget _newItem(BuildContext context) {
     return Container(
         margin: EdgeInsets.only(top: 2.w),
         child: Row(
           children: [
-            GradientButton(
-              width: 50.w,
-              height: 20.w,
-              fontWeight: FontWeight.bold,
-              text: widget.goodsModel.discount,
-            ),
-            SizedBox(width: 10.w),
-            double.parse(widget.goodsModel.listPrice) > 0.0
-                ? Text( '￥'+
-                Utils.formatStepCount(
-                    double.parse(widget.goodsModel.listPrice)), // 商品原价
+            Image.asset("assets/images/mine/fi_integral.png"),
+            SizedBox(width: 5.w),
+            Text(
+              'P${widget.goodsModel.point}',
               style: BaseText.style(
-                  fontSize: 10.0.sp,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.primaryBlackText.withOpacity(0.5),
-                  decoration: TextDecoration.lineThrough
-              ),
-            )
-                : SizedBox(),
+                  color: AppColors.color_F6AD2A,
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w700),
+            ),
           ],
-        )
-    );
+        ));
   }
 
   /// 价格模块
   Widget _priceItem(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 2.w,bottom: 4.w),
+      margin: EdgeInsets.only(top: 2.w, bottom: 4.w),
       height: 16.0.w,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Text(
-                '￥',
-                style: BaseText.style(
-                    color: AppColors.primaryBlackText,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                Utils.formatStepCount(double.parse(widget.goodsModel.price)),
-
-                /// 商品价格
-                style: BaseText.style(
-                    height: 1.0,
-                    color: AppColors.primaryBlackText,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 评分
-  Widget _ratationItem(BuildContext context) {
-    return Container(
-      height: 24.0.w,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              RatingBar(
-                initialRating: widget.goodsModel.rating,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                itemSize: 13.w,
-                ignoreGestures: true,
-                ratingWidget: RatingWidget(
-                  full: Container(child: Image.asset('assets/images/sort/icon_star_full.png')),
-                  half: Container(child: Image.asset('assets/images/sort/icon_star_half.png')),
-                  empty: Container(child: Image.asset('assets/images/sort/icon_star_empty.png')),
+          Container(
+            child: Row(
+              children: [
+                Text(
+                  '￥',
+                  style: BaseText.style(
+                      color: AppColors.navigationColor,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w700),
                 ),
-                onRatingUpdate: (double value) {},
-              ),
-              Text(
-                widget.goodsModel.rating.toString(),
-                style: BaseText.style(
-                    color: AppColors.jp_color153,
-                    fontSize: 15.0.sp,
-                    fontWeight: FontWeight.normal),
-              ),
-            ],
-          ),
+                Text(
+                  Utils.formatStepCount(double.parse(widget.goodsModel.price)),
 
-          Row(
-            children: [
-               ManagementOptions(
-                  onTap: () => widget.onItemLikeClick!(),
-                  isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
-                  selectUrl: 'assets/images/sort/love_red.png',
-                  unchecked: 'assets/images/sort/love_black.png',
-                  width: 24.w,
+                  /// 商品价格
+                  style: BaseText.style(
+                      height: 1.0,
+                      color: AppColors.navigationColor,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700),
                 ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 24.w,
-                  height: 24.w,
-                  child: Image.asset(
-                    'assets/images/sort/shop_detail_shopcart.png',
-                    // color: Colors.white,
-                  ),
+                SizedBox(width: 5.w),
+                GradientButton(
+                  width: 35.w,
+                  height: 15.w,
+                  fontWeight: FontWeight.bold,
+                  text: '${widget.goodsModel.discount == '' ? 0 : widget.goodsModel.discount}%',
                 ),
-              )
-            ],
+              ],
+            ),
           ),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: 24.w,
+              height: 24.w,
+              child: Image.asset(
+                'assets/images/sort/shop_detail_shopcart.png',
+                // color: Colors.white,
+              ),
+            ),
+          )
         ],
       ),
     );

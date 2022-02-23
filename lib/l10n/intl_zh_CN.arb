@@ -77,5 +77,6 @@
   "mine_page_canclled": "已取消",
   "mine_page_order_sn": "订单号:",
   "cart_title": "购物车",
-  "charge_title": "管理"
+  "charge_title": "管理",
+  "mine_promotion": "促销"
 }
