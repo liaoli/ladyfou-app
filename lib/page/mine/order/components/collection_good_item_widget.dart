@@ -20,6 +20,7 @@ import '../../../../style/text.dart';
 import '../../../sort/components/shop_gradient_button.dart';
 
 typedef CallBackWidget = void Function();
+typedef CallCollectionWidget = void Function(GoodsInfoModel model);
 
 class CollectionGoodItem extends StatefulWidget {
   // 点击整个item
@@ -28,17 +29,25 @@ class CollectionGoodItem extends StatefulWidget {
   // 点击喜欢
   final CallBackWidget? onItemLikeClick;
 
+  // 收藏-点击选中
+  final CallCollectionWidget onCollectionSelectClick;
+
   // 数据model
   final GoodsInfoModel goodsModel;
   bool isShowLike;
+  final bool isEditCollection;
+  final bool isSelect;
 
-  CollectionGoodItem(
-      {Key? key,
-      required this.goodsModel,
-      this.onItemClick,
-      this.onItemLikeClick,
-      this.isShowLike = true})
-      : super(key: key);
+  CollectionGoodItem({
+    Key? key,
+    required this.goodsModel,
+    required this.onCollectionSelectClick,
+    this.onItemClick,
+    this.onItemLikeClick,
+    this.isShowLike = true,
+    this.isEditCollection = false,
+    this.isSelect = false,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -50,6 +59,7 @@ class CollectionGoodItem extends StatefulWidget {
 class _CollectionGoodItemState extends State<CollectionGoodItem> {
   var eventBusFn;
   bool isListen = false;
+
 
   @override
   void initState() {
@@ -86,29 +96,46 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
   @override
   Widget build(BuildContext context) {
     /// : implement build
-    return GestureDetector(
-      onTap: widget.onItemClick,
-      child: Container(
-        height: 116.0.w,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(width: 12.0.w),
+    return Row(
+      children: [
+        widget.isEditCollection
+            ? InkWell(
+                onTap: () {
+                  widget.onCollectionSelectClick(widget.goodsModel);
+                },
+                child: Container(
+                  height: 116.0.w,
+                  width: 50.w,
+                  child: Image.asset(widget.isSelect ? "assets/images/sort/fi_check.png" : "assets/images/sort/fi_check_nor.png"),
+                ),
+              )
+            : SizedBox(),
+        Expanded(
+            child: GestureDetector(
+          onTap: widget.onItemClick,
+          child: Container(
+            height: 116.0.w,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(width: 12.0.w),
 
-            /// 图片模块
-            _imageItem(context),
-            SizedBox(width: 8.0.w),
+                /// 图片模块
+                _imageItem(context),
+                SizedBox(width: 8.0.w),
 
-            /// 标题价格模块
-            Flexible(child: _titlePriceItem(context)),
-            SizedBox(width: 12.0.w),
-          ],
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(8.w)),
-        ),
-      ),
+                /// 标题价格模块
+                Flexible(child: _titlePriceItem(context)),
+                SizedBox(width: 12.0.w),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(8.w)),
+            ),
+          ),
+        )),
+      ],
     );
   }
 
@@ -121,9 +148,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
       child: ImagePlaceholdWidget(
         imgError: () {
           Future.delayed(Duration(milliseconds: 100)).then((e) {
-            setState(() {
-              widget.isShowLike = false;
-            });
+            widget.isShowLike = false;
           });
         },
         url: widget.goodsModel.fThumb,
@@ -139,7 +164,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
   /// 右边内容
   Widget _titlePriceItem(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 8.w,bottom: 8.w),
+      padding: EdgeInsets.only(top: 8.w, bottom: 8.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -234,7 +259,8 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
                   width: 35.w,
                   height: 15.w,
                   fontWeight: FontWeight.bold,
-                  text: '${widget.goodsModel.discount == '' ? 0 : widget.goodsModel.discount}%',
+                  text:
+                      '${widget.goodsModel.discount == '' ? 0 : widget.goodsModel.discount}%',
                 ),
               ],
             ),

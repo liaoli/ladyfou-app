@@ -2,18 +2,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../style/Color.dart';
+import '../../detail/product_detail_page.dart';
 
 class ProductRankList extends StatefulWidget {
   final Widget background;
   final EdgeInsetsGeometry padding;
   final int count;
 
-  const ProductRankList(
-      {Key? key, required this.background, required this.padding,this.count = 6,})
-      : super(key: key);
+  const ProductRankList({
+    Key? key,
+    required this.background,
+    required this.padding,
+    this.count = 6,
+  }) : super(key: key);
 
   @override
   _ProductRankListState createState() => _ProductRankListState();
@@ -55,8 +60,13 @@ class _ProductRankListState extends State<ProductRankList> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 //创建子widget
-                return RankProductItemView(
-                  index: index,
+                return GestureDetector(
+                  child: RankProductItemView(
+                    index: index,
+                  ),
+                  onTap: () {
+                    Get.to(() => ProductDetailPage());
+                  },
                 );
               },
               childCount: widget.count,

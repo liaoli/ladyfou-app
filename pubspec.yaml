@@ -237,6 +237,13 @@ flutter:
     - assets/images/detail/plus.png
     - assets/images/detail/minus.png
 
+    #message
+    - assets/images/message/coupon.png
+    - assets/images/message/cs.png
+    - assets/images/message/order.png
+    - assets/images/message/sell_info.png
+    - assets/images/message/sign.png
+
     # search
     - assets/images/search/delete_icon.png
     - assets/images/search/rank_first.png
