@@ -9,4 +9,8 @@ class XRouter {
   static void goCartPage() {
     Get.toNamed("/cart");
   }
+
+  static void goSearchPage() {
+    Get.toNamed("/search");
+  }
 }
