@@ -21,7 +21,6 @@ import '../../../../generated/l10n.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
 import '../../../sort/components/shop_gradient_button.dart';
-import '../../../sort/components/shop_grid_list_view.dart';
 import '../components/mine_collection_list_view.dart';
 import '../store/goods_operation_provider.dart';
 
@@ -99,11 +98,14 @@ class _MineCollectionState extends State<MineCollectionFul> {
                     padding: EdgeInsets.only(right: 20.w),
                     child: Row(
                       children: [
-                        /// 管理
+                        /// 管理-完成
                         GestureDetector(
+                          onTap: () {
+                            provider.checkEditCollection();
+                          },
                           child: Container(
                             child: Text(
-                              '管理',
+                              provider.isEditCollection ? '完成':'管理',
                               style: BaseText.style(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.normal),
@@ -203,13 +205,14 @@ class _MineCollectionState extends State<MineCollectionFul> {
     return CollectionGridListView(
       displayType: DisplayType.list_form,
       goodsList: provider.goodCollectionList,
+      selectCollectionGoodList: provider.selectCollectionGoodList,
       padding: EdgeInsets.only(
-          left: 16.0.w, top: 8.0.w, bottom: 16.0.w, right: 16.0.w),
+          left: provider.isEditCollection ? 0.w : 16.w, top: 8.0.w, bottom: 16.0.w, right: 16.0.w),
+      isEditCollection: provider.isEditCollection,
       loverClick: (index) {
-        // if (UserInfoManager().isLogin(context)) {
-        //   Provider.of<StoreHomeProvider>(context, listen: false)
-        //       .isCollectionAction(index);
-        // }
+      },
+      onCollectionSelectClick: (model) {
+        provider.checkSelectCollection(model);
       },
     );
   }

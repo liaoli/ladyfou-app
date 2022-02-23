@@ -19,8 +19,10 @@ class GoodsOperationProvider with ChangeNotifier {
   bool isRequestError = false;
   int currentPage = CURRENT_PAGE;
   EasyRefreshController refreshController = EasyRefreshController();
+  bool isEditCollection = false;
 
   List<GoodsInfoModel> goodCollectionList = [];
+  List<GoodsInfoModel> selectCollectionGoodList = [];
 
   /// 获取二级分类商品列表
   Future getCollectionLists(
@@ -75,5 +77,31 @@ class GoodsOperationProvider with ChangeNotifier {
     } catch (s, e) {
       print('请求报错:$e');
     }
+  }
+
+  /// 点击编辑还是完成
+  Future checkEditCollection() async {
+    isEditCollection = !isEditCollection;
+    notifyListeners();
+  }
+
+  /// 选中或者取消选中
+  Future checkSelectCollection(GoodsInfoModel model) async {
+    if (selectCollectionGoodList.length == 0) {
+      selectCollectionGoodList.add(model);
+    }else {
+      bool isExit = false;
+      selectCollectionGoodList.forEach((e) {
+        if (model.id == e.id) {
+          isExit = true;
+        }
+      });
+      if (isExit) {
+        selectCollectionGoodList.removeWhere((element) => element.id == model.id);
+      }else {
+        selectCollectionGoodList.add(model);
+      }
+    }
+    notifyListeners();
   }
 }

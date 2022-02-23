@@ -14,17 +14,21 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../../core/constant/base_enum.dart';
 import '../../../../core/model/good_info_model.dart';
-import '../../../sort/components/shop_goods_item2_widget.dart';
 import '../../../sort/components/shop_goods_item_widget.dart';
 import 'collection_good_item_widget.dart';
 
 typedef CallBackWidget = void Function(int index);
+typedef CallCollectionWidget = void Function(GoodsInfoModel model);
 
 class CollectionGridListView extends StatefulWidget {
 
   final List<GoodsInfoModel> goodsList;
+  final List<GoodsInfoModel> selectCollectionGoodList;
   final EdgeInsetsGeometry? padding;
   final CallBackWidget? loverClick;
+  final bool isEditCollection;
+  // 收藏-点击选中
+  final CallCollectionWidget onCollectionSelectClick;
   DisplayType displayType;
 
   CollectionGridListView({
@@ -32,6 +36,9 @@ class CollectionGridListView extends StatefulWidget {
     this.padding,
     this.loverClick,
     this.displayType = DisplayType.grid_shape,
+    this.isEditCollection = false,
+    required this.onCollectionSelectClick,
+    this.selectCollectionGoodList = const [],
     required this.goodsList,
   }) : super(key: key);
 
@@ -109,6 +116,15 @@ class CollectionGridListViewState extends State<CollectionGridListView> {
         crossAxisCount: 2,
         itemCount: widget.goodsList.length,
         itemBuilder: (context, index) {
+
+          GoodsInfoModel model = widget.goodsList[index];
+          bool isExit = false;
+          widget.selectCollectionGoodList.map((e) {
+            if (model.id == e.id) {
+              isExit = true;
+            }
+          });
+
           return AnimationConfiguration.staggeredList(
             position: index,
             duration: const Duration(milliseconds: 500),
@@ -117,6 +133,7 @@ class CollectionGridListViewState extends State<CollectionGridListView> {
               child: FadeInAnimation(
                 child: CollectionGoodItem(
                   goodsModel: widget.goodsList[index],
+                  isEditCollection: widget.isEditCollection,
                   onItemClick: () {
                     // BaseNavigation.push(
                     //     'goods/detail?id=${widget.goodsList[index].id}',
@@ -124,6 +141,10 @@ class CollectionGridListViewState extends State<CollectionGridListView> {
                   },
                   onItemLikeClick: () {
                     // widget.loverClick(index);
+                  },
+                  isSelect: isExit,
+                  onCollectionSelectClick: (model) {
+                    widget.onCollectionSelectClick(model);
                   },
                 ),
               ),
