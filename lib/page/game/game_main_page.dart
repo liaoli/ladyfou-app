@@ -85,7 +85,7 @@ class _GameMainPageState extends State<GameMainPage> {
         width: 375.w,
         height: 513.w,
         imageUrl:
-            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+            "https://goerp.oss-cn-hongkong.aliyuncs.com/apk/erp/game.png",
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
