@@ -58,7 +58,7 @@ class SPUtils {
   }
 
   static String? getToken() {
-    return /*_spf.getString('key_token')*/'mBkkV9l0Vqy1I7fdcfEL0pDqsybMfOBd';
+    return /*_spf.getString('key_token')*/'5LgZCkp9jSYtK94uvmveI29AEc9hVPld';
   }
 
   ///是否同意隐私协议

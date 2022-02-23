@@ -45,7 +45,7 @@ class OrderProvider with ChangeNotifier {
       int size = PAGE_SIZE}) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
     Map<String, dynamic> params = {
-      "type": status.name,
+      "type": /*status.name*/'all',
       "page": page,
       "size": size,
     };

@@ -58,11 +58,11 @@ class _MineCollectionState extends State<MineCollectionFul> {
 
     provider = Provider.of<GoodsOperationProvider>(context, listen: false);
     provider.getCollectionLists().then((value) {
-      if (provider.goodCollectionList.length > 0) {
-        tabTitles = getTabTitles(true);
-      } else {
-        tabTitles = getTabTitles(false);
-      }
+      // if (provider.goodCollectionList.length > 0) {
+      //   tabTitles = getTabTitles(true);
+      // } else {
+      //   tabTitles = getTabTitles(false);
+      // }
     });
 
     super.initState();
