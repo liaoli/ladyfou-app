@@ -227,6 +227,9 @@ flutter:
     - assets/images/detail/online.png
     - assets/images/detail/phone.png
 
+    # search
+    - assets/images/search/delete_icon.png
+
   fonts:
     - family: xuifont
       fonts:

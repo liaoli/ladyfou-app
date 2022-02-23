@@ -42,6 +42,8 @@ class _CartPageState extends State<CartPage> {
         leadType: AppBarBackType.Back,
         actions: [
           Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.only(right: 12),
             child: Text(
               S.of(context).charge_title,
               style: TextStyle(

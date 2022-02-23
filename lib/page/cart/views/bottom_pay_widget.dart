@@ -98,10 +98,10 @@ class BottomPayWidget extends StatelessWidget {
     );
   }
 
+  // 选择积分/优惠券弹框
   void _showDiscountsWidget(BuildContext context, double bottomSafeHg) {
     showModalBottomSheet(
       context: context,
-      isDismissible: false,
       builder: (BuildContext bc) {
         return Container(
           width: double.infinity,

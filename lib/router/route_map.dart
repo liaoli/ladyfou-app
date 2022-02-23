@@ -8,6 +8,7 @@ import 'package:ladyfou/page/menu/language.dart';
 import 'package:ladyfou/page/login/login.dart';
 import 'package:ladyfou/page/menu/settings.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/page/search/page/search_page.dart';
 
 class RouteMap {
   static List<GetPage> getPages = [
@@ -20,6 +21,7 @@ class RouteMap {
     GetPage(name: '/menu/language-page', page: () => LanguagePage()),
     GetPage(name: '/menu/about-page', page: () => AboutPage()),
     GetPage(name: '/cart', page: () => CartPage()),
+    GetPage(name: '/search', page: () => SearchPage()),
   ];
 
   /// 页面切换动画
