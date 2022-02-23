@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ladyfou/components/search_bar.dart';
 import 'package:ladyfou/router/router.dart';
 
+import '../../message/message_page.dart';
 import 'home_default_nav_bar.dart';
 
 class HomeSearchNavBar extends StatefulWidget {
@@ -36,6 +38,7 @@ class _HomeSearchNavBarState extends State<HomeSearchNavBar> {
               image: "assets/images/home/home_head_message.png",
               onTap: () {
                 //TODO:跳转
+                Get.to(() => MessagePage());
               }),
           SizedBox(
             width: 12.w,
