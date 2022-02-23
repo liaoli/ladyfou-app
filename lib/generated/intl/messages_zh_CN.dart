@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mine_page_order_sn": MessageLookupByLibrary.simpleMessage("订单号:"),
         "mine_page_to_be_paid": MessageLookupByLibrary.simpleMessage("待付款"),
         "mine_page_to_be_received": MessageLookupByLibrary.simpleMessage("待收货"),
+        "mine_promotion": MessageLookupByLibrary.simpleMessage("促销"),
         "not_shipped": MessageLookupByLibrary.simpleMessage("未发货"),
         "password": MessageLookupByLibrary.simpleMessage("密码"),
         "passwordError": MessageLookupByLibrary.simpleMessage("密码不能少于6位!"),

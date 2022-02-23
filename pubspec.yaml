@@ -162,6 +162,8 @@ flutter:
     - assets/images/mine/fi_jcb_pay.png
     - assets/images/mine/fi_visa_pay.png
     - assets/images/mine/fi_master_pay.png
+    - assets/images/mine/fi_integral.png
+    - assets/images/mine/fi_no_collection_goods.png
 
     #history
     - assets/images/history/browsing_history_close.png

@@ -14,7 +14,7 @@ class GoodsInfoModel {
     this.discount = '',
     this.url = '',
     this.fThumb = '',
-    this.reviewsTotal = '',
+    this.reviewsTotal = 0,
     this.wishlistTotal = 0,
     this.rating = 0.0,
     this.cids = const [],
@@ -41,9 +41,9 @@ class GoodsInfoModel {
   String discount;
   String url;
   String fThumb;
-  String reviewsTotal;
-  double rating;
+  int reviewsTotal;
   int wishlistTotal;
+  double rating;
   List<int> cids;
   List<Option> options;
   List<dynamic> tags;
@@ -68,7 +68,7 @@ class GoodsInfoModel {
     id: json["id"],
     name: json["name"],
     status: json["status"],
-    listPrice: json["list_price"],
+    listPrice: json["list_price"].toString(),
     price: json["price"].toString(),
     amount: json["amount"],
     saled: json["saled"],
@@ -78,14 +78,14 @@ class GoodsInfoModel {
     discount: json["discount"].toString(),
     url: json["url"],
     fThumb: json["f_thumb"],
-    reviewsTotal: json["reviews_total"].toString(),
+    reviewsTotal: (json["reviews_total"] == null || json["reviews_total"] == '') ? 0 : int.parse(json["reviews_total"].toString()),
     rating: double.parse(json["rating"].toString()),
-    wishlistTotal: json["wishlist_total"],
+    wishlistTotal: (json["wishlist_total"] == null || json["wishlist_total"] == '') ? 0 : int.parse(json["wishlist_total"].toString()),
     cids: json["cids"] == null ? [] : List<int>.from(json["cids"].map((x) => x)),
     options: json["options"] == null ? [] : List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
     tags: json["tags"] == null ? [] : List<dynamic>.from(json["tags"].map((x) => x)),
-    imgUrl: json["imgUrl"],
-    isWished: json["is_wished"],
+    imgUrl: json["imgUrl"] ?? '',
+    isWished: json["is_wished"] ?? 0,
     point: json["point"].toString(),
     presell:json["presell"] == null ? Presell() :  Presell.fromJson(json["presell"]),
     isLuckyBag: json["is_lucky_bag"],

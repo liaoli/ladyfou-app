@@ -13,6 +13,7 @@ import 'package:ladyfou/style/Color.dart';
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
+import 'order/page/mine_collection_page.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -303,6 +304,9 @@ class _MinePageState extends State<MinePage> {
       return InkWell(
         onTap: () {
           //TODO: 点击跳转
+          if (e['name'] == S.current.collection) {
+            Get.to(()=> MineCollectionPage());
+          }
         },
         child: Column(
           children: <Widget>[

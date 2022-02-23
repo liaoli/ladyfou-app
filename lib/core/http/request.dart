@@ -1,4 +1,5 @@
 import 'package:ladyfou/core/http/response.dart';
+import 'package:ladyfou/core/model/good_collection_model.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
@@ -85,6 +86,16 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
       await XHttp.get("/otonastyle/account/order", params);
   MyResponse<List<OrderInfoModel>> response =
       MyResponse<List<OrderInfoModel>>.fromJson(result);
+  return response;
+}
+
+/// 获取收藏列表
+Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
+    {required Map<String,dynamic> params}) async {
+  Map<String, dynamic> result =
+  await XHttp.get("/otonastyle/account/wish_list", params);
+  MyResponse<List<GoodsInfoModel>> response =
+  MyResponse<List<GoodsInfoModel>>.fromJson(result);
   return response;
 }
 /////////////////////////////////thw-end//////////////////////////////////////

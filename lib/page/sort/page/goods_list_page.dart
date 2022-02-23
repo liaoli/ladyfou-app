@@ -155,14 +155,14 @@ class _GoodsListPageState extends State<GoodsListPageFul>
           leadType: AppBarBackType.Back,
           brightness: Brightness.dark,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(44.0 + ScreenUtil().statusBarHeight),
+            preferredSize: Size.fromHeight(56.0.w),
             child: BaseAppBar(
               title: Container(
                 child: Text(widget.title,
                     style: BaseText.style(
                         fontWeight: FontWeight.w700,
                         color: AppColors.primaryBlackText,
-                        fontSize: 14)),
+                        fontSize: 14.sp)),
               ),
               elevation: 0,
               actions: <Widget>[
@@ -195,7 +195,7 @@ class _GoodsListPageState extends State<GoodsListPageFul>
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(bottom: 10.0.w),
                 child: Stack(
                   key: _stackKey,
                   children: [
