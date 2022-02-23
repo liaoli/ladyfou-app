@@ -10,7 +10,6 @@
 // 封装图片加载控件，图片加载失败时加载默认图片
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 import 'dart:io';

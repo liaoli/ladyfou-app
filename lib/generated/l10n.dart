@@ -819,6 +819,26 @@ class S {
       args: [],
     );
   }
+
+  /// `购物车`
+  String get cart_title {
+    return Intl.message(
+      '购物车',
+      name: 'cart_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `管理`
+  String get charge_title {
+    return Intl.message(
+      '管理',
+      name: 'charge_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

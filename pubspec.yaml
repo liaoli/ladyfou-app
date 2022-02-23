@@ -85,7 +85,7 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   # 星级评分控件
   # https://pub.flutter-io.cn/packages/flutter_rating_bar
-  flutter_rating_bar:
+  flutter_rating_bar: ^4.0.0
   # Dart 常用工具类库 https://github.com/Sky24n/common_utils
   common_utils: ^2.1.0
   # 下拉菜单 https://pub.flutter-io.cn/packages/gzx_dropdown_menu/install
@@ -163,13 +163,12 @@ flutter:
     - assets/images/mine/fi_visa_pay.png
     - assets/images/mine/fi_master_pay.png
 
-
     #history
     - assets/images/history/browsing_history_close.png
     - assets/images/history/browsing_history_delete.png
     - assets/images/history/browsing_history_like.png
     - assets/images/history/browsing_history_unlike.png
-    
+
 
     - assets/sample_audio.ogg
     - assets/sample_video.mp4
@@ -185,7 +184,6 @@ flutter:
     - assets/images/home/icon_star.png
     - assets/images/home/icon_star_nor.png
     - assets/images/home/cart_empty.png
-
 
     # Sort
     - assets/images/sort/news_icon_black.png
@@ -208,7 +206,12 @@ flutter:
     - assets/images/sort/fi_check.png
     - assets/images/sort/fi_check_nor.png
 
-    #通用
+    # Cart
+    - assets/images/cart/checkbox_select.png # 复选框选中
+    - assets/images/cart/checkbox_unselect.png # 复选框非选中
+    - assets/images/cart/dropdown_arrow.png 
+
+    # 通用
     - assets/images/action_bar_shopping_cart_black.png
     - assets/images/limit_time_discount_clock.png
     - assets/images/change_list_style_1.png
@@ -216,12 +219,24 @@ flutter:
     - assets/images/limit_time_discount_clock.png
     - assets/images/triangle.png
     - assets/images/limit_time_discount_star.png
+    - assets/images/more_icon.png
+    - assets/images/more_icon_white.png
+    - assets/images/close_icon.png
+
+    #detail
+    - assets/images/detail/limit_time_discount_bg.png
+    - assets/images/detail/gold_coin.png
+    - assets/images/detail/thumbs_up_grey.png
+    - assets/images/detail/thumbs_up_red.png
+    - assets/images/detail/detail_like_black.png
+    - assets/images/detail/mail.png
+    - assets/images/detail/online.png
+    - assets/images/detail/phone.png
 
   fonts:
     - family: xuifont
       fonts:
         - asset: assets/fonts/iconfont.ttf
-
 
 ad_launch:
   enabled: true
