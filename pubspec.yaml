@@ -244,6 +244,9 @@ flutter:
     - assets/images/message/sell_info.png
     - assets/images/message/sign.png
 
+    # search
+    - assets/images/search/delete_icon.png
+
   fonts:
     - family: xuifont
       fonts:

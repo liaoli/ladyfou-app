@@ -2,33 +2,29 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
+import 'package:ladyfou/components/circle_image.dart';
+import 'package:ladyfou/components/round_rect_image.dart';
 import 'package:ladyfou/page/detail/components/arrow_forward.dart';
-import 'package:ladyfou/page/message/sell_info_page.dart';
 
+import '../../components/button/common_button.dart';
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
-import '../mine/order/page/mine_order_page.dart';
 
-class MessagePage extends StatefulWidget {
-  const MessagePage({Key? key}) : super(key: key);
+class SellInfoPage extends StatefulWidget {
+  const SellInfoPage({Key? key}) : super(key: key);
 
   @override
-  _MessagePageState createState() => _MessagePageState();
+  _SellInfoPageState createState() => _SellInfoPageState();
 }
 
-class _MessagePageState extends State<MessagePage> {
-  List<MessageItem> dataS = [];
-
+class _SellInfoPageState extends State<SellInfoPage> {
   @override
   void initState() {
-    dataS.add(MessageItem("assets/images/message/cs.png", "客服中心",1));
-    dataS.add(MessageItem("assets/images/message/sell_info.png", "优惠信息情报",2));
-    dataS.add(MessageItem("assets/images/message/coupon.png", "优惠券信息",3));
-    dataS.add(MessageItem("assets/images/message/order.png", "订单页面",4));
-    dataS.add(MessageItem("assets/images/message/sign.png", "签到推送",5));
     super.initState();
   }
 
@@ -36,7 +32,7 @@ class _MessagePageState extends State<MessagePage> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       leadType: AppBarBackType.Back,
-      title: "消息中心",
+      title: "优惠信息情报",
       body: Column(
         children: [Expanded(child: refresh())],
       ),
@@ -73,56 +69,41 @@ class _MessagePageState extends State<MessagePage> {
           vertical: 12.w,
         ),
         itemBuilder: (context, index) {
-          return MessageItemView(
-            item: dataS[index],
-          );
+          return SellInfoItemView();
         },
         separatorBuilder: (context, index) {
           return SizedBox(
             height: 12.w,
           );
         },
-        itemCount: dataS.length);
+        itemCount: 2);
   }
 }
 
-class MessageItemView extends StatelessWidget {
-  final MessageItem item;
-
-  const MessageItemView({
-    required this.item,
+class SellInfoItemView extends StatelessWidget {
+  const SellInfoItemView({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        switch(item.type){
-          case 2:
-          case 3:
-            Get.to(()=>SellInfoPage());
-            break;
-          case 4:
-            Get.to(() => MineOrderPage());
-        }
-      },
-      child:ClipRRect(
+    return ClipRRect(
       borderRadius: BorderRadius.all(new Radius.circular(10.w)),
       child: Container(
-        padding: EdgeInsets.only(left:12.w,top: 12.w,bottom: 12.w),
+        padding: EdgeInsets.only(
+          top: 12.w,
+        ),
         color: AppColors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Image.asset(item.icon),
                 SizedBox(
                   width: 12.w,
                 ),
                 Text(
-                  item.title,
+                  "限时特惠正在热卖 >",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
                     fontSize: 12.sp,
@@ -130,21 +111,45 @@ class MessageItemView extends StatelessWidget {
                   ),
                 ),
                 Expanded(child: SizedBox()),
-                ArrowForward(),
+                Text(
+                  "2020-12-25",
+                  style: TextStyle(
+                    color: AppColors.color_FF333333,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  width: 12.w,
+                ),
               ],
             ),
-
+            SizedBox(
+              height: 6.w,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 12.w),
+              child: Text(
+                "百款服装正在售卖~",
+                style: TextStyle(
+                  color: AppColors.color_FF999999,
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.w,
+            ),
+            RoundRectImage(
+                borderRadius: BorderRadius.zero,
+                height: 126.w,
+                width: 351.w,
+                url:
+                    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/614/d32/3d5/614d323d524f2537290680.jpg")
           ],
         ),
       ),
-    ) ,);
+    );
   }
-}
-
-class MessageItem {
-  String icon;
-  String title;
-  int type;
-
-  MessageItem(this.icon, this.title,this.type);
 }

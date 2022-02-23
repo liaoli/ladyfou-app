@@ -2,52 +2,83 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/style/Color.dart';
 
-import '../utils/common_util.dart';
-
 class SearchBar extends StatelessWidget {
   final String placeholder;
   final TextEditingController controller;
-
-  SearchBar({Key? key, this.placeholder = "Search", required this.controller})
+  final List<Widget>? actions; // 右边按钮
+  final double barHeight;
+  final Color barBgColor;
+  SearchBar(
+      {Key? key,
+      this.placeholder = "Search",
+      required this.controller,
+      this.actions,
+      this.barHeight = 28,
+      this.barBgColor = AppColors.white})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: EdgeInsets.all(12),
-      height: 28.w,
-      decoration: BoxDecoration(
-          border: Border.all(color: AppColors.white, width: 0.33),
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(14)),
-      child: TextField(
-        autofocus: false,
-        onChanged: (value) {},
-        controller: controller,
-        decoration: InputDecoration(
-            prefixIcon: Icon(
-              Icons.search,
-              color: AppColors.color_FF999999,
-            ),
-            suffixIcon: Offstage(
-              offstage: controller.text.isEmpty,
-              child: InkWell(
-                onTap: () {
-                  controller.clear();
-                },
-                child: Icon(
-                  Icons.cancel,
-                  color: AppColors.color_FF999999,
+        // margin: EdgeInsets.all(12),
+        height: barHeight,
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.white, width: 0.33),
+                  color: barBgColor,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: TextField(
+                  autofocus: false,
+                  onChanged: (value) {},
+                  controller: controller,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: AppColors.color_FF999999,
+                    ),
+                    suffixIcon: Offstage(
+                      offstage: controller.text.isEmpty,
+                      child: InkWell(
+                        onTap: () {
+                          controller.clear();
+                        },
+                        child: Icon(
+                          Icons.cancel,
+                          color: AppColors.color_FF999999,
+                        ),
+                      ),
+                    ),
+                    border: InputBorder.none,
+                    hintText: "当前热搜词",
+                    hintStyle: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.color_FF999999,
+                      fontSize: 14.sp,
+                    ),
+                  ),
                 ),
               ),
             ),
-            border: InputBorder.none,
-            hintText: "当前热搜词",
-            hintStyle: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: AppColors.color_FF999999,
-                fontSize: 14.sp)),
-      ),
-    );
+            // 输入框右边添加按钮
+            _actionsWidget(),
+          ],
+        ));
+  }
+
+  Widget _actionsWidget() {
+    if (actions != null && actions!.isNotEmpty) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: actions!,
+      );
+    } else {
+      return Container();
+    }
   }
 }

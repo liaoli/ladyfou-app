@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:get/get.dart';
 
 import '../../../style/Color.dart';
+import '../../detail/product_detail_page.dart';
 
 class HomeBannerSwiper extends StatefulWidget {
   HomeBannerSwiper();
@@ -56,26 +58,31 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
   ];
 
   Widget _buildItem(BuildContext context, int index) {
-    return CachedNetworkImage(
-      width: double.infinity,
-      height: double.infinity,
-      imageUrl: img[index],
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
+    return GestureDetector(
+      child: CachedNetworkImage(
+        width: double.infinity,
+        height: double.infinity,
+        imageUrl: img[index],
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
-      placeholder: (context, url) => Center(
-        child: SizedBox(
-          width: 20,
-          height: 20,
-          child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+        placeholder: (context, url) => Center(
+          child: SizedBox(
+            width: 20,
+            height: 20,
+            child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+          ),
         ),
+        errorWidget: (context, url, error) => SizedBox(),
       ),
-      errorWidget: (context, url, error) => SizedBox(),
+      onTap: () {
+        Get.to(() => ProductDetailPage());
+      },
     );
   }
 

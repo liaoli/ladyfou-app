@@ -41,7 +41,7 @@ class _HomeDefaultNavBarState extends State<HomeDefaultNavBar> {
         buildImageAsset(
             image: "assets/images/home/home_head_search.png",
             onTap: () {
-              //TODO:跳转
+              XRouter.goSearchPage();
             }),
         SizedBox(
           width: 12.w,

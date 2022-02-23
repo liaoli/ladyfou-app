@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/utils/date_util.dart';
 
+import '../../detail/product_detail_page.dart';
 import '../limit_time_discount_page.dart';
 
 class LimitedTimeDiscount extends StatefulWidget {
@@ -195,7 +196,9 @@ class LimitDiscountList extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             child: DiscountItemView(),
-            onTap: () {},
+            onTap: () {
+              Get.to(() => ProductDetailPage());
+            },
           );
         },
         separatorBuilder: (context, index) {

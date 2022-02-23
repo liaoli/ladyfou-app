@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../../../style/Color.dart';
+import '../../detail/product_detail_page.dart';
 import '../new_product_page.dart';
 
 class DailyNewProduct extends StatefulWidget {
@@ -137,7 +138,9 @@ class DailyNewProductList extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             child: DailyNewProductItemView(),
-            onTap: () {},
+            onTap: () {
+              Get.to(() => ProductDetailPage());
+            },
           );
         },
         separatorBuilder: (context, index) {
