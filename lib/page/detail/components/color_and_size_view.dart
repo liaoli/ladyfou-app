@@ -27,7 +27,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
             height: 2.w,
             color: AppColors.color_FFF5F5F5,
           ),
-          
+
 
           Expanded(child: SizedBox()),
           DetailBottomView(),
