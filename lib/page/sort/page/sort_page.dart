@@ -23,16 +23,16 @@ import '../components/left_category_widget.dart';
 import '../components/right_category_widget.dart';
 import '../store/sort_provider.dart';
 
-class SortPage extends StatelessWidget {
+// class SortPage extends StatelessWidget {
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return ChangeNotifierProvider(create: (_) => SortProvider(),child: SortPageFul());
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ChangeNotifierProvider(create: (_) => SortProvider(),child: SortPageFul());
-  }
-}
-
-class SortPageFul extends StatefulWidget {
+class SortPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
@@ -42,13 +42,14 @@ class SortPageFul extends StatefulWidget {
   }
 }
 
-class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMixin {
+class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin {
 
   int currentPage = 0;
   GlobalKey<RightListViewState> rightListviewKey =
   new GlobalKey<RightListViewState>();
   GlobalKey<CategoryMenueState> categoryMenueKey =
   new GlobalKey<CategoryMenueState>();
+  late SortProvider provider;
 
   @override
   void initState() {
@@ -57,8 +58,14 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
     // 状态栏颜色
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 
+    provider = SortProvider();
+
     // 请求分类数据
-    Provider.of<SortProvider>(context,listen: false).getSortAllDatas();
+    provider.getSortAllDatas().then((value) {
+      setState(() {
+
+      });
+    });
 
     super.initState();
   }
@@ -73,7 +80,9 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
         ScreenUtil().bottomBarHeight -
         44.w -
         49.w;
-    return AnnotatedRegion<SystemUiOverlayStyle>(
+    return ChangeNotifierProvider.value(
+        value: provider,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -83,7 +92,7 @@ class _SortPageState extends State<SortPageFul> with AutomaticKeepAliveClientMix
           _listWidget(context, rightListViewHeight),
         ]),
       ),
-    );
+    ));
   }
 
   Widget _listWidget(BuildContext context, double listHeight) {

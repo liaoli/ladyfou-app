@@ -21,22 +21,24 @@ import '../../../../style/text.dart';
 import '../components/mine_order_list.dart';
 import '../store/order_provider.dart';
 
-class MineOrderPage extends StatelessWidget {
+// class MineOrderPage extends StatelessWidget {
+//   final OrderStatus orderStatus;
+//
+//   MineOrderPage({Key? key, this.orderStatus = OrderStatus.all}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return ChangeNotifierProvider(
+//         create: (_) => OrderProvider(), child: MineOrderPageFul(orderStatus: orderStatus));
+//   }
+// }
+
+class MineOrderPage extends StatefulWidget {
   final OrderStatus orderStatus;
 
-  MineOrderPage({Key? key, this.orderStatus = OrderStatus.all}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ChangeNotifierProvider(
-        create: (_) => OrderProvider(), child: MineOrderPageFul(orderStatus: orderStatus));
-  }
-}
-
-class MineOrderPageFul extends StatefulWidget {
-  final OrderStatus orderStatus;
-  MineOrderPageFul({Key? key, this.orderStatus = OrderStatus.all}) : super(key: key);
+  MineOrderPage({Key? key, this.orderStatus = OrderStatus.all})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -45,12 +47,12 @@ class MineOrderPageFul extends StatefulWidget {
   }
 }
 
-class _MineOrderPageState extends State<MineOrderPageFul>
+class _MineOrderPageState extends State<MineOrderPage>
     with TickerProviderStateMixin {
   OrderStatus selectOrderStatus = OrderStatus.all;
   TextEditingController _searchController = TextEditingController();
   late TabController _tabController;
-  late  OrderProvider provider;
+  late OrderProvider provider;
   List _orderList = [
     /// 全部
     S.current.mine_page_all,
@@ -72,9 +74,12 @@ class _MineOrderPageState extends State<MineOrderPageFul>
   @override
   void initState() {
     selectOrderStatus = widget.orderStatus;
+
     /// 默认获取所有订单列表
-    provider = Provider.of<OrderProvider>(context, listen: false);
-    provider.getOrderList(selectOrderStatus,isFirst: true);
+    provider = OrderProvider();
+    provider.getOrderList(selectOrderStatus, isFirst: true).then((value) {
+      setState(() {});
+    });
 
     _tabController = TabController(
       length: _orderList.length,
@@ -88,7 +93,8 @@ class _MineOrderPageState extends State<MineOrderPageFul>
           DateTime.now().difference(_lastRequestAdt) > Duration(seconds: 1)) {
         // 超过1秒允许再次请求
         _lastRequestAdt = DateTime.now();
-        provider.getOrderList(OrderStatus.values[_tabController.index], isLoadMore: false);
+        provider.getOrderList(OrderStatus.values[_tabController.index],
+            isLoadMore: false);
       }
     });
     super.initState();
@@ -98,73 +104,75 @@ class _MineOrderPageState extends State<MineOrderPageFul>
   Widget build(BuildContext context) {
     // _tabController.animateTo(selectIndex == 'all' ? 0 : int.parse(selectIndex));
 
-    return BaseScaffold(
-      title: '订单管理',
-      leadType: AppBarBackType.Back,
-      actions: [
-        GestureDetector(
-          onTap: () {
-            // BaseNavigation.push('mine/news/list', context: context);
-          },
-          child: Padding(
-            padding: EdgeInsets.only(right: 16.w),
-            child: Image.asset(
-              'assets/images/mine/icon_customer.png',
-              width: 25.0.w,
-              height: 25.0.w,
+    return ChangeNotifierProvider.value(
+        value: provider,
+        child: BaseScaffold(
+          title: '订单管理',
+          leadType: AppBarBackType.Back,
+          actions: [
+            GestureDetector(
+              onTap: () {
+                // BaseNavigation.push('mine/news/list', context: context);
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: 16.w),
+                child: Image.asset(
+                  'assets/images/mine/icon_customer.png',
+                  width: 25.0.w,
+                  height: 25.0.w,
+                ),
+              ),
+            ),
+          ],
+          body: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              // 触摸收起键盘
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  height: 54.w,
+                  padding: EdgeInsets.only(
+                    left: 4.w,
+                    right: 4.w,
+                  ),
+                  child: TabBar(
+                    tabs: _orderList.map((f) {
+                      return Text(f);
+                    }).toList(),
+                    controller: _tabController,
+                    indicatorColor: Colors.red,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    isScrollable: true,
+                    labelColor: AppColors.primaryBlackText,
+                    unselectedLabelColor: AppColors.primaryBlackText,
+                    labelStyle: BaseText.style(height: 2, fontSize: 15.sp),
+                    onTap: (int status) {
+                      selectOrderStatus = OrderStatus.values[status];
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: createPages(),
+                  ),
+                )
+              ],
             ),
           ),
-        ),
-      ],
-      body: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          // 触摸收起键盘
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              alignment: Alignment.center,
-              height: 54.w,
-              padding: EdgeInsets.only(
-                left: 4.w,
-                right: 4.w,
-              ),
-              child: TabBar(
-                tabs: _orderList.map((f) {
-                  return Text(f);
-                }).toList(),
-                controller: _tabController,
-                indicatorColor: Colors.red,
-                indicatorSize: TabBarIndicatorSize.label,
-                isScrollable: true,
-                labelColor: AppColors.primaryBlackText,
-                unselectedLabelColor: AppColors.primaryBlackText,
-                labelStyle: BaseText.style(height: 2, fontSize: 15.sp),
-                onTap: (int status) {
-                  selectOrderStatus = OrderStatus.values[status];
-                },
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: createPages(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+        ));
   }
 
   // 列表
   List<Widget> createPages() {
     List<Widget> desList = [];
     for (int i = 0; i < _orderList.length; i++) {
-      desList.add(OrderListPage(pageIndex: i,provider: provider));
+      desList.add(OrderListPage(pageIndex: i, provider: provider));
     }
     return desList;
   }

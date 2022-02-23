@@ -56,13 +56,15 @@ class _MineCollectionState extends State<MineCollectionFul> {
   void initState() {
     // TODO: implement initState
 
-    provider = Provider.of<GoodsOperationProvider>(context, listen: false);
+    provider = GoodsOperationProvider();
     provider.getCollectionLists().then((value) {
-      // if (provider.goodCollectionList.length > 0) {
-      //   tabTitles = getTabTitles(true);
-      // } else {
-      //   tabTitles = getTabTitles(false);
-      // }
+      setState(() {
+        if (provider.goodCollectionList.length > 0) {
+          tabTitles = getTabTitles(true);
+        } else {
+          tabTitles = getTabTitles(false);
+        }
+      });
     });
 
     super.initState();
@@ -71,9 +73,11 @@ class _MineCollectionState extends State<MineCollectionFul> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Consumer<GoodsOperationProvider>(builder: (context, child, value) {
-      provider = child;
-      return GestureDetector(
+    // return Consumer<GoodsOperationProvider>(builder: (context, child, value) {
+    //   provider = child;
+      return ChangeNotifierProvider.value(
+          value: provider,
+          child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
             // 触摸收起键盘
@@ -183,21 +187,21 @@ class _MineCollectionState extends State<MineCollectionFul> {
                               : SizedBox(),
                         ],
                       ),
-                      GZXDropDownMenu(
-                          controller: _dropdownMenuController,
-                          animationMilliseconds: 300,
-                          dropdownMenuChanged: (isShow, index) {
-                            print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                            BaseBloc.instance.addListenerAllSortShow(isShow);
-                          },
-                          menus: getBuilderMenus()),
+                      // GZXDropDownMenu(
+                      //     controller: _dropdownMenuController,
+                      //     animationMilliseconds: 300,
+                      //     dropdownMenuChanged: (isShow, index) {
+                      //       print("(已经${isShow ? '显示' : '隐藏'}$index)");
+                      //       BaseBloc.instance.addListenerAllSortShow(isShow);
+                      //     },
+                      //     menus: getBuilderMenus()),
                     ],
                   ),
                 ),
               ),
             ),
-          ));
-    });
+          )));
+    // });
   }
 
   /// List
