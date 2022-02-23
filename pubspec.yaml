@@ -158,6 +158,10 @@ flutter:
     - assets/images/mine/mine_modul_icon4.png
     - assets/images/mine/me_right_arrow.png
     - assets/images/mine/icon_customer.png
+    - assets/images/mine/fi_x-circle-add.png
+    - assets/images/mine/fi_jcb_pay.png
+    - assets/images/mine/fi_visa_pay.png
+    - assets/images/mine/fi_master_pay.png
 
 
     #history

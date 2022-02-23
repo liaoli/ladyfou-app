@@ -113,6 +113,7 @@ class ItemButtom extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        callBack();
         // _operatAction(context, item['action'], orderModel, addressJsonStr,
         //     state, goodsModel);
       },
@@ -263,154 +264,100 @@ List _operatMenuList(BuildContext context, String code) {
     case 'placed': //已下单
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
-        {
-          // 修改订单
-          'action': 1,
-          'title': '修改订单',
-        },
-        {
-          // 去支付
-          'action': 2,
-          'title': '去支付',
+          'title': '立即支付',
         }
       ];
     case 'paid': //已支付
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
-        {
-          // 修改订单
-          'action': 1,
-          'title': '修改订单',
-        },
-        {
-          // 去支付
-          'action': 2,
-          'title': '去支付',
+          'title': '立即支付',
         }
       ];
     case 'payment_failed': // 支付失败
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
-        {
-          // 修改订单
-          'action': 1,
-          'title': '修改订单',
+          'title': '立即支付',
         }
       ];
     case 'stockout': // 缺货
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
-        {
-          // 修改订单
-          'action': 1,
-          'title': '修改订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'delivered': // 已发货
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'canceled': // 已取消
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
-        {
-          // 修改订单
-          'action': 1,
-          'title': '修改订单',
-        },
-        {
-          // 去支付
-          'action': 2,
-          'title': '去支付',
+          'title': '立即支付',
         }
       ];
     case 'repeated': // 重复订单
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'pressed': // 已催款
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'stockup': // 已备货
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'submitted': // 已提交
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'confirmreceipt': // 确认收货
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'pending': // 支付确认中
       return [
         {
-          // 再次购买
-          'action': 1,
-          'title': '再次购买',
-        },
+          'action': 0,
+          'title': '立即支付',
+        }
       ];
     case 'refunded': // 已退款
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     case 'cod_verified': // COD客服审核完成
       return [
         {
-          // 取消订单
           'action': 0,
-          'title': '取消订单',
-        },
+          'title': '立即支付',
+        }
       ];
     default:
       return [];

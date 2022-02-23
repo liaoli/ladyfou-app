@@ -6,6 +6,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/core/constant/base_enum.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
 
@@ -435,7 +436,20 @@ class _MinePageState extends State<MinePage> {
   List<Widget> orderList() {
     List<Widget> result = _orderList.map((e) {
       return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          OrderStatus orderStatus = OrderStatus.all;
+          if (e['name'] == S.current.not_shipped) {
+            orderStatus = OrderStatus.delivering;
+          } else if (e['name'] == S.current.shipped) {
+            orderStatus = OrderStatus.delivering;
+          } else if (e['name'] == S.current.distribution) {
+            orderStatus = OrderStatus.delivering;
+          } else if (e['name'] == S.current.received) {
+            orderStatus = OrderStatus.finished;
+          }
+
+          Get.to(() => MineOrderPage(orderStatus: orderStatus));
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

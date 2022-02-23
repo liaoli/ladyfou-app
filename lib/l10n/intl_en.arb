@@ -63,7 +63,7 @@
   "not_shipped":"未发货",
   "shipped":"已发货",
   "distribution":"配送中",
-  "received":"配送中",
+  "received":"已收货",
   "home_new_products": "新品",
   "price_news_asc": "价格升序",
   "price_news_desc": "价格降序",

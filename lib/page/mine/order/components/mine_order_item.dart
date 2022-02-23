@@ -10,12 +10,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 import 'package:ladyfou/page/mine/order/components/mine_order_goods_item.dart';
 
 import '../../../../core/model/order_info_model.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
+import '../page/mine_order_detail_page.dart';
 import 'mine_order_operation.dart';
 
 class MineOrderItem extends StatefulWidget {
@@ -84,7 +87,7 @@ class _MineOrderItemState extends State<MineOrderItem> {
               orderModel: widget.orderModel,
               qtys: jumpQtys(),
               callBack: () {
-
+                Get.to(() => MineOrderDetailPage(orderModel: widget.orderModel,));
               },
             ),
           ],

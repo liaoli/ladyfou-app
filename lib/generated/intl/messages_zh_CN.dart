@@ -84,7 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyExplainAgain": m0,
         "privacyName": m1,
         "qqgroup": MessageLookupByLibrary.simpleMessage("QQ群"),
-        "received": MessageLookupByLibrary.simpleMessage("配送中"),
+        "received": MessageLookupByLibrary.simpleMessage("已收货"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
         "registerSuccess": MessageLookupByLibrary.simpleMessage("注册成功"),
         "reminder": MessageLookupByLibrary.simpleMessage("温馨提醒"),

@@ -690,10 +690,10 @@ class S {
     );
   }
 
-  /// `配送中`
+  /// `已收货`
   String get received {
     return Intl.message(
-      '配送中',
+      '已收货',
       name: 'received',
       desc: '',
       args: [],
