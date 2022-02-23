@@ -14,8 +14,13 @@ enum DisplayType {
 }
 
 /// appbar 返回按钮类型
-enum AppBarBackType {
-  Back,
-  Close,
-  None
+enum AppBarBackType { Back, Close, None }
+
+/// 订单状态
+enum OrderStatus {
+  all, //全部
+  wait_pay, //待付款
+  delivering, //待收货
+  finished, //已完成
+  discarded, // 已取消
 }

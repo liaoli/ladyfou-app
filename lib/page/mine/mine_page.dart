@@ -6,11 +6,14 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/core/constant/base_enum.dart';
+import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
 
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
+import 'order/page/mine_collection_page.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -301,6 +304,9 @@ class _MinePageState extends State<MinePage> {
       return InkWell(
         onTap: () {
           //TODO: 点击跳转
+          if (e['name'] == S.current.collection) {
+            Get.to(()=> MineCollectionPage());
+          }
         },
         child: Column(
           children: <Widget>[
@@ -390,6 +396,7 @@ class _MinePageState extends State<MinePage> {
                 GestureDetector(
                   onTap: () {
                     //TODO: 跳转到订单页面
+                    Get.to(() => MineOrderPage());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -433,7 +440,20 @@ class _MinePageState extends State<MinePage> {
   List<Widget> orderList() {
     List<Widget> result = _orderList.map((e) {
       return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          OrderStatus orderStatus = OrderStatus.all;
+          if (e['name'] == S.current.not_shipped) {
+            orderStatus = OrderStatus.delivering;
+          } else if (e['name'] == S.current.shipped) {
+            orderStatus = OrderStatus.delivering;
+          } else if (e['name'] == S.current.distribution) {
+            orderStatus = OrderStatus.delivering;
+          } else if (e['name'] == S.current.received) {
+            orderStatus = OrderStatus.finished;
+          }
+
+          Get.to(() => MineOrderPage(orderStatus: orderStatus));
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

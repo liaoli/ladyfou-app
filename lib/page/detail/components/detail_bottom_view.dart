@@ -21,8 +21,11 @@ class _DetailBottomViewState extends State<DetailBottomView> {
 
   @override
   Widget build(BuildContext context) {
-    final double bottomBarHeight = MediaQuery.of(context).padding.bottom;
+    double bottomBarHeight = MediaQuery.of(context).padding.bottom;
 
+    if (bottomBarHeight == 0) {
+      bottomBarHeight = 34.w;
+    }
 
     final double bottomHeight = 49.w + bottomBarHeight;
     return Container(

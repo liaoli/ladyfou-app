@@ -27,7 +27,9 @@ class GradientButton extends StatefulWidget {
         this.fontWeight = FontWeight.w400,
         this.fontSize = 12.0,
         this.borderRadius = 20,
-        this.text = ''})
+        this.text = '',
+        this.margin = EdgeInsets.zero
+      })
       : super(key: key);
   Widget? child;
   List<Color> colors;
@@ -39,6 +41,7 @@ class GradientButton extends StatefulWidget {
   double borderRadius;
   String text;
   double fontSize;
+  EdgeInsetsGeometry margin;
   Function()? onTap;
 
   @override
@@ -54,6 +57,7 @@ class _MineButtonState extends State<GradientButton> {
         height: widget.height,
         width: widget.width,
         alignment: Alignment.center,
+        margin: widget.margin,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: widget.colors,

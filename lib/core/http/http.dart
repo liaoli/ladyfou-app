@@ -20,14 +20,13 @@ class XHttp {
   static final Dio dio = Dio(BaseOptions(
     baseUrl: baseUrl,
     connectTimeout: 5000,
-    sendTimeout:5000,
+    sendTimeout: 5000,
     receiveTimeout: 5000,
-
-    // headers: {
-    //   //预设好的header信息
-    //   "x-token:":SPUtils.getToken(),
-    //   "Content-Type:": "multipart/form-data",
-    // },
+    headers: {
+      //   //预设好的header信息
+      "token": SPUtils.getToken(),
+      //   "Content-Type:": "multipart/form-data",
+    },
   ));
 
   ///初始化dio
@@ -47,7 +46,7 @@ class XHttp {
         responseHeader: true)); //开启请求日志
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options, handler) {
-      options.headers["x-token"] = SPUtils.getToken();
+      options.headers["token"] = SPUtils.getToken();
 
       print("请求之前");
       return handler.next(options);

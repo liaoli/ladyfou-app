@@ -690,10 +690,10 @@ class S {
     );
   }
 
-  /// `配送中`
+  /// `已收货`
   String get received {
     return Intl.message(
-      '配送中',
+      '已收货',
       name: 'received',
       desc: '',
       args: [],
@@ -740,6 +740,86 @@ class S {
     );
   }
 
+  /// `全部`
+  String get mine_page_all {
+    return Intl.message(
+      '全部',
+      name: 'mine_page_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `待付款`
+  String get mine_page_to_be_paid {
+    return Intl.message(
+      '待付款',
+      name: 'mine_page_to_be_paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `等待付款`
+  String get mine_common_wait_paid {
+    return Intl.message(
+      '等待付款',
+      name: 'mine_common_wait_paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `待收货`
+  String get mine_page_to_be_received {
+    return Intl.message(
+      '待收货',
+      name: 'mine_page_to_be_received',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `等待收货`
+  String get mine_common_wait_received {
+    return Intl.message(
+      '等待收货',
+      name: 'mine_common_wait_received',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已完成`
+  String get mine_page_completed {
+    return Intl.message(
+      '已完成',
+      name: 'mine_page_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已取消`
+  String get mine_page_canclled {
+    return Intl.message(
+      '已取消',
+      name: 'mine_page_canclled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `订单号:`
+  String get mine_page_order_sn {
+    return Intl.message(
+      '订单号:',
+      name: 'mine_page_order_sn',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `购物车`
   String get cart_title {
     return Intl.message(
@@ -755,6 +835,16 @@ class S {
     return Intl.message(
       '管理',
       name: 'charge_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `促销`
+  String get mine_promotion {
+    return Intl.message(
+      '促销',
+      name: 'mine_promotion',
       desc: '',
       args: [],
     );

@@ -71,6 +71,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "lookAgain": MessageLookupByLibrary.simpleMessage("Look Again"),
         "me": MessageLookupByLibrary.simpleMessage("Profile"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "mine_common_wait_paid": MessageLookupByLibrary.simpleMessage("等待付款"),
+        "mine_common_wait_received":
+            MessageLookupByLibrary.simpleMessage("等待收货"),
+        "mine_page_all": MessageLookupByLibrary.simpleMessage("全部"),
+        "mine_page_canclled": MessageLookupByLibrary.simpleMessage("已取消"),
+        "mine_page_completed": MessageLookupByLibrary.simpleMessage("已完成"),
+        "mine_page_order_sn": MessageLookupByLibrary.simpleMessage("订单号:"),
+        "mine_page_to_be_paid": MessageLookupByLibrary.simpleMessage("待付款"),
+        "mine_page_to_be_received": MessageLookupByLibrary.simpleMessage("待收货"),
+        "mine_promotion": MessageLookupByLibrary.simpleMessage("促销"),
         "not_shipped": MessageLookupByLibrary.simpleMessage("未发货"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordError": MessageLookupByLibrary.simpleMessage(
@@ -83,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyExplainAgain": m0,
         "privacyName": m1,
         "qqgroup": MessageLookupByLibrary.simpleMessage("QQ Group"),
-        "received": MessageLookupByLibrary.simpleMessage("配送中"),
+        "received": MessageLookupByLibrary.simpleMessage("已收货"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("Register Success"),

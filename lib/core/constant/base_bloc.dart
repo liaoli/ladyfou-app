@@ -54,4 +54,10 @@ class BaseBloc {
     _addListenerConditionShow.add(isShow);
   }
 
+  final _addListenerAllSortShow = StreamController<bool>.broadcast();
+  Stream<bool> get addListenerAllSortShowStream => _addListenerAllSortShow.stream;
+  void addListenerAllSortShow(bool isShow) {
+    _addListenerAllSortShow.add(isShow);
+  }
+
 }
