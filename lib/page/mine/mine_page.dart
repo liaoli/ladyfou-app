@@ -7,12 +7,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
+import 'package:ladyfou/page/message/sell_info_page.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
 
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
+import '../history/browsing_history_page.dart';
 import 'order/page/mine_collection_page.dart';
 
 class MinePage extends StatefulWidget {
@@ -246,57 +248,6 @@ class _MinePageState extends State<MinePage> {
       ),
     );
 
-    // return Container(
-    //   width: 313.w,
-    //   height: 55.w,
-    //   child: GridView.builder(
-    //     shrinkWrap: true,
-    //     itemCount: gridList.length,
-    //     physics: NeverScrollableScrollPhysics(),
-    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //       crossAxisCount: 5,
-    //       mainAxisSpacing: 0,
-    //       crossAxisSpacing: 34.w,
-    //       childAspectRatio: 0.6,
-    //     ),
-    //     itemBuilder: (context, index) {
-    //       return Center(
-    //         child: InkWell(
-    //           onTap: () => _record(index, context),
-    //           child: Column(
-    //             children: <Widget>[
-    //               Container(
-    //                 margin: EdgeInsets.only(bottom: 4.w),
-    //                 width: 32.w,
-    //                 height: 32.w,
-    //                 decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(16.w),
-    //                     color: Colors.white),
-    //                 child: Center(
-    //                   child: Image.asset(
-    //                     gridList[index]['url'],
-    //                     width: 18.w,
-    //                     height: 18.w,
-    //                     fit: BoxFit.cover,
-    //                   ),
-    //                 ),
-    //               ),
-    //               Text(
-    //                 // '${gridList[index]['name']}',
-    //                 '测测',
-    //                 style: TextStyle(
-    //                   color: AppColors.color_FF333333,
-    //                   fontWeight: FontWeight.w700,
-    //                   fontSize: 12.sp,
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 
   List<Widget> menuList() {
@@ -306,6 +257,33 @@ class _MinePageState extends State<MinePage> {
           //TODO: 点击跳转
           if (e['name'] == S.current.collection) {
             Get.to(()=> MineCollectionPage());
+          }else if(e['name'] == S.current.discount_code){
+            Get.to(()=> SellInfoPage());
+          }else if(e['name'] == S.current.footprint){
+            showModalBottomSheet(
+              // backgroundColor: AppColors.transparent,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.w),
+              ),
+              context: context,
+              builder: (context) {
+                return SizedBox(
+                  height: 502.w,
+                  child: ClipRRect(
+                    //剪裁为圆角矩形
+                    borderRadius: BorderRadius.circular(10.w),
+                    child: Container(
+                      width: double.infinity,
+                      height: 502.w,
+                      color: AppColors.white,
+                      alignment: Alignment.centerLeft,
+                      child: BrowsingHistoryPage(),
+                    ),
+                  ),
+                );
+              },
+            );
           }
         },
         child: Column(

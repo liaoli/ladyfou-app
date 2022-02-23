@@ -21,7 +21,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         titleSpacing: 15,
-        automaticallyImplyLeading: false, //隐藏返回箭头
+        automaticallyImplyLeading: false,
         title: Container(
           height: 32,
           child: _searchBarWidget(),
@@ -167,45 +167,59 @@ class _TabListWidgetState extends State<TabListWidget>
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-        child: Container(
-      child: Column(
-        children: [
-          TabBar(
-            tabs: _orderList.map((f) {
-              return Text(f);
-            }).toList(),
-            controller: _tabController,
-            indicatorColor: Colors.red,
-            indicatorSize: TabBarIndicatorSize.label,
-            isScrollable: true,
-            labelColor: AppColors.primaryBlackText,
-            unselectedLabelColor: AppColors.primaryBlackText,
-            labelStyle: myTextStyle(height: 2, fontSize: 12),
-            onTap: (int index) {
-              selectIndex = index;
-            },
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: _orderList.map((e) {
-                return Container();
+      child: Container(
+        margin: EdgeInsets.only(top: 36, left: 12, right: 12),
+        padding: EdgeInsets.only(top: 20),
+        height: 205,
+        decoration: new BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TabBar(
+              tabs: _orderList.map((f) {
+                return Text(f);
               }).toList(),
+              controller: _tabController,
+              indicatorColor: Colors.red,
+              indicatorSize: TabBarIndicatorSize.label,
+              isScrollable: true,
+              labelColor: AppColors.color_E34D59,
+              unselectedLabelColor: AppColors.color_FF666666,
+              labelStyle:
+                  myTextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+              unselectedLabelStyle:
+                  myTextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+              onTap: (int index) {
+                selectIndex = index;
+              },
             ),
-          ),
-        ],
+            Container(
+              height: 1,
+              color: AppColors.primaryBackground,
+              margin: EdgeInsets.fromLTRB(12, 10, 12, 11),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: createPages(),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   List<Widget> createPages() {
     List<Widget> desList = [];
     for (int i = 0; i < _orderList.length; i++) {
       desList.add(
-        // TabItemListWidget(
-        //   pageIndex: i,
-        // ),
-        Container(),
+        TabItemListWidget(
+          pageIndex: i,
+        ),
       );
     }
     return desList;
@@ -220,14 +234,66 @@ class TabItemListWidget extends StatefulWidget {
   State<TabItemListWidget> createState() => _TabItemListWidgetState();
 }
 
-class _TabItemListWidgetState extends State<TabItemListWidget>
-    with AutomaticKeepAliveClientMixin {
+class _TabItemListWidgetState extends State<TabItemListWidget> {
+  List rowList = [
+    {'title': 'シフォンの春にぴっ', 'hot_num': '1100'},
+    {'title': 'カジュアルスウ', 'hot_num': '800'},
+    {'title': '4色展開スタン', 'hot_num': '200'}
+  ];
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return Container();
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      child: ListView.builder(
+        itemCount: rowList.length,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, index) {
+          String iconImg = 'assets/images/search/rank_first.png';
+          if (index == 1) {
+            iconImg = 'assets/images/search/rank_second.png';
+          } else if (index == 2) {
+            iconImg = 'assets/images/search/rank_third.png';
+          }
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 12),
+            height: 41,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Image.asset(iconImg, width: 22),
+                      Container(
+                        padding: EdgeInsets.only(left: 4),
+                        child: Text(
+                          rowList[index]['title'],
+                          style: myTextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: AppColors.primaryBlackText51,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    '热度：${rowList[index]['hot_num']}',
+                    style: myTextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10,
+                      color: AppColors.Color_E34D59,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

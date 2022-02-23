@@ -14,6 +14,7 @@ import 'package:ladyfou/page/detail/components/arrow_forward.dart';
 import '../../components/button/common_button.dart';
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
+import '../detail/product_detail_page.dart';
 
 class SellInfoPage extends StatefulWidget {
   const SellInfoPage({Key? key}) : super(key: key);
@@ -57,19 +58,24 @@ class _SellInfoPageState extends State<SellInfoPage> {
             setState(() {});
           });
         },
-        child: commentList(),
+        child: sellInfoList(),
       ),
     );
   }
 
-  Widget commentList() {
+  Widget sellInfoList() {
     return ListView.separated(
         padding: EdgeInsets.symmetric(
           horizontal: 12.w,
           vertical: 12.w,
         ),
         itemBuilder: (context, index) {
-          return SellInfoItemView();
+          return GestureDetector(
+            child: SellInfoItemView(),
+            onTap: () {
+              Get.to(() => ProductDetailPage());
+            },
+          );
         },
         separatorBuilder: (context, index) {
           return SizedBox(

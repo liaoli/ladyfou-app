@@ -246,6 +246,9 @@ flutter:
 
     # search
     - assets/images/search/delete_icon.png
+    - assets/images/search/rank_first.png
+    - assets/images/search/rank_second.png
+    - assets/images/search/rank_third.png
 
   fonts:
     - family: xuifont
