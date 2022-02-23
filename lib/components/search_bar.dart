@@ -8,19 +8,21 @@ class SearchBar extends StatelessWidget {
   final List<Widget>? actions; // 右边按钮
   final double barHeight;
   final Color barBgColor;
-  SearchBar(
-      {Key? key,
-      this.placeholder = "Search",
-      required this.controller,
-      this.actions,
-      this.barHeight = 28,
-      this.barBgColor = AppColors.white})
+  final bool enabled;
+
+  SearchBar({Key? key,
+    this.placeholder = "Search",
+    required this.controller,
+    this.actions,
+    this.barHeight = 28,
+    this.enabled = true,
+    this.barBgColor = AppColors.white})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        // margin: EdgeInsets.all(12),
+      // margin: EdgeInsets.all(12),
         height: barHeight,
         child: Row(
           children: [
@@ -33,10 +35,14 @@ class SearchBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: TextField(
+                  enabled: enabled,
                   autofocus: false,
                   onChanged: (value) {},
                   controller: controller,
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(
+                        bottom: 12.w
+                    ),
                     prefixIcon: Icon(
                       Icons.search,
                       color: AppColors.color_FF999999,
