@@ -34,7 +34,7 @@ class _ArrowForwardState extends State<ArrowForward> {
         ),
       ),
       onTap: () {
-        Navigator.pop(context);
+        // Navigator.pop(context);
       },
     );
   }

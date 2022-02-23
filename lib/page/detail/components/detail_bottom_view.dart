@@ -23,6 +23,7 @@ class _DetailBottomViewState extends State<DetailBottomView> {
   Widget build(BuildContext context) {
     final double bottomBarHeight = MediaQuery.of(context).padding.bottom;
 
+
     final double bottomHeight = 49.w + bottomBarHeight;
     return Container(
       height: bottomHeight,
