@@ -33,6 +33,12 @@ class GoodsOperationProvider with ChangeNotifier {
       int page = CURRENT_PAGE,
       int size = PAGE_SIZE}) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
+
+    List data = [{"id":7931,"name":"product_7931","status":"instock","list_price":2376,"price":2200,"amount":5000,"max_qty":0,"saled":22,"rating":5,"created_at":"2019-05-28 07:38:37","src_price":"2200","promotion_price":"2200","discount":"","url":"/skatap-sleeve-casual-blouse-p-7931.html","point":"1008","tags":[],"f_thumb":"http://192.168.1.174/plugins/jason/ccshop/assets/images/default-thumb.png","is_restricted_blessing_bag":0,"feature_image":[],"cids":[2,21],"options":[],"wishlist_total":"","reviews_total":"","is_lucky_bag":0},{"id":2811,"name":"product_2811","status":"instock","list_price":44,"price":22,"amount":1911016,"max_qty":0,"saled":424,"rating":5,"created_at":"2019-04-28 06:52:05","src_price":"22","promotion_price":"22","discount":"","url":"/long-sleeve-casual-dress-p-2811.html","point":"0","tags":[],"f_thumb":"http://192.168.1.174/plugins/jason/ccshop/assets/images/default-thumb.png","is_restricted_blessing_bag":0,"feature_image":[],"cids":[25,18],"options":[],"wishlist_total":"","reviews_total":"","is_lucky_bag":0},{"id":7937,"name":"product_7937","status":"instock","list_price":5346,"price":4455,"amount":599983,"max_qty":0,"saled":1,"rating":5,"created_at":"2019-05-28 08:59:05","src_price":"4455","promotion_price":"4455","discount":"","url":"/vneck-commute-dress-p-7937.html","point":"44","tags":[],"f_thumb":"http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg","is_restricted_blessing_bag":0,"feature_image":["http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg","http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg"],"cids":[25,29],"options":[],"wishlist_total":"","reviews_total":"","is_lucky_bag":0}];
+    goodCollectionList = GoodsInfoModel.fromList(data);
+    notifyListeners();
+
+    /*
     Map<String, dynamic> params = {
       "promotion": promotion,
       "cid": cid,
@@ -77,6 +83,7 @@ class GoodsOperationProvider with ChangeNotifier {
     } catch (s, e) {
       print('请求报错:$e');
     }
+     */
   }
 
   /// 点击编辑还是完成

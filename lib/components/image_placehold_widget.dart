@@ -22,7 +22,7 @@ class ImagePlaceholdWidget extends StatelessWidget {
       this.w,
       this.imgError,
       this.h,
-      this.defImagePath = 'assets/images/home/placeholder.jpg',
+      this.defImagePath = 'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg',
       this.fill = BoxFit.fill});
   final CallbackAction? imgError;
   final String url;
@@ -33,7 +33,7 @@ class ImagePlaceholdWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String imgUrl = url;
+    String imgUrl = /*url*/'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg';
     imgUrl = imgUrl.contains('assets/') ? imgUrl : Utils.url(imgUrl);
     if (imgUrl.isEmpty) {
       return Image.asset(defImagePath!, width: w, height: h, fit: fill);

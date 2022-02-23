@@ -29,27 +29,27 @@ import '../components/shop_top_bar_widget.dart';
 import '../store/sort_provider.dart';
 import '../../../generated/l10n.dart';
 
-class GoodsListPage extends StatelessWidget {
+// class GoodsListPage extends StatelessWidget {
+//   final int shopId;
+//   final String title;
+//
+//   GoodsListPage({Key? key, required this.shopId, required this.title})
+//       : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return ChangeNotifierProvider(
+//         create: (_) => SortProvider(),
+//         child: GoodsListPageFul(shopId: shopId, title: title));
+//   }
+// }
+
+class GoodsListPage extends StatefulWidget {
   final int shopId;
   final String title;
 
   GoodsListPage({Key? key, required this.shopId, required this.title})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ChangeNotifierProvider(
-        create: (_) => SortProvider(),
-        child: GoodsListPageFul(shopId: shopId, title: title));
-  }
-}
-
-class GoodsListPageFul extends StatefulWidget {
-  final int shopId;
-  final String title;
-
-  GoodsListPageFul({Key? key, required this.shopId, required this.title})
       : super(key: key);
 
   @override
@@ -60,7 +60,7 @@ class GoodsListPageFul extends StatefulWidget {
   }
 }
 
-class _GoodsListPageState extends State<GoodsListPageFul>
+class _GoodsListPageState extends State<GoodsListPage>
     with TickerProviderStateMixin {
   late SortProvider provider;
   bool isDisplay = false;
@@ -78,13 +78,20 @@ class _GoodsListPageState extends State<GoodsListPageFul>
   void initState() {
     // TODO: implement initState
 
-    SortProvider sortProvider =
-        Provider.of<SortProvider>(context, listen: false);
+    provider = SortProvider();
 
     // 请求分类数据
-    sortProvider.getCategoryProducts(widget.shopId, isFirst: true);
+    provider.getCategoryProducts(widget.shopId, isFirst: true).then((value) {
+      setState(() {
+
+      });
+    });
     // 请求筛选的数据
-    sortProvider.getCategoryChildDatas(widget.shopId);
+    provider.getCategoryChildDatas(widget.shopId).then((value) {
+      setState(() {
+
+      });
+    });
 
     tabTitles = getTabTitles();
     tabController = TabController(length: tabTitles.length, vsync: this);
@@ -142,10 +149,12 @@ class _GoodsListPageState extends State<GoodsListPageFul>
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Consumer<SortProvider>(builder: (context, child, value) {
-      provider = child;
+    // return Consumer<SortProvider>(builder: (context, child, value) {
+    //   provider = child;
 
-      return GestureDetector(
+      return ChangeNotifierProvider.value(
+          value: provider,
+          child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
           // 触摸收起键盘
@@ -293,8 +302,8 @@ class _GoodsListPageState extends State<GoodsListPageFul>
             ),
           ),
         ),
-      );
-    });
+      ));
+    // });
   }
 
   // 分类还是列表按钮

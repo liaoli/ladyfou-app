@@ -23,22 +23,22 @@ import '../../../../style/Color.dart';
 import '../components/mine_order_item.dart';
 import '../store/order_detail_provider.dart';
 
-class MineOrderDetailPage extends StatelessWidget {
-  MineOrderDetailPage({Key? key, required this.orderModel}) : super(key: key);
+// class MineOrderDetailPage extends StatelessWidget {
+//   MineOrderDetailPage({Key? key, required this.orderModel}) : super(key: key);
+//
+//   final OrderInfoModel orderModel;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return ChangeNotifierProvider(
+//         create: (_) => OrderDetailProvider(),
+//         child: MineOrderDetailPageFul(orderModel: orderModel));
+//   }
+// }
 
-  final OrderInfoModel orderModel;
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ChangeNotifierProvider(
-        create: (_) => OrderDetailProvider(),
-        child: MineOrderDetailPageFul(orderModel: orderModel));
-  }
-}
-
-class MineOrderDetailPageFul extends StatefulWidget {
-  MineOrderDetailPageFul({Key? key, required this.orderModel})
+class MineOrderDetailPage extends StatefulWidget {
+  MineOrderDetailPage({Key? key, required this.orderModel})
       : super(key: key);
 
   final OrderInfoModel orderModel;
@@ -50,7 +50,7 @@ class MineOrderDetailPageFul extends StatefulWidget {
   }
 }
 
-class _MineOrderDetailPageState extends State<MineOrderDetailPageFul>
+class _MineOrderDetailPageState extends State<MineOrderDetailPage>
     with AutomaticKeepAliveClientMixin {
   late OrderDetailProvider provider;
   bool isExitAddress = true;
@@ -72,7 +72,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPageFul>
     payMethodDatas = getPayMethodList();
     priceDatas = getPriceList();
 
-    provider = Provider.of<OrderDetailProvider>(context, listen: false);
+    provider = OrderDetailProvider();
 
     super.initState();
   }
@@ -87,7 +87,9 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPageFul>
   Widget build(BuildContext context) {
     // TODO: implement build
 
-    return BaseScaffold(
+    return ChangeNotifierProvider.value(
+        value: provider,
+        child: BaseScaffold(
         title: '订单管理',
         leadType: AppBarBackType.Back,
         actions: [
@@ -141,7 +143,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPageFul>
               ),
             ),
           ],
-        ));
+        )));
   }
 
   /// Body
