@@ -17,6 +17,7 @@ class ClickedImageAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       child: Image.asset(
         image,
         width: width,

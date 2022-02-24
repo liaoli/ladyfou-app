@@ -19,7 +19,7 @@ class _CountEditViewState extends State<CountEditView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 78.w,
+      width: 80.w,
       height: 20.w,
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -29,8 +29,8 @@ class _CountEditViewState extends State<CountEditView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ClickedImageAsset(
-            image: "assets/images/detail/minus.png",
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               count -= 1;
               if (count < 0) {
@@ -38,6 +38,15 @@ class _CountEditViewState extends State<CountEditView> {
               }
               controller.text = count.toString();
             },
+            child: Container(
+              width: 23.w,
+              height: 20.w,
+              child: Center(
+                child: Image.asset(
+                  "assets/images/detail/minus.png",
+                ),
+              ),
+            ),
           ),
           Container(
             width: 32.w,
@@ -73,12 +82,21 @@ class _CountEditViewState extends State<CountEditView> {
               ),
             ),
           ),
-          ClickedImageAsset(
-            image: "assets/images/detail/plus.png",
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               count += 1;
               controller.text = count.toString();
             },
+            child: Container(
+              width: 23.w,
+              height: 20.w,
+              child: Center(
+                child: Image.asset(
+                  "assets/images/detail/plus.png",
+                ),
+              ),
+            ),
           ),
         ],
       ),
