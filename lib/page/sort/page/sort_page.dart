@@ -61,11 +61,12 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
     provider = SortProvider();
 
     // 请求分类数据
-    provider.getSortAllDatas().then((value) {
-      setState(() {
-
-      });
-    });
+    provider.getSortAllDatas();
+    //     {
+    //   setState(() {
+    //
+    //   });
+    // });
 
     super.initState();
   }

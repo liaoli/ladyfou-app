@@ -8,7 +8,7 @@ class AppColors {
   static const Color color_FF333333 = Color(0xFF333333);
 
   /// 导航栏背景色<主题红色>
-  static const Color navigationColor = Color.fromRGBO(222, 0, 32, 1);
+  static const Color navigationColor = Color.fromRGBO(222, 0, 32, 1.0);
 
   /// 主背景
   static const Color primaryBackground = Color.fromRGBO(245, 245, 245, 1.0);
