@@ -21,12 +21,13 @@ class CategoryWidget extends StatefulWidget {
   final double? showHeight; // 显示区域高度
   final ValueChanged<int>? menueTaped; // 滚动第几个
   CategoryWidget(
-      { Key? key,
-        required this.items,
-        this.itemHeight = 60,
-        this.showHeight,
-        this.menueTaped})
+      {Key? key,
+      required this.items,
+      this.itemHeight = 60,
+      this.showHeight,
+      this.menueTaped})
       : super(key: key);
+
   @override
   State<StatefulWidget> createState() => CategoryMenueState();
 }
@@ -36,6 +37,7 @@ class CategoryMenueState extends State<CategoryWidget>
   late Animation<double> animation;
   late AnimationController controller;
   int currentItemIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery.removePadding(
@@ -44,8 +46,9 @@ class CategoryMenueState extends State<CategoryWidget>
       context: context,
       child: Container(
         color: AppColors.primaryBackground,
-        width: 100.sp,
+        width: 100.w,
         height: widget.showHeight,
+        padding: EdgeInsets.only(left: 10.w, right: 5.w, top: 10.w),
         child: ListView.builder(
             itemCount: widget.items.length,
             itemBuilder: (condex, index) {
@@ -53,19 +56,29 @@ class CategoryMenueState extends State<CategoryWidget>
                 onTap: () => _menueTaped(index),
                 child: Container(
                   height: widget.itemHeight,
-                  padding: EdgeInsets.only(left: 5.sp, right: 5.sp),
-                  color: Colors.white,
-                  // color: currentItemIndex == index
-                  //     ? Colors.white
-                  //     : Color.fromRGBO(147, 149, 151, 0.1),
+                  padding: EdgeInsets.only(left: 5.w, right: 5.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: index == 0
+                        ? BorderRadius.only(
+                            topLeft: Radius.circular(10.w),
+                            topRight: Radius.circular(10.w))
+                        : index + 1 == widget.items.length
+                            ? BorderRadius.only(
+                                bottomLeft: Radius.circular(10.w),
+                                bottomRight: Radius.circular(10.w))
+                            : BorderRadius.all(Radius.circular(0.w)),
+                  ),
                   child: Center(
                     child: Container(
-                      padding: EdgeInsets.only(left: 15.sp,right: 15.sp,top: 2.sp,bottom: 3.sp),
+                      padding: EdgeInsets.only(
+                          left: 10.w, right: 10.w, top: 2.w, bottom: 3.w),
                       decoration: BoxDecoration(
                         color: currentItemIndex == index
                             ? Colors.red
                             : Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(widget.itemHeight / 2)),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(widget.itemHeight / 2)),
                       ),
                       child: Text(
                         widget.items[index].name2,

@@ -8,18 +8,25 @@
  */
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:ladyfou/page/sort/components/right_category_item_widget.dart';
+
+import '../../../style/Color.dart';
 
 class RightListView extends StatefulWidget {
   final double height;
   final List<SortModel> dataItems;
   final ValueChanged<int>? listViewChanged;
-  RightListView({
-    Key? key,
-    required this.height,
-    required this.dataItems,
-    this.listViewChanged}): super(key: key);
+
+  RightListView(
+      {Key? key,
+      required this.height,
+      required this.dataItems,
+      this.listViewChanged})
+      : super(key: key);
+
   @override
   State<StatefulWidget> createState() => RightListViewState();
 }
@@ -38,13 +45,18 @@ class RightListViewState extends State<RightListView> {
         removeTop: true,
         removeBottom: true,
         context: context,
-        child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(), //禁用手动滑动，于是有了上面的注释
-          padding: EdgeInsets.all(0),
-          controller: controller,
-          itemBuilder: _itembuilder,
-          itemCount: itemCount,
-          itemExtent: widget.height,
+        child: Container(
+          padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 10.w),
+          color: AppColors.primaryBackground,
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            //禁用手动滑动，于是有了上面的注释
+            padding: EdgeInsets.all(0),
+            controller: controller,
+            itemBuilder: _itembuilder,
+            itemCount: itemCount,
+            itemExtent: widget.height,
+          ),
         ),
       ),
 
@@ -87,8 +99,10 @@ class RightListViewState extends State<RightListView> {
     currentPage = i;
     this.isAnimating = true;
     double offset = widget.height * i;
-    this.controller.animateTo(offset,
-        duration: Duration(milliseconds: 300), curve: Curves.easeOut)
+    this
+        .controller
+        .animateTo(offset,
+            duration: Duration(milliseconds: 300), curve: Curves.easeOut)
         .then((onValue) => this.isAnimating = false);
   }
 }

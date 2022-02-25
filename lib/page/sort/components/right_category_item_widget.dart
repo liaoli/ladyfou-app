@@ -41,9 +41,15 @@ class SubCategoryListState extends State<SubCategoryList> {
       onPointerUp: this.dragend,
       child: Container(
         height: widget.height,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius:BorderRadius.only(
+                topLeft: Radius.circular(10.w),
+                topRight: Radius.circular(10.w))
+        ),
         child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.only(top: 16.w),
+            padding: EdgeInsets.only(top: 5.w),
             controller: controller,
             child: Container(
               child: widget.data != null
@@ -112,7 +118,7 @@ class SecondryCategory extends StatelessWidget {
                         textAlign: TextAlign.left,
                         style: BaseText.style(
                             fontWeight: FontWeight.w700,
-                            color: AppColors.primaryBlackText,
+                            color: AppColors.color_FF333333,
                             fontSize: 14),
                         minFontSize: 10,
                         maxFontSize: 14,
@@ -134,7 +140,7 @@ class SecondryCategory extends StatelessWidget {
                                 'All',
                                 style: BaseText.style(
                                     fontWeight: FontWeight.normal,
-                                    color: AppColors.primaryBlackText,
+                                    color: AppColors.color_FF666666,
                                     fontSize: 14.sp),
                               ),
                             ),
