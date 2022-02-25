@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
+import 'package:ladyfou/page/address/address_main_page.dart';
 import 'package:ladyfou/page/message/sell_info_page.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
@@ -148,43 +149,43 @@ class _MinePageState extends State<MinePage> {
           //         ))
           //     :
           InkWell(
-                  onTap: () => {
-                    setState(() {
-                      isLogin = true;
-                      Get.to(() => LoginPage());
-                    })
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Welcome To Ladyfou',
-                          style: TextStyle(
-                            color: AppColors.color_FF333333,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Row(
-                        children: [
-                          Text('登录/注册',
-                              style: TextStyle(
-                                color: AppColors.color_FF333333,
-                                fontSize: fontSize,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Image.asset(
-                            "assets/images/mine/black_right.png",
-                            width: 24.w,
-                            height: 24.w,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+            onTap: () => {
+              setState(() {
+                isLogin = true;
+                Get.to(() => LoginPage());
+              })
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Welcome To Ladyfou',
+                    style: TextStyle(
+                      color: AppColors.color_FF333333,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SizedBox(
+                  width: 4.w,
                 ),
+                Row(
+                  children: [
+                    Text('登录/注册',
+                        style: TextStyle(
+                          color: AppColors.color_FF333333,
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Image.asset(
+                      "assets/images/mine/black_right.png",
+                      width: 24.w,
+                      height: 24.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
           Expanded(child: SizedBox()),
           isLogin
               ? InkWell(
@@ -286,6 +287,8 @@ class _MinePageState extends State<MinePage> {
                 );
               },
             );
+          } else if (e['name'] == S.current.address) {
+            Get.to(() => AddressMainPage());
           }
         },
         child: Column(
