@@ -207,6 +207,7 @@ flutter:
     - assets/images/sort/store_price_up.png
     - assets/images/sort/fi_check.png
     - assets/images/sort/fi_check_nor.png
+    - assets/images/sort/fi_check_delete.png
 
     # Cart
     - assets/images/cart/checkbox_select.png # 复选框选中

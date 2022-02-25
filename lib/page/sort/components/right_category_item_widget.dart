@@ -8,8 +8,10 @@
  */
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
@@ -24,6 +26,7 @@ class SubCategoryList extends StatefulWidget {
   final double height;
   final SortModel data;
   final void Function(String)? goPage;
+
   SubCategoryList(
       {Key? key, required this.height, this.goPage, required this.data})
       : super(key: key);
@@ -43,10 +46,9 @@ class SubCategoryListState extends State<SubCategoryList> {
         height: widget.height,
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius:BorderRadius.only(
+            borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10.w),
-                topRight: Radius.circular(10.w))
-        ),
+                topRight: Radius.circular(10.w))),
         child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.only(top: 5.w),
@@ -130,8 +132,9 @@ class SecondryCategory extends StatelessWidget {
                     // ),
                     Container(
                       child: GestureDetector(
-                        onTap: ()=>{
-                          Get.to(() => GoodsListPage(shopId: data.id, title: data.name2))
+                        onTap: () => {
+                          Get.to(() =>
+                              GoodsListPage(shopId: data.id, title: data.name2))
                         },
                         child: Row(
                           children: [
@@ -144,7 +147,8 @@ class SecondryCategory extends StatelessWidget {
                                     fontSize: 14.sp),
                               ),
                             ),
-                            Image.asset("assets/images/sort/fi_chevron-right.png"),
+                            Image.asset(
+                                "assets/images/sort/fi_chevron-right.png"),
                             SizedBox(width: 20.w),
                           ],
                         ),
@@ -176,7 +180,9 @@ class SecondryCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         String titleStr = Uri.encodeComponent(goodModel.name2);
-        Get.to(() => GoodsListPage(shopId: goodModel.id, title: goodModel.name2));
+        Get.to(
+            () => GoodsListPage(shopId: goodModel.id, title: goodModel.name2));
+
         /// 跳转搜索
         // BaseNavigation.present("search?id=$titleStr");
       },
@@ -184,13 +190,32 @@ class SecondryCategory extends StatelessWidget {
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: 10.w),
-              height: 50.w,
-              width: 50.w,
-              // child: ImagePlaceholdWidget(url: goodModel.thumb),
-              child: ImagePlaceholdWidget(url: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg"),
+            ClipRRect(
+              borderRadius: BorderRadius.all(new Radius.circular(5.w)),
+              child: CachedNetworkImage(
+                height: 50.w,
+                width: 50.w,
+                imageUrl:
+                "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => Center(
+                  child: SizedBox(
+                    width: 20.w,
+                    height: 20.w,
+                    child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
             ),
+            SizedBox(height: 2.w),
             Container(
               child: Text(
                 goodModel.name2,
@@ -199,7 +224,7 @@ class SecondryCategory extends StatelessWidget {
                 style: BaseText.style(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.primaryBlackText),
+                    color: AppColors.color_FF3F3F3F),
               ),
             ),
           ],

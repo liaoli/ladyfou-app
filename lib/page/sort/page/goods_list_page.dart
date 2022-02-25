@@ -122,11 +122,9 @@ class _GoodsListPageState extends State<GoodsListPage>
       //延时500毫秒执行
       Future.delayed(const Duration(milliseconds: 200), () {
         if (!isDisplay) {
-          Provider.of<SortProvider>(context, listen: false)
-              .switchListType(DisplayType.grid_shape);
+          provider.switchListType(DisplayType.grid_shape);
         } else {
-          Provider.of<SortProvider>(context, listen: false)
-              .switchListType(DisplayType.list_form);
+          provider.switchListType(DisplayType.list_form);
         }
         isEnable = true;
       });
@@ -268,14 +266,27 @@ class _GoodsListPageState extends State<GoodsListPage>
                       GZXDropDownMenu(
                           controller: _dropdownMenuController,
                           animationMilliseconds: 300,
-                          dropdownMenuChanged: (isShow, index) {
+                          dropdownMenuChanging: (isShow, index) {
                             print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                            if (index == 1) {
-                              BaseBloc.instance.addListenerAlertShow(isShow);
+                            if(!isShow) {
+                              if (index == 1) {
+                                BaseBloc.instance.addListenerAlertShow(isShow);
+                              }
+                              if (index == 2) {
+                                BaseBloc.instance
+                                    .addListenerConditionShow(isShow);
+                              }
                             }
-                            if (index == 2) {
-                              BaseBloc.instance
-                                  .addListenerConditionShow(isShow);
+                          },
+                          dropdownMenuChanged: (isShow,index) {
+                            if (isShow) {
+                              if (index == 1) {
+                                BaseBloc.instance.addListenerAlertShow(isShow);
+                              }
+                              if (index == 2) {
+                                BaseBloc.instance
+                                    .addListenerConditionShow(isShow);
+                              }
                             }
                           },
                           menus: [
@@ -283,10 +294,10 @@ class _GoodsListPageState extends State<GoodsListPage>
                                 dropDownHeight: 40.w * 5.0,
                                 dropDownWidget: _buildComprehensive(context)),
                             GZXDropdownMenuBuilder(
-                                dropDownHeight: 40.w * 7.0,
+                                dropDownHeight: 40.w * 4.0,
                                 dropDownWidget: _buildClassification(context)),
                             GZXDropdownMenuBuilder(
-                                dropDownHeight: 40.w * 5.0,
+                                dropDownHeight: 40.w * 4.0,
                                 dropDownWidget: _buildConditions(context)),
                           ])
                     ],
@@ -301,14 +312,16 @@ class _GoodsListPageState extends State<GoodsListPage>
 
   // 分类还是列表按钮
   Widget listTypeItem(BuildContext context) {
-    return GestureDetector(
-      onTap: () => checkDisplayAction(context),
-      child: Image.asset(
-        BaseBloc.instance.displayType == DisplayType.list_form
-            ? 'assets/images/sort/store_display.png'
-            : 'assets/images/sort/store_display_sqr.png',
-      ),
-    );
+    return Consumer<SortProvider>(builder: (context, child, value) {
+      return GestureDetector(
+        onTap: () => checkDisplayAction(context),
+        child: Image.asset(
+          BaseBloc.instance.displayType == DisplayType.list_form
+              ? 'assets/images/sort/store_display.png'
+              : 'assets/images/sort/store_display_sqr.png',
+        ),
+      );
+    });
   }
 
   /// 购物车按钮
@@ -321,17 +334,20 @@ class _GoodsListPageState extends State<GoodsListPage>
 
   /// List
   Widget _buildList(BuildContext context) {
-    return ShopGridListView(
-      displayType: BaseBloc.instance.displayType,
-      goodsList: provider.goodsInfoList,
-      padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 16.0, right: 16.0),
-      loverClick: (index) {
-        // if (UserInfoManager().isLogin(context)) {
-        //   Provider.of<StoreHomeProvider>(context, listen: false)
-        //       .isCollectionAction(index);
-        // }
-      },
-    );
+    return Consumer<SortProvider>(builder: (context, child, value) {
+      return ShopGridListView(
+        displayType: BaseBloc.instance.displayType,
+        goodsList: provider.goodsInfoList,
+        padding:
+            EdgeInsets.only(left: 16.0, top: 8.0, bottom: 16.0, right: 16.0),
+        loverClick: (index) {
+          // if (UserInfoManager().isLogin(context)) {
+          //   Provider.of<StoreHomeProvider>(context, listen: false)
+          //       .isCollectionAction(index);
+          // }
+        },
+      );
+    });
   }
 
   /// 综合筛选

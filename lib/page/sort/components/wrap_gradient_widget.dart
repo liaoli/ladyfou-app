@@ -29,6 +29,7 @@ class WrapGradientWidget extends StatefulWidget {
     this.bgSelectGradientColor = const [],
     this.titleSize = 10,
     this.padding = EdgeInsets.zero,
+    this.height = 30.0,
     required this.currentSelects,
   });
 
@@ -38,6 +39,7 @@ class WrapGradientWidget extends StatefulWidget {
   final Color borderColor; // 边框颜色，要先设置isAddBorder = true
   final Color bgNormalColor; // 默认背景色
   final List<Color> bgSelectGradientColor; // 选中背景色
+  final double height;
 
   final Color titleNormalColor; // 默认文字颜色
   final Color titleSelectColor; // 选中文字颜色
@@ -50,7 +52,6 @@ class WrapGradientWidget extends StatefulWidget {
 }
 
 class _WrapGradientWidgetState extends State<WrapGradientWidget> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -61,7 +62,7 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 12,
+      spacing: 40.w,
       children: widget.itemList.asMap().keys.map((index) {
         return _selectItemWidget(widget.itemList[index], index);
       }).toList(),
@@ -71,7 +72,7 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
   bool isExit(int index) {
     bool isExit = false;
     widget.currentSelects.forEach((element) {
-      if(element == index) {
+      if (element == index) {
         isExit = true;
       }
     });
@@ -83,42 +84,60 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
       onTap: () {
         if (isExit(index)) {
           widget.currentSelects.remove(index);
-        }else {
+        } else {
           widget.currentSelects.add(index);
         }
         widget.onClick(widget.currentSelects);
-        setState(() {
-        });
+        setState(() {});
       },
-      child: Container(
-        margin: EdgeInsets.only(top: 16.sp, bottom: 16.sp),
-        padding: widget.padding,
-        decoration: BoxDecoration(
-          border: widget.isAddBorder
-              ? isExit(index)
-                  ? null
-                  : Border.all(
-                      width: 0.5.sp,
-                      color: AppColors.primaryGreyText,
-                    )
-              : null,
-          color: !isExit(index) ? widget.bgNormalColor : null,
-          gradient: isExit(index)
-              ? LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: widget.bgSelectGradientColor)
-              : null,
-          borderRadius: BorderRadius.all(Radius.circular(16.0.sp)),
-        ),
-        child: Text(
-          '$title',
-          style: BaseText.style(
-              fontSize: widget.titleSize,
-              color: isExit(index)
-                  ? widget.titleSelectColor
-                  : widget.titleNormalColor),
-        ),
+      child: Stack(
+        alignment: Alignment.centerRight,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 20.w),
+            padding: widget.padding,
+            height: widget.height,
+            decoration: BoxDecoration(
+              border: widget.isAddBorder
+                  ? isExit(index)
+                      ? Border.all(
+                          width: 0.5.w,
+                          color: widget.titleSelectColor,
+                        )
+                      : Border.all(
+                          width: 0.5.w,
+                          color: widget.bgNormalColor,
+                        )
+                  : null,
+              color: !isExit(index) ? widget.bgNormalColor : null,
+              // gradient: isExit(index)
+              //     ? LinearGradient(
+              //     begin: Alignment.centerLeft,
+              //     end: Alignment.centerRight,
+              //     colors: widget.bgSelectGradientColor)
+              //     : null,
+              borderRadius: BorderRadius.all(Radius.circular(widget.height / 2.0)),
+            ),
+            child: Text(
+              '$title',
+              style: BaseText.style(
+                  fontSize: widget.titleSize,
+                  color: isExit(index)
+                      ? widget.titleSelectColor
+                      : widget.titleNormalColor),
+              strutStyle: StrutStyle(
+                height: 1.5,
+                forceStrutHeight: true
+              ),
+            ),
+          ),
+          isExit(index)
+              ? Container(
+                  padding: EdgeInsets.only(bottom: 5.w),
+                  child: Image.asset("assets/images/sort/fi_check_delete.png"),
+                )
+              : SizedBox(),
+        ],
       ),
     );
   }

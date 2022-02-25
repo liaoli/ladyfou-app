@@ -74,7 +74,7 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    super.build(context);
+    // super.build(context);
 
     double rightListViewHeight = MediaQuery.of(context).size.height -
         ScreenUtil().statusBarHeight -
