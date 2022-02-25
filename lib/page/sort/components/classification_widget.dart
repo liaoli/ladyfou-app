@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/page/sort/components/wrap_gradient_widget.dart';
 import 'package:ladyfou/style/Color.dart';
+import 'package:ladyfou/style/text.dart';
 
 import '../../../core/model/category_info_model.dart';
 
@@ -36,10 +37,14 @@ class ClassificationWidget extends StatefulWidget {
 class _ClassificationState extends State<ClassificationWidget> {
   List<String> itemList = [];
   List<String> selectItemList = [];
+  List list = [];
 
   @override
   void initState() {
     // TODO: implement initState
+
+    list = ['测试1','测试2','测试3','测试4'];
+
     super.initState();
   }
 
@@ -51,34 +56,52 @@ class _ClassificationState extends State<ClassificationWidget> {
     });
 
     // TODO: implement build
+
+    // return Container(
+    //   padding: EdgeInsets.only(left: 10.w, right: 10.w),
+    //   child: Text('测试'),
+    // );
+
     return Container(
-        padding: EdgeInsets.only(left: 20.w, right: 20.w),
-        child: Visibility(
-            visible: widget.isShow,
-            child: Column(
-              children: [
-                Expanded(
+          padding: EdgeInsets.only(left: 10.w, right: 10.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                  child: Visibility(
+                    visible: widget.isShow,
                     child: WrapGradientWidget(
                         itemList: itemList,
                         isAddBorder: true,
                         borderColor: AppColors.navigationColor,
                         bgNormalColor: AppColors.color_FFF5F5F5,
-                        bgSelectGradientColor: [
-                          AppColors.gradientColorStart,
-                          AppColors.gradientColorEnd
-                        ],
                         titleNormalColor: AppColors.primaryBlackText,
-                        titleSelectColor: AppColors.white,
+                        titleSelectColor: AppColors.navigationColor,
                         titleSize: 12.sp,
+                        height: 24.w,
                         currentSelects: [],
-                        padding: EdgeInsets.only(
-                            left: 12.sp, top: 5.sp, bottom: 5.sp, right: 12.sp),
-                        onClick: (idxs) {})),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Text('重置'),
+                        padding: EdgeInsets.only(left: 15.w, right: 15.w),
+                        onClick: (idxs) {}),
+                  )),
+              Expanded(child: Container(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  width: 62.w,
+                  height: 24.w,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColors.color_FFF5F5F5,
+                    borderRadius: BorderRadius.all(Radius.circular(12.0.w)),
+                  ),
+                  child: Text('重置',
+                      style: BaseText.style(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
+                          color: AppColors.color_FF333333)),
                 ),
-              ],
-            )));
+              )),
+            ],
+          ),
+    );
   }
 }

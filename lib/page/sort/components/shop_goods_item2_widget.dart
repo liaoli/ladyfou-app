@@ -7,11 +7,13 @@
  * @LastEditors: tang
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
@@ -116,24 +118,29 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
 
   /// 图片模块
   Widget _imageItem(BuildContext context) {
-    return Container(
-      width: 92.0.w,
-      height: 92.0.w,
-      alignment: Alignment.center,
-      child: ImagePlaceholdWidget(
-        imgError: () {
-          Future.delayed(Duration(milliseconds: 100)).then((e) {
-            setState(() {
-              widget.isShowLike = false;
-            });
-          });
-        },
-        url: widget.goodsModel.fThumb,
-        w: double.infinity,
-        defImagePath: 'assets/images/home/banner_placehold.png',
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8.w)),
+    return ClipRRect(
+      borderRadius: BorderRadius.all(new Radius.circular(5.w)),
+      child: CachedNetworkImage(
+        height: 92.0.w,
+        width: 92.0.w,
+        imageUrl:
+        "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        placeholder: (context, url) => Center(
+          child: SizedBox(
+            width: 20.w,
+            height: 20.w,
+            child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+          ),
+        ),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }
@@ -238,7 +245,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 style: BaseText.style(
                     height: 1.0,
                     color: AppColors.primaryBlackText,
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w700),
               ),
             ],
@@ -263,7 +270,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                itemSize: 13.w,
+                itemSize: 12.w,
                 ignoreGestures: true,
                 ratingWidget: RatingWidget(
                   full: Container(child: Image.asset('assets/images/sort/icon_star_full.png')),
@@ -275,8 +282,8 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
               Text(
                 widget.goodsModel.rating.toString(),
                 style: BaseText.style(
-                    color: AppColors.jp_color153,
-                    fontSize: 15.0.sp,
+                    color: AppColors.color_FF333333,
+                    fontSize: 12.0.sp,
                     fontWeight: FontWeight.normal),
               ),
             ],
