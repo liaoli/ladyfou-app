@@ -212,7 +212,7 @@ flutter:
     # Cart
     - assets/images/cart/checkbox_select.png # 复选框选中
     - assets/images/cart/checkbox_unselect.png # 复选框非选中
-    - assets/images/cart/dropdown_arrow.png 
+    - assets/images/cart/dropdown_arrow.png
 
     # 通用
     - assets/images/action_bar_shopping_cart_black.png
@@ -250,6 +250,14 @@ flutter:
     - assets/images/search/rank_first.png
     - assets/images/search/rank_second.png
     - assets/images/search/rank_third.png
+
+    #login
+    - assets/images/login/eye_open.png
+    - assets/images/login/eye_close.png
+    - assets/images/login/user.png
+    - assets/images/login/ladyfou_1.png
+    - assets/images/login/lock.png
+    - assets/images/login/mail.png
 
   fonts:
     - family: xuifont
