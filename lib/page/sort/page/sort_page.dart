@@ -76,9 +76,10 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
     // TODO: implement build
     // super.build(context);
 
+
     double rightListViewHeight = MediaQuery.of(context).size.height -
-        ScreenUtil().statusBarHeight -
-        ScreenUtil().bottomBarHeight -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom -
         44.w -
         49.w;
     return ChangeNotifierProvider.value(
