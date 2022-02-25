@@ -1,27 +1,17 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/circle_image.dart';
-import 'package:ladyfou/components/clicked_Image_asset.dart';
 import 'package:ladyfou/components/round_rect_image.dart';
 
 import '../../components/button/common_button.dart';
-import '../../components/sliver_header_delegate.dart';
-import '../../components/web_view_page.dart';
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
-import '../home/components/new_product_list.dart';
-import '../home/components/recommend_product_bottom.dart';
-import '../home/components/recommend_product_head.dart';
-import '../home/components/recommend_product_list.dart';
-import 'components/common_label.dart';
+import '../../components/common_label.dart';
 import 'components/thumbs_up_view.dart';
 
 class ProductCommentPage extends StatefulWidget {
@@ -45,9 +35,10 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
   void initState() {
     resetData();
 
-    labels.add(CommentLabel(label: "全部", isSelected: true, type: 1));
     labels.add(
-      CommentLabel(label: "带图评论", type: 2),
+        CommentLabel(label: "全部", isSelected: true, data: 1, height: 24.w));
+    labels.add(
+      CommentLabel(label: "带图评论", data: 2, height: 24.w),
     );
 
     super.initState();
@@ -107,7 +98,7 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
           MyTabBar(
             dataS: labels,
             onTap: (CommentLabel label) {
-              if (label.type == 1) {
+              if (label.data == 1) {
                 resetData();
               } else {
                 comments = comments.where((element) {
@@ -358,34 +349,5 @@ class _MyTabBarState extends State<MyTabBar> {
       ),
     );
     return children;
-  }
-}
-
-class CommentLabel with ICommonLabelModel {
-  String label;
-  int type;
-  bool isSelected;
-
-  CommentLabel(
-      {required this.label, this.isSelected = false, required this.type});
-
-  @override
-  Color getBackgroundColor() {
-    return isSelected ? selected_bg : default_bg;
-  }
-
-  @override
-  Color getBorderColor() {
-    return AppColors.transparent;
-  }
-
-  @override
-  String getLabel() {
-    return label;
-  }
-
-  @override
-  Color getLabelColor() {
-    return isSelected ? selected_text_color : default_text_color;
   }
 }

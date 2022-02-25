@@ -15,7 +15,7 @@ class LoginTextField extends StatefulWidget {
       this.prefixIcon = "assets/images/login/user.png",
       this.suffixIcon_hide,
       this.suffixIcon_show,
-      this.obscureText = true,
+      this.obscureText = false,
       this.hintText,
       required this.controller})
       : super(key: key);
