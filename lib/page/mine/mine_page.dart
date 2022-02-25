@@ -15,6 +15,7 @@ import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
 import '../history/browsing_history_page.dart';
+import '../login/login.dart';
 import 'order/page/mine_collection_page.dart';
 
 class MinePage extends StatefulWidget {
@@ -25,7 +26,7 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
-  bool isLogin = true;
+  bool isLogin = false;
 
   @override
   Widget build(BuildContext context) {
@@ -138,17 +139,19 @@ class _MinePageState extends State<MinePage> {
           SizedBox(
             width: 24.w,
           ),
-          isLogin
-              ? Text('Hello，前田敦子',
-                  style: TextStyle(
-                    color: AppColors.color_FF333333,
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.bold,
-                  ))
-              : InkWell(
+          // isLogin
+          //     ? Text('Hello，前田敦子',
+          //         style: TextStyle(
+          //           color: AppColors.color_FF333333,
+          //           fontSize: fontSize,
+          //           fontWeight: FontWeight.bold,
+          //         ))
+          //     :
+          InkWell(
                   onTap: () => {
                     setState(() {
                       isLogin = true;
+                      Get.to(() => LoginPage());
                     })
                   },
                   child: Column(
@@ -185,10 +188,10 @@ class _MinePageState extends State<MinePage> {
           Expanded(child: SizedBox()),
           isLogin
               ? InkWell(
-                  onTap: () => {
+                  onTap: () {
                     setState(() {
                       isLogin = false;
-                    })
+                    });
                   },
                   child: Container(
                     width: 68.w,
@@ -247,7 +250,6 @@ class _MinePageState extends State<MinePage> {
         children: menuList(),
       ),
     );
-
   }
 
   List<Widget> menuList() {
@@ -256,10 +258,10 @@ class _MinePageState extends State<MinePage> {
         onTap: () {
           //TODO: 点击跳转
           if (e['name'] == S.current.collection) {
-            Get.to(()=> MineCollectionPage());
-          }else if(e['name'] == S.current.discount_code){
-            Get.to(()=> SellInfoPage());
-          }else if(e['name'] == S.current.footprint){
+            Get.to(() => MineCollectionPage());
+          } else if (e['name'] == S.current.discount_code) {
+            Get.to(() => SellInfoPage());
+          } else if (e['name'] == S.current.footprint) {
             showModalBottomSheet(
               // backgroundColor: AppColors.transparent,
               isScrollControlled: true,
