@@ -82,15 +82,11 @@ class _GoodsListPageState extends State<GoodsListPage>
 
     // 请求分类数据
     provider.getCategoryProducts(widget.shopId, isFirst: true).then((value) {
-      setState(() {
-
-      });
+      setState(() {});
     });
     // 请求筛选的数据
     provider.getCategoryChildDatas(widget.shopId).then((value) {
-      setState(() {
-
-      });
+      setState(() {});
     });
 
     tabTitles = getTabTitles();
@@ -149,160 +145,157 @@ class _GoodsListPageState extends State<GoodsListPage>
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    // return Consumer<SortProvider>(builder: (context, child, value) {
-    //   provider = child;
 
-      return ChangeNotifierProvider.value(
-          value: provider,
-          child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          // 触摸收起键盘
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: BaseScaffold(
-          leadType: AppBarBackType.Back,
-          brightness: Brightness.dark,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(56.0.w),
-            child: BaseAppBar(
-              title: Container(
-                child: Text(widget.title,
-                    style: BaseText.style(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primaryBlackText,
-                        fontSize: 14.sp)),
-              ),
-              elevation: 0,
-              actions: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(right: 20.w),
-                  child: Row(
-                    children: [
-                      /// 切换按钮
-                      listTypeItem(context),
-                      SizedBox(width: 20.w),
+    return ChangeNotifierProvider.value(
+        value: provider,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            // 触摸收起键盘
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: BaseScaffold(
+            leadType: AppBarBackType.Back,
+            brightness: Brightness.dark,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(56.0.w),
+              child: BaseAppBar(
+                title: Container(
+                  child: Text(widget.title,
+                      style: BaseText.style(
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.primaryBlackText,
+                          fontSize: 14.sp)),
+                ),
+                elevation: 0,
+                actions: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(right: 20.w),
+                    child: Row(
+                      children: [
+                        /// 切换按钮
+                        listTypeItem(context),
+                        SizedBox(width: 20.w),
 
-                      /// 购物车按钮
-                      carItem(context),
-                    ],
-                  ),
-                )
-              ],
-              // bottom: PreferredSize(
-              //   preferredSize: Size.fromHeight(35.0),
-              //   child: _buildTabListWidget(context),
-              // ),
-            ),
-          ),
-          body: Material(
-            color: AppColors.primaryBackground,
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                // 触摸收起键盘
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              child: Container(
-                padding: EdgeInsets.only(bottom: 10.0.w),
-                child: Stack(
-                  key: _stackKey,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        /// 综合筛选
-                        GZXDropDownHeader(
-                          items: [
-                            GZXDropDownHeaderItem(tabTitles[0],
-                                iconData: Icons.arrow_drop_down,
-                                iconDropDownData: Icons.arrow_drop_up),
-                            GZXDropDownHeaderItem(tabTitles[1],
-                                iconData: Icons.arrow_drop_down,
-                                iconDropDownData: Icons.arrow_drop_up),
-                            GZXDropDownHeaderItem(tabTitles[2],
-                                iconData: Icons.arrow_drop_down,
-                                iconDropDownData: Icons.arrow_drop_up),
-                          ],
-                          stackKey: _stackKey,
-                          controller: _dropdownMenuController,
-                          height: 40.w,
-                          color: Colors.white,
-                          borderWidth: 1.w,
-                          borderColor: AppColors.bgGreytr,
-                          dividerHeight: 0.w,
-                          dividerColor: Colors.white,
-                          style: BaseText.style(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.primaryBlackText),
-                          dropDownStyle: BaseText.style(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.navigationColor),
-                          iconSize: 20.w,
-                          iconColor: AppColors.color_FF666666,
-                          iconDropDownColor: AppColors.navigationColor,
-                          onItemTap: (index) {},
-                        ),
-
-                        /// 商品列表
-                        Expanded(
-                            child: EasyRefresh.custom(
-                          controller: provider.refreshController,
-                          onRefresh: () {
-                            provider.currentPage += CURRENT_PAGE;
-                            return provider.getCategoryProducts(widget.shopId,
-                                isRefresh: true, page: provider.currentPage);
-                          },
-                          onLoad: () {
-                            provider.currentPage += 1;
-                            return provider.getCategoryProducts(widget.shopId,
-                                isRefresh: false, page: provider.currentPage);
-                          },
-                          enableControlFinishLoad: true,
-                          enableControlFinishRefresh: true,
-                          header: MaterialHeader(),
-                          footer: MaterialFooter(),
-                          slivers: <Widget>[
-                            /// List
-                            SliverToBoxAdapter(
-                              child: _buildList(context),
-                            ),
-                          ],
-                        )),
+                        /// 购物车按钮
+                        carItem(context),
                       ],
                     ),
-                    GZXDropDownMenu(
-                        controller: _dropdownMenuController,
-                        animationMilliseconds: 300,
-                        dropdownMenuChanged: (isShow, index) {
-                          print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                          if (index == 1) {
-                            BaseBloc.instance.addListenerAlertShow(isShow);
-                          }
-                          if (index == 2) {
-                            BaseBloc.instance.addListenerConditionShow(isShow);
-                          }
-                        },
-                        menus: [
-                          GZXDropdownMenuBuilder(
-                              dropDownHeight: 40.w * 5.0,
-                              dropDownWidget: _buildComprehensive(context)),
-                          GZXDropdownMenuBuilder(
-                              dropDownHeight: 40.w * 7.0,
-                              dropDownWidget: _buildClassification(context)),
-                          GZXDropdownMenuBuilder(
-                              dropDownHeight: 40.w * 5.0,
-                              dropDownWidget: _buildConditions(context)),
-                        ])
-                  ],
+                  )
+                ],
+              ),
+            ),
+            body: Material(
+              color: AppColors.primaryBackground,
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  // 触摸收起键盘
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 10.0.w),
+                  child: Stack(
+                    key: _stackKey,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          /// 综合筛选
+                          GZXDropDownHeader(
+                            items: [
+                              GZXDropDownHeaderItem(tabTitles[0],
+                                  iconData: Icons.arrow_drop_down,
+                                  iconDropDownData: Icons.arrow_drop_up),
+                              GZXDropDownHeaderItem(tabTitles[1],
+                                  iconData: Icons.arrow_drop_down,
+                                  iconDropDownData: Icons.arrow_drop_up),
+                              GZXDropDownHeaderItem(tabTitles[2],
+                                  iconData: Icons.arrow_drop_down,
+                                  iconDropDownData: Icons.arrow_drop_up),
+                            ],
+                            stackKey: _stackKey,
+                            controller: _dropdownMenuController,
+                            height: 40.w,
+                            color: Colors.white,
+                            borderWidth: 1.w,
+                            borderColor: AppColors.bgGreytr,
+                            dividerHeight: 0.w,
+                            dividerColor: Colors.white,
+                            style: BaseText.style(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.primaryBlackText),
+                            dropDownStyle: BaseText.style(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.navigationColor),
+                            iconSize: 20.w,
+                            iconColor: AppColors.color_FF666666,
+                            iconDropDownColor: AppColors.navigationColor,
+                            onItemTap: (index) {
+                              debugPrint("index = $index");
+                            },
+                          ),
+
+                          /// 商品列表
+                          Expanded(
+                              child: EasyRefresh.custom(
+                            controller: provider.refreshController,
+                            onRefresh: () {
+                              provider.currentPage += CURRENT_PAGE;
+                              return provider.getCategoryProducts(widget.shopId,
+                                  isRefresh: true, page: provider.currentPage);
+                            },
+                            onLoad: () {
+                              provider.currentPage += 1;
+                              return provider.getCategoryProducts(widget.shopId,
+                                  isRefresh: false, page: provider.currentPage);
+                            },
+                            enableControlFinishLoad: true,
+                            enableControlFinishRefresh: true,
+                            header: MaterialHeader(),
+                            footer: MaterialFooter(),
+                            slivers: <Widget>[
+                              /// List
+                              SliverToBoxAdapter(
+                                child: _buildList(context),
+                              ),
+                            ],
+                          )),
+                        ],
+                      ),
+                      GZXDropDownMenu(
+                          controller: _dropdownMenuController,
+                          animationMilliseconds: 300,
+                          dropdownMenuChanged: (isShow, index) {
+                            print("(已经${isShow ? '显示' : '隐藏'}$index)");
+                            if (index == 1) {
+                              BaseBloc.instance.addListenerAlertShow(isShow);
+                            }
+                            if (index == 2) {
+                              BaseBloc.instance
+                                  .addListenerConditionShow(isShow);
+                            }
+                          },
+                          menus: [
+                            GZXDropdownMenuBuilder(
+                                dropDownHeight: 40.w * 5.0,
+                                dropDownWidget: _buildComprehensive(context)),
+                            GZXDropdownMenuBuilder(
+                                dropDownHeight: 40.w * 7.0,
+                                dropDownWidget: _buildClassification(context)),
+                            GZXDropdownMenuBuilder(
+                                dropDownHeight: 40.w * 5.0,
+                                dropDownWidget: _buildConditions(context)),
+                          ])
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ));
+        ));
     // });
   }
 

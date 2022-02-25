@@ -5,6 +5,8 @@ import 'package:ladyfou/components/search_bar.dart';
 import 'package:ladyfou/router/router.dart';
 
 import '../../message/message_page.dart';
+import '../../mine/order/page/mine_collection_page.dart';
+import '../../search/page/search_page.dart';
 import 'home_default_nav_bar.dart';
 
 class HomeSearchNavBar extends StatefulWidget {
@@ -43,7 +45,17 @@ class _HomeSearchNavBarState extends State<HomeSearchNavBar> {
           SizedBox(
             width: 12.w,
           ),
-          Expanded(child: SearchBar(controller: TextEditingController())),
+          Expanded(
+            child: GestureDetector(
+              child: SearchBar(
+                controller: TextEditingController(),
+                enabled: false,
+              ),
+              onTap: () {
+                Get.to(() => SearchPage());
+              },
+            ),
+          ),
           SizedBox(
             width: 12.w,
           ),
@@ -51,6 +63,7 @@ class _HomeSearchNavBarState extends State<HomeSearchNavBar> {
               image: "assets/images/home/home_head_heart.png",
               onTap: () {
                 //TODO:跳转
+                Get.to(()=> MineCollectionPage());
               }),
           SizedBox(
             width: 12.w,

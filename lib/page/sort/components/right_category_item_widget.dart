@@ -188,7 +188,8 @@ class SecondryCategory extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 10.w),
               height: 50.w,
               width: 50.w,
-              child: ImagePlaceholdWidget(url: goodModel.thumb),
+              // child: ImagePlaceholdWidget(url: goodModel.thumb),
+              child: ImagePlaceholdWidget(url: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg"),
             ),
             Container(
               child: Text(
