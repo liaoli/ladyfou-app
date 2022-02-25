@@ -12,13 +12,13 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   TextEditingController _unameController = TextEditingController();
   TextEditingController _pwdController = TextEditingController();
 
+  bool enable = false;
+
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -27,10 +27,12 @@ class _LoginViewState extends State<LoginView> {
     return Column(
       children: [
         LoginTextField(
-          hintText: "邮箱地址",
-          prefixIcon: "assets/images/login/user.png",
-          controller: _unameController,
-        ),
+            hintText: "邮箱地址",
+            prefixIcon: "assets/images/login/user.png",
+            controller: _unameController,
+            onChanged: (String text) {
+              isEnable();
+            }),
         SizedBox(
           height: 15.w,
         ),
@@ -40,11 +42,15 @@ class _LoginViewState extends State<LoginView> {
           suffixIcon_hide: "assets/images/login/eye_close.png",
           suffixIcon_show: "assets/images/login/eye_open.png",
           controller: _pwdController,
+          onChanged: (String text) {
+            isEnable();
+          },
         ),
         SizedBox(
           height: 110.w,
         ),
         CommonButton(
+          enable: enable,
           height: 44.w,
           width: 260.w,
           borderRadius: BorderRadius.all(Radius.circular(10.w)),
@@ -65,5 +71,14 @@ class _LoginViewState extends State<LoginView> {
         )
       ],
     );
+  }
+
+  void isEnable() {
+    if (_unameController.text.length > 0 && _pwdController.text.length > 0) {
+      enable = true;
+    } else {
+      enable = false;
+    }
+    setState(() {});
   }
 }

@@ -9,6 +9,7 @@ class LoginTextField extends StatefulWidget {
   final String? hintText;
   final TextEditingController controller;
   final bool obscureText;
+  final Function(String)? onChanged;
 
   const LoginTextField(
       {Key? key,
@@ -17,6 +18,7 @@ class LoginTextField extends StatefulWidget {
       this.suffixIcon_show,
       this.obscureText = false,
       this.hintText,
+      this.onChanged,
       required this.controller})
       : super(key: key);
 
@@ -51,6 +53,7 @@ class _LoginTextFieldState extends State<LoginTextField> {
             child: TextField(
               controller: widget.controller,
               obscureText: obscureText,
+              onChanged: widget.onChanged,
               style: TextStyle(
                 color: AppColors.color_FF333333,
                 fontSize: 12.sp,

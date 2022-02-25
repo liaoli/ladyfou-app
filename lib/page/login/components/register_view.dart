@@ -17,6 +17,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   TextEditingController _uNameController = TextEditingController();
   TextEditingController _UPJMController = TextEditingController();
+  bool enable = false;
 
   @override
   void initState() {
@@ -31,6 +32,9 @@ class _RegisterViewState extends State<RegisterView> {
           hintText: "名字",
           prefixIcon: "assets/images/login/user.png",
           controller: _uNameController,
+          onChanged: (String text) {
+            isEnable();
+          },
         ),
         SizedBox(
           height: 15.w,
@@ -39,6 +43,9 @@ class _RegisterViewState extends State<RegisterView> {
           hintText: "片假名",
           prefixIcon: "assets/images/login/user.png",
           controller: _UPJMController,
+          onChanged: (String text) {
+            isEnable();
+          },
         ),
         SizedBox(
           height: 15.w,
@@ -47,6 +54,9 @@ class _RegisterViewState extends State<RegisterView> {
           hintText: "邮箱地址",
           prefixIcon: "assets/images/login/mail.png",
           controller: _emailController,
+          onChanged: (String text) {
+            isEnable();
+          },
         ),
         SizedBox(
           height: 15.w,
@@ -57,11 +67,15 @@ class _RegisterViewState extends State<RegisterView> {
           suffixIcon_hide: "assets/images/login/eye_close.png",
           suffixIcon_show: "assets/images/login/eye_open.png",
           controller: _pwdController,
+          onChanged: (String text) {
+            isEnable();
+          },
         ),
         SizedBox(
           height: 110.w,
         ),
         CommonButton(
+          enable: enable,
           height: 44.w,
           width: 260.w,
           borderRadius: BorderRadius.all(Radius.circular(10.w)),
@@ -82,5 +96,17 @@ class _RegisterViewState extends State<RegisterView> {
         )
       ],
     );
+  }
+
+  void isEnable() {
+    if (_emailController.text.length > 0 &&
+        _pwdController.text.length > 0 &&
+        _uNameController.text.length > 0 &&
+        _UPJMController.text.length > 0) {
+      enable = true;
+    } else {
+      enable = false;
+    }
+    setState(() {});
   }
 }
