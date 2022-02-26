@@ -6,6 +6,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/components/clicked_Image_asset.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
 import 'package:ladyfou/page/address/address_main_page.dart';
 import 'package:ladyfou/page/message/sell_info_page.dart';
@@ -17,6 +18,7 @@ import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
 import '../history/browsing_history_page.dart';
 import '../login/login.dart';
+import '../setting/setting_main_page.dart';
 import 'order/page/mine_collection_page.dart';
 
 class MinePage extends StatefulWidget {
@@ -96,11 +98,14 @@ class _MinePageState extends State<MinePage> {
           SizedBox(
             width: 12.w,
           ),
-          Image.asset(
-            "assets/images/mine/icon_settings.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_settings.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              Get.to(() => SettingMainPage());
+            },
           ),
           SizedBox(
             width: 12.w,
