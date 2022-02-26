@@ -8,14 +8,14 @@ import '../../detail/components/attention_content_view.dart';
 import '../../detail/components/comon_forward_item_view.dart';
 import '../setting_user_info_page.dart';
 
-class UserInfoItemView extends StatefulWidget {
-  const UserInfoItemView({Key? key}) : super(key: key);
+class UserEmailItemView extends StatefulWidget {
+  const UserEmailItemView({Key? key}) : super(key: key);
 
   @override
-  _UserInfoItemViewState createState() => _UserInfoItemViewState();
+  _UserEmailItemViewState createState() => _UserEmailItemViewState();
 }
 
-class _UserInfoItemViewState extends State<UserInfoItemView> {
+class _UserEmailItemViewState extends State<UserEmailItemView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +30,8 @@ class _UserInfoItemViewState extends State<UserInfoItemView> {
             height: 41.w,
             color: AppColors.white,
             child: SettingItemView(
-              title: "个人资料",
+               title: "邮箱号",
+              subTitle: "123459786@Gmail.com",
             ),
           ),
         ),

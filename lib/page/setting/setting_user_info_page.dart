@@ -19,16 +19,18 @@ import '../home/components/recommend_product_bottom.dart';
 import '../home/components/recommend_product_head.dart';
 import '../home/components/recommend_product_list.dart';
 import 'components/common_setting_view.dart';
+import 'components/user_email_item_view.dart';
 import 'components/user_info_item_view.dart';
+import 'components/user_name_item_view.dart';
 
-class SettingMainPage extends StatefulWidget {
-  const SettingMainPage({Key? key}) : super(key: key);
+class SettingUserInfoPage extends StatefulWidget {
+  const SettingUserInfoPage({Key? key}) : super(key: key);
 
   @override
-  _SettingMainPageState createState() => _SettingMainPageState();
+  _SettingUserInfoPageState createState() => _SettingUserInfoPageState();
 }
 
-class _SettingMainPageState extends State<SettingMainPage> {
+class _SettingUserInfoPageState extends State<SettingUserInfoPage> {
   bool showCountdown = false;
 
   @override
@@ -41,36 +43,7 @@ class _SettingMainPageState extends State<SettingMainPage> {
     return BaseScaffold(
       leadType: AppBarBackType.Back,
       title: "设 置",
-      body: Column(
-        children: [
-          Expanded(
-            child: refresh(),
-          ),
-          CommonButton(
-            height: 43.w,
-            width: 351.w,
-            bg: AppColors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10.w)),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "退出登录",
-                  style: TextStyle(
-                    color: AppColors.color_FF333333,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 100.w,
-          ),
-        ],
-      ),
+      body: refresh(),
     );
   }
 
@@ -89,20 +62,20 @@ class _SettingMainPageState extends State<SettingMainPage> {
         },
         slivers: <Widget>[
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: userInfoItem()),
+          SliverToBoxAdapter(child: userNameItem()),
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: commonSetting()),
+          SliverToBoxAdapter(child: emailItem()),
         ],
       ),
     );
   }
 
-  Widget userInfoItem() {
-    return UserInfoItemView();
+  Widget userNameItem() {
+    return UserNameItemView();
   }
 
-  Widget commonSetting() {
-    return CommonSettingView();
+  Widget emailItem() {
+    return UserEmailItemView();
   }
 
   SliverToBoxAdapter buildSliverToBoxAdapter(double height) {

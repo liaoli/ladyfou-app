@@ -8,14 +8,14 @@ import '../../detail/components/attention_content_view.dart';
 import '../../detail/components/comon_forward_item_view.dart';
 import '../setting_user_info_page.dart';
 
-class UserInfoItemView extends StatefulWidget {
-  const UserInfoItemView({Key? key}) : super(key: key);
+class UserNameItemView extends StatefulWidget {
+  const UserNameItemView({Key? key}) : super(key: key);
 
   @override
-  _UserInfoItemViewState createState() => _UserInfoItemViewState();
+  _UserNameItemViewState createState() => _UserNameItemViewState();
 }
 
-class _UserInfoItemViewState extends State<UserInfoItemView> {
+class _UserNameItemViewState extends State<UserNameItemView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +30,8 @@ class _UserInfoItemViewState extends State<UserInfoItemView> {
             height: 41.w,
             color: AppColors.white,
             child: SettingItemView(
-              title: "个人资料",
+               title: "用户名",
+              subTitle: "前田敦子",
             ),
           ),
         ),

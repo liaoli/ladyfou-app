@@ -19,17 +19,23 @@ import '../home/components/recommend_product_bottom.dart';
 import '../home/components/recommend_product_head.dart';
 import '../home/components/recommend_product_list.dart';
 import 'components/common_setting_view.dart';
+import 'components/edit_password_item_view.dart';
+import 'components/user_email_item_view.dart';
 import 'components/user_info_item_view.dart';
+import 'components/user_name_item_view.dart';
 
-class SettingMainPage extends StatefulWidget {
-  const SettingMainPage({Key? key}) : super(key: key);
+class SettingEditUserInfoPage extends StatefulWidget {
+  const SettingEditUserInfoPage({Key? key}) : super(key: key);
 
   @override
-  _SettingMainPageState createState() => _SettingMainPageState();
+  _SettingEditUserInfoPageState createState() =>
+      _SettingEditUserInfoPageState();
 }
 
-class _SettingMainPageState extends State<SettingMainPage> {
+class _SettingEditUserInfoPageState extends State<SettingEditUserInfoPage> {
   bool showCountdown = false;
+
+  bool enable = false;
 
   @override
   void initState() {
@@ -40,25 +46,23 @@ class _SettingMainPageState extends State<SettingMainPage> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       leadType: AppBarBackType.Back,
-      title: "设 置",
+      title: "密码修改",
       body: Column(
         children: [
-          Expanded(
-            child: refresh(),
-          ),
+          Expanded(child: refresh()),
           CommonButton(
+            enable: enable,
             height: 43.w,
             width: 351.w,
-            bg: AppColors.white,
             borderRadius: BorderRadius.all(Radius.circular(10.w)),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "退出登录",
+                  "确 认",
                   style: TextStyle(
-                    color: AppColors.color_FF333333,
+                    color: AppColors.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                   ),
@@ -89,20 +93,14 @@ class _SettingMainPageState extends State<SettingMainPage> {
         },
         slivers: <Widget>[
           buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: userInfoItem()),
-          buildSliverToBoxAdapter(12.w),
-          SliverToBoxAdapter(child: commonSetting()),
+          SliverToBoxAdapter(child: editPasswordItemView()),
         ],
       ),
     );
   }
 
-  Widget userInfoItem() {
-    return UserInfoItemView();
-  }
-
-  Widget commonSetting() {
-    return CommonSettingView();
+  Widget editPasswordItemView() {
+    return EditPasswordItemView();
   }
 
   SliverToBoxAdapter buildSliverToBoxAdapter(double height) {

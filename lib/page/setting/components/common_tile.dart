@@ -42,7 +42,7 @@ class CommonTile extends StatelessWidget {
         ),
         Expanded(child: SizedBox()),
         Text(
-          subTitle ?? "",
+          subTitle ,
           style: TextStyle(
             color: AppColors.color_FF999999,
             fontSize: 10.sp,

@@ -1,11 +1,14 @@
+import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ladyfou/page/setting/components/setting_item_view.dart';
 
 import '../../../components/line.dart';
 import '../../../style/Color.dart';
 import '../../address/components/address_text_field.dart';
 import '../../detail/components/arrow_forward.dart';
+import '../setting_edit_user_info_page.dart';
 
 class CommonSettingView extends StatefulWidget {
   const CommonSettingView({Key? key}) : super(key: key);
@@ -31,7 +34,8 @@ class _CommonSettingViewState extends State<CommonSettingView> {
           children: [
             SettingItemView(
               title: "消息通知推送",
-              leftChild: Switch(
+              leftChild: cupertino.CupertinoSwitch(
+                  activeColor: AppColors.Color_E34D59,
                   value: openPush,
                   onChanged: (bool flag) {
                     setState(() {
@@ -42,6 +46,9 @@ class _CommonSettingViewState extends State<CommonSettingView> {
             line(),
             SettingItemView(
               title: "密码修改",
+              onTap: () {
+                Get.to(() => SettingEditUserInfoPage());
+              },
             ),
             line(),
             SettingItemView(
