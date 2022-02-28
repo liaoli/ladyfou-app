@@ -10,11 +10,50 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/constant/base_bloc.dart';
+import '../../../core/model/category_info_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
-typedef CallBackWidget = void Function(List indexs);
+class ItemButtonModel {
+  ItemButtonModel({
+    this.id = 0,
+    this.name = '',
+  });
+
+  final int id;
+  final String name;
+
+  factory ItemButtonModel.fromModel(int id, String name) =>
+      ItemButtonModel(id: id, name: name);
+
+  static List<CategoryInfoModel> toFindModels(
+      List<CategoryInfoModel> models, List<ItemButtonModel> list) {
+    List<CategoryInfoModel> currentModels = [];
+    list.forEach((element) {
+      models.forEach((m) {
+        if (element.id == m.id) {
+          currentModels.add(m);
+        }
+      });
+    });
+    return currentModels;
+  }
+
+  static List<ItemButtonModel> fromItemModels(
+      List<CategoryInfoModel> models) {
+    List<ItemButtonModel> currentModels = [];
+    models.forEach((m) {
+      currentModels.add(ItemButtonModel(
+          id: m.id, name: m.name2));
+    });
+    return currentModels;
+  }
+}
+
+typedef CallBackWidget = void Function(List<ItemButtonModel> models);
 
 class WrapGradientWidget extends StatefulWidget {
   WrapGradientWidget({
@@ -33,8 +72,8 @@ class WrapGradientWidget extends StatefulWidget {
     required this.currentSelects,
   });
 
-  List currentSelects = [];
-  final List itemList;
+  List<ItemButtonModel> currentSelects = [];
+  final List<ItemButtonModel> itemList;
   final bool isAddBorder; // 是否添加边框
   final Color borderColor; // 边框颜色，要先设置isAddBorder = true
   final Color bgNormalColor; // 默认背景色
@@ -64,81 +103,84 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
     return Wrap(
       spacing: 40.w,
       children: widget.itemList.asMap().keys.map((index) {
-        return _selectItemWidget(widget.itemList[index], index);
+        return _selectItemWidget(widget.itemList[index]);
       }).toList(),
     );
   }
 
-  bool isExit(int index) {
+  bool isExit(ItemButtonModel model) {
     bool isExit = false;
     widget.currentSelects.forEach((element) {
-      if (element == index) {
+      if (element.id == model.id) {
         isExit = true;
       }
     });
     return isExit;
   }
 
-  Widget _selectItemWidget(String title, int index) {
-    return GestureDetector(
-      onTap: () {
-        if (isExit(index)) {
-          widget.currentSelects.remove(index);
-        } else {
-          widget.currentSelects.add(index);
-        }
-        widget.onClick(widget.currentSelects);
-        setState(() {});
-      },
-      child: Stack(
-        alignment: Alignment.centerRight,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 20.w),
-            padding: widget.padding,
-            height: widget.height,
-            decoration: BoxDecoration(
-              border: widget.isAddBorder
-                  ? isExit(index)
-                      ? Border.all(
-                          width: 0.5.w,
-                          color: widget.titleSelectColor,
-                        )
-                      : Border.all(
-                          width: 0.5.w,
-                          color: widget.bgNormalColor,
-                        )
-                  : null,
-              color: !isExit(index) ? widget.bgNormalColor : null,
-              // gradient: isExit(index)
-              //     ? LinearGradient(
-              //     begin: Alignment.centerLeft,
-              //     end: Alignment.centerRight,
-              //     colors: widget.bgSelectGradientColor)
-              //     : null,
-              borderRadius: BorderRadius.all(Radius.circular(widget.height / 2.0)),
+  Widget _selectItemWidget(ItemButtonModel model) {
+    return StreamBuilder<bool>(
+        initialData: false,
+        stream: BaseBloc.instance.addUpdateCollectionAlertStream,
+        builder: (ctx, snopshot) {
+          if (snopshot.data == true) {
+            widget.currentSelects = [];
+            BaseBloc.instance.addUpdateCollectionAlertShow(false);
+          }
+          return GestureDetector(
+            onTap: () {
+              if (isExit(model)) {
+                widget.currentSelects
+                    .removeWhere((element) => element.id == model.id);
+              } else {
+                widget.currentSelects.add(model);
+              }
+              widget.onClick(widget.currentSelects);
+              setState(() {});
+            },
+            child: Stack(
+              alignment: Alignment.centerRight,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 20.w),
+                  padding: widget.padding,
+                  height: widget.height,
+                  decoration: BoxDecoration(
+                    border: widget.isAddBorder
+                        ? isExit(model)
+                            ? Border.all(
+                                width: 0.5.w,
+                                color: widget.titleSelectColor,
+                              )
+                            : Border.all(
+                                width: 0.5.w,
+                                color: widget.bgNormalColor,
+                              )
+                        : null,
+                    color: !isExit(model) ? widget.bgNormalColor : null,
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(widget.height / 2.0)),
+                  ),
+                  child: Text(
+                    '${model.name}',
+                    style: BaseText.style(
+                        fontSize: widget.titleSize,
+                        color: isExit(model)
+                            ? widget.titleSelectColor
+                            : widget.titleNormalColor),
+                    strutStyle: StrutStyle(height: 1.5, forceStrutHeight: true),
+                  ),
+                ),
+                isExit(model)
+                    ? Container(
+                        padding: EdgeInsets.only(bottom: 5.w),
+                        child: Image.asset(
+                            "assets/images/sort/fi_check_delete.png"),
+                      )
+                    : SizedBox(),
+              ],
             ),
-            child: Text(
-              '$title',
-              style: BaseText.style(
-                  fontSize: widget.titleSize,
-                  color: isExit(index)
-                      ? widget.titleSelectColor
-                      : widget.titleNormalColor),
-              strutStyle: StrutStyle(
-                height: 1.5,
-                forceStrutHeight: true
-              ),
-            ),
-          ),
-          isExit(index)
-              ? Container(
-                  padding: EdgeInsets.only(bottom: 5.w),
-                  child: Image.asset("assets/images/sort/fi_check_delete.png"),
-                )
-              : SizedBox(),
-        ],
-      ),
-    );
+          );
+        });
   }
 }

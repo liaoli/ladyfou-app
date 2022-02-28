@@ -14,11 +14,11 @@ import 'package:ladyfou/page/sort/components/wrap_gradient_widget.dart';
 import '../../../core/model/category_info_model.dart';
 import '../../../style/Color.dart';
 
-typedef CallBackWidget = void Function(List<CategoryInfoModel> infoModels);
+typedef CallBackWidget = void Function(List<ItemButtonModel> models);
 
 class ConditionsWidget extends StatefulWidget {
 
-  final List<CategoryInfoModel> categoryInfoModels;
+  final List<ItemButtonModel> categoryInfoModels;
   final CallBackWidget callBack;
   final bool isShow;
 
@@ -30,8 +30,8 @@ class ConditionsWidget extends StatefulWidget {
 
 class _ConditionsState extends State<ConditionsWidget> {
 
-  List<String> itemList = [];
-  List<String> selectItemList = [];
+  List<ItemButtonModel> itemList = [];
+  List<ItemButtonModel> selectItemList = [];
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _ConditionsState extends State<ConditionsWidget> {
 
     itemList = [];
     widget.categoryInfoModels.forEach((element) {
-      itemList.add(element.name2);
+      itemList.add(element);
     });
 
     // TODO: implement build

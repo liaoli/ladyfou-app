@@ -17,10 +17,13 @@ import 'package:provider/provider.dart';
 import '../../../../components/base_scaffold.dart';
 import '../../../../core/constant/base_bloc.dart';
 import '../../../../core/constant/base_enum.dart';
+import '../../../../core/model/category_info_model.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
+import '../../../sort/components/classification_widget.dart';
 import '../../../sort/components/shop_gradient_button.dart';
+import '../../../sort/components/wrap_gradient_widget.dart';
 import '../components/mine_collection_list_view.dart';
 import '../store/goods_operation_provider.dart';
 
@@ -55,7 +58,7 @@ class _MineCollectionState extends State<MineCollectionFul> {
   @override
   void initState() {
     // TODO: implement initState
-
+    _dropdownMenuController.isShow = false;
     provider = GoodsOperationProvider();
     provider.getCollectionLists().then((value) {
       setState(() {
@@ -66,6 +69,12 @@ class _MineCollectionState extends State<MineCollectionFul> {
         }
       });
     });
+    // 请求筛选的数据
+    provider.getCategoryChildDatas(0).then((value) {
+      setState(() {});
+    });
+
+
 
     super.initState();
   }
@@ -73,152 +82,178 @@ class _MineCollectionState extends State<MineCollectionFul> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    // return Consumer<GoodsOperationProvider>(builder: (context, child, value) {
-    //   provider = child;
-      return ChangeNotifierProvider.value(
-          value: provider,
-          child: GestureDetector(
+    return ChangeNotifierProvider.value(
+        value: provider,
+        child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
             // 触摸收起键盘
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: BaseScaffold(
-            leadType: AppBarBackType.Back,
-            brightness: Brightness.dark,
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(56.0.w),
-              child: BaseAppBar(
-                title: Container(
-                  child: Text('商品收藏',
-                      style: BaseText.style(
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primaryBlackText,
-                          fontSize: 14.sp)),
-                ),
-                elevation: 0,
-                actions: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(right: 20.w),
-                    child: Row(
-                      children: [
-                        /// 管理-完成
-                        GestureDetector(
-                          onTap: () {
-                            provider.checkEditCollection();
-                          },
-                          child: Container(
-                            child: Text(
-                              provider.isEditCollection ? '完成':'管理',
-                              style: BaseText.style(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.normal),
+          child: Consumer<GoodsOperationProvider>(
+              builder: (context, child, value) {
+            provider = child;
+            return BaseScaffold(
+              leadType: AppBarBackType.Back,
+              brightness: Brightness.dark,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(56.0.w),
+                child: BaseAppBar(
+                  title: Container(
+                    child: Text('商品收藏',
+                        style: BaseText.style(
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.primaryBlackText,
+                            fontSize: 14.sp)),
+                  ),
+                  elevation: 0,
+                  actions: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(right: 20.w),
+                      child: Row(
+                        children: [
+                          /// 管理-完成
+                          GestureDetector(
+                            onTap: () {
+                              provider.checkEditCollection();
+                            },
+                            child: Container(
+                              child: Text(
+                                provider.isEditCollection ? '完成' : '管理',
+                                style: BaseText.style(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.normal),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            body: Material(
-              color: AppColors.primaryBackground,
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  // 触摸收起键盘
-                  FocusScope.of(context).requestFocus(FocusNode());
-                },
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: Stack(
-                    key: _stackKey,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          /// 综合筛选
-                          tabTitles.length > 0
-                              ? GZXDropDownHeader(
-                                  items: getItems(),
-                                  stackKey: _stackKey,
-                                  controller: _dropdownMenuController,
-                                  height: 40.w,
-                                  color: Colors.white,
-                                  borderWidth: 1.w,
-                                  borderColor: AppColors.bgGreytr,
-                                  dividerHeight: 0.w,
-                                  dividerColor: Colors.white,
-                                  style: BaseText.style(
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.primaryBlackText),
-                                  dropDownStyle: BaseText.style(
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.navigationColor),
-                                  iconSize: 20.w,
-                                  iconColor: AppColors.color_FF666666,
-                                  iconDropDownColor: AppColors.navigationColor,
-                                  onItemTap: (index) {},
-                                )
-                              : _noDataWidget(context),
-
-                          /// 商品列表
-                          tabTitles.length > 0
-                              ? Expanded(
-                                  child: EasyRefresh.custom(
-                                  controller: provider.refreshController,
-                                  onRefresh: () async {},
-                                  onLoad: () async {},
-                                  enableControlFinishLoad: false,
-                                  enableControlFinishRefresh: false,
-                                  header: MaterialHeader(),
-                                  footer: MaterialFooter(),
-                                  slivers: <Widget>[
-                                    /// List
-                                    SliverToBoxAdapter(
-                                      child: _buildList(context),
-                                    ),
-                                  ],
-                                ))
-                              : SizedBox(),
                         ],
                       ),
-                      // GZXDropDownMenu(
-                      //     controller: _dropdownMenuController,
-                      //     animationMilliseconds: 300,
-                      //     dropdownMenuChanged: (isShow, index) {
-                      //       print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                      //       BaseBloc.instance.addListenerAllSortShow(isShow);
-                      //     },
-                      //     menus: getBuilderMenus()),
-                    ],
+                    )
+                  ],
+                ),
+              ),
+              body: Material(
+                color: AppColors.primaryBackground,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    // 触摸收起键盘
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Stack(
+                      key: _stackKey,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            /// 综合筛选
+                            tabTitles.length > 0
+                                ? GZXDropDownHeader(
+                                    items: getItems(),
+                                    stackKey: _stackKey,
+                                    controller: _dropdownMenuController,
+                                    height: 40.w,
+                                    color: Colors.white,
+                                    borderWidth: 1.w,
+                                    borderColor: AppColors.bgGreytr,
+                                    dividerHeight: 0.w,
+                                    dividerColor: Colors.white,
+                                    style: BaseText.style(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.primaryBlackText),
+                                    dropDownStyle: BaseText.style(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.navigationColor),
+                                    iconSize: 20.w,
+                                    iconColor: AppColors.color_FF666666,
+                                    iconDropDownColor:
+                                        AppColors.navigationColor,
+                                    onItemTap: (index) {
+                                      if(index < 2) {
+                                        _dropdownMenuController.hide();
+                                      }
+                                    },
+                                  )
+                                : _noDataWidget(context),
+
+                            /// 商品列表
+                            tabTitles.length > 0
+                                ? Expanded(
+                                    child: EasyRefresh.custom(
+                                    controller: provider.refreshController,
+                                    onRefresh: () async {},
+                                    onLoad: () async {},
+                                    enableControlFinishLoad: false,
+                                    enableControlFinishRefresh: false,
+                                    header: MaterialHeader(),
+                                    footer: MaterialFooter(),
+                                    slivers: <Widget>[
+                                      /// List
+                                      SliverToBoxAdapter(
+                                        child: _buildList(context),
+                                      ),
+                                    ],
+                                  ))
+                                : SizedBox(),
+                          ],
+                        ),
+                        GZXDropDownMenu(
+                            controller: _dropdownMenuController,
+                            animationMilliseconds: 300,
+                            dropdownMenuChanging: (isShow, index) {
+                              print("(已经${isShow ? '显示' : '隐藏'}$index)");
+                              if (!isShow) {
+                                if (index == 2) {
+                                  BaseBloc.instance
+                                      .addListenerCollectionAlertShowShow(
+                                          isShow);
+                                }
+                              }
+                            },
+                            dropdownMenuChanged: (isShow, index) {
+                              if (isShow) {
+                                if (index == 2) {
+                                  BaseBloc.instance
+                                      .addListenerCollectionAlertShowShow(
+                                          isShow);
+                                }
+                              }
+                            },
+                            menus: getBuilderMenus()),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          )));
-    // });
+            );
+          }),
+        ));
   }
 
   /// List
   Widget _buildList(BuildContext context) {
-    return CollectionGridListView(
-      displayType: DisplayType.list_form,
-      goodsList: provider.goodCollectionList,
-      selectCollectionGoodList: provider.selectCollectionGoodList,
-      padding: EdgeInsets.only(
-          left: provider.isEditCollection ? 0.w : 16.w, top: 8.0.w, bottom: 16.0.w, right: 16.0.w),
-      isEditCollection: provider.isEditCollection,
-      loverClick: (index) {
-      },
-      onCollectionSelectClick: (model) {
-        provider.checkSelectCollection(model);
-      },
-    );
+    return Consumer<GoodsOperationProvider>(builder: (context, value, child) {
+      return CollectionGridListView(
+        displayType: DisplayType.list_form,
+        goodsList: value.goodCollectionList,
+        selectCollectionGoodList: value.selectCollectionGoodList,
+        padding: EdgeInsets.only(
+            left: value.isEditCollection ? 0.w : 16.w,
+            top: 8.0.w,
+            bottom: 16.0.w,
+            right: 16.0.w),
+        isEditCollection: value.isEditCollection,
+        loverClick: (index) {},
+        onCollectionSelectClick: (model) {
+          provider.checkSelectCollection(model);
+        },
+      );
+    });
   }
 
   List<GZXDropDownHeaderItem> getItems() {
@@ -255,13 +290,37 @@ class _MineCollectionState extends State<MineCollectionFul> {
 
   List<GZXDropdownMenuBuilder> getBuilderMenus() {
     List<GZXDropdownMenuBuilder> items = [];
-    tabTitles.forEach((e) {
-      items.add(GZXDropdownMenuBuilder(
-        dropDownHeight: 40.w * 5.0,
-        dropDownWidget: Container(child: Text('测试')),
-      ));
+    List<double> list = [40.w * 4.0,40.w * 4.0,40.w * 4.0];
+    list.forEach((e) {
+      items.add(_menuBuilder(e));
     });
     return items;
+  }
+
+  GZXDropdownMenuBuilder _menuBuilder(double height) {
+    return  GZXDropdownMenuBuilder(
+        dropDownHeight: height,
+        dropDownWidget: StreamBuilder<bool>(
+          initialData: false,
+          stream: BaseBloc.instance.addListenerCollectionAlertShowStream,
+          builder: (ctx, snapshot) {
+
+            List<ItemButtonModel> models = [];
+            provider.categoryInfoModels.forEach((element) {
+              models.add(ItemButtonModel.fromModel(element.id, element.name2));
+            });
+            return ClassificationWidget(
+              itemList: models,
+              selectItemList: ItemButtonModel.fromItemModels(provider.selectCategoryInfoModels),
+              isShow: snapshot.data ?? false,
+              callBack: (infoModels) {
+                provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(provider.categoryInfoModels, infoModels);
+                setState(() {
+                });
+              },
+            );
+          },
+        ));
   }
 
   // 无数据缺省页
