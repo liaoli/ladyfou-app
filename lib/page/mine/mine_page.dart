@@ -16,9 +16,11 @@ import 'package:ladyfou/style/Color.dart';
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
+import '../../router/router.dart';
 import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
 import '../login/login.dart';
+import '../message/message_page.dart';
 import '../setting/setting_main_page.dart';
 import 'order/page/mine_collection_page.dart';
 
@@ -40,7 +42,7 @@ class _MinePageState extends State<MinePage> {
         Image.asset(
           'assets/images/mine/mine_bg.png',
           width: 375.w,
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.fitWidth,
         ),
         refresh(),
       ]),
@@ -62,9 +64,9 @@ class _MinePageState extends State<MinePage> {
           SliverToBoxAdapter(child: mineInformation()),
           buildSliverToBoxAdapter(28.w),
           SliverToBoxAdapter(child: mineMenu()),
-          buildSliverToBoxAdapter(26.w),
+          buildSliverToBoxAdapter(60.w),
           SliverToBoxAdapter(child: mineModul()),
-          buildSliverToBoxAdapter(26.w),
+          buildSliverToBoxAdapter(12.w),
           SliverToBoxAdapter(child: game()),
           buildSliverToBoxAdapter(28.w),
         ],
@@ -114,20 +116,26 @@ class _MinePageState extends State<MinePage> {
           SizedBox(
             width: 12.w,
           ),
-          Image.asset(
-            "assets/images/mine/icon_shopping.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_shopping.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              XRouter.goCartPage();
+            },
           ),
           SizedBox(
             width: 12.w,
           ),
-          Image.asset(
-            "assets/images/mine/icon_message.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_message.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              Get.to(() => MessagePage());
+            },
           ),
           SizedBox(
             width: 12.w,
@@ -254,7 +262,7 @@ class _MinePageState extends State<MinePage> {
 
   Widget mineMenu() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 35.w),
+      padding: EdgeInsets.symmetric(horizontal: 23.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: menuList(),
