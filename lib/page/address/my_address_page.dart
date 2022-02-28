@@ -19,8 +19,15 @@ class MyAddressPage extends StatefulWidget {
 }
 
 class _MyAddressPageState extends State<MyAddressPage> {
+  List<Address> address = [];
+
   @override
   void initState() {
+    address.add(Address(isDefault: true));
+    address.add(Address());
+    address.add(Address());
+    address.add(Address());
+
     super.initState();
   }
 
@@ -66,7 +73,9 @@ class _MyAddressPageState extends State<MyAddressPage> {
         ),
         itemBuilder: (context, index) {
           return GestureDetector(
-            child: SellInfoItemView(),
+            child: SellInfoItemView(
+              address: address[index],
+            ),
             onTap: () {
               Get.to(() => ProductDetailPage());
             },
@@ -77,13 +86,16 @@ class _MyAddressPageState extends State<MyAddressPage> {
             height: 12.w,
           );
         },
-        itemCount: 2);
+        itemCount: address.length);
   }
 }
 
 class SellInfoItemView extends StatelessWidget {
+  final Address address;
+
   const SellInfoItemView({
     Key? key,
+    required this.address,
   }) : super(key: key);
 
   @override
@@ -160,27 +172,30 @@ class SellInfoItemView extends StatelessWidget {
             ),
             Row(
               children: [
-                Row(
-                  children: [
-                    Image.asset("assets/images/selected.png"),
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    Text(
-                      "默认地址",
-                      style: TextStyle(
-                        color: AppColors.color_FF999999,
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w400,
+                Visibility(
+                  child: Row(
+                    children: [
+                      Image.asset("assets/images/selected.png"),
+                      SizedBox(
+                        width: 3.w,
                       ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                  ],
+                      Text(
+                        "默认地址",
+                        style: TextStyle(
+                          color: AppColors.color_FF999999,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                    ],
+                  ),
+                  visible: address.isDefault,
                 ),
                 Text(
-                  "广东省深圳市南山区粤海街道",
+                  address.address,
                   style: TextStyle(
                     color: AppColors.color_FF999999,
                     fontSize: 10.sp,
@@ -208,4 +223,18 @@ class SellInfoItemView extends StatelessWidget {
       ),
     );
   }
+}
+
+class Address {
+  bool isDefault;
+  String address;
+  String name;
+  String phone;
+
+  Address({
+    this.isDefault = false,
+    this.address = "广东省深圳市南山区粤海街道",
+    this.name = "胡仁杰",
+    this.phone = "18258489316",
+  });
 }
