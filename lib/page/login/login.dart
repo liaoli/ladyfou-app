@@ -19,14 +19,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   // 响应空白处的焦点的Node
   FocusNode blankNode = FocusNode();
-  List<CommentLabel> labels = [];
+  List<CommonLabelData> labels = [];
   int index = 0;
 
   @override
   void initState() {
     super.initState();
 
-    labels.add(CommentLabel(
+    labels.add(CommonLabelData(
         label: "注册",
         isSelected: true,
         data: 0,
@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: 16.w,
         useTextWidth: false));
     labels.add(
-      CommentLabel(
+      CommonLabelData(
           label: "登录",
           data: 1,
           default_bg: AppColors.color_FFF5F5F5,
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   LoginTabBar(
                     dataS: labels,
-                    onTap: (CommentLabel model) {
+                    onTap: (CommonLabelData model) {
                       setState(() {
                         index = model.data;
                       });

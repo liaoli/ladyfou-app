@@ -16,6 +16,7 @@ import 'package:ladyfou/style/Color.dart';
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
+import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
 import '../login/login.dart';
 import '../setting/setting_main_page.dart';
@@ -89,11 +90,14 @@ class _MinePageState extends State<MinePage> {
       child: Row(
         children: [
           Expanded(child: SizedBox()),
-          Image.asset(
-            "assets/images/mine/icon_frame.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_frame.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              Get.to(() => CSMainPage());
+            },
           ),
           SizedBox(
             width: 12.w,

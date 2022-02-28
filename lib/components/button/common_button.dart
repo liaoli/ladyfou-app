@@ -10,6 +10,7 @@ class CommonButton extends StatelessWidget {
   final BorderRadius? borderRadius;
   final Function()? onTap;
   final bool enable;
+  final Color borderColor;
 
   const CommonButton(
       {Key? key,
@@ -20,6 +21,7 @@ class CommonButton extends StatelessWidget {
       this.bg = AppColors.Color_E34D59,
       this.enable = true,
       this.borderRadius,
+      this.borderColor = AppColors.transparent,
       this.onTap})
       : super(key: key);
 
@@ -31,14 +33,15 @@ class CommonButton extends StatelessWidget {
           onTap!();
         }
       },
-      child: ClipRRect(
-        borderRadius: borderRadius,
-        child: Container(
-          width: width,
-          height: height,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
           color: enable ? bg : diableBg,
-          child: child,
+          border: new Border.all(color: this.borderColor, width: 1),
         ),
+        child: child,
       ),
     );
   }

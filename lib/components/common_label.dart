@@ -5,7 +5,7 @@ import 'package:ladyfou/style/Color.dart';
 import '../utils/measure_util.dart';
 
 class CommonLabel extends StatefulWidget {
-  final CommentLabel model;
+  final CommonLabelData model;
 
   CommonLabel({required this.model});
 
@@ -53,7 +53,7 @@ class _CommonLabelState extends State<CommonLabel> {
   bool selected() => widget.model.isSelected;
 }
 
-class CommentLabel<T> {
+class CommonLabelData<T> {
   String label;
   bool isSelected;
   bool useTextWidth;
@@ -72,7 +72,7 @@ class CommentLabel<T> {
 
   T data;
 
-  CommentLabel({
+  CommonLabelData({
     required this.label,
     this.isSelected = false,
     this.useTextWidth = true,

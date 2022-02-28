@@ -29,16 +29,16 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
     "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/614/d32/3d5/614d323d524f2537290680.jpg",
   ];
 
-  List<CommentLabel> labels = [];
+  List<CommonLabelData> labels = [];
 
   @override
   void initState() {
     resetData();
 
     labels.add(
-        CommentLabel(label: "全部", isSelected: true, data: 1, height: 24.w));
+        CommonLabelData(label: "全部", isSelected: true, data: 1, height: 24.w));
     labels.add(
-      CommentLabel(label: "带图评论", data: 2, height: 24.w),
+      CommonLabelData(label: "带图评论", data: 2, height: 24.w),
     );
 
     super.initState();
@@ -97,7 +97,7 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
         children: [
           MyTabBar(
             dataS: labels,
-            onTap: (CommentLabel label) {
+            onTap: (CommonLabelData label) {
               if (label.data == 1) {
                 resetData();
               } else {
@@ -295,9 +295,9 @@ class Comment {
 }
 
 class MyTabBar extends StatefulWidget {
-  final List<CommentLabel> dataS;
+  final List<CommonLabelData> dataS;
 
-  final ValueSetter<CommentLabel>? onTap;
+  final ValueSetter<CommonLabelData>? onTap;
 
   const MyTabBar({
     Key? key,

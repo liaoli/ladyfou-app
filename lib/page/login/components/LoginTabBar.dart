@@ -5,9 +5,9 @@ import '../../../style/Color.dart';
 import '../../../components/common_label.dart';
 
 class LoginTabBar extends StatefulWidget {
-  final List<CommentLabel> dataS;
+  final List<CommonLabelData> dataS;
 
-  final ValueSetter<CommentLabel>? onTap;
+  final ValueSetter<CommonLabelData>? onTap;
 
   const LoginTabBar({
     Key? key,
