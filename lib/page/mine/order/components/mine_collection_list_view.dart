@@ -119,7 +119,7 @@ class CollectionGridListViewState extends State<CollectionGridListView> {
 
           GoodsInfoModel model = widget.goodsList[index];
           bool isExit = false;
-          widget.selectCollectionGoodList.map((e) {
+          widget.selectCollectionGoodList.forEach((e) {
             if (model.id == e.id) {
               isExit = true;
             }
@@ -129,7 +129,7 @@ class CollectionGridListViewState extends State<CollectionGridListView> {
             position: index,
             duration: const Duration(milliseconds: 500),
             child: SlideAnimation(
-              verticalOffset: 50.0,
+              verticalOffset: 50.0.w,
               child: FadeInAnimation(
                 child: CollectionGoodItem(
                   goodsModel: widget.goodsList[index],

@@ -26,6 +26,7 @@ import '../components/classification_widget.dart';
 import '../components/conditions_widget.dart';
 import '../components/shop_grid_list_view.dart';
 import '../components/shop_top_bar_widget.dart';
+import '../components/wrap_gradient_widget.dart';
 import '../store/sort_provider.dart';
 import '../../../generated/l10n.dart';
 
@@ -86,6 +87,9 @@ class _GoodsListPageState extends State<GoodsListPage>
     });
     // 请求筛选的数据
     provider.getCategoryChildDatas(widget.shopId).then((value) {
+      setState(() {});
+    });
+    provider.getConditionChildDatas(widget.shopId).then((value) {
       setState(() {});
     });
 
@@ -361,10 +365,19 @@ class _GoodsListPageState extends State<GoodsListPage>
         initialData: false,
         stream: BaseBloc.instance.addListenerAlertShowStream,
         builder: (ctx, snapshot) {
+          List<ItemButtonModel> models = [];
+          provider.categoryInfoModels.forEach((element) {
+            models.add(ItemButtonModel.fromModel(element.id, element.name2));
+          });
           return ClassificationWidget(
-            categoryInfoModels: provider.categoryInfoModels,
+            itemList: models,
+            selectItemList: ItemButtonModel.fromItemModels(provider.selectCategoryInfoModels),
             isShow: snapshot.data ?? false,
-            callBack: (infoModels) {},
+            callBack: (infoModels) {
+              provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(provider.categoryInfoModels, infoModels);
+              setState(() {
+              });
+            },
           );
         });
   }
@@ -375,10 +388,19 @@ class _GoodsListPageState extends State<GoodsListPage>
         initialData: false,
         stream: BaseBloc.instance.addListenerConditionStream,
         builder: (ctx, snapshot) {
+          List<ItemButtonModel> models = [];
+          provider.conditionInfoModels.forEach((element) {
+            models.add(ItemButtonModel.fromModel(element.id, element.name2));
+          });
           return ClassificationWidget(
-            categoryInfoModels: provider.categoryInfoModels,
+            itemList: models,
+            selectItemList: ItemButtonModel.fromItemModels(provider.selectConditionInfoModels),
             isShow: snapshot.data ?? false,
-            callBack: (infoModels) {},
+            callBack: (infoModels) {
+              provider.selectConditionInfoModels = ItemButtonModel.toFindModels(provider.conditionInfoModels, infoModels);
+              setState(() {
+              });
+            },
           );
         });
   }

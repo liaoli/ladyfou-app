@@ -60,4 +60,16 @@ class BaseBloc {
     _addListenerAllSortShow.add(isShow);
   }
 
+  final _addListenerCollectionAlertShow = StreamController<bool>.broadcast();
+  Stream<bool> get addListenerCollectionAlertShowStream => _addListenerCollectionAlertShow.stream;
+  void addListenerCollectionAlertShowShow(bool isShow) {
+    _addListenerCollectionAlertShow.add(isShow);
+  }
+
+  final _addUpdateCollectionAlertShow = StreamController<bool>.broadcast();
+  Stream<bool> get addUpdateCollectionAlertStream => _addUpdateCollectionAlertShow.stream;
+  void addUpdateCollectionAlertShow(bool isUpdate) {
+    _addUpdateCollectionAlertShow.add(isUpdate);
+  }
+
 }
