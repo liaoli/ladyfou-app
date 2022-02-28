@@ -10,7 +10,9 @@ import 'package:ladyfou/page/message/sell_info_page.dart';
 
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
+import '../cs/cs_main_page.dart';
 import '../mine/order/page/mine_order_page.dart';
+import 'coupon_info_page.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);
@@ -24,11 +26,11 @@ class _MessagePageState extends State<MessagePage> {
 
   @override
   void initState() {
-    dataS.add(MessageItem("assets/images/message/cs.png", "客服中心",1));
-    dataS.add(MessageItem("assets/images/message/sell_info.png", "优惠信息情报",2));
-    dataS.add(MessageItem("assets/images/message/coupon.png", "优惠券信息",3));
-    dataS.add(MessageItem("assets/images/message/order.png", "订单页面",4));
-    dataS.add(MessageItem("assets/images/message/sign.png", "签到推送",5));
+    dataS.add(MessageItem("assets/images/message/cs.png", "客服中心", 1));
+    dataS.add(MessageItem("assets/images/message/sell_info.png", "优惠信息情报", 2));
+    dataS.add(MessageItem("assets/images/message/coupon.png", "优惠券信息", 3));
+    dataS.add(MessageItem("assets/images/message/order.png", "订单页面", 4));
+    dataS.add(MessageItem("assets/images/message/sign.png", "签到推送", 5));
     super.initState();
   }
 
@@ -97,47 +99,52 @@ class MessageItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        switch(item.type){
+      onTap: () {
+        switch (item.type) {
+          case 1:
+            Get.to(() => CSMainPage());
+            break;
           case 2:
+            Get.to(() => SellInfoPage());
+            break;
           case 3:
-            Get.to(()=>SellInfoPage());
+            Get.to(() => CouponInfoPage());
             break;
           case 4:
             Get.to(() => MineOrderPage());
         }
       },
-      child:ClipRRect(
-      borderRadius: BorderRadius.all(new Radius.circular(10.w)),
-      child: Container(
-        padding: EdgeInsets.only(left:12.w,top: 12.w,bottom: 12.w),
-        color: AppColors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Image.asset(item.icon),
-                SizedBox(
-                  width: 12.w,
-                ),
-                Text(
-                  item.title,
-                  style: TextStyle(
-                    color: AppColors.color_FF333333,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w700,
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(new Radius.circular(10.w)),
+        child: Container(
+          padding: EdgeInsets.only(left: 12.w, top: 12.w, bottom: 12.w),
+          color: AppColors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Image.asset(item.icon),
+                  SizedBox(
+                    width: 12.w,
                   ),
-                ),
-                Expanded(child: SizedBox()),
-                ArrowForward(),
-              ],
-            ),
-
-          ],
+                  Text(
+                    item.title,
+                    style: TextStyle(
+                      color: AppColors.color_FF333333,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Expanded(child: SizedBox()),
+                  ArrowForward(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-    ) ,);
+    );
   }
 }
 
@@ -146,5 +153,5 @@ class MessageItem {
   String title;
   int type;
 
-  MessageItem(this.icon, this.title,this.type);
+  MessageItem(this.icon, this.title, this.type);
 }

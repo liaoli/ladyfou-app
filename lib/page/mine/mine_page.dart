@@ -20,6 +20,7 @@ import '../../router/router.dart';
 import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
 import '../login/login.dart';
+import '../message/coupon_info_page.dart';
 import '../message/message_page.dart';
 import '../setting/setting_main_page.dart';
 import 'order/page/mine_collection_page.dart';
@@ -278,7 +279,7 @@ class _MinePageState extends State<MinePage> {
           if (e['name'] == S.current.collection) {
             Get.to(() => MineCollectionPage());
           } else if (e['name'] == S.current.discount_code) {
-            Get.to(() => SellInfoPage());
+            Get.to(() => CouponInfoPage());
           } else if (e['name'] == S.current.footprint) {
             showModalBottomSheet(
               // backgroundColor: AppColors.transparent,
