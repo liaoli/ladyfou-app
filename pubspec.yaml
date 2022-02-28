@@ -258,6 +258,7 @@ flutter:
     - assets/images/login/ladyfou_1.png
     - assets/images/login/lock.png
     - assets/images/login/mail.png
+    - assets/images/must.png
 
   fonts:
     - family: xuifont

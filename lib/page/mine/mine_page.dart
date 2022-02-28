@@ -6,7 +6,9 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/components/clicked_Image_asset.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
+import 'package:ladyfou/page/address/address_main_page.dart';
 import 'package:ladyfou/page/message/sell_info_page.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
@@ -14,8 +16,12 @@ import 'package:ladyfou/style/Color.dart';
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
+import '../../router/router.dart';
+import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
 import '../login/login.dart';
+import '../message/message_page.dart';
+import '../setting/setting_main_page.dart';
 import 'order/page/mine_collection_page.dart';
 
 class MinePage extends StatefulWidget {
@@ -36,7 +42,7 @@ class _MinePageState extends State<MinePage> {
         Image.asset(
           'assets/images/mine/mine_bg.png',
           width: 375.w,
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.fitWidth,
         ),
         refresh(),
       ]),
@@ -58,9 +64,9 @@ class _MinePageState extends State<MinePage> {
           SliverToBoxAdapter(child: mineInformation()),
           buildSliverToBoxAdapter(28.w),
           SliverToBoxAdapter(child: mineMenu()),
-          buildSliverToBoxAdapter(26.w),
+          buildSliverToBoxAdapter(60.w),
           SliverToBoxAdapter(child: mineModul()),
-          buildSliverToBoxAdapter(26.w),
+          buildSliverToBoxAdapter(12.w),
           SliverToBoxAdapter(child: game()),
           buildSliverToBoxAdapter(28.w),
         ],
@@ -86,38 +92,50 @@ class _MinePageState extends State<MinePage> {
       child: Row(
         children: [
           Expanded(child: SizedBox()),
-          Image.asset(
-            "assets/images/mine/icon_frame.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_frame.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              Get.to(() => CSMainPage());
+            },
           ),
           SizedBox(
             width: 12.w,
           ),
-          Image.asset(
-            "assets/images/mine/icon_settings.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_settings.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              Get.to(() => SettingMainPage());
+            },
           ),
           SizedBox(
             width: 12.w,
           ),
-          Image.asset(
-            "assets/images/mine/icon_shopping.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_shopping.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              XRouter.goCartPage();
+            },
           ),
           SizedBox(
             width: 12.w,
           ),
-          Image.asset(
-            "assets/images/mine/icon_message.png",
+          ClickedImageAsset(
+            image: "assets/images/mine/icon_message.png",
             width: 20.w,
             height: 20.w,
             fit: BoxFit.cover,
+            onTap: () {
+              Get.to(() => MessagePage());
+            },
           ),
           SizedBox(
             width: 12.w,
@@ -148,43 +166,43 @@ class _MinePageState extends State<MinePage> {
           //         ))
           //     :
           InkWell(
-                  onTap: () => {
-                    setState(() {
-                      isLogin = true;
-                      Get.to(() => LoginPage());
-                    })
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Welcome To Ladyfou',
-                          style: TextStyle(
-                            color: AppColors.color_FF333333,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Row(
-                        children: [
-                          Text('登录/注册',
-                              style: TextStyle(
-                                color: AppColors.color_FF333333,
-                                fontSize: fontSize,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Image.asset(
-                            "assets/images/mine/black_right.png",
-                            width: 24.w,
-                            height: 24.w,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+            onTap: () => {
+              setState(() {
+                isLogin = true;
+                Get.to(() => LoginPage());
+              })
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Welcome To Ladyfou',
+                    style: TextStyle(
+                      color: AppColors.color_FF333333,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SizedBox(
+                  width: 4.w,
                 ),
+                Row(
+                  children: [
+                    Text('登录/注册',
+                        style: TextStyle(
+                          color: AppColors.color_FF333333,
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Image.asset(
+                      "assets/images/mine/black_right.png",
+                      width: 24.w,
+                      height: 24.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
           Expanded(child: SizedBox()),
           isLogin
               ? InkWell(
@@ -244,7 +262,7 @@ class _MinePageState extends State<MinePage> {
 
   Widget mineMenu() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 35.w),
+      padding: EdgeInsets.symmetric(horizontal: 23.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: menuList(),
@@ -286,6 +304,8 @@ class _MinePageState extends State<MinePage> {
                 );
               },
             );
+          } else if (e['name'] == S.current.address) {
+            Get.to(() => AddressMainPage());
           }
         },
         child: Column(

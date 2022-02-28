@@ -2,31 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/style/Color.dart';
 
-class LoginTextField extends StatefulWidget {
+class AddressTextField extends StatefulWidget {
   final String prefixIcon;
-  final String? suffixIcon_show;
-  final String? suffixIcon_hide;
-  final String? hintText;
+  final String? title;
   final TextEditingController controller;
   final bool obscureText;
   final Function(String)? onChanged;
+  final Widget? leftChild;
+  final Color borderColor;
 
-  const LoginTextField(
+  const AddressTextField(
       {Key? key,
       this.prefixIcon = "assets/images/login/user.png",
-      this.suffixIcon_hide,
-      this.suffixIcon_show,
       this.obscureText = false,
-      this.hintText,
+      this.title,
       this.onChanged,
+      this.leftChild,
+      this.borderColor = AppColors.color_EAEAEA,
       required this.controller})
       : super(key: key);
 
   @override
-  _LoginTextFieldState createState() => _LoginTextFieldState();
+  _AddressTextFieldState createState() => _AddressTextFieldState();
 }
 
-class _LoginTextFieldState extends State<LoginTextField> {
+class _AddressTextFieldState extends State<AddressTextField> {
   late bool obscureText;
 
   @override
@@ -38,16 +38,28 @@ class _LoginTextFieldState extends State<LoginTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: AppColors.color_EAEAEA, width: 1),
+          bottom: BorderSide(color: widget.borderColor, width: 1),
         ),
       ),
       child: Row(
         children: [
           Image.asset(widget.prefixIcon),
           SizedBox(
-            width: 7,
+            width: 2.w,
+          ),
+          Text(
+            widget.title!,
+            style: TextStyle(
+              color: AppColors.color_C4C4C4,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          SizedBox(
+            width: 14,
           ),
           Expanded(
             child: TextField(
@@ -60,7 +72,6 @@ class _LoginTextFieldState extends State<LoginTextField> {
                 fontWeight: FontWeight.w400,
               ),
               decoration: InputDecoration(
-                hintText: widget.hintText,
                 hintStyle: TextStyle(
                   color: AppColors.color_C4C4C4,
                   fontSize: 12.sp,
@@ -70,18 +81,7 @@ class _LoginTextFieldState extends State<LoginTextField> {
               ),
             ),
           ),
-          widget.suffixIcon_show == null
-              ? SizedBox()
-              : GestureDetector(
-                  child: Image.asset(obscureText
-                      ? widget.suffixIcon_show!
-                      : widget.suffixIcon_hide!),
-                  onTap: () {
-                    setState(() {
-                      obscureText = !obscureText;
-                    });
-                  },
-                ),
+          widget.leftChild ?? SizedBox()
         ],
       ),
     );
