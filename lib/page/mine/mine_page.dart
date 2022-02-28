@@ -17,6 +17,7 @@ import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
 import '../../router/router.dart';
+import '../address/my_address_page.dart';
 import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
 import '../login/login.dart';
@@ -306,7 +307,8 @@ class _MinePageState extends State<MinePage> {
               },
             );
           } else if (e['name'] == S.current.address) {
-            Get.to(() => AddressMainPage());
+            Get.to(() => MyAddressPage());
+
           }
         },
         child: Column(
