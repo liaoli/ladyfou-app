@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ladyfou/core/utils/utils.dart';
-import 'package:ladyfou/page/mine/order/page/mine_order_logistics.dart';
+import 'package:ladyfou/page/mine/order/page/mine_order_logistics_page.dart';
 import 'package:ladyfou/style/text.dart';
 import 'package:provider/provider.dart';
 

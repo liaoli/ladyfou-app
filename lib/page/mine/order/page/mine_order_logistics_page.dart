@@ -1,6 +1,6 @@
 /*
  * @Descripttion: TODO
- * @FileName: mine_order_logistics
+ * @FileName: mine_order_logistics_page
  * @version: 1.0.0
  * @Author: ladyfou-app
  * @Date: 3/1/22 2:17 PM
@@ -17,7 +17,6 @@ import 'package:ladyfou/style/text.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../components/base_scaffold.dart';
-import '../../../../components/image_placehold_widget.dart';
 import '../../../../core/constant/base_enum.dart';
 import '../../../../style/Color.dart';
 import '../store/order_detail_provider.dart';
