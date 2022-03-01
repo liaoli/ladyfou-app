@@ -70,101 +70,91 @@ class S {
     );
   }
 
-  /// `Log out`
+  /// `Logout`
   String get logout {
     return Intl.message(
-      'Log out',
+      'Logout',
       name: 'logout',
       desc: '',
       args: [],
     );
   }
 
-  /// `LoginName`
-  String get loginName {
+  /// `邮箱地址`
+  String get login_email {
     return Intl.message(
-      'LoginName',
-      name: 'loginName',
+      '邮箱地址',
+      name: 'login_email',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please enter your login name or email`
-  String get loginNameHint {
+  /// `密码`
+  String get login_password {
     return Intl.message(
-      'Please enter your login name or email',
-      name: 'loginNameHint',
+      '密码',
+      name: 'login_password',
       desc: '',
       args: [],
     );
   }
 
-  /// `LoginName cannot be empty!`
-  String get loginNameError {
+  /// `登  录`
+  String get login_button_text {
     return Intl.message(
-      'LoginName cannot be empty!',
-      name: 'loginNameError',
+      '登  录',
+      name: 'login_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Password`
-  String get password {
-    return Intl.message(
-      'Password',
-      name: 'password',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please enter your password`
-  String get passwordHint {
-    return Intl.message(
-      'Please enter your password',
-      name: 'passwordHint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password cannot be less than 6 digits!`
+  /// `密码不能少于6位!`
   String get passwordError {
     return Intl.message(
-      'Password cannot be less than 6 digits!',
+      '密码不能少于6位!',
       name: 'passwordError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Login Success`
+  /// `登录成功`
   String get loginSuccess {
     return Intl.message(
-      'Login Success',
+      '登录成功',
       name: 'loginSuccess',
       desc: '',
       args: [],
     );
   }
 
-  /// `Register`
+  /// `注册`
   String get register {
     return Intl.message(
-      'Register',
+      '注册',
       name: 'register',
       desc: '',
       args: [],
     );
   }
 
-  /// `Repeat Password`
-  String get repeatPassword {
+  /// `名字`
+  String get register_name {
     return Intl.message(
-      'Repeat Password',
-      name: 'repeatPassword',
+      '名字',
+      name: 'register_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `片假名`
+  String get register_pj_Name {
+    return Intl.message(
+      '片假名',
+      name: 'register_pj_Name',
       desc: '',
       args: [],
     );
@@ -175,6 +165,16 @@ class S {
     return Intl.message(
       'Register Success',
       name: 'registerSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `完成注册并登陆`
+  String get register_button_text {
+    return Intl.message(
+      '完成注册并登陆',
+      name: 'register_button_text',
       desc: '',
       args: [],
     );

@@ -32,7 +32,7 @@ class _LoginViewState extends State<LoginView> {
     return Column(
       children: [
         LoginTextField(
-            hintText: "邮箱地址",
+            hintText: S.of(context).login_email,
             prefixIcon: "assets/images/login/user.png",
             controller: _emailController,
             onChanged: (String text) {
@@ -42,7 +42,7 @@ class _LoginViewState extends State<LoginView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "密码",
+          hintText: S.of(context).login_password,
           prefixIcon: "assets/images/login/lock.png",
           suffixIcon_hide: "assets/images/login/eye_close.png",
           suffixIcon_show: "assets/images/login/eye_open.png",
@@ -64,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "登  录",
+                S.of(context).login_button_text,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 16.sp,

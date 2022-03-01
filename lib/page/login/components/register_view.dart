@@ -33,7 +33,7 @@ class _RegisterViewState extends State<RegisterView> {
     return Column(
       children: [
         LoginTextField(
-          hintText: "名字",
+          hintText: S.of(context).register_name,
           prefixIcon: "assets/images/login/user.png",
           controller: _uNameController,
           onChanged: (String text) {
@@ -44,7 +44,7 @@ class _RegisterViewState extends State<RegisterView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "片假名",
+          hintText: S.of(context).register_pj_Name,
           prefixIcon: "assets/images/login/user.png",
           controller: _UPJMController,
           onChanged: (String text) {
@@ -55,7 +55,7 @@ class _RegisterViewState extends State<RegisterView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "邮箱地址",
+          hintText: S.of(context).login_email,
           prefixIcon: "assets/images/login/mail.png",
           controller: _emailController,
           onChanged: (String text) {
@@ -66,7 +66,7 @@ class _RegisterViewState extends State<RegisterView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "密码",
+          hintText: S.of(context).login_password,
           prefixIcon: "assets/images/login/lock.png",
           suffixIcon_hide: "assets/images/login/eye_close.png",
           suffixIcon_show: "assets/images/login/eye_open.png",
@@ -88,7 +88,7 @@ class _RegisterViewState extends State<RegisterView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "完成注册并登陆",
+                S.of(context).register_button_text,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 16.sp,
