@@ -1,0 +1,1 @@
+const TOKEN_INFO = "token_info";

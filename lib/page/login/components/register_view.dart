@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../components/button/common_button.dart';
+import '../../../core/http/request.dart';
+import '../../../core/utils/toast.dart';
+import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
+import '../../../utils/sputils.dart';
 import 'login_text_field.dart';
 
 class RegisterView extends StatefulWidget {
@@ -93,6 +97,9 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             ],
           ),
+          onTap: () {
+            onSubmit(context);
+          },
         )
       ],
     );
@@ -109,4 +116,30 @@ class _RegisterViewState extends State<RegisterView> {
     }
     setState(() {});
   }
+
+  //验证通过提交数据
+  void onSubmit(BuildContext context) {
+    closeKeyboard(context);
+
+    register(
+      chinese_name: _uNameController.text,
+      katakana_name: _UPJMController.text,
+      email: _emailController.text,
+      password: _pwdController.text,
+    ).then((value) {
+      Navigator.pop(context);
+      if (value.common.statusCode == 0) {
+        ToastUtils.toast(S.of(context).registerSuccess);
+        SPUtils.saveTokenInfo(value.response!.data!);
+      } else {
+        ToastUtils.error(value.common.debugMessage);
+      }
+    }).catchError((onError) {
+      ToastUtils.error(onError);
+    });
+  }
+}
+
+void closeKeyboard(BuildContext context) {
+  FocusScope.of(context).requestFocus(FocusNode());
 }

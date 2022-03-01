@@ -4,6 +4,7 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import '../model/category_info_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
+import '../model/token_info_model.dart';
 import '../model/order_info_model.dart';
 import '../model/user_info_model.dart';
 
@@ -27,6 +28,8 @@ T fromJson<T>(dynamic json) {
   switch (T.toString()) {
     case "UserInfoModel":
       return UserInfoModel.fromMap(json) as T;
+    case "TokenInfoModel":
+      return TokenInfoModel.fromMap(json) as T;
     case "List<SortModel>":
       return SortModel.fromList(json) as T;
     case "List<GoodsInfoModel>":
