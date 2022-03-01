@@ -24,6 +24,8 @@ class GoodsOperationProvider with ChangeNotifier {
 
   List<GoodsInfoModel> goodCollectionList = [];
   List<GoodsInfoModel> selectCollectionGoodList = [];
+  bool isSelectAll = false;
+
   List<CategoryInfoModel> categoryInfoModels = [];
 
 
@@ -136,6 +138,28 @@ class GoodsOperationProvider with ChangeNotifier {
         selectCollectionGoodList.add(model);
       }
     }
+    notifyListeners();
+  }
+
+  /// 全选
+  Future checkSelectAll() async {
+    isSelectAll = !isSelectAll;
+    if (isSelectAll) {
+      selectCollectionGoodList.clear();
+      goodCollectionList.forEach((element) {
+        selectCollectionGoodList.add(element);
+      });
+    }else {
+      selectCollectionGoodList.clear();
+    }
+    notifyListeners();
+  }
+
+  /// 取消收藏
+  Future cancleCollection() async {
+    selectCollectionGoodList.clear();
+    isEditCollection = false;
+    isSelectAll = false;
     notifyListeners();
   }
 }

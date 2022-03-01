@@ -7,7 +7,7 @@ class AppColors {
   static const Color Color_E34D59 = Color(0xFFE34D59);
 
   /// 导航栏背景色<主题红色>
-  static const Color navigationColor = Color.fromRGBO(222, 0, 32, 1.0);
+  static const Color navigationColor = Color(0xFFE34D59);
 
   /// 主背景
   static const Color primaryBackground = Color.fromRGBO(245, 245, 245, 1.0);
@@ -64,6 +64,6 @@ class AppColors {
 
   static const Color color_C4C4C4 = Color(0xFFC4C4C4);
 
-  static const Color color_E7E7E7= Color(0xFFE7E7E7);
-  static const Color blue= Colors.blueAccent;
+  static const Color color_E7E7E7 = Color(0xFFE7E7E7);
+  static const Color blue = Colors.blueAccent;
 }
