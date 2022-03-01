@@ -29,7 +29,7 @@ class XHttp {
     headers: {
       //   //预设好的header信息
       // "token": SPUtils.getToken(),
-      //   "Content-Type:": "multipart/form-data",
+      //   "Content-Type": "multipart/form-data",
     },
   ));
 

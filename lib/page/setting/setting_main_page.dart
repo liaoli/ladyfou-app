@@ -6,12 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/core/constant/share_preference_key.dart';
+import 'package:ladyfou/core/model/token_info_model.dart';
 import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/utils/sputils.dart';
 
 import '../../components/button/common_button.dart';
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
+import '../../utils/provider.dart';
 import 'components/common_setting_view.dart';
 import 'components/user_info_item_view.dart';
 
@@ -62,6 +64,12 @@ class _SettingMainPageState extends State<SettingMainPage> {
             onTap: () {
               Global.logout().then((value) {
                 ToastUtils.success("退出登录成功");
+
+                if (!mounted) {
+                  return;
+                }
+                Store.of<UserProfile>(context, listen: false).tokenInfoModel =
+                    TokenInfoModel();
               });
             },
           ),

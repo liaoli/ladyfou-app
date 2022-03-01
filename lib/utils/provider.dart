@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ladyfou/core/model/token_info_model.dart';
 import 'package:ladyfou/core/utils/locale.dart';
 import 'package:ladyfou/generated/l10n.dart';
 import 'package:provider/provider.dart';
@@ -139,10 +140,18 @@ class UserProfile with ChangeNotifier {
 
   String get nickName => _nickName ?? "";
 
+  TokenInfoModel? _tokenInfoModel;
+
   set nickName(String nickName) {
     _nickName = nickName;
     notifyListeners();
   }
+
+  set tokenInfoModel(TokenInfoModel? model ){
+    _tokenInfoModel = model;
+    notifyListeners();
+  }
+
 }
 
 ///主页

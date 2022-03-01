@@ -7,16 +7,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
+import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
 import 'package:ladyfou/page/address/address_main_page.dart';
 import 'package:ladyfou/page/message/sell_info_page.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/button/common_button.dart';
 import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
 import '../../router/router.dart';
+import '../../utils/provider.dart';
 import '../address/my_address_page.dart';
 import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
@@ -150,105 +153,106 @@ class _MinePageState extends State<MinePage> {
   Widget mineInformation() {
     final double widgetHeight = 48.w;
     final double fontSize = 18;
-
-    return Container(
-      height: widgetHeight,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 24.w,
-          ),
-          // isLogin
-          //     ? Text('Hello，前田敦子',
-          //         style: TextStyle(
-          //           color: AppColors.color_FF333333,
-          //           fontSize: fontSize,
-          //           fontWeight: FontWeight.bold,
-          //         ))
-          //     :
-          InkWell(
-            onTap: () => {
-              setState(() {
-                isLogin = true;
-                Get.to(() => LoginPage());
-              })
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Welcome To Ladyfou',
+    return Consumer<UserProfile>(
+        builder: (BuildContext context, UserProfile value, Widget? child) {
+      return Container(
+        height: widgetHeight,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 24.w,
+            ),
+            Global.isLogin()
+                ? Text(Global.tokenInfo.name,
                     style: TextStyle(
                       color: AppColors.color_FF333333,
-                      fontSize: 14,
+                      fontSize: fontSize,
                       fontWeight: FontWeight.bold,
-                    )),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Row(
-                  children: [
-                    Text('登录/注册',
-                        style: TextStyle(
-                          color: AppColors.color_FF333333,
-                          fontSize: fontSize,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    Image.asset(
-                      "assets/images/mine/black_right.png",
-                      width: 24.w,
-                      height: 24.w,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Expanded(child: SizedBox()),
-          isLogin
-              ? InkWell(
-                  onTap: () {
-                    setState(() {
-                      isLogin = false;
-                    });
-                  },
-                  child: Container(
-                    width: 68.w,
-                    height: 24.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColors.transparent_Black5),
-                    child: Center(
-                      //加上Center让文字居中
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Text('会员情报',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                              )),
-                          Image.asset(
-                            "assets/images/mine/white_right.png",
-                            width: 16.w,
-                            height: 16.w,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
-                      ),
+                    ))
+                : InkWell(
+                    onTap: () => {
+                      setState(() {
+                        isLogin = true;
+                        Get.to(() => LoginPage());
+                      })
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Welcome To Ladyfou',
+                            style: TextStyle(
+                              color: AppColors.color_FF333333,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Row(
+                          children: [
+                            Text('登录/注册',
+                                style: TextStyle(
+                                  color: AppColors.color_FF333333,
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Image.asset(
+                              "assets/images/mine/black_right.png",
+                              width: 24.w,
+                              height: 24.w,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                )
-              : SizedBox(),
-          SizedBox(
-            width: 12.w,
-          ),
-        ],
-      ),
-    );
+            Expanded(child: SizedBox()),
+            Global.isLogin()
+                ? InkWell(
+                    onTap: () {
+                      setState(() {
+                        isLogin = false;
+                      });
+                    },
+                    child: Container(
+                      width: 68.w,
+                      height: 24.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.transparent_Black5),
+                      child: Center(
+                        //加上Center让文字居中
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            Text('会员情报',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                )),
+                            Image.asset(
+                              "assets/images/mine/white_right.png",
+                              width: 16.w,
+                              height: 16.w,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : SizedBox(),
+            SizedBox(
+              width: 12.w,
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   final List gridList = [
@@ -308,7 +312,6 @@ class _MinePageState extends State<MinePage> {
             );
           } else if (e['name'] == S.current.address) {
             Get.to(() => MyAddressPage());
-
           }
         },
         child: Column(

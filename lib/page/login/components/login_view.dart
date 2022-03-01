@@ -7,6 +7,7 @@ import '../../../components/button/common_button.dart';
 import '../../../core/utils/toast.dart';
 import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
+import '../../../utils/provider.dart';
 import 'login_text_field.dart';
 
 class LoginView extends StatefulWidget {
@@ -98,10 +99,15 @@ class _LoginViewState extends State<LoginView> {
       password: _pwdController.text,
     ).then((value) {
       if (value.common.statusCode == 1000) {
+        if (!mounted) {
+          return;
+        }
+
         ToastUtils.toast(S.of(context).loginSuccess);
 
         SPUtils.saveTokenInfo(value.response!.data!);
-
+        Store.of<UserProfile>(context, listen: false).tokenInfoModel =
+            value.response!.data!;
         Navigator.of(context).pop();
       } else {
         ToastUtils.error(value.common.debugMessage);

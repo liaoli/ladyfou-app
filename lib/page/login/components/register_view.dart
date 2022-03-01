@@ -5,6 +5,7 @@ import '../../../core/http/request.dart';
 import '../../../core/utils/toast.dart';
 import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
+import '../../../utils/provider.dart';
 import '../../../utils/sputils.dart';
 import 'login_text_field.dart';
 
@@ -127,10 +128,17 @@ class _RegisterViewState extends State<RegisterView> {
       email: _emailController.text,
       password: _pwdController.text,
     ).then((value) {
-      Navigator.pop(context);
-      if (value.common.statusCode == 0) {
+      if (!mounted) {
+        return;
+      }
+
+
+      if (value.common.statusCode == 1000) {
         ToastUtils.toast(S.of(context).registerSuccess);
         SPUtils.saveTokenInfo(value.response!.data!);
+        Store.of<UserProfile>(context, listen: false).tokenInfoModel =
+            value.response!.data!;
+        Navigator.pop(context);
       } else {
         ToastUtils.error(value.common.debugMessage);
       }
