@@ -36,9 +36,9 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
     resetData();
 
     labels.add(
-        CommonLabelData(label: "全部", isSelected: true, data: 1, height: 24.w));
+        CommonLabelData(label: "全部", isSelected: true, data: 1, height: 24.w,borderRadius: 12.w));
     labels.add(
-      CommonLabelData(label: "带图评论", data: 2, height: 24.w),
+      CommonLabelData(label: "带图评论", data: 2, height: 24.w,borderRadius: 12.w),
     );
 
     super.initState();

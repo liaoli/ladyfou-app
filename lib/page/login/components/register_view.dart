@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../components/button/common_button.dart';
+import '../../../core/http/request.dart';
+import '../../../core/utils/toast.dart';
+import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
+import '../../../utils/sputils.dart';
 import 'login_text_field.dart';
 
 class RegisterView extends StatefulWidget {
@@ -29,7 +33,7 @@ class _RegisterViewState extends State<RegisterView> {
     return Column(
       children: [
         LoginTextField(
-          hintText: "名字",
+          hintText: S.of(context).register_name,
           prefixIcon: "assets/images/login/user.png",
           controller: _uNameController,
           onChanged: (String text) {
@@ -40,7 +44,7 @@ class _RegisterViewState extends State<RegisterView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "片假名",
+          hintText: S.of(context).register_pj_Name,
           prefixIcon: "assets/images/login/user.png",
           controller: _UPJMController,
           onChanged: (String text) {
@@ -51,7 +55,7 @@ class _RegisterViewState extends State<RegisterView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "邮箱地址",
+          hintText: S.of(context).login_email,
           prefixIcon: "assets/images/login/mail.png",
           controller: _emailController,
           onChanged: (String text) {
@@ -62,7 +66,7 @@ class _RegisterViewState extends State<RegisterView> {
           height: 15.w,
         ),
         LoginTextField(
-          hintText: "密码",
+          hintText: S.of(context).login_password,
           prefixIcon: "assets/images/login/lock.png",
           suffixIcon_hide: "assets/images/login/eye_close.png",
           suffixIcon_show: "assets/images/login/eye_open.png",
@@ -84,7 +88,7 @@ class _RegisterViewState extends State<RegisterView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "完成注册并登陆",
+                S.of(context).register_button_text,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 16.sp,
@@ -93,6 +97,9 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             ],
           ),
+          onTap: () {
+            onSubmit(context);
+          },
         )
       ],
     );
@@ -109,4 +116,30 @@ class _RegisterViewState extends State<RegisterView> {
     }
     setState(() {});
   }
+
+  //验证通过提交数据
+  void onSubmit(BuildContext context) {
+    closeKeyboard(context);
+
+    register(
+      chinese_name: _uNameController.text,
+      katakana_name: _UPJMController.text,
+      email: _emailController.text,
+      password: _pwdController.text,
+    ).then((value) {
+      Navigator.pop(context);
+      if (value.common.statusCode == 0) {
+        ToastUtils.toast(S.of(context).registerSuccess);
+        SPUtils.saveTokenInfo(value.response!.data!);
+      } else {
+        ToastUtils.error(value.common.debugMessage);
+      }
+    }).catchError((onError) {
+      ToastUtils.error(onError);
+    });
+  }
+}
+
+void closeKeyboard(BuildContext context) {
+  FocusScope.of(context).requestFocus(FocusNode());
 }

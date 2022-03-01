@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ladyfou/components/search_bar.dart';
 import 'package:ladyfou/router/router.dart';
 
 import '../../../components/clicked_Image_asset.dart';

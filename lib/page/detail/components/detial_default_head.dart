@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/clicked_Image_asset.dart';
 import '../../../components/horizontal_scroll_tab_bar.dart';
+import '../../../router/router.dart';
 import '../store/product_detail_provider.dart';
 
 class DetailDefaultNavBar extends StatefulWidget {
@@ -145,6 +146,7 @@ class _DetailDefaultNavBarState extends State<DetailDefaultNavBar> {
         image: getShoppingCartIcon(),
         onTap: () {
           //TODO:跳转
+          XRouter.goCartPage();
         });
   }
 

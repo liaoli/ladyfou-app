@@ -1,6 +1,7 @@
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:ladyfou/core/common/global.dart';
 
 import 'package:ladyfou/core/utils/path.dart';
 import 'dart:io';
@@ -11,10 +12,10 @@ import 'package:ladyfou/utils/sputils.dart';
 // const String baseUrl = "http://aashop.neverdown.cc";
 
 /// 测试环境域名
-const String baseUrl = "https://release.ladyfou.com";
+// const String baseUrl = "https://release.ladyfou.com";
 
 /// 开发环境域名
-// const String baseUrl = "http://192.168.1.174";
+const String baseUrl = "http://192.168.1.174";
 
 class XHttp {
   XHttp._internal();
@@ -27,7 +28,7 @@ class XHttp {
     receiveTimeout: 5000,
     headers: {
       //   //预设好的header信息
-      "token": SPUtils.getToken(),
+      // "token": SPUtils.getToken(),
       //   "Content-Type:": "multipart/form-data",
     },
   ));
@@ -49,7 +50,7 @@ class XHttp {
         responseHeader: true)); //开启请求日志
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options, handler) {
-      options.headers["token"] = SPUtils.getToken();
+      options.headers["token"] = Global.tokenInfo.token;
 
       print("请求之前");
       return handler.next(options);
@@ -100,7 +101,8 @@ class XHttp {
 
   ///post 表单请求
   static Future post(String url, [Map<String, dynamic>? params]) async {
-    Response response = await dio.post(url, queryParameters: params);
+    FormData data = FormData.fromMap(params!);
+    Response response = await dio.post(url, data: data);
     return response.data;
   }
 

@@ -1,42 +1,50 @@
+import 'package:flutter/cupertino.dart';
 import 'package:ladyfou/core/http/response.dart';
-import 'package:ladyfou/core/model/good_collection_model.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 
+import '../../utils/sputils.dart';
 import '../model/category_info_model.dart';
+import '../model/token_info_model.dart';
 import '../model/user_info_model.dart';
 import 'http.dart';
 
 /// 注册接口
-/// [username] 用户名
+/// [chinese_name] 名字
+/// [katakana_name] 片假名
+/// [email] 邮箱
 /// [password] 密码
-/// [repassword] 确认密码
-Future<MyResponse<UserInfoModel>> register({
-  required String username,
+Future<MyResponse<TokenInfoModel>> register({
+  required String chinese_name,
+  required String katakana_name,
+  required String email,
   required String password,
-  required String repassword,
 }) async {
-  Map<String, dynamic> result = await XHttp.post("/user/register",
-      {"username": username, "password": password, "repassword": repassword});
-  MyResponse<UserInfoModel> response = MyResponse.fromJson(result);
+  Map<String, dynamic> result =
+      await XHttp.post("/otonastyle/account/register", {
+    "chinese_name": chinese_name,
+    "katakana_name": katakana_name,
+    "email": email,
+    "password": password,
+  });
+  MyResponse<TokenInfoModel> response = MyResponse.fromJson(result);
 
   return response;
 }
 
 /// 登录接口
-/// [username] 用户名
+/// [email] 邮箱
 /// [password] 密码
-/// [repassword] 确认密码
-Future<MyResponse<UserInfoModel>> login({
-  required String username,
+Future<MyResponse<TokenInfoModel>> login({
+  required String email,
   required String password,
 }) async {
-  Map<String, dynamic> result = await XHttp.post("/user/login", {
-    "username": username,
+  Map<String, dynamic> result = await XHttp.post("/otonastyle/account/login", {
+    "email": email,
     "password": password,
   });
-  MyResponse<UserInfoModel> response = MyResponse.fromJson(result);
+  MyResponse<TokenInfoModel> response = MyResponse.fromJson(result);
 
   return response;
 }
@@ -81,7 +89,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
 
 /// 获取订单列表
 Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
-    {required Map<String,dynamic> params, bool isLoadMore = false}) async {
+    {required Map<String, dynamic> params, bool isLoadMore = false}) async {
   Map<String, dynamic> result =
       await XHttp.get("/otonastyle/account/order", params);
   MyResponse<List<OrderInfoModel>> response =
@@ -91,11 +99,11 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
 
 /// 获取收藏列表
 Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
-    {required Map<String,dynamic> params}) async {
+    {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-  await XHttp.get("/otonastyle/account/wish_list", params);
+      await XHttp.get("/otonastyle/account/wish_list", params);
   MyResponse<List<GoodsInfoModel>> response =
-  MyResponse<List<GoodsInfoModel>>.fromJson(result);
+      MyResponse<List<GoodsInfoModel>>.fromJson(result);
   return response;
 }
 /////////////////////////////////thw-end//////////////////////////////////////

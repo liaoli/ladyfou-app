@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
 
     labels.add(CommonLabelData(
-        label: "注册",
+        label: S.current.login,
         isSelected: true,
         data: 0,
         default_bg: AppColors.color_FFF5F5F5,
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
         useTextWidth: false));
     labels.add(
       CommonLabelData(
-          label: "登录",
+          label: S.current.register,
           data: 1,
           default_bg: AppColors.color_FFF5F5F5,
           selected_bg: AppColors.transparent,

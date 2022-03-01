@@ -260,6 +260,9 @@ flutter:
     - assets/images/login/lock.png
     - assets/images/login/mail.png
     - assets/images/must.png
+    - assets/images/edit.png
+    - assets/images/selected.png
+    - assets/images/trash.png
 
   fonts:
     - family: xuifont

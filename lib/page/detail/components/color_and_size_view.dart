@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ladyfou/components/common_label.dart';
 import 'package:ladyfou/page/detail/components/detail_bottom_view.dart';
 
 import '../../../components/button/common_button.dart';
@@ -233,8 +234,27 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
   }
 
   List<String> sizeList = ["XL", "L", "M", "S"];
+  List<CommonLabelData<String>> sizeLabel = [];
 
   Widget size() {
+    if (sizeLabel.length == 0) {
+      sizeLabel = sizeList
+          .map((e) => CommonLabelData(
+                label: e,
+                data: e,
+                height: 20.w,
+                width: 40.w,
+                default_bg: AppColors.transparent,
+                selected_bg: AppColors.Color_E34D59,
+                default_text_color: AppColors.color_FF333333,
+                selected_text_color: AppColors.white,
+                selected_borderColor: AppColors.Color_E34D59,
+                borderRadius: 16.w,
+                default_borderColor: AppColors.color_FF999999,
+              ))
+          .toList();
+    }
+
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5, //Grid按两列显示
@@ -244,34 +264,29 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
       ),
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
+          CommonLabelData item = sizeLabel[index];
           //创建子widget
-          return CommonButton(
-              borderRadius: new BorderRadius.all(Radius.circular(15.w)),
-              height: 20.w,
-              width: 40.w,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    sizeList[index],
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  )
-                ],
-              ));
-          ;
+          return GestureDetector(
+            child: CommonLabel(model: item),
+            onTap: () {
+              sizeLabel.forEach((element) {
+                element.isSelected = false;
+              });
+              item.isSelected = true;
+
+              setState(() {});
+            },
+          );
         },
-        childCount: sizeList.length,
+        childCount: sizeLabel.length,
       ),
     );
   }
 
   Widget count() {
     return Padding(
-      padding: EdgeInsets.only(left: 12.w,right: 12.w,top: 20.w,bottom: 30.w),
+      padding:
+          EdgeInsets.only(left: 12.w, right: 12.w, top: 20.w, bottom: 30.w),
       child: Row(
         children: [
           Text(

@@ -61,13 +61,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "integral": MessageLookupByLibrary.simpleMessage("积分"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
-        "loginName": MessageLookupByLibrary.simpleMessage("LoginName"),
-        "loginNameError":
-            MessageLookupByLibrary.simpleMessage("LoginName cannot be empty!"),
-        "loginNameHint": MessageLookupByLibrary.simpleMessage(
-            "Please enter your login name or email"),
-        "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
-        "logout": MessageLookupByLibrary.simpleMessage("Log out"),
+        "loginSuccess": MessageLookupByLibrary.simpleMessage("登录成功"),
+        "login_button_text": MessageLookupByLibrary.simpleMessage("登  录"),
+        "login_email": MessageLookupByLibrary.simpleMessage("邮箱地址"),
+        "login_password": MessageLookupByLibrary.simpleMessage("密码"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "lookAgain": MessageLookupByLibrary.simpleMessage("Look Again"),
         "me": MessageLookupByLibrary.simpleMessage("Profile"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
@@ -82,11 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mine_page_to_be_received": MessageLookupByLibrary.simpleMessage("待收货"),
         "mine_promotion": MessageLookupByLibrary.simpleMessage("促销"),
         "not_shipped": MessageLookupByLibrary.simpleMessage("未发货"),
-        "password": MessageLookupByLibrary.simpleMessage("Password"),
-        "passwordError": MessageLookupByLibrary.simpleMessage(
-            "Password cannot be less than 6 digits!"),
-        "passwordHint":
-            MessageLookupByLibrary.simpleMessage("Please enter your password"),
+        "passwordError": MessageLookupByLibrary.simpleMessage("密码不能少于6位!"),
         "phoneNum": MessageLookupByLibrary.simpleMessage("phoneNum"),
         "price_news_asc": MessageLookupByLibrary.simpleMessage("价格升序"),
         "price_news_desc": MessageLookupByLibrary.simpleMessage("价格降序"),
@@ -94,12 +88,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyName": m1,
         "qqgroup": MessageLookupByLibrary.simpleMessage("QQ Group"),
         "received": MessageLookupByLibrary.simpleMessage("已收货"),
-        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "register": MessageLookupByLibrary.simpleMessage("注册"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("Register Success"),
+        "register_button_text": MessageLookupByLibrary.simpleMessage("完成注册并登陆"),
+        "register_name": MessageLookupByLibrary.simpleMessage("名字"),
+        "register_pj_Name": MessageLookupByLibrary.simpleMessage("片假名"),
         "reminder": MessageLookupByLibrary.simpleMessage("Reminder"),
-        "repeatPassword":
-            MessageLookupByLibrary.simpleMessage("Repeat Password"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shipped": MessageLookupByLibrary.simpleMessage("已发货"),
         "sponsor": MessageLookupByLibrary.simpleMessage("Sponsor"),

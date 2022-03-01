@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../components/button/common_button.dart';
 import '../../../style/Color.dart';
-import '../../home/product_rank_page.dart';
+import '../product_comment_page.dart';
 
 class ProductEvaluationBottom extends StatefulWidget {
   const ProductEvaluationBottom({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class _ProductEvaluationBottomState extends State<ProductEvaluationBottom> {
                 ),
                 onTap: () {
                   //TODO:跳转到每日新品列表
-                  Get.to(() => ProductRankPage());
+                  Get.to(() => ProductCommentPage());
                 },
               ),
             ],
