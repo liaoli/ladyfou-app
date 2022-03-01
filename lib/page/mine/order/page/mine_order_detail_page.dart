@@ -11,8 +11,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:ladyfou/core/utils/utils.dart';
-import 'package:ladyfou/page/mine/order/components/mine_order_operation.dart';
+import 'package:ladyfou/page/mine/order/page/mine_order_logistics.dart';
 import 'package:ladyfou/style/text.dart';
 import 'package:provider/provider.dart';
 
@@ -23,23 +25,8 @@ import '../../../../style/Color.dart';
 import '../components/mine_order_item.dart';
 import '../store/order_detail_provider.dart';
 
-// class MineOrderDetailPage extends StatelessWidget {
-//   MineOrderDetailPage({Key? key, required this.orderModel}) : super(key: key);
-//
-//   final OrderInfoModel orderModel;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return ChangeNotifierProvider(
-//         create: (_) => OrderDetailProvider(),
-//         child: MineOrderDetailPageFul(orderModel: orderModel));
-//   }
-// }
-
 class MineOrderDetailPage extends StatefulWidget {
-  MineOrderDetailPage({Key? key, required this.orderModel})
-      : super(key: key);
+  MineOrderDetailPage({Key? key, required this.orderModel}) : super(key: key);
 
   final OrderInfoModel orderModel;
 
@@ -90,60 +77,61 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
     return ChangeNotifierProvider.value(
         value: provider,
         child: BaseScaffold(
-        title: '订单管理',
-        leadType: AppBarBackType.Back,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              // BaseNavigation.push('mine/news/list', context: context);
-            },
-            child: Padding(
-              padding: EdgeInsets.only(right: 16.w),
-              child: Image.asset(
-                'assets/images/mine/icon_customer.png',
-                width: 25.0.w,
-                height: 25.0.w,
+            title: '订单管理',
+            leadType: AppBarBackType.Back,
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  // BaseNavigation.push('mine/news/list', context: context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: 16.w),
+                  child: Image.asset(
+                    'assets/images/mine/icon_customer.png',
+                    width: 25.0.w,
+                    height: 25.0.w,
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
-        body: Stack(
-          children: [
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                // 触摸收起键盘
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      10.w, 10.w, 10.w, ScreenUtil().bottomBarHeight + 84.w),
-                  child: EasyRefresh.custom(
-                    controller: provider.refreshController,
-                    // onRefresh: () async {},
-                    // onLoad: () async {},
-                    enableControlFinishLoad: false,
-                    enableControlFinishRefresh: false,
-                    header: MaterialHeader(),
-                    footer: MaterialFooter(),
-                    slivers: <Widget>[bodyWidget(context)],
-                  )),
-            ),
-            Positioned(
-              bottom: 0.w,
-              child: Container(
-                height: ScreenUtil().bottomBarHeight + 84.w,
-                width: 375.w,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                        top: BorderSide(
-                            width: 0.5.w, color: AppColors.color_FFDADADA))),
-                child: buildBottomWidget(),
-              ),
-            ),
-          ],
-        )));
+            ],
+            body: Stack(
+              children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    // 触摸收起键盘
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.fromLTRB(10.w, 10.w, 10.w,
+                          ScreenUtil().bottomBarHeight + 84.w),
+                      child: EasyRefresh.custom(
+                        controller: provider.refreshController,
+                        // onRefresh: () async {},
+                        // onLoad: () async {},
+                        enableControlFinishLoad: false,
+                        enableControlFinishRefresh: false,
+                        header: MaterialHeader(),
+                        footer: MaterialFooter(),
+                        slivers: <Widget>[bodyWidget(context)],
+                      )),
+                ),
+                Positioned(
+                  bottom: 0.w,
+                  child: Container(
+                    height: ScreenUtil().bottomBarHeight + 84.w,
+                    width: 375.w,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                            top: BorderSide(
+                                width: 0.5.w,
+                                color: AppColors.color_FFDADADA))),
+                    child: buildBottomWidget(),
+                  ),
+                ),
+              ],
+            )));
   }
 
   /// Body
@@ -437,7 +425,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
   /// 订单信息
   Widget orderInfoWidget(BuildContext context) {
     return Container(
-      height: 75.w * widget.orderModel.product.length + 90.w,
+      height: 85.w * widget.orderModel.product.length + 90.w,
       decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -571,7 +559,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.only(left: 12.w,top: 10.w),
+            padding: EdgeInsets.only(left: 12.w, top: 10.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -582,9 +570,10 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                         fontSize: 12.sp,
                         color: AppColors.primaryBlackText)),
                 SizedBox(width: 5.w),
-                Text('￥${Utils.formatStepCount(double.parse(widget.orderModel.totalPrice))}',
+                Text(
+                    '￥${Utils.formatStepCount(double.parse(widget.orderModel.totalPrice))}',
                     style: BaseText.style(
-                      height: 1.5.sp,
+                        height: 1.5.sp,
                         fontWeight: FontWeight.w700,
                         fontSize: 14.sp,
                         color: AppColors.primaryBlackText)),
@@ -593,18 +582,32 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
           ),
           SizedBox(height: 5.w),
           Container(
-            width: 375.w - 24.w,
-            height: 34.w,
-            child: Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(left: 12.w,right: 12.w),
-              decoration: BoxDecoration(
-                  color: AppColors.navigationColor,
-                  borderRadius: BorderRadius.all(Radius.circular(17.w))
-              ),
-              child: Text('立即结算',style: BaseText.style(fontSize: 14.sp,fontWeight: FontWeight.w700,color: AppColors.white)),
-            ),
-          ),
+              padding: EdgeInsets.only(left: 20.w, right: 20.w),
+              height: 34.w,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => MineOrderLogisticsPage());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(left: 12.w, right: 12.w),
+                      decoration: BoxDecoration(
+                          color: AppColors.navigationColor,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(17.w))),
+                      child: Text('立即结算',
+                          style: BaseText.style(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.white)),
+                    ),
+                  )),
+                ],
+              )),
         ],
       ),
     );

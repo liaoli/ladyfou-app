@@ -7,9 +7,11 @@
  * @LastEditors: tang
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 
 import '../../../../components/image_placehold_widget.dart';
@@ -26,7 +28,7 @@ class OrderGoodsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String imgCoverStr = product.fThumb;
+    String imgCoverStr = /*product.fThumb*/"http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg";
     String specStr = '';
       List specs = [];
       product.optionsInfo.forEach((spec) {
@@ -48,18 +50,34 @@ class OrderGoodsItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           // 商品封面
-          Container(
-            margin: EdgeInsets.only(right: 12.w),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: ImagePlaceholdWidget(
-              url: imgCoverStr,
-              w: 75.w,
-              h: 75.w,
+          ClipRRect(
+            borderRadius: BorderRadius.all(new Radius.circular(5.w)),
+            child: CachedNetworkImage(
+              height: 75.0.w,
+              width: 75.0.w,
+              imageUrl:
+              imgCoverStr,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              placeholder: (context, url) => Center(
+                child: SizedBox(
+                  width: 20.w,
+                  height: 20.w,
+                  child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+                ),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
+          SizedBox(width: 5.w),
           // 封面右侧商品信息
           _orderGoodsInfo(context, product, specStr),
         ],

@@ -7,10 +7,12 @@
  * @LastEditors: tang
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../../components/image_placehold_widget.dart';
 import '../../../../core/model/good_info_model.dart';
@@ -141,22 +143,29 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
 
   /// 图片模块
   Widget _imageItem(BuildContext context) {
-    return Container(
-      width: 92.0.w,
-      height: 92.0.w,
-      alignment: Alignment.center,
-      child: ImagePlaceholdWidget(
-        imgError: () {
-          Future.delayed(Duration(milliseconds: 100)).then((e) {
-            widget.isShowLike = false;
-          });
-        },
-        url: widget.goodsModel.fThumb,
-        w: double.infinity,
-        defImagePath: 'assets/images/home/banner_placehold.png',
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8.w)),
+    return ClipRRect(
+      borderRadius: BorderRadius.all(new Radius.circular(5.w)),
+      child: CachedNetworkImage(
+        height: 92.0.w,
+        width: 92.0.w,
+        imageUrl:
+        "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        placeholder: (context, url) => Center(
+          child: SizedBox(
+            width: 20.w,
+            height: 20.w,
+            child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+          ),
+        ),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }
