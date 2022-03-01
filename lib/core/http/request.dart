@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 
-import '../../utils/sputils.dart';
 import '../model/category_info_model.dart';
 import '../model/token_info_model.dart';
-import '../model/user_info_model.dart';
 import 'http.dart';
 
 /// 注册接口
