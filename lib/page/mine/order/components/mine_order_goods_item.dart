@@ -27,7 +27,7 @@ class OrderGoodsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String
-        imgCoverStr = /*product.fThumb*/ "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg";
+        imgCoverStr = product.fThumb;
     String specStr = '';
     List specs = [];
     product.optionsInfo.forEach((spec) {

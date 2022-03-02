@@ -54,6 +54,8 @@ T fromJson<T>(dynamic json) {
       return CategoryInfoModel.fromList(json) as T;
     case "List<OrderInfoModel>":
       return OrderInfoModel.fromList(json) as T;
+    case "CollectionInfoModel":
+      return CollectionInfoModel.fromJson(json) as T;
     case "CartModel":
       CartModel cartModel = CartModel.fromJson(json);
       return cartModel as T;

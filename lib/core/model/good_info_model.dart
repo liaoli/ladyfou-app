@@ -21,7 +21,7 @@ class GoodsInfoModel {
     this.options = const [],
     this.tags = const [],
     this.imgUrl = '',
-    this.isWished = 0,
+    this.isWished = false,
     this.point = '',
     required this.presell,
     this.isLuckyBag = 0,
@@ -48,7 +48,7 @@ class GoodsInfoModel {
   List<Option> options;
   List<dynamic> tags;
   String imgUrl;
-  int isWished;
+  bool isWished;
   String point;
   Presell presell;
   int isLuckyBag;
@@ -85,7 +85,7 @@ class GoodsInfoModel {
     options: json["options"] == null ? [] : List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
     tags: json["tags"] == null ? [] : List<dynamic>.from(json["tags"].map((x) => x)),
     imgUrl: json["imgUrl"] ?? '',
-    isWished: json["is_wished"] ?? 0,
+    isWished: json["is_wished"] == 1 ? true : false,
     point: json["point"].toString(),
     presell:json["presell"] == null ? Presell() :  Presell.fromJson(json["presell"]),
     isLuckyBag: json["is_lucky_bag"],
@@ -113,7 +113,7 @@ class GoodsInfoModel {
     "options": List<dynamic>.from(options.map((x) => x.toJson())),
     "tags": List<dynamic>.from(tags.map((x) => x)),
     "imgUrl": imgUrl,
-    "is_wished": isWished,
+    "is_wished": isWished == true ? 1 : 0,
     "point": point.toString(),
     "presell": presell == null ? Presell() : presell.toJson(),
     "is_lucky_bag": isLuckyBag,
@@ -215,4 +215,14 @@ class Presell {
     "actual_num": actualNum,
     "presale": presale,
   };
+}
+
+
+class WishedModelReq {
+  WishedModelReq({
+    required this.id,
+    required this.isWished,
+});
+  int id;
+  bool isWished;
 }
