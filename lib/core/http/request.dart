@@ -4,6 +4,7 @@ import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 
 import '../model/category_info_model.dart';
+import '../model/home_data_list_model.dart';
 import '../model/token_info_model.dart';
 import 'http.dart';
 
@@ -42,6 +43,16 @@ Future<MyResponse<TokenInfoModel>> login({
     "password": password,
   });
   MyResponse<TokenInfoModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
+/// home页数据 限时折扣 新品 ，排行榜
+Future<MyResponse<HomeDataListModel>> homeData() async {
+  Map<String, dynamic> result = await XHttp.get(
+    "/otonastyle/product/getProductData",
+  );
+  MyResponse<HomeDataListModel> response = MyResponse.fromJson(result);
 
   return response;
 }

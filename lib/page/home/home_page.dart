@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/sliver_header_delegate.dart';
 import 'package:ladyfou/page/home/components/home_banner_swiper.dart';
 import 'package:ladyfou/page/home/components/recommend_product_head.dart';
+import 'package:ladyfou/page/home/store/home_provider.dart';
 import 'package:ladyfou/style/Color.dart';
+import 'package:provider/provider.dart';
 
 import 'components/daily_new_product.dart';
 import 'components/game_entry.dart';
@@ -30,8 +32,13 @@ class _HomePageState extends State<HomePage> {
 
   bool showSearch = false;
 
+  late HomeProvider homeProvider;
+
   @override
   void initState() {
+    homeProvider = HomeProvider();
+    homeProvider.getHomeDataList(context);
+
     scrollController = ScrollController();
     scrollController.addListener(() {
       debugPrint("controller.offset = ${scrollController.offset}");
@@ -62,27 +69,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.color_FFF5F5F5,
-      child: Stack(
-        children: [
-          Visibility(
-              visible: !showSearch,
-              child: Image.asset(
-                "assets/images/home/home_head_default_bg.png",
-                width: 375.w,
-                height: 172.w,
-                fit: BoxFit.cover,
-              )),
-          Column(
-            children: [
-              homeHead(),
-              Expanded(
-                child: refresh(),
-              ),
-            ],
-          )
-        ],
+    return ChangeNotifierProvider.value(
+      value: homeProvider,
+      child: Material(
+        color: AppColors.color_FFF5F5F5,
+        child: Stack(
+          children: [
+            Visibility(
+                visible: !showSearch,
+                child: Image.asset(
+                  "assets/images/home/home_head_default_bg.png",
+                  width: 375.w,
+                  height: 172.w,
+                  fit: BoxFit.cover,
+                )),
+            Column(
+              children: [
+                homeHead(),
+                Expanded(
+                  child: refresh(),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

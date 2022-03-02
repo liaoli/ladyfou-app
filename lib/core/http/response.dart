@@ -4,6 +4,7 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import '../model/category_info_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
+import '../model/home_data_list_model.dart';
 import '../model/token_info_model.dart';
 import '../model/order_info_model.dart';
 import '../model/user_info_model.dart';
@@ -18,9 +19,9 @@ class MyResponse<T> {
   Response<T>? response;
 
   factory MyResponse.fromJson(Map<String, dynamic> json) => MyResponse(
-    common: Common.fromJson(json["common"]),
-    response: Response<T>.fromJson(json['response']),
-  );
+        common: Common.fromJson(json["common"]),
+        response: Response<T>.fromJson(json['response']),
+      );
 }
 
 T fromJson<T>(dynamic json) {
@@ -28,6 +29,8 @@ T fromJson<T>(dynamic json) {
   switch (T.toString()) {
     case "UserInfoModel":
       return UserInfoModel.fromMap(json) as T;
+    case "HomeDataListModel":
+      return HomeDataListModel.fromMap(json) as T;
     case "TokenInfoModel":
       return TokenInfoModel.fromMap(json) as T;
     case "List<SortModel>":
@@ -43,7 +46,6 @@ T fromJson<T>(dynamic json) {
   }
 }
 
-
 class Response<T> {
   Response({
     required this.data,
@@ -52,8 +54,8 @@ class Response<T> {
   T? data;
 
   factory Response.fromJson(Map<String, dynamic> json) => Response(
-    data: json["data"] == null ? null : fromJson<T>(json['data']),
-  );
+        data: json["data"] == null ? null : fromJson<T>(json['data']),
+      );
 }
 
 class Common {
@@ -78,27 +80,26 @@ class Common {
   PageEnabled pageEnabled;
 
   factory Common.fromJson(Map<String, dynamic> json) => Common(
-    statusCode: json["statusCode"],
-    debugMessage: json["debugMessage"],
-    releaseMessage: json["releaseMessage"],
-    domain: json["domain"],
-    currencySymbol: json["currencySymbol"],
-    encryptionEnabled: json["encryptionEnabled"],
-    currentTimeStamp: json["currentTimeStamp"],
-    pageEnabled: PageEnabled.fromJson(json["pageEnabled"]),
-  );
+        statusCode: json["statusCode"],
+        debugMessage: json["debugMessage"],
+        releaseMessage: json["releaseMessage"],
+        domain: json["domain"],
+        currencySymbol: json["currencySymbol"],
+        encryptionEnabled: json["encryptionEnabled"],
+        currentTimeStamp: json["currentTimeStamp"],
+        pageEnabled: PageEnabled.fromJson(json["pageEnabled"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "statusCode": statusCode,
-    "debugMessage": debugMessage,
-    "releaseMessage": releaseMessage,
-    "domain": domain,
-    "currencySymbol": currencySymbol,
-    "encryptionEnabled": encryptionEnabled,
-    "currentTimeStamp": currentTimeStamp,
-    "pageEnabled": pageEnabled.toJson(),
-  };
-
+        "statusCode": statusCode,
+        "debugMessage": debugMessage,
+        "releaseMessage": releaseMessage,
+        "domain": domain,
+        "currencySymbol": currencySymbol,
+        "encryptionEnabled": encryptionEnabled,
+        "currentTimeStamp": currentTimeStamp,
+        "pageEnabled": pageEnabled.toJson(),
+      };
 }
 
 class PageEnabled {
@@ -115,18 +116,22 @@ class PageEnabled {
   int pageSize;
 
   factory PageEnabled.fromJson(Map<String, dynamic> json) => PageEnabled(
-    pageEnabled: json["pageEnabled"] == null ? false : json["pageEnabled"],
-    currentPage: json["currentPage"] == null ? 0 : int.parse(json["currentPage"].toString()),
-    totalPage: json["totalPage"] == null ? 0 : int.parse(json["totalPage"].toString()),
-    pageSize: json["pageSize"] == null ? 0 : int.parse(json["pageSize"].toString()),
-  );
+        pageEnabled: json["pageEnabled"] == null ? false : json["pageEnabled"],
+        currentPage: json["currentPage"] == null
+            ? 0
+            : int.parse(json["currentPage"].toString()),
+        totalPage: json["totalPage"] == null
+            ? 0
+            : int.parse(json["totalPage"].toString()),
+        pageSize: json["pageSize"] == null
+            ? 0
+            : int.parse(json["pageSize"].toString()),
+      );
 
   Map<String, dynamic> toJson() => {
-    "pageEnabled": pageEnabled,
-    "currentPage": currentPage,
-    "totalPage": totalPage,
-    "pageSize": pageSize,
-  };
+        "pageEnabled": pageEnabled,
+        "currentPage": currentPage,
+        "totalPage": totalPage,
+        "pageSize": pageSize,
+      };
 }
-
-
