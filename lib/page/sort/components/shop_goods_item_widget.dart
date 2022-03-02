@@ -7,19 +7,17 @@
  * @LastEditors: tang
  */
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
 import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
-import '../../../components/image_placehold_widget.dart';
+import '../../../components/base_image_load.dart';
 import '../../../core/constant/event_bus.dart';
 import '../../../core/utils/event.dart';
 import '../../../style/Color.dart';
@@ -133,7 +131,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.all(new Radius.circular(5.w)),
-          child: ImagePlaceholdWidget(
+          child: BaseImageLoading(
             imgError: () {
               Future.delayed(Duration(milliseconds: 100)).then((e) {
                 setState(() {
@@ -143,8 +141,8 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
               });
             },
             url: widget.goodsModel.fThumb,
-            w: double.infinity,
-            defImagePath: 'assets/images/home/banner_placehold.png',
+            width: double.infinity,
+            placehold: 'assets/images/home/banner_placehold.png',
           ),
         ),
       ),

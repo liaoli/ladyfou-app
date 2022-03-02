@@ -7,14 +7,12 @@
  * @LastEditors: tang
  */
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 
-import '../../../../components/image_placehold_widget.dart';
+import '../../../../components/base_image_load.dart';
 import '../../../../core/model/order_info_model.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
@@ -28,53 +26,36 @@ class OrderGoodsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String imgCoverStr = /*product.fThumb*/"http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg";
+    String
+        imgCoverStr = /*product.fThumb*/ "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg";
     String specStr = '';
-      List specs = [];
-      product.optionsInfo.forEach((spec) {
-        String specsStr = '';
+    List specs = [];
+    product.optionsInfo.forEach((spec) {
+      String specsStr = '';
 
-        List specs2 = [];
-        spec.optionValues.forEach((element) {
-          if (element.name2.isNotEmpty) {
-            specs2.add(element.name2);
-          }
-        });
-        specsStr += spec.name2 + ':' + specs2.join('、');
-        specs.add(specsStr);
+      List specs2 = [];
+      spec.optionValues.forEach((element) {
+        if (element.name2.isNotEmpty) {
+          specs2.add(element.name2);
+        }
       });
-      specStr = specs.join(' ');
+      specsStr += spec.name2 + ':' + specs2.join('、');
+      specs.add(specsStr);
+    });
+    specStr = specs.join(' ');
 
     return Container(
       padding: EdgeInsets.only(bottom: 12.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // 商品封面
           ClipRRect(
             borderRadius: BorderRadius.all(new Radius.circular(5.w)),
-            child: CachedNetworkImage(
+            child: BaseImageLoading(
               height: 75.0.w,
               width: 75.0.w,
-              imageUrl:
-              imgCoverStr,
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              placeholder: (context, url) => Center(
-                child: SizedBox(
-                  width: 20.w,
-                  height: 20.w,
-                  child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
-                ),
-              ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              url: imgCoverStr,
             ),
           ),
           SizedBox(width: 5.w),

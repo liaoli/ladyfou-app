@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ladyfou/page/cart/views/discounts_tab_widget.dart';
+import 'package:ladyfou/page/cart/view/discounts_tab_widget.dart';
 import 'package:ladyfou/style/Color.dart';
 
 class BottomPayWidget extends StatelessWidget {

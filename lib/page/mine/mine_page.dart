@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
 import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
-import 'package:ladyfou/page/address/address_main_page.dart';
+import 'package:ladyfou/page/address/edit_address_page.dart';
 import 'package:ladyfou/page/message/sell_info_page.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';

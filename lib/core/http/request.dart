@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
+import 'package:ladyfou/page/cart/model/cart_model.dart';
 
-import '../../utils/sputils.dart';
 import '../model/category_info_model.dart';
+import '../model/country_list_model.dart';
+import '../model/home_data_list_model.dart';
 import '../model/token_info_model.dart';
-import '../model/user_info_model.dart';
 import 'http.dart';
 
 /// 注册接口
@@ -45,6 +45,16 @@ Future<MyResponse<TokenInfoModel>> login({
     "password": password,
   });
   MyResponse<TokenInfoModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
+/// home页数据 限时折扣 新品 ，排行榜
+Future<MyResponse<HomeDataListModel>> homeData() async {
+  Map<String, dynamic> result = await XHttp.get(
+    "/otonastyle/product/getProductData",
+  );
+  MyResponse<HomeDataListModel> response = MyResponse.fromJson(result);
 
   return response;
 }
@@ -115,4 +125,25 @@ Future<MyResponse> operationIsWished(
   MyResponse response = MyResponse.fromJson(result);
   return response;
 }
+
 /////////////////////////////////thw-end//////////////////////////////////////
+
+/*-------------------------------购物车--------------------------------------*/
+Future<MyResponse<CartModel>> getCartList(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+      await XHttp.get("/otonastyle/checkout/shopping_cart_list", params);
+  MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
+  return response;
+}
+
+/// 获取国家
+///
+Future<MyResponse<CountryListModel>> getCountryList() async {
+  Map<String, dynamic> result = await XHttp.get(
+    "/otonastyle/common/country",
+  );
+  MyResponse<CountryListModel> response =
+      MyResponse<CountryListModel>.fromJson(result);
+  return response;
+}

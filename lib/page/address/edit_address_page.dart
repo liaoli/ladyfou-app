@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
+import 'package:ladyfou/core/utils/toast.dart';
 
 import '../../components/button/common_button.dart';
 import '../../core/constant/base_enum.dart';
+import '../../core/http/request.dart';
 import '../../style/Color.dart';
 import 'components/address_text_field.dart';
 import 'components/address_view.dart';
@@ -14,18 +16,29 @@ import 'components/common_address_switch_view.dart';
 import 'components/country_item_view.dart';
 import 'components/name_phone_email_view.dart';
 
-class AddressMainPage extends StatefulWidget {
-  const AddressMainPage({Key? key}) : super(key: key);
+class EditAddressPage extends StatefulWidget {
+  const EditAddressPage({Key? key}) : super(key: key);
 
   @override
-  _AddressMainPageState createState() => _AddressMainPageState();
+  _EditAddressPageState createState() => _EditAddressPageState();
 }
 
-class _AddressMainPageState extends State<AddressMainPage> {
+class _EditAddressPageState extends State<EditAddressPage> {
   bool showCountdown = false;
 
   @override
   void initState() {
+
+
+    getCountryList().then((value){
+      ToastUtils.success(value.common.debugMessage);
+     if(value.common.statusCode == 1000) {
+
+     }else{
+
+     }
+    });
+
     super.initState();
   }
 
