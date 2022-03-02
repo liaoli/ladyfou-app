@@ -20,6 +20,8 @@ import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
 import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
 import '../../../components/image_placehold_widget.dart';
+import '../../../core/constant/event_bus.dart';
+import '../../../core/utils/event.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -30,7 +32,7 @@ class ShopGoodsItem extends StatefulWidget {
   final VoidCallback? onItemClick;
 
   // 点击喜欢
-  final CallBackWidget? onItemLikeClick;
+  final CallBackWidget onItemLikeClick;
 
   // 点击更多
   final VoidCallback? onItemMoreClick;
@@ -44,7 +46,7 @@ class ShopGoodsItem extends StatefulWidget {
       {Key? key,
       required this.goodsModel,
       this.onItemClick,
-      this.onItemLikeClick,
+      required this.onItemLikeClick,
       this.onItemMoreClick,
       this.isShowLike = true})
       : super(key: key);
@@ -65,28 +67,23 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
     /// : implement initState
     super.initState();
 
-    // eventBusFn = eventBus.on<GoodsModelEvent>().listen((event) {
-    //   bool isCollection = widget.goodsModel.isCollection;
-    //   if (event != null && event.id == widget.goodsModel.id) {
-    //     setState(() {
-    //       isCollection = event.isCollection;
-    //       isListen = true;
-    //       widget.goodsModel.isCollection = isCollection;
-    //     });
-    //   }
-    // });
+    XEvent.on(EVENT_KEY_WISHED, (WishedModelReq event) {
+      bool isWished = widget.goodsModel.isWished;
+      if (event.id == widget.goodsModel.id) {
+        isWished = event.isWished;
+        widget.goodsModel.isWished = isWished;
+        setState(() {});
+      }
+    });
   }
 
   @override
   void dispose() {
     /// : implement dispose
-    super.dispose();
 
-    // if (isListen && eventBusFn != null) {
-    //   //取消订阅
-    //   eventBusFn.cancel();
-    //   isListen = false;
-    // }
+    // XEvent.cancelAll(EVENT_KEY_WISHED);
+
+    super.dispose();
   }
 
   @override
@@ -297,13 +294,12 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
             children: [
               widget.isShowLike
                   ? ManagementOptions(
-                        onTap: () => widget.onItemLikeClick!(),
-                        isOptions:
-                            widget.goodsModel.isLuckyBag > 0 ? true : false,
-                        selectUrl: 'assets/images/sort/love_red.png',
-                        unchecked: 'assets/images/sort/love_black.png',
-                        width: 24.w,
-                      )
+                      onTap: () => widget.onItemLikeClick(),
+                      isOptions: widget.goodsModel.isWished,
+                      selectUrl: 'assets/images/sort/love_red.png',
+                      unchecked: 'assets/images/sort/love_black.png',
+                      width: 24.w,
+                    )
                   : Padding(padding: EdgeInsets.zero),
               GestureDetector(
                 onTap: () {},

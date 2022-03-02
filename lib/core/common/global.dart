@@ -19,7 +19,7 @@ class Global {
     tokenInfo = SPUtils.getTokenInfo();
   }
 
- static bool isLogin() {
+  static bool isLogin() {
     return tokenInfo.token.isNotEmpty;
   }
 

@@ -1,11 +1,15 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/utils/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../core/constant/share_preference_key.dart';
 import '../core/model/token_info_model.dart';
 import '../core/model/user_info_model.dart';
+import '../page/login/login.dart';
 
 class SPUtils {
   /// 内部构造方法，可避免外部暴露构造函数，进行实例化
@@ -88,6 +92,15 @@ class SPUtils {
   static bool isLogined() {
     String? token = getToken();
     return token != null && token.isNotEmpty;
+  }
+
+  /// 是否登录，未登录的跳转登录页
+  static bool tryToLogin(BuildContext context) {
+    bool isLogin = isLogined();
+    if (isLogin == false) {
+      Get.to(() => LoginPage());
+    }
+    return isLogin;
   }
 
   //版本号

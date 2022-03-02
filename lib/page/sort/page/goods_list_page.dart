@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:gzx_dropdown_menu/gzx_dropdown_menu.dart';
 import 'package:ladyfou/core/constant/base_bloc.dart';
 import 'package:ladyfou/page/sort/components/comprehensive_widget.dart';
@@ -19,13 +21,12 @@ import 'package:provider/provider.dart';
 import '../../../components/base_scaffold.dart';
 import '../../../core/constant/base_enum.dart';
 import '../../../core/constant/constant.dart';
-import '../../../core/model/sort_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
+import '../../../utils/sputils.dart';
+import '../../cart/page/cart_page.dart';
 import '../components/classification_widget.dart';
-import '../components/conditions_widget.dart';
 import '../components/shop_grid_list_view.dart';
-import '../components/shop_top_bar_widget.dart';
 import '../components/wrap_gradient_widget.dart';
 import '../store/sort_provider.dart';
 import '../../../generated/l10n.dart';
@@ -106,6 +107,17 @@ class _GoodsListPageState extends State<GoodsListPage>
       });
     }
 
+    // Event.on<GoodsModelEvent>().listen((event) {
+    //   bool isCollection = widget.goodsModel.isCollection;
+    //   if (event != null && event.id == widget.goodsModel.id) {
+    //     setState(() {
+    //       isCollection = event.isCollection;
+    //       isListen = true;
+    //       widget.goodsModel.isCollection = isCollection;
+    //     });
+    //   }
+    // });
+
     super.initState();
   }
 
@@ -136,7 +148,9 @@ class _GoodsListPageState extends State<GoodsListPage>
   }
 
   /// 点击跳转购物车
-  void checkPushCartAction(BuildContext context) async {}
+  void checkPushCartAction(BuildContext context) async {
+    Get.to(()=> CartPage());
+  }
 
   /// 点击tab切换
   void selectTabItem(int index) {
@@ -345,10 +359,9 @@ class _GoodsListPageState extends State<GoodsListPage>
         padding:
             EdgeInsets.only(left: 16.0, top: 8.0, bottom: 16.0, right: 16.0),
         loverClick: (index) {
-          // if (UserInfoManager().isLogin(context)) {
-          //   Provider.of<StoreHomeProvider>(context, listen: false)
-          //       .isCollectionAction(index);
-          // }
+          if (SPUtils.tryToLogin(context)) {
+            provider.collectionAction(index);
+          }
         },
       );
     });

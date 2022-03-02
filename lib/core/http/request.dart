@@ -106,4 +106,13 @@ Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
   return response;
 }
+
+/// 收藏
+Future<MyResponse> operationIsWished(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+      await XHttp.post("/otonastyle/account/wish_product", params);
+  MyResponse response = MyResponse.fromJson(result);
+  return response;
+}
 /////////////////////////////////thw-end//////////////////////////////////////
