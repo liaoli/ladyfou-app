@@ -28,8 +28,6 @@ class _EditAddressPageState extends State<EditAddressPage> {
 
   @override
   void initState() {
-
-
     getCountryList().then((value){
       ToastUtils.success(value.common.debugMessage);
      if(value.common.statusCode == 1000) {

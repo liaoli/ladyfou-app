@@ -3,10 +3,13 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
+import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
+import '../model/county_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
 import '../model/home_data_list_model.dart';
+import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import '../model/order_info_model.dart';
 import '../model/user_info_model.dart';
@@ -33,6 +36,12 @@ T fromJson<T>(dynamic json) {
       return UserInfoModel.fromMap(json) as T;
     case "CountryListModel":
       return CountryListModel.fromMap(json) as T;
+    case "ProvinceListModel":
+      return ProvinceListModel.fromMap(json) as T;
+    case "CityListModel":
+      return CityListModel.fromMap(json) as T;
+    case "CountyListModel":
+      return CountyListModel.fromMap(json) as T;
     case "HomeDataListModel":
       return HomeDataListModel.fromMap(json) as T;
     case "TokenInfoModel":
