@@ -5,6 +5,7 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
+import '../model/country_list_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/token_info_model.dart';
 import 'http.dart';
@@ -124,5 +125,16 @@ Future<MyResponse<CartModel>> getCartList(
   Map<String, dynamic> result =
       await XHttp.get("/otonastyle/checkout/shopping_cart_list", params);
   MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
+  return response;
+}
+
+/// 获取国家
+///
+Future<MyResponse<CountryListModel>> getCountryList() async {
+  Map<String, dynamic> result = await XHttp.get(
+    "/otonastyle/common/country",
+  );
+  MyResponse<CountryListModel> response =
+      MyResponse<CountryListModel>.fromJson(result);
   return response;
 }
