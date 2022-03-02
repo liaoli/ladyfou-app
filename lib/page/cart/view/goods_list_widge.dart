@@ -81,7 +81,10 @@ class GoodItemWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.all(new Radius.circular(5)),
             child: BaseImageLoading(
-                url: producModel.fThumb, width: 90, height: 90),
+              url: producModel.fThumb,
+              width: 90,
+              height: 90,
+            ),
           ),
         ],
       ),
