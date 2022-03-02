@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../../../components/image_placehold_widget.dart';
+import '../../../../components/base_image_load.dart';
 import '../../../../core/model/good_info_model.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../style/Color.dart';
@@ -62,7 +62,6 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
   var eventBusFn;
   bool isListen = false;
 
-
   @override
   void initState() {
     // ignore: todo
@@ -108,7 +107,9 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
                 child: Container(
                   height: 116.0.w,
                   width: 50.w,
-                  child: Image.asset(widget.isSelect ? "assets/images/sort/fi_check.png" : "assets/images/sort/fi_check_nor.png"),
+                  child: Image.asset(widget.isSelect
+                      ? "assets/images/sort/fi_check.png"
+                      : "assets/images/sort/fi_check_nor.png"),
                 ),
               )
             : SizedBox(),
@@ -143,29 +144,25 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
 
   /// 图片模块
   Widget _imageItem(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(new Radius.circular(5.w)),
-      child: CachedNetworkImage(
+    return Container(
+      width: 92.0.w,
+      height: 92.0.w,
+      alignment: Alignment.center,
+      child: BaseImageLoading(
+        // url: widget.goodsModel.fThumb,
+        url:
+            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
         height: 92.0.w,
         width: 92.0.w,
-        imageUrl:
-        "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        placeholder: (context, url) => Center(
-          child: SizedBox(
-            width: 20.w,
-            height: 20.w,
-            child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
-          ),
-        ),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        imgError: () {
+          Future.delayed(Duration(milliseconds: 100)).then((e) {
+            widget.isShowLike = false;
+          });
+        },
+        placehold: 'assets/images/home/banner_placehold.png',
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8.w)),
       ),
     );
   }

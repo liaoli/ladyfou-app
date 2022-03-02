@@ -18,7 +18,7 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:flutter/material.dart';
 import 'package:ladyfou/page/sort/page/goods_list_page.dart';
 
-import '../../../components/image_placehold_widget.dart';
+import '../../../components/base_image_load.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -196,7 +196,7 @@ class SecondryCategory extends StatelessWidget {
                 height: 50.w,
                 width: 50.w,
                 imageUrl:
-                "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(

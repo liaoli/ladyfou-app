@@ -2,6 +2,7 @@ import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
+import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
 import '../model/home_data_list_model.dart';
@@ -114,4 +115,14 @@ Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
   return response;
 }
+
 /////////////////////////////////thw-end//////////////////////////////////////
+
+/*-------------------------------购物车--------------------------------------*/
+Future<MyResponse<CartModel>> getCartList(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+      await XHttp.get("/otonastyle/checkout/shopping_cart_list", params);
+  MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
+  return response;
+}

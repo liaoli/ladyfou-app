@@ -1,12 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:ladyfou/components/base_image_load.dart';
 import 'package:ladyfou/components/check_box_widget.dart';
+import 'package:ladyfou/page/cart/model/cart_model.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/style/text.dart';
 
 class GoodsListWidget extends StatelessWidget {
-  const GoodsListWidget({Key? key}) : super(key: key);
+  const GoodsListWidget({Key? key, this.productList = const []})
+      : super(key: key);
+  final List<Product> productList;
   @override
   Widget build(BuildContext context) {
     final datas = ['1', '2', '3', '4'];
@@ -23,7 +26,7 @@ class GoodsListWidget extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
-                child: GoodItemWidget(),
+                child: GoodItemWidget(producModel: productList[index]),
               ),
 
               // 侧滑选项
@@ -49,15 +52,15 @@ class GoodsListWidget extends StatelessWidget {
             ),
           );
         },
-        childCount: 1,
+        childCount: productList.length,
       ),
     );
   }
 }
 
 class GoodItemWidget extends StatelessWidget {
-  const GoodItemWidget({Key? key}) : super(key: key);
-
+  const GoodItemWidget({Key? key, required this.producModel}) : super(key: key);
+  final Product producModel;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -77,20 +80,8 @@ class GoodItemWidget extends StatelessWidget {
           CheckBoxWidget(isSelect: true),
           ClipRRect(
             borderRadius: BorderRadius.all(new Radius.circular(5)),
-            child: CachedNetworkImage(
-              width: 90,
-              height: 90,
-              imageUrl:
-                  "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
+            child: BaseImageLoading(
+                url: producModel.fThumb, width: 90, height: 90),
           ),
         ],
       ),
@@ -111,7 +102,7 @@ class GoodItemWidget extends StatelessWidget {
                 children: [
                   // 商品名称
                   Text(
-                    '我是很长很长的title，只显示一行，多余显示省略号',
+                    producModel.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: BaseText.style(

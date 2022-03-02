@@ -19,7 +19,7 @@ import 'package:ladyfou/core/utils/utils.dart';
 import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
 import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
-import '../../../components/image_placehold_widget.dart';
+import '../../../components/base_image_load.dart';
 import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
@@ -35,13 +35,12 @@ class ShopGoodsItem2 extends StatefulWidget {
   final GoodsInfoModel goodsModel;
   bool isShowLike;
 
-
   ShopGoodsItem2(
       {Key? key,
-        required this.goodsModel,
-        this.onItemClick,
-        this.onItemLikeClick,
-        this.isShowLike = true})
+      required this.goodsModel,
+      this.onItemClick,
+      this.onItemLikeClick,
+      this.isShowLike = true})
       : super(key: key);
 
   @override
@@ -124,7 +123,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
         height: 92.0.w,
         width: 92.0.w,
         imageUrl:
-        "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -205,26 +204,25 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
             ),
             SizedBox(width: 10.w),
             double.parse(widget.goodsModel.listPrice) > 0.0
-                ? Text( '￥'+
-                Utils.formatStepCount(
-                    double.parse(widget.goodsModel.listPrice)), // 商品原价
-              style: BaseText.style(
-                  fontSize: 10.0.sp,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.primaryBlackText.withOpacity(0.5),
-                  decoration: TextDecoration.lineThrough
-              ),
-            )
+                ? Text(
+                    '￥' +
+                        Utils.formatStepCount(
+                            double.parse(widget.goodsModel.listPrice)), // 商品原价
+                    style: BaseText.style(
+                        fontSize: 10.0.sp,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.primaryBlackText.withOpacity(0.5),
+                        decoration: TextDecoration.lineThrough),
+                  )
                 : SizedBox(),
           ],
-        )
-    );
+        ));
   }
 
   /// 价格模块
   Widget _priceItem(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 2.w,bottom: 4.w),
+      margin: EdgeInsets.only(top: 2.w, bottom: 4.w),
       height: 16.0.w,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -273,9 +271,15 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 itemSize: 12.w,
                 ignoreGestures: true,
                 ratingWidget: RatingWidget(
-                  full: Container(child: Image.asset('assets/images/sort/icon_star_full.png')),
-                  half: Container(child: Image.asset('assets/images/sort/icon_star_half.png')),
-                  empty: Container(child: Image.asset('assets/images/sort/icon_star_empty.png')),
+                  full: Container(
+                      child:
+                          Image.asset('assets/images/sort/icon_star_full.png')),
+                  half: Container(
+                      child:
+                          Image.asset('assets/images/sort/icon_star_half.png')),
+                  empty: Container(
+                      child: Image.asset(
+                          'assets/images/sort/icon_star_empty.png')),
                 ),
                 onRatingUpdate: (double value) {},
               ),
@@ -288,16 +292,15 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
               ),
             ],
           ),
-
           Row(
             children: [
-               ManagementOptions(
-                  onTap: () => widget.onItemLikeClick!(),
-                  isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
-                  selectUrl: 'assets/images/sort/love_red.png',
-                  unchecked: 'assets/images/sort/love_black.png',
-                  width: 24.w,
-                ),
+              ManagementOptions(
+                onTap: () => widget.onItemLikeClick!(),
+                isOptions: widget.goodsModel.isLuckyBag > 0 ? true : false,
+                selectUrl: 'assets/images/sort/love_red.png',
+                unchecked: 'assets/images/sort/love_black.png',
+                width: 24.w,
+              ),
               GestureDetector(
                 onTap: () {},
                 child: Container(

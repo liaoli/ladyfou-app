@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
+import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
 import '../model/good_collection_model.dart';
@@ -41,6 +42,9 @@ T fromJson<T>(dynamic json) {
       return CategoryInfoModel.fromList(json) as T;
     case "List<OrderInfoModel>":
       return OrderInfoModel.fromList(json) as T;
+    case "CartModel":
+      CartModel cartModel = CartModel.fromJson(json);
+      return cartModel as T;
     default:
       return [] as T;
   }
