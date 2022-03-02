@@ -7,10 +7,12 @@
  * @LastEditors: tang
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../../components/base_image_load.dart';
 import '../../../../core/model/good_info_model.dart';
@@ -147,13 +149,16 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
       height: 92.0.w,
       alignment: Alignment.center,
       child: BaseImageLoading(
+        // url: widget.goodsModel.fThumb,
+        url:
+            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+        height: 92.0.w,
+        width: 92.0.w,
         imgError: () {
           Future.delayed(Duration(milliseconds: 100)).then((e) {
             widget.isShowLike = false;
           });
         },
-        url: widget.goodsModel.fThumb,
-        width: double.infinity,
         placehold: 'assets/images/home/banner_placehold.png',
       ),
       decoration: BoxDecoration(

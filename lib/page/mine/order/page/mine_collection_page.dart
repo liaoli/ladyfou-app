@@ -58,7 +58,6 @@ class _MineCollectionState extends State<MineCollectionFul> {
   @override
   void initState() {
     // TODO: implement initState
-    _dropdownMenuController.isShow = false;
     provider = GoodsOperationProvider();
     provider.getCollectionLists().then((value) {
       setState(() {
@@ -73,8 +72,6 @@ class _MineCollectionState extends State<MineCollectionFul> {
     provider.getCategoryChildDatas(0).then((value) {
       setState(() {});
     });
-
-
 
     super.initState();
   }
@@ -174,7 +171,7 @@ class _MineCollectionState extends State<MineCollectionFul> {
                                     iconDropDownColor:
                                         AppColors.navigationColor,
                                     onItemTap: (index) {
-                                      if(index < 2) {
+                                      if (index < 2) {
                                         _dropdownMenuController.hide();
                                       }
                                     },
@@ -225,6 +222,20 @@ class _MineCollectionState extends State<MineCollectionFul> {
                               }
                             },
                             menus: getBuilderMenus()),
+                        provider.isEditCollection ? Positioned(
+                          bottom: 0.w,
+                          child: Container(
+                            height: ScreenUtil().bottomBarHeight + 84.w,
+                            width: 375.w,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border(
+                                    top: BorderSide(
+                                        width: 0.5.w,
+                                        color: AppColors.color_FFDADADA))),
+                            child: buildBottomWidget(),
+                          ),
+                        ) : SizedBox(),
                       ],
                     ),
                   ),
@@ -251,6 +262,7 @@ class _MineCollectionState extends State<MineCollectionFul> {
         loverClick: (index) {},
         onCollectionSelectClick: (model) {
           provider.checkSelectCollection(model);
+          setState(() {});
         },
       );
     });
@@ -290,7 +302,7 @@ class _MineCollectionState extends State<MineCollectionFul> {
 
   List<GZXDropdownMenuBuilder> getBuilderMenus() {
     List<GZXDropdownMenuBuilder> items = [];
-    List<double> list = [40.w * 4.0,40.w * 4.0,40.w * 4.0];
+    List<double> list = [1.w * 1, 1.w * 1, 40.w * 4.0];
     list.forEach((e) {
       items.add(_menuBuilder(e));
     });
@@ -298,25 +310,26 @@ class _MineCollectionState extends State<MineCollectionFul> {
   }
 
   GZXDropdownMenuBuilder _menuBuilder(double height) {
-    return  GZXDropdownMenuBuilder(
+    return GZXDropdownMenuBuilder(
         dropDownHeight: height,
-        dropDownWidget: StreamBuilder<bool>(
+        dropDownWidget:height < 50.w ? Container() : StreamBuilder<bool>(
           initialData: false,
           stream: BaseBloc.instance.addListenerCollectionAlertShowStream,
           builder: (ctx, snapshot) {
-
             List<ItemButtonModel> models = [];
             provider.categoryInfoModels.forEach((element) {
               models.add(ItemButtonModel.fromModel(element.id, element.name2));
             });
             return ClassificationWidget(
               itemList: models,
-              selectItemList: ItemButtonModel.fromItemModels(provider.selectCategoryInfoModels),
+              selectItemList: ItemButtonModel.fromItemModels(
+                  provider.selectCategoryInfoModels),
               isShow: snapshot.data ?? false,
               callBack: (infoModels) {
-                provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(provider.categoryInfoModels, infoModels);
-                setState(() {
-                });
+                provider.selectCategoryInfoModels =
+                    ItemButtonModel.toFindModels(
+                        provider.categoryInfoModels, infoModels);
+                setState(() {});
               },
             );
           },
@@ -355,6 +368,91 @@ class _MineCollectionState extends State<MineCollectionFul> {
         ),
       ],
     );
+  }
+
+  /// 底部
+  Widget buildBottomWidget() {
+    return Consumer<GoodsOperationProvider>(builder: (context, value, child) {
+      return Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: 15.w),
+            InkWell(
+                onTap: () {
+                  value.checkSelectAll();
+                },
+                child: Container(
+                  child: Row(children: [
+                    Image.asset(value.isSelectAll
+                        ? "assets/images/sort/fi_check.png"
+                        : "assets/images/sort/fi_check_nor.png"),
+                    SizedBox(width: 5.w),
+                    Text(
+                      '全选',
+                      style: BaseText.style(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.color_FF333333),
+                    )
+                  ]),
+                )),
+            SizedBox(width: 15.w),
+            Expanded(
+                child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      value.cancleCollection();
+                    },
+                    child: Container(
+                      height: 33.w,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                        decoration: BoxDecoration(
+                            color: AppColors.color_FFF5F5F5,
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(16.5.w))),
+                        child: Text(
+                            value.selectCollectionGoodList.length > 0
+                                ? '取消收藏(${value.selectCollectionGoodList.length})'
+                                : '取消收藏',
+                            style: BaseText.style(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.color_FF333333)),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15.w),
+                  Container(
+                    height: 33.w,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                      decoration: BoxDecoration(
+                          color: AppColors.navigationColor,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(16.5.w))),
+                      child: Text('立即结算',
+                          style: BaseText.style(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.white)),
+                    ),
+                  )
+                ],
+              ),
+            )),
+            SizedBox(width: 15.w),
+          ],
+        ),
+      );
+    });
   }
 }
 

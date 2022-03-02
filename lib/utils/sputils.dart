@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/utils/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../core/constant/share_preference_key.dart';
+import '../core/model/token_info_model.dart';
 import '../core/model/user_info_model.dart';
 
 class SPUtils {
@@ -15,10 +18,18 @@ class SPUtils {
     return _spf;
   }
 
+
+  ///删除某个key
+  static Future<bool> removeKey(String key) {
+    return _spf.remove(key);
+  }
+
   ///主题
   static Future<bool> saveThemeIndex(int value) {
     return _spf.setInt('key_theme_color', value);
   }
+
+
 
   static int getThemeIndex() {
     if (_spf.containsKey('key_theme_color')) {
@@ -103,6 +114,24 @@ class SPUtils {
       return model;
     } else {
       return UserInfoModel();
+    }
+  }
+
+  ///存取token信息
+  static Future<bool> saveTokenInfo(TokenInfoModel info) {
+    Global.tokenInfo = info;
+    return _spf.setString(TOKEN_INFO, info.toJson());
+  }
+
+  ///获取token信息
+  static TokenInfoModel getTokenInfo() {
+    String? uJson = _spf.getString(TOKEN_INFO);
+
+    if (uJson != null) {
+      TokenInfoModel model = TokenInfoModel.fromJson(uJson);
+      return model;
+    } else {
+      return TokenInfoModel();
     }
   }
 }

@@ -16,4 +16,5 @@ class OrderDetailProvider with ChangeNotifier {
   bool isRequestError = false;
   int currentPage = CURRENT_PAGE;
   EasyRefreshController refreshController = EasyRefreshController();
+  EasyRefreshController logisticsRefreshController = EasyRefreshController();
 }

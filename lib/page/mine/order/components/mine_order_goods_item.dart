@@ -26,7 +26,8 @@ class OrderGoodsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String imgCoverStr = product.fThumb;
+    String
+        imgCoverStr = /*product.fThumb*/ "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg";
     String specStr = '';
     List specs = [];
     product.optionsInfo.forEach((spec) {
@@ -49,17 +50,15 @@ class OrderGoodsItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 商品封面
-          Container(
-            margin: EdgeInsets.only(right: 12.w),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
+          ClipRRect(
+            borderRadius: BorderRadius.all(new Radius.circular(5.w)),
             child: BaseImageLoading(
+              height: 75.0.w,
+              width: 75.0.w,
               url: imgCoverStr,
-              width: 75.w,
-              height: 75.w,
             ),
           ),
+          SizedBox(width: 5.w),
           // 封面右侧商品信息
           _orderGoodsInfo(context, product, specStr),
         ],
