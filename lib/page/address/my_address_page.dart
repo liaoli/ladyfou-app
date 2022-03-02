@@ -9,7 +9,7 @@ import 'package:ladyfou/components/base_scaffold.dart';
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
 import '../detail/product_detail_page.dart';
-import 'address_main_page.dart';
+import 'edit_address_page.dart';
 
 class MyAddressPage extends StatefulWidget {
   const MyAddressPage({Key? key}) : super(key: key);
@@ -77,7 +77,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
               address: address[index],
             ),
             onTap: () {
-              Get.to(() => ProductDetailPage());
+              // Get.to(() => ProductDetailPage());
             },
           );
         },
@@ -151,7 +151,7 @@ class SellInfoItemView extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    Get.to(() => AddressMainPage());
+                    Get.to(() => EditAddressPage());
                   },
                 ),
               ],

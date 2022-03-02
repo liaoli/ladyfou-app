@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:gzx_dropdown_menu/gzx_dropdown_menu.dart';
 import 'package:ladyfou/core/constant/base_bloc.dart';
 import 'package:ladyfou/page/sort/components/comprehensive_widget.dart';
@@ -19,32 +21,15 @@ import 'package:provider/provider.dart';
 import '../../../components/base_scaffold.dart';
 import '../../../core/constant/base_enum.dart';
 import '../../../core/constant/constant.dart';
-import '../../../core/model/sort_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
+import '../../../utils/sputils.dart';
+import '../../cart/page/cart_page.dart';
 import '../components/classification_widget.dart';
-import '../components/conditions_widget.dart';
 import '../components/shop_grid_list_view.dart';
-import '../components/shop_top_bar_widget.dart';
 import '../components/wrap_gradient_widget.dart';
 import '../store/sort_provider.dart';
 import '../../../generated/l10n.dart';
-
-// class GoodsListPage extends StatelessWidget {
-//   final int shopId;
-//   final String title;
-//
-//   GoodsListPage({Key? key, required this.shopId, required this.title})
-//       : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return ChangeNotifierProvider(
-//         create: (_) => SortProvider(),
-//         child: GoodsListPageFul(shopId: shopId, title: title));
-//   }
-// }
 
 class GoodsListPage extends StatefulWidget {
   final int shopId;
@@ -82,11 +67,12 @@ class _GoodsListPageState extends State<GoodsListPage>
     provider = SortProvider();
 
     // 请求分类数据
-    provider.getCategoryProducts(widget.shopId, isFirst: true).then((value) {
+    provider.getCategoryProducts([widget.shopId], isFirst: true).then((value) {
       setState(() {});
     });
     // 请求筛选的数据
     provider.getCategoryChildDatas(widget.shopId).then((value) {
+      provider.firstSelectModels(widget.title);
       setState(() {});
     });
     provider.getConditionChildDatas(widget.shopId).then((value) {
@@ -98,11 +84,6 @@ class _GoodsListPageState extends State<GoodsListPage>
 
     if (tabController != null) {
       tabController.addListener(() {
-        // if (currentIndex != tabController.index) {
-        //   selectTabItem(tabController.index);
-        // }
-        // currentIndex = tabController.index;
-        // bloc.setUpdateIndex(currentIndex);
       });
     }
 
@@ -136,7 +117,9 @@ class _GoodsListPageState extends State<GoodsListPage>
   }
 
   /// 点击跳转购物车
-  void checkPushCartAction(BuildContext context) async {}
+  void checkPushCartAction(BuildContext context) async {
+    Get.to(()=> CartPage());
+  }
 
   /// 点击tab切换
   void selectTabItem(int index) {
@@ -236,7 +219,17 @@ class _GoodsListPageState extends State<GoodsListPage>
                             iconColor: AppColors.color_FF666666,
                             iconDropDownColor: AppColors.navigationColor,
                             onItemTap: (index) {
-                              debugPrint("index = $index");
+                              // if (index == 1) {
+                              //   // 请求筛选的数据
+                              //   provider.getCategoryChildDatas(widget.shopId).then((value) {
+                              //     setState(() {});
+                              //   });
+                              // }
+                              // if (index == 2) {
+                              //   provider.getConditionChildDatas(widget.shopId).then((value) {
+                              //     setState(() {});
+                              //   });
+                              // }
                             },
                           ),
 
@@ -246,12 +239,12 @@ class _GoodsListPageState extends State<GoodsListPage>
                             controller: provider.refreshController,
                             onRefresh: () {
                               provider.currentPage += CURRENT_PAGE;
-                              return provider.getCategoryProducts(widget.shopId,
+                              return provider.getCategoryProducts([widget.shopId],
                                   isRefresh: true, page: provider.currentPage);
                             },
                             onLoad: () {
                               provider.currentPage += 1;
-                              return provider.getCategoryProducts(widget.shopId,
+                              return provider.getCategoryProducts([widget.shopId],
                                   isRefresh: false, page: provider.currentPage);
                             },
                             enableControlFinishLoad: true,
@@ -298,7 +291,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                                 dropDownHeight: 40.w * 5.0,
                                 dropDownWidget: _buildComprehensive(context)),
                             GZXDropdownMenuBuilder(
-                                dropDownHeight: 40.w * 4.0,
+                                dropDownHeight: 40.w * 6.0,
                                 dropDownWidget: _buildClassification(context)),
                             GZXDropdownMenuBuilder(
                                 dropDownHeight: 40.w * 4.0,
@@ -345,10 +338,9 @@ class _GoodsListPageState extends State<GoodsListPage>
         padding:
             EdgeInsets.only(left: 16.0, top: 8.0, bottom: 16.0, right: 16.0),
         loverClick: (index) {
-          // if (UserInfoManager().isLogin(context)) {
-          //   Provider.of<StoreHomeProvider>(context, listen: false)
-          //       .isCollectionAction(index);
-          // }
+          if (SPUtils.tryToLogin(context)) {
+            provider.collectionAction(index);
+          }
         },
       );
     });
@@ -375,8 +367,11 @@ class _GoodsListPageState extends State<GoodsListPage>
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
               provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(provider.categoryInfoModels, infoModels);
-              setState(() {
-              });
+              provider.querySortCategoryProducts([widget.shopId]);
+            },
+            finishCallBack:() {
+              _dropdownMenuController.hide();
+              provider.querySortCategoryProducts([widget.shopId]);
             },
           );
         });
@@ -398,8 +393,10 @@ class _GoodsListPageState extends State<GoodsListPage>
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
               provider.selectConditionInfoModels = ItemButtonModel.toFindModels(provider.conditionInfoModels, infoModels);
-              setState(() {
-              });
+              provider.querySortCategoryProducts([widget.shopId]);
+            },
+            finishCallBack:() {
+              _dropdownMenuController.hide();
             },
           );
         });

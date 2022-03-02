@@ -16,8 +16,10 @@ import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
 
 import '../../../core/constant/base_enum.dart';
+import '../../../core/constant/event_bus.dart';
 import '../../../core/model/category_info_model.dart';
 import '../../../core/model/good_info_model.dart';
+import '../../../core/utils/event.dart';
 
 class SortProvider with ChangeNotifier {
   List<SortModel> categoryList = [];
@@ -33,6 +35,7 @@ class SortProvider with ChangeNotifier {
 
   /// 获取分类数据
   Future getSortAllDatas() async {
+    /*
     List data = [
       {
         "id": 25,
@@ -349,7 +352,8 @@ class SortProvider with ChangeNotifier {
     await Future.delayed(Duration(milliseconds: 300));
 
     notifyListeners();
-    /*
+    */
+
     try {
       MyResponse<List<SortModel>> response = await getSortData();
       if (response.common.statusCode == 1000) {
@@ -363,11 +367,10 @@ class SortProvider with ChangeNotifier {
     } catch (s, e) {
       print('请求报错:$e');
     }
-     */
   }
 
   /// 获取二级分类商品列表
-  Future getCategoryProducts(int id,
+  Future getCategoryProducts(List<int> ids,
       {bool isFirst = false,
       bool isRefresh = true,
       int page = CURRENT_PAGE,
@@ -375,6 +378,7 @@ class SortProvider with ChangeNotifier {
       String order_type = ""}) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
 
+    /*
     List data = [
       {
         "id": 3867,
@@ -591,11 +595,18 @@ class SortProvider with ChangeNotifier {
     ];
     goodsInfoList = GoodsInfoModel.fromList(data);
     notifyListeners();
+     */
 
-    /*
     try {
-      MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(
-          id: id, page: page, size: size, order_type: order_type);
+      Map<String, dynamic> params = {
+        "id": ids.join(','),
+        "page": page,
+        "size": size,
+        "order_type": order_type,
+      };
+
+      MyResponse<List<GoodsInfoModel>> response =
+          await getCategoryProduct(params: params);
       if (response.common.statusCode == 1000) {
         List<GoodsInfoModel> modelList = response.response!.data!;
 
@@ -627,21 +638,37 @@ class SortProvider with ChangeNotifier {
         refreshController.finishLoad();
         notifyListeners();
       }
-    } catch (s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
     }
-     */
+  }
+
+  /// 通过分类查询数据
+  Future querySortCategoryProducts(List<int>  ids) async {
+    if (selectCategoryInfoModels.length > 0) {
+      List<int> list = [];
+      selectCategoryInfoModels.forEach((element) {
+        list.add(element.id);
+      });
+      if (list.length > 0) {
+        getCategoryProducts(list, isRefresh: true, isFirst: true);
+      }
+    }else {
+      if(ids.length >0 ) {
+        getCategoryProducts(ids, isRefresh: true, isFirst: true);
+      }
+    }
   }
 
   /// 切换列表模式
   Future switchListType(DisplayType type) async {
-    // displayType = type;
     BaseBloc.instance.displayType = type;
     notifyListeners();
   }
 
   /// 获取一级二级分类的分类数据
   Future getCategoryChildDatas(int id) async {
+    /*
     List data = [
       {
         "id": 25,
@@ -908,25 +935,38 @@ class SortProvider with ChangeNotifier {
     ];
     categoryInfoModels = CategoryInfoModel.fromList(data);
     notifyListeners();
-    /*
+     */
+
     try {
-      MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
+      MyResponse<List<CategoryInfoModel>> response =
+          await getCategoryChilds(id: id);
       if (response.common.statusCode == 1000) {
         categoryInfoModels = response.response!.data!;
         notifyListeners();
-      }else {
+      } else {
         categoryInfoModels = [];
         notifyListeners();
       }
-    } catch (s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
     }
+  }
 
-     */
+  Future firstSelectModels(String name2) async {
+    selectCategoryInfoModels = [];
+    for(int index = 0; index < categoryInfoModels.length;index ++) {
+      CategoryInfoModel model = categoryInfoModels[index];
+      if(model.name2 == name2) {
+        selectCategoryInfoModels.add(model);
+        notifyListeners();
+        break;
+      }
+    }
   }
 
   /// 获取一级二级分类的分类数据
   Future getConditionChildDatas(int id) async {
+    /*
     List data = [
       {
         "id": 25,
@@ -1193,20 +1233,53 @@ class SortProvider with ChangeNotifier {
     ];
     conditionInfoModels = CategoryInfoModel.fromList(data);
     notifyListeners();
-    /*
+     */
+
     try {
-      MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
+      MyResponse<List<CategoryInfoModel>> response =
+          await getCategoryChilds(id: id);
       if (response.common.statusCode == 1000) {
         categoryInfoModels = response.response!.data!;
         notifyListeners();
-      }else {
+      } else {
         categoryInfoModels = [];
         notifyListeners();
       }
-    } catch (s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
     }
+  }
 
-     */
+  /// 收藏或者取消收藏
+  Future collectionAction(int index) async {
+    int product_id = 0;
+    try {
+      product_id = goodsInfoList[index].id;
+      goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
+
+      /// 通知所有这个商品改变状态
+      XEvent.post(
+          EVENT_KEY_WISHED,
+          WishedModelReq(
+              id: product_id, isWished: goodsInfoList[index].isWished));
+
+      Map<String, dynamic> params = {"product_id": product_id};
+
+      /// 发送请求
+      MyResponse response = await operationIsWished(params: params);
+      if (response.common.statusCode == 1000) {
+      } else {
+        product_id = goodsInfoList[index].id;
+        goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
+
+        /// 通知所有这个商品改变状态
+        XEvent.post(
+            EVENT_KEY_WISHED,
+            WishedModelReq(
+                id: product_id, isWished: goodsInfoList[index].isWished));
+      }
+    } catch (s, e) {
+      print('请求报错:$e');
+    }
   }
 }

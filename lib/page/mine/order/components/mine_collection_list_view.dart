@@ -11,9 +11,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../core/constant/base_enum.dart';
 import '../../../../core/model/good_info_model.dart';
+import '../../../detail/product_detail_page.dart';
 import '../../../sort/components/shop_goods_item_widget.dart';
 import 'collection_good_item_widget.dart';
 
@@ -135,9 +138,7 @@ class CollectionGridListViewState extends State<CollectionGridListView> {
                   goodsModel: widget.goodsList[index],
                   isEditCollection: widget.isEditCollection,
                   onItemClick: () {
-                    // BaseNavigation.push(
-                    //     'goods/detail?id=${widget.goodsList[index].id}',
-                    //     context: context);
+                    Get.to(() => ProductDetailPage());
                   },
                   onItemLikeClick: () {
                     // widget.loverClick(index);

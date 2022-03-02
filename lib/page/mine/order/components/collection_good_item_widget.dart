@@ -148,18 +148,19 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
       width: 92.0.w,
       height: 92.0.w,
       alignment: Alignment.center,
-      child: BaseImageLoading(
-        // url: widget.goodsModel.fThumb,
-        url:
-            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-        height: 92.0.w,
-        width: 92.0.w,
-        imgError: () {
-          Future.delayed(Duration(milliseconds: 100)).then((e) {
-            widget.isShowLike = false;
-          });
-        },
-        placehold: 'assets/images/home/banner_placehold.png',
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(new Radius.circular(5.w)),
+        child: BaseImageLoading(
+          url: /*widget.goodsModel.fThumb*/ 'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg',
+          height: 92.0.w,
+          width: 92.0.w,
+          imgError: () {
+            Future.delayed(Duration(milliseconds: 100)).then((e) {
+              widget.isShowLike = false;
+            });
+          },
+          placehold: 'assets/images/home/banner_placehold.png',
+        ),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.w)),

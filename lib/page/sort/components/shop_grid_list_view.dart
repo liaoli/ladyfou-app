@@ -10,25 +10,28 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ladyfou/page/sort/components/shop_goods_item2_widget.dart';
 import 'package:ladyfou/page/sort/components/shop_goods_item_widget.dart';
 
 import '../../../core/constant/base_enum.dart';
+import '../../detail/product_detail_page.dart';
 
 typedef CallBackWidget = void Function(int index);
 
 class ShopGridListView extends StatefulWidget {
   final List<GoodsInfoModel> goodsList;
   final EdgeInsetsGeometry? padding;
-  final CallBackWidget? loverClick;
+  final CallBackWidget loverClick;
   DisplayType displayType;
 
   ShopGridListView({
     Key? key,
     this.padding,
-    this.loverClick,
+    required this.loverClick,
     this.displayType = DisplayType.grid_shape,
     required this.goodsList,
   }) : super(key: key);
@@ -76,11 +79,10 @@ class ShopGridListViewState extends State<ShopGridListView> {
         return ShopGoodsItem(
           goodsModel: widget.goodsList[index],
           onItemClick: () {
-            // BaseNavigation.push('goods/detail?id=${widget.goodsList[index].id}',
-            //     context: context);
+            Get.to(() => ProductDetailPage());
           },
           onItemLikeClick: () {
-            // widget.loverClick(index);
+            widget.loverClick(index);
           },
           onItemMoreClick: () {
             print('点击更多');
@@ -116,12 +118,10 @@ class ShopGridListViewState extends State<ShopGridListView> {
                 child: ShopGoodsItem2(
                   goodsModel: widget.goodsList[index],
                   onItemClick: () {
-                    // BaseNavigation.push(
-                    //     'goods/detail?id=${widget.goodsList[index].id}',
-                    //     context: context);
+                    Get.to(() => ProductDetailPage());
                   },
                   onItemLikeClick: () {
-                    // widget.loverClick(index);
+                    widget.loverClick(index);
                   },
                 ),
               ),

@@ -181,7 +181,7 @@ class SecondryCategory extends StatelessWidget {
       onTap: () {
         String titleStr = Uri.encodeComponent(goodModel.name2);
         Get.to(
-            () => GoodsListPage(shopId: goodModel.id, title: goodModel.name2));
+            () => GoodsListPage(shopId: data.id, title: goodModel.name2));
 
         /// 跳转搜索
         // BaseNavigation.present("search?id=$titleStr");
