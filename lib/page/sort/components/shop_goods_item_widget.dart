@@ -19,7 +19,7 @@ import 'package:ladyfou/core/utils/utils.dart';
 import 'package:ladyfou/page/sort/components/shop_gradient_button.dart';
 import 'package:ladyfou/page/sort/components/shop_management_options.dart';
 
-import '../../../components/image_placehold_widget.dart';
+import '../../../components/base_image_load.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -136,7 +136,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.all(new Radius.circular(5.w)),
-          child: ImagePlaceholdWidget(
+          child: BaseImageLoading(
             imgError: () {
               Future.delayed(Duration(milliseconds: 100)).then((e) {
                 setState(() {
@@ -146,8 +146,8 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
               });
             },
             url: widget.goodsModel.fThumb,
-            w: double.infinity,
-            defImagePath: 'assets/images/home/banner_placehold.png',
+            width: double.infinity,
+            placehold: 'assets/images/home/banner_placehold.png',
           ),
         ),
       ),
@@ -297,13 +297,13 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
             children: [
               widget.isShowLike
                   ? ManagementOptions(
-                        onTap: () => widget.onItemLikeClick!(),
-                        isOptions:
-                            widget.goodsModel.isLuckyBag > 0 ? true : false,
-                        selectUrl: 'assets/images/sort/love_red.png',
-                        unchecked: 'assets/images/sort/love_black.png',
-                        width: 24.w,
-                      )
+                      onTap: () => widget.onItemLikeClick!(),
+                      isOptions:
+                          widget.goodsModel.isLuckyBag > 0 ? true : false,
+                      selectUrl: 'assets/images/sort/love_red.png',
+                      unchecked: 'assets/images/sort/love_black.png',
+                      width: 24.w,
+                    )
                   : Padding(padding: EdgeInsets.zero),
               GestureDetector(
                 onTap: () {},

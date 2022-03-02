@@ -12,7 +12,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../components/image_placehold_widget.dart';
+import '../../../../components/base_image_load.dart';
 import '../../../../core/model/good_info_model.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../style/Color.dart';
@@ -60,7 +60,6 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
   var eventBusFn;
   bool isListen = false;
 
-
   @override
   void initState() {
     // ignore: todo
@@ -106,7 +105,9 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
                 child: Container(
                   height: 116.0.w,
                   width: 50.w,
-                  child: Image.asset(widget.isSelect ? "assets/images/sort/fi_check.png" : "assets/images/sort/fi_check_nor.png"),
+                  child: Image.asset(widget.isSelect
+                      ? "assets/images/sort/fi_check.png"
+                      : "assets/images/sort/fi_check_nor.png"),
                 ),
               )
             : SizedBox(),
@@ -145,15 +146,15 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
       width: 92.0.w,
       height: 92.0.w,
       alignment: Alignment.center,
-      child: ImagePlaceholdWidget(
+      child: BaseImageLoading(
         imgError: () {
           Future.delayed(Duration(milliseconds: 100)).then((e) {
             widget.isShowLike = false;
           });
         },
         url: widget.goodsModel.fThumb,
-        w: double.infinity,
-        defImagePath: 'assets/images/home/banner_placehold.png',
+        width: double.infinity,
+        placehold: 'assets/images/home/banner_placehold.png',
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.w)),

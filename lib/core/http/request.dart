@@ -3,6 +3,7 @@ import 'package:ladyfou/core/model/good_collection_model.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
+import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
 import '../model/user_info_model.dart';
@@ -81,7 +82,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
 
 /// 获取订单列表
 Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
-    {required Map<String,dynamic> params, bool isLoadMore = false}) async {
+    {required Map<String, dynamic> params, bool isLoadMore = false}) async {
   Map<String, dynamic> result =
       await XHttp.get("/otonastyle/account/order", params);
   MyResponse<List<OrderInfoModel>> response =
@@ -91,11 +92,21 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
 
 /// 获取收藏列表
 Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
-    {required Map<String,dynamic> params}) async {
+    {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-  await XHttp.get("/otonastyle/account/wish_list", params);
+      await XHttp.get("/otonastyle/account/wish_list", params);
   MyResponse<List<GoodsInfoModel>> response =
-  MyResponse<List<GoodsInfoModel>>.fromJson(result);
+      MyResponse<List<GoodsInfoModel>>.fromJson(result);
   return response;
 }
+
 /////////////////////////////////thw-end//////////////////////////////////////
+
+/*-------------------------------购物车--------------------------------------*/
+Future<MyResponse<CartModel>> getCartList(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+      await XHttp.get("/otonastyle/checkout/shopping_cart_list", params);
+  MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
+  return response;
+}

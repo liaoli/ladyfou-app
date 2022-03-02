@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 
-import '../../../../components/image_placehold_widget.dart';
+import '../../../../components/base_image_load.dart';
 import '../../../../core/model/order_info_model.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
@@ -28,20 +28,20 @@ class OrderGoodsItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String imgCoverStr = product.fThumb;
     String specStr = '';
-      List specs = [];
-      product.optionsInfo.forEach((spec) {
-        String specsStr = '';
+    List specs = [];
+    product.optionsInfo.forEach((spec) {
+      String specsStr = '';
 
-        List specs2 = [];
-        spec.optionValues.forEach((element) {
-          if (element.name2.isNotEmpty) {
-            specs2.add(element.name2);
-          }
-        });
-        specsStr += spec.name2 + ':' + specs2.join('、');
-        specs.add(specsStr);
+      List specs2 = [];
+      spec.optionValues.forEach((element) {
+        if (element.name2.isNotEmpty) {
+          specs2.add(element.name2);
+        }
       });
-      specStr = specs.join(' ');
+      specsStr += spec.name2 + ':' + specs2.join('、');
+      specs.add(specsStr);
+    });
+    specStr = specs.join(' ');
 
     return Container(
       padding: EdgeInsets.only(bottom: 12.w),
@@ -54,10 +54,10 @@ class OrderGoodsItemWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
             ),
-            child: ImagePlaceholdWidget(
+            child: BaseImageLoading(
               url: imgCoverStr,
-              w: 75.w,
-              h: 75.w,
+              width: 75.w,
+              height: 75.w,
             ),
           ),
           // 封面右侧商品信息
