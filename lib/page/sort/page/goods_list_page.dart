@@ -31,22 +31,6 @@ import '../components/wrap_gradient_widget.dart';
 import '../store/sort_provider.dart';
 import '../../../generated/l10n.dart';
 
-// class GoodsListPage extends StatelessWidget {
-//   final int shopId;
-//   final String title;
-//
-//   GoodsListPage({Key? key, required this.shopId, required this.title})
-//       : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return ChangeNotifierProvider(
-//         create: (_) => SortProvider(),
-//         child: GoodsListPageFul(shopId: shopId, title: title));
-//   }
-// }
-
 class GoodsListPage extends StatefulWidget {
   final int shopId;
   final String title;
@@ -83,11 +67,12 @@ class _GoodsListPageState extends State<GoodsListPage>
     provider = SortProvider();
 
     // 请求分类数据
-    provider.getCategoryProducts(widget.shopId, isFirst: true).then((value) {
+    provider.getCategoryProducts([widget.shopId], isFirst: true).then((value) {
       setState(() {});
     });
     // 请求筛选的数据
     provider.getCategoryChildDatas(widget.shopId).then((value) {
+      provider.firstSelectModels(widget.title);
       setState(() {});
     });
     provider.getConditionChildDatas(widget.shopId).then((value) {
@@ -254,12 +239,12 @@ class _GoodsListPageState extends State<GoodsListPage>
                             controller: provider.refreshController,
                             onRefresh: () {
                               provider.currentPage += CURRENT_PAGE;
-                              return provider.getCategoryProducts(widget.shopId,
+                              return provider.getCategoryProducts([widget.shopId],
                                   isRefresh: true, page: provider.currentPage);
                             },
                             onLoad: () {
                               provider.currentPage += 1;
-                              return provider.getCategoryProducts(widget.shopId,
+                              return provider.getCategoryProducts([widget.shopId],
                                   isRefresh: false, page: provider.currentPage);
                             },
                             enableControlFinishLoad: true,
@@ -306,7 +291,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                                 dropDownHeight: 40.w * 5.0,
                                 dropDownWidget: _buildComprehensive(context)),
                             GZXDropdownMenuBuilder(
-                                dropDownHeight: 40.w * 4.0,
+                                dropDownHeight: 40.w * 6.0,
                                 dropDownWidget: _buildClassification(context)),
                             GZXDropdownMenuBuilder(
                                 dropDownHeight: 40.w * 4.0,
@@ -382,8 +367,11 @@ class _GoodsListPageState extends State<GoodsListPage>
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
               provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(provider.categoryInfoModels, infoModels);
-              setState(() {
-              });
+              provider.querySortCategoryProducts([widget.shopId]);
+            },
+            finishCallBack:() {
+              _dropdownMenuController.hide();
+              provider.querySortCategoryProducts([widget.shopId]);
             },
           );
         });
@@ -405,8 +393,10 @@ class _GoodsListPageState extends State<GoodsListPage>
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
               provider.selectConditionInfoModels = ItemButtonModel.toFindModels(provider.conditionInfoModels, infoModels);
-              setState(() {
-              });
+              provider.querySortCategoryProducts([widget.shopId]);
+            },
+            finishCallBack:() {
+              _dropdownMenuController.hide();
             },
           );
         });

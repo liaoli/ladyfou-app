@@ -60,16 +60,11 @@ class _MineCollectionState extends State<MineCollectionFul> {
     // TODO: implement initState
     provider = GoodsOperationProvider();
     provider.getCollectionLists().then((value) {
-      setState(() {
-        if (provider.goodCollectionList.length > 0) {
-          tabTitles = getTabTitles(true);
-        } else {
-          tabTitles = getTabTitles(false);
-        }
-      });
-    });
-    // 请求筛选的数据
-    provider.getCategoryChildDatas(0).then((value) {
+      if (provider.goodCollectionList.length > 0) {
+        tabTitles = getTabTitles(true);
+      } else {
+        tabTitles = getTabTitles(false);
+      }
       setState(() {});
     });
 
@@ -318,7 +313,7 @@ class _MineCollectionState extends State<MineCollectionFul> {
           builder: (ctx, snapshot) {
             List<ItemButtonModel> models = [];
             provider.categoryInfoModels.forEach((element) {
-              models.add(ItemButtonModel.fromModel(element.id, element.name2));
+              models.add(ItemButtonModel.fromModel(element.cid, element.name2));
             });
             return ClassificationWidget(
               itemList: models,
@@ -326,10 +321,10 @@ class _MineCollectionState extends State<MineCollectionFul> {
                   provider.selectCategoryInfoModels),
               isShow: snapshot.data ?? false,
               callBack: (infoModels) {
-                provider.selectCategoryInfoModels =
-                    ItemButtonModel.toFindModels(
-                        provider.categoryInfoModels, infoModels);
                 setState(() {});
+              },
+              finishCallBack:() {
+
               },
             );
           },

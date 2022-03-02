@@ -101,7 +101,7 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 40.w,
+      spacing: 30.w,
       children: widget.itemList.asMap().keys.map((index) {
         return _selectItemWidget(widget.itemList[index]);
       }).toList(),

@@ -7,6 +7,7 @@ import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
 import '../model/country_list_model.dart';
+import '../model/good_collection_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/token_info_model.dart';
 import 'http.dart';
@@ -82,17 +83,9 @@ Future<MyResponse<List<SortModel>>> getSortData() async {
 
 /// 获取二级分类
 Future<MyResponse<List<GoodsInfoModel>>> getCategoryProduct(
-    {required int id,
-    required int page,
-    required int size,
-    String order_type = ""}) async {
+    {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/catalog/category_product", {
-    "id": id,
-    "page": page,
-    "size": size,
-    "order_type": order_type,
-  });
+      await XHttp.get("/otonastyle/catalog/category_product", params);
   MyResponse<List<GoodsInfoModel>> response =
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -123,12 +116,12 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
 }
 
 /// 获取收藏列表
-Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
+Future<MyResponse<CollectionInfoModel>> getCollectionInfos(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
       await XHttp.get("/otonastyle/account/wish_list", params);
-  MyResponse<List<GoodsInfoModel>> response =
-      MyResponse<List<GoodsInfoModel>>.fromJson(result);
+  MyResponse<CollectionInfoModel> response =
+      MyResponse<CollectionInfoModel>.fromJson(result);
   handleResponse(response);
   return response;
 }

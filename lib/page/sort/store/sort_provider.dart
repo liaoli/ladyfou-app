@@ -370,7 +370,7 @@ class SortProvider with ChangeNotifier {
   }
 
   /// 获取二级分类商品列表
-  Future getCategoryProducts(int id,
+  Future getCategoryProducts(List<int> ids,
       {bool isFirst = false,
       bool isRefresh = true,
       int page = CURRENT_PAGE,
@@ -598,8 +598,15 @@ class SortProvider with ChangeNotifier {
      */
 
     try {
-      MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(
-          id: id, page: page, size: size, order_type: order_type);
+      Map<String, dynamic> params = {
+        "id": ids.join(','),
+        "page": page,
+        "size": size,
+        "order_type": order_type,
+      };
+
+      MyResponse<List<GoodsInfoModel>> response =
+          await getCategoryProduct(params: params);
       if (response.common.statusCode == 1000) {
         List<GoodsInfoModel> modelList = response.response!.data!;
 
@@ -631,8 +638,25 @@ class SortProvider with ChangeNotifier {
         refreshController.finishLoad();
         notifyListeners();
       }
-    } catch (s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
+    }
+  }
+
+  /// 通过分类查询数据
+  Future querySortCategoryProducts(List<int>  ids) async {
+    if (selectCategoryInfoModels.length > 0) {
+      List<int> list = [];
+      selectCategoryInfoModels.forEach((element) {
+        list.add(element.id);
+      });
+      if (list.length > 0) {
+        getCategoryProducts(list, isRefresh: true, isFirst: true);
+      }
+    }else {
+      if(ids.length >0 ) {
+        getCategoryProducts(ids, isRefresh: true, isFirst: true);
+      }
     }
   }
 
@@ -914,16 +938,29 @@ class SortProvider with ChangeNotifier {
      */
 
     try {
-      MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
+      MyResponse<List<CategoryInfoModel>> response =
+          await getCategoryChilds(id: id);
       if (response.common.statusCode == 1000) {
         categoryInfoModels = response.response!.data!;
         notifyListeners();
-      }else {
+      } else {
         categoryInfoModels = [];
         notifyListeners();
       }
-    } catch (s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
+    }
+  }
+
+  Future firstSelectModels(String name2) async {
+    selectCategoryInfoModels = [];
+    for(int index = 0; index < categoryInfoModels.length;index ++) {
+      CategoryInfoModel model = categoryInfoModels[index];
+      if(model.name2 == name2) {
+        selectCategoryInfoModels.add(model);
+        notifyListeners();
+        break;
+      }
     }
   }
 
@@ -1199,15 +1236,16 @@ class SortProvider with ChangeNotifier {
      */
 
     try {
-      MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
+      MyResponse<List<CategoryInfoModel>> response =
+          await getCategoryChilds(id: id);
       if (response.common.statusCode == 1000) {
         categoryInfoModels = response.response!.data!;
         notifyListeners();
-      }else {
+      } else {
         categoryInfoModels = [];
         notifyListeners();
       }
-    } catch (s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
     }
   }
@@ -1218,24 +1256,29 @@ class SortProvider with ChangeNotifier {
     try {
       product_id = goodsInfoList[index].id;
       goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
-      /// 通知所有这个商品改变状态
-      XEvent.post(EVENT_KEY_WISHED, WishedModelReq(id: product_id,isWished: goodsInfoList[index].isWished));
 
-      Map<String,dynamic> params = {
-        "product_id": product_id
-      };
+      /// 通知所有这个商品改变状态
+      XEvent.post(
+          EVENT_KEY_WISHED,
+          WishedModelReq(
+              id: product_id, isWished: goodsInfoList[index].isWished));
+
+      Map<String, dynamic> params = {"product_id": product_id};
+
       /// 发送请求
       MyResponse response = await operationIsWished(params: params);
       if (response.common.statusCode == 1000) {
-
-      }else {
+      } else {
         product_id = goodsInfoList[index].id;
         goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
 
         /// 通知所有这个商品改变状态
-        XEvent.post(EVENT_KEY_WISHED, WishedModelReq(id: product_id,isWished: goodsInfoList[index].isWished));
+        XEvent.post(
+            EVENT_KEY_WISHED,
+            WishedModelReq(
+                id: product_id, isWished: goodsInfoList[index].isWished));
       }
-    } catch(s,e) {
+    } catch (s, e) {
       print('请求报错:$e');
     }
   }
