@@ -35,6 +35,7 @@ class SortProvider with ChangeNotifier {
 
   /// 获取分类数据
   Future getSortAllDatas() async {
+    /*
     List data = [
       {
         "id": 25,
@@ -351,7 +352,8 @@ class SortProvider with ChangeNotifier {
     await Future.delayed(Duration(milliseconds: 300));
 
     notifyListeners();
-    /*
+    */
+
     try {
       MyResponse<List<SortModel>> response = await getSortData();
       if (response.common.statusCode == 1000) {
@@ -365,7 +367,6 @@ class SortProvider with ChangeNotifier {
     } catch (s, e) {
       print('请求报错:$e');
     }
-     */
   }
 
   /// 获取二级分类商品列表
@@ -377,6 +378,7 @@ class SortProvider with ChangeNotifier {
       String order_type = ""}) async {
     if (isFirst || isRefresh) page = CURRENT_PAGE;
 
+    /*
     List data = [
       {
         "id": 3867,
@@ -593,8 +595,8 @@ class SortProvider with ChangeNotifier {
     ];
     goodsInfoList = GoodsInfoModel.fromList(data);
     notifyListeners();
+     */
 
-    /*
     try {
       MyResponse<List<GoodsInfoModel>> response = await getCategoryProduct(
           id: id, page: page, size: size, order_type: order_type);
@@ -632,18 +634,17 @@ class SortProvider with ChangeNotifier {
     } catch (s,e) {
       print('请求报错:$e');
     }
-     */
   }
 
   /// 切换列表模式
   Future switchListType(DisplayType type) async {
-    // displayType = type;
     BaseBloc.instance.displayType = type;
     notifyListeners();
   }
 
   /// 获取一级二级分类的分类数据
   Future getCategoryChildDatas(int id) async {
+    /*
     List data = [
       {
         "id": 25,
@@ -910,7 +911,8 @@ class SortProvider with ChangeNotifier {
     ];
     categoryInfoModels = CategoryInfoModel.fromList(data);
     notifyListeners();
-    /*
+     */
+
     try {
       MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
       if (response.common.statusCode == 1000) {
@@ -923,12 +925,11 @@ class SortProvider with ChangeNotifier {
     } catch (s,e) {
       print('请求报错:$e');
     }
-
-     */
   }
 
   /// 获取一级二级分类的分类数据
   Future getConditionChildDatas(int id) async {
+    /*
     List data = [
       {
         "id": 25,
@@ -1195,7 +1196,8 @@ class SortProvider with ChangeNotifier {
     ];
     conditionInfoModels = CategoryInfoModel.fromList(data);
     notifyListeners();
-    /*
+     */
+
     try {
       MyResponse<List<CategoryInfoModel>> response = await getCategoryChilds(id: id);
       if (response.common.statusCode == 1000) {
@@ -1208,36 +1210,31 @@ class SortProvider with ChangeNotifier {
     } catch (s,e) {
       print('请求报错:$e');
     }
-
-     */
   }
 
   /// 收藏或者取消收藏
   Future collectionAction(int index) async {
-    bool isWished = false;
     int product_id = 0;
     try {
       product_id = goodsInfoList[index].id;
-      isWished = goodsInfoList[index].isWished;
       goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
       /// 通知所有这个商品改变状态
       XEvent.post(EVENT_KEY_WISHED, WishedModelReq(id: product_id,isWished: goodsInfoList[index].isWished));
 
-      // Map<String,dynamic> params = {
-      //   "product_id": product_id
-      // };
-      // /// 发送请求
-      // MyResponse response = await operationIsWished(params: params);
-      // if (response.common.statusCode == 1000) {
-      //
-      // }else {
-      //   product_id = goodsInfoList[index].id;
-      //   isWished = goodsInfoList[index].isWished;
-      //   goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
-      //
-      //   /// 通知所有这个商品改变状态
-      //   XEvent.post(EVENT_KEY_WISHED, WishedModelReq(id: product_id,isWished: isWished));
-      // }
+      Map<String,dynamic> params = {
+        "product_id": product_id
+      };
+      /// 发送请求
+      MyResponse response = await operationIsWished(params: params);
+      if (response.common.statusCode == 1000) {
+
+      }else {
+        product_id = goodsInfoList[index].id;
+        goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
+
+        /// 通知所有这个商品改变状态
+        XEvent.post(EVENT_KEY_WISHED, WishedModelReq(id: product_id,isWished: goodsInfoList[index].isWished));
+      }
     } catch(s,e) {
       print('请求报错:$e');
     }

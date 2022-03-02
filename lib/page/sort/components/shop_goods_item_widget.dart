@@ -140,7 +140,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 // _bloc.changeIsLike(widget.isShowLike);
               });
             },
-            url: widget.goodsModel.fThumb,
+            url: /*widget.goodsModel.fThumb*/'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg',
             width: double.infinity,
             placehold: 'assets/images/home/banner_placehold.png',
           ),

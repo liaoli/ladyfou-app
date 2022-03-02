@@ -99,24 +99,8 @@ class _GoodsListPageState extends State<GoodsListPage>
 
     if (tabController != null) {
       tabController.addListener(() {
-        // if (currentIndex != tabController.index) {
-        //   selectTabItem(tabController.index);
-        // }
-        // currentIndex = tabController.index;
-        // bloc.setUpdateIndex(currentIndex);
       });
     }
-
-    // Event.on<GoodsModelEvent>().listen((event) {
-    //   bool isCollection = widget.goodsModel.isCollection;
-    //   if (event != null && event.id == widget.goodsModel.id) {
-    //     setState(() {
-    //       isCollection = event.isCollection;
-    //       isListen = true;
-    //       widget.goodsModel.isCollection = isCollection;
-    //     });
-    //   }
-    // });
 
     super.initState();
   }
@@ -250,7 +234,17 @@ class _GoodsListPageState extends State<GoodsListPage>
                             iconColor: AppColors.color_FF666666,
                             iconDropDownColor: AppColors.navigationColor,
                             onItemTap: (index) {
-                              debugPrint("index = $index");
+                              // if (index == 1) {
+                              //   // 请求筛选的数据
+                              //   provider.getCategoryChildDatas(widget.shopId).then((value) {
+                              //     setState(() {});
+                              //   });
+                              // }
+                              // if (index == 2) {
+                              //   provider.getConditionChildDatas(widget.shopId).then((value) {
+                              //     setState(() {});
+                              //   });
+                              // }
                             },
                           ),
 

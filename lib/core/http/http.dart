@@ -90,6 +90,7 @@ class XHttp {
 
   ///get请求
   static Future get(String url, [Map<String, dynamic>? params]) async {
+    print("请求接口：${url}\n上送参数：${params}");
     Response response;
     if (params != null) {
       response = await dio.get(url, queryParameters: params);
@@ -101,6 +102,7 @@ class XHttp {
 
   ///post 表单请求
   static Future post(String url, [Map<String, dynamic>? params]) async {
+    print("请求接口：${url}\n上送参数：${params}");
     FormData data = FormData.fromMap(params!);
     Response response = await dio.post(url, data: data);
     return response.data;

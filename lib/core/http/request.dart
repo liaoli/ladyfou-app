@@ -2,6 +2,7 @@ import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
+import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
@@ -60,11 +61,22 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
 }
 
 /////////////////////////////////thw-start////////////////////////////////////
+
+Future handleResponse(MyResponse response) async {
+  if (response.common.statusCode != 1000) {
+    String error = response.common.debugMessage;
+    /// 先屏蔽
+    // ToastUtils.error(error);
+  }
+}
+
+
 /// 获取分类接口
 Future<MyResponse<List<SortModel>>> getSortData() async {
   Map<String, dynamic> result = await XHttp.get("/otonastyle/catalog/category");
   MyResponse<List<SortModel>> response =
       MyResponse<List<SortModel>>.fromJson(result);
+  handleResponse(response);
   return response;
 }
 
@@ -83,6 +95,7 @@ Future<MyResponse<List<GoodsInfoModel>>> getCategoryProduct(
   });
   MyResponse<List<GoodsInfoModel>> response =
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
+  handleResponse(response);
   return response;
 }
 
@@ -94,6 +107,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
       await XHttp.get("/otonastyle/catalog/cate_child", {"category_id": id});
   MyResponse<List<CategoryInfoModel>> response =
       MyResponse<List<CategoryInfoModel>>.fromJson(result);
+  handleResponse(response);
   return response;
 }
 
@@ -104,6 +118,7 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
       await XHttp.get("/otonastyle/account/order", params);
   MyResponse<List<OrderInfoModel>> response =
       MyResponse<List<OrderInfoModel>>.fromJson(result);
+  handleResponse(response);
   return response;
 }
 
@@ -114,6 +129,7 @@ Future<MyResponse<List<GoodsInfoModel>>> getCollectionInfos(
       await XHttp.get("/otonastyle/account/wish_list", params);
   MyResponse<List<GoodsInfoModel>> response =
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
+  handleResponse(response);
   return response;
 }
 
@@ -123,6 +139,7 @@ Future<MyResponse> operationIsWished(
   Map<String, dynamic> result =
       await XHttp.post("/otonastyle/account/wish_product", params);
   MyResponse response = MyResponse.fromJson(result);
+  handleResponse(response);
   return response;
 }
 
