@@ -5,9 +5,11 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
+import '../../page/home/components/daily_new_product.dart';
 import '../model/category_info_model.dart';
 import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
+import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
@@ -27,7 +29,7 @@ Future<MyResponse<TokenInfoModel>> register({
   required String password,
 }) async {
   Map<String, dynamic> result =
-      await XHttp.post("/otonastyle/account/register", {
+      await XHttp.post("/ladyfou/account/register", {
     "chinese_name": chinese_name,
     "katakana_name": katakana_name,
     "email": email,
@@ -45,7 +47,7 @@ Future<MyResponse<TokenInfoModel>> login({
   required String email,
   required String password,
 }) async {
-  Map<String, dynamic> result = await XHttp.post("/otonastyle/account/login", {
+  Map<String, dynamic> result = await XHttp.post("/ladyfou/account/login", {
     "email": email,
     "password": password,
   });
@@ -57,7 +59,7 @@ Future<MyResponse<TokenInfoModel>> login({
 /// home页数据 限时折扣 新品 ，排行榜
 Future<MyResponse<HomeDataListModel>> homeData() async {
   Map<String, dynamic> result = await XHttp.get(
-    "/otonastyle/product/getProductData",
+    "/ladyfou/product/getProductData",
   );
   MyResponse<HomeDataListModel> response = MyResponse.fromJson(result);
 
@@ -65,11 +67,11 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
 }
 
 /// home 每日新品
-Future<MyResponse<HomeDataListModel>> homeDailyNew() async {
+Future<MyResponse<DailyNewProductListModel>> homeDailyNew() async {
   Map<String, dynamic> result = await XHttp.get(
-    "/otonastyle/index/getTopNewProducts",
+    "/ladyfou/index/getTopNewProducts",
   );
-  MyResponse<HomeDataListModel> response = MyResponse.fromJson(result);
+  MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
 
   return response;
 }

@@ -6,6 +6,7 @@ import '../model/category_info_model.dart';
 import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
 import '../model/county_list_model.dart';
+import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
 import '../model/home_data_list_model.dart';
@@ -34,6 +35,8 @@ T fromJson<T>(dynamic json) {
   switch (T.toString()) {
     case "UserInfoModel":
       return UserInfoModel.fromMap(json) as T;
+    case "DailyNewProductListModel":
+      return DailyNewProductListModel.fromMap(json) as T;
     case "CountryListModel":
       return CountryListModel.fromMap(json) as T;
     case "ProvinceListModel":
