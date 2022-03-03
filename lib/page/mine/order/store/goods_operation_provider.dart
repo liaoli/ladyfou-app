@@ -79,6 +79,7 @@ class GoodsOperationProvider with ChangeNotifier {
 
         notifyListeners();
       } else {
+        ToastUtils.error(response.common.debugMessage);
         isRequestError = true;
         goodCollectionList.clear();
         goodCollectionList = [];
@@ -87,7 +88,7 @@ class GoodsOperationProvider with ChangeNotifier {
         notifyListeners();
       }
     } catch (s, e) {
-      print('请求报错:$e');
+      print('请求报错:$s');
     }
   }
 

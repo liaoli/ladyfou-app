@@ -49,11 +49,10 @@ class _MineCollectionState extends State<MineCollectionPage> {
   void initState() {
     // TODO: implement initState
     provider = GoodsOperationProvider();
+    tabTitles = getTabTitles(false);
     provider.getCollectionLists().then((value) {
       if (provider.goodCollectionList.length > 0) {
         tabTitles = getTabTitles(true);
-      } else {
-        tabTitles = getTabTitles(false);
       }
       setState(() {});
     });
@@ -138,39 +137,36 @@ class _MineCollectionState extends State<MineCollectionPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             /// 综合筛选
-                            tabTitles.length > 0
-                                ? GZXDropDownHeader(
-                                    items: getItems(),
-                                    stackKey: _stackKey,
-                                    controller: _dropdownMenuController,
-                                    height: 40.w,
-                                    color: Colors.white,
-                                    borderWidth: 1.w,
-                                    borderColor: AppColors.bgGreytr,
-                                    dividerHeight: 0.w,
-                                    dividerColor: Colors.white,
-                                    style: BaseText.style(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.primaryBlackText),
-                                    dropDownStyle: BaseText.style(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.navigationColor),
-                                    iconSize: 20.w,
-                                    iconColor: AppColors.color_FF666666,
-                                    iconDropDownColor:
-                                        AppColors.navigationColor,
-                                    onItemTap: (index) {
-                                      if (index < 2) {
-                                        _dropdownMenuController.hide();
-                                      }
-                                    },
-                                  )
-                                : _noDataWidget(context),
-
+                            tabTitles.length > 0 ? GZXDropDownHeader(
+                              items: getItems(),
+                              stackKey: _stackKey,
+                              controller: _dropdownMenuController,
+                              height: 40.w,
+                              color: Colors.white,
+                              borderWidth: 1.w,
+                              borderColor: AppColors.bgGreytr,
+                              dividerHeight: 0.w,
+                              dividerColor: Colors.white,
+                              style: BaseText.style(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.primaryBlackText),
+                              dropDownStyle: BaseText.style(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.navigationColor),
+                              iconSize: 20.w,
+                              iconColor: AppColors.color_FF666666,
+                              iconDropDownColor:
+                              AppColors.navigationColor,
+                              onItemTap: (index) {
+                                if (index < 2) {
+                                  _dropdownMenuController.hide();
+                                }
+                              },
+                            ) : SizedBox(),
                             /// 商品列表
-                            tabTitles.length > 0
+                            provider.goodCollectionList.length > 0
                                 ? Expanded(
                                     child: EasyRefresh.custom(
                                     controller: provider.refreshController,
@@ -197,7 +193,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                                       ),
                                     ],
                                   ))
-                                : SizedBox(),
+                                : _noDataWidget(context),
                           ],
                         ),
                         GZXDropDownMenu(
