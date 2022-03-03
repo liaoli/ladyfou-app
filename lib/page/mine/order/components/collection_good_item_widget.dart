@@ -151,7 +151,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
       child: ClipRRect(
         borderRadius: BorderRadius.all(new Radius.circular(5.w)),
         child: BaseImageLoading(
-          url: /*widget.goodsModel.fThumb*/ 'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg',
+          url: widget.goodsModel.fThumb,
           height: 92.0.w,
           width: 92.0.w,
           imgError: () {

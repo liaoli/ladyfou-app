@@ -137,34 +137,45 @@ class _MineCollectionState extends State<MineCollectionPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             /// 综合筛选
-                            tabTitles.length > 0 ? GZXDropDownHeader(
-                              items: getItems(),
-                              stackKey: _stackKey,
-                              controller: _dropdownMenuController,
-                              height: 40.w,
-                              color: Colors.white,
-                              borderWidth: 1.w,
-                              borderColor: AppColors.bgGreytr,
-                              dividerHeight: 0.w,
-                              dividerColor: Colors.white,
-                              style: BaseText.style(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.primaryBlackText),
-                              dropDownStyle: BaseText.style(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.navigationColor),
-                              iconSize: 20.w,
-                              iconColor: AppColors.color_FF666666,
-                              iconDropDownColor:
-                              AppColors.navigationColor,
-                              onItemTap: (index) {
-                                if (index < 2) {
-                                  _dropdownMenuController.hide();
-                                }
-                              },
-                            ) : SizedBox(),
+                            tabTitles.length > 0
+                                ? GZXDropDownHeader(
+                                    items: getItems(),
+                                    stackKey: _stackKey,
+                                    controller: _dropdownMenuController,
+                                    height: 40.w,
+                                    color: Colors.white,
+                                    borderWidth: 1.w,
+                                    borderColor: AppColors.bgGreytr,
+                                    dividerHeight: 0.w,
+                                    dividerColor: Colors.white,
+                                    style: BaseText.style(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.primaryBlackText),
+                                    dropDownStyle: BaseText.style(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.navigationColor),
+                                    iconSize: 20.w,
+                                    iconColor: AppColors.color_FF666666,
+                                    iconDropDownColor:
+                                        AppColors.navigationColor,
+                                    onItemTap: (index) {
+                                      if (index < 2) {
+                                        _dropdownMenuController.hide();
+                                        _dropdownMenuController.isShow = true;
+                                        provider
+                                            .getCollectionLists(
+                                                promotion: index,
+                                                isRefresh: true)
+                                            .then((value) {
+                                          setState(() {});
+                                        });
+                                      }
+                                    },
+                                  )
+                                : SizedBox(),
+
                             /// 商品列表
                             provider.goodCollectionList.length > 0
                                 ? Expanded(
@@ -334,7 +345,10 @@ class _MineCollectionState extends State<MineCollectionPage> {
                               provider.categoryInfoModels, infoModels);
                       provider.querySortCategoryProducts();
                     },
-                    finishCallBack: () {},
+                    finishCallBack: () {
+                      _dropdownMenuController.hide();
+                      provider.querySortCategoryProducts();
+                    },
                   );
                 },
               ));
@@ -435,22 +449,31 @@ class _MineCollectionState extends State<MineCollectionPage> {
                     ),
                   ),
                   SizedBox(width: 15.w),
-                  Container(
-                    height: 33.w,
+                  GestureDetector(
+                    onTap: () {
+                      List<int> ids = [];
+                      value.selectCollectionGoodList.forEach((element) {
+                        ids.add(element.id);
+                      });
+                      value.addToCart(ids);
+                    },
                     child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                      decoration: BoxDecoration(
-                          color: AppColors.navigationColor,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(16.5.w))),
-                      child: Text('加入购物车',
-                          style: BaseText.style(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.white)),
+                      height: 33.w,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                        decoration: BoxDecoration(
+                            color: AppColors.navigationColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16.5.w))),
+                        child: Text('加入购物车',
+                            style: BaseText.style(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.white)),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             )),

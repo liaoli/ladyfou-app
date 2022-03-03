@@ -140,7 +140,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 // _bloc.changeIsLike(widget.isShowLike);
               });
             },
-            url: /*widget.goodsModel.fThumb*/'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg',
+            url: widget.goodsModel.fThumb,
             width: double.infinity,
             placehold: 'assets/images/home/banner_placehold.png',
           ),
@@ -290,15 +290,13 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
           ),
           Row(
             children: [
-              widget.isShowLike
-                  ? ManagementOptions(
-                      onTap: () => widget.onItemLikeClick(),
-                      isOptions: widget.goodsModel.isWished,
-                      selectUrl: 'assets/images/sort/love_red.png',
-                      unchecked: 'assets/images/sort/love_black.png',
-                      width: 24.w,
-                    )
-                  : Padding(padding: EdgeInsets.zero),
+              ManagementOptions(
+                onTap: () => widget.onItemLikeClick(),
+                isOptions: widget.goodsModel.isWished,
+                selectUrl: 'assets/images/sort/love_red.png',
+                unchecked: 'assets/images/sort/love_black.png',
+                width: 24.w,
+              ),
               GestureDetector(
                 onTap: () {},
                 child: Container(

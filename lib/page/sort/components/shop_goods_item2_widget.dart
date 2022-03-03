@@ -120,7 +120,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
         height: 92.0.w,
         width: 92.0.w,
         imageUrl:
-            "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+            widget.goodsModel.fThumb,
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
