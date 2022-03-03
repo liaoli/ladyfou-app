@@ -37,7 +37,7 @@ class RecommendProductHead extends StatelessWidget {
                 "猜你喜欢",
                 style: TextStyle(
                   color: AppColors.color_FF333333,
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
               ),

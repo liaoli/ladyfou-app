@@ -68,7 +68,7 @@ class _CountEditViewState extends State<CountEditView> {
                 }
               },
               style:
-                  TextStyle(fontSize: 12.sp, color: AppColors.color_FF333333),
+                  TextStyle(fontSize: 12, color: AppColors.color_FF333333),
               autofocus: false,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(

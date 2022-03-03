@@ -32,7 +32,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                   maxLines: 2,
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -55,7 +55,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                           "-21%",
                           style: TextStyle(
                             color: AppColors.white,
-                            fontSize: 8.sp,
+                            fontSize: 8,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -69,7 +69,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     "￥8687",
                     style: TextStyle(
                       color: AppColors.color_FF353547,
-                      fontSize: 10.sp,
+                      fontSize: 10,
                       fontWeight: FontWeight.w400,
                       decoration: TextDecoration.lineThrough,
                     ),
@@ -86,7 +86,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                       text: "￥",
                       style: TextStyle(
                         color: AppColors.Color_E34D59,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeight.w700,
                       ),
                       children: [
@@ -94,7 +94,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                           text: "4475",
                           style: TextStyle(
                             color: AppColors.Color_E34D59,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -102,7 +102,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                           text: "税込",
                           style: TextStyle(
                             color: AppColors.color_FF333333,
-                            fontSize: 12.sp,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -116,7 +116,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     "商品番号:433",
                     style: TextStyle(
                       color: AppColors.color_FF999999,
-                      fontSize: 10.sp,
+                      fontSize: 10,
                       fontWeight: FontWeight.w400,
                     ),
                   )
@@ -137,7 +137,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     "【本周内衣类商品TOP1】",
                     style: TextStyle(
                       color: AppColors.Color_E34D59,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

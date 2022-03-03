@@ -34,7 +34,7 @@ class RecommendProductBottom extends StatelessWidget {
                     "已经刷到底部了！看看其他的吧",
                     style: TextStyle(
                       color: AppColors.color_FF666666,
-                      fontSize: 10.sp,
+                      fontSize: 10,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

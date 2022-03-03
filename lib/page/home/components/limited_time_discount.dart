@@ -173,7 +173,7 @@ class _DiscountCountdownState extends State<DiscountCountdown> {
             text,
             style: TextStyle(
               color: AppColors.Color_E34D59,
-              fontSize: 12.sp,
+              fontSize: 12,
             ),
           ),
         ),
@@ -256,7 +256,7 @@ class DiscountItemView extends StatelessWidget {
                     "50%",
                     style: TextStyle(
                       color: AppColors.white,
-                      fontSize: 8.sp,
+                      fontSize: 8,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -278,7 +278,7 @@ class DiscountItemView extends StatelessWidget {
           "￥4475",
           style: TextStyle(
             color: AppColors.Color_E34D59,
-            fontSize: 14.sp,
+            fontSize: 14,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -286,7 +286,7 @@ class DiscountItemView extends StatelessWidget {
           "￥8687",
           style: TextStyle(
             color: AppColors.color_FF353547,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w400,
             decoration: TextDecoration.lineThrough,
           ),

@@ -68,7 +68,7 @@ class _ClassificationState extends State<ClassificationWidget> {
                       bgNormalColor: AppColors.color_FFF5F5F5,
                       titleNormalColor: AppColors.primaryBlackText,
                       titleSelectColor: AppColors.navigationColor,
-                      titleSize: 12.sp,
+                      titleSize: 12,
                       height: 24.w,
                       currentSelects: widget.selectItemList,
                       padding: EdgeInsets.only(left: 15.w, right: 15.w),
@@ -102,7 +102,7 @@ class _ClassificationState extends State<ClassificationWidget> {
                           ),
                           child: Text('重置',
                               style: BaseText.style(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   color: AppColors.color_FF333333)),
                         ),
@@ -122,7 +122,7 @@ class _ClassificationState extends State<ClassificationWidget> {
                           ),
                           child: Text('确定',
                               style: BaseText.style(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   color: AppColors.color_FF333333)),
                         ),

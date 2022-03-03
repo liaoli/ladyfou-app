@@ -31,12 +31,12 @@ class SettingItemView extends StatelessWidget {
           subTitle: subTitle,
           titleStyle: TextStyle(
             color: AppColors.color_FF333333,
-            fontSize: 14.sp,
+            fontSize: 14,
             fontWeight: FontWeight.w400,
           ),
           subTitleStyle: TextStyle(
             color: AppColors.color_FF999999,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
           leftChild: Padding(

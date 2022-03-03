@@ -208,11 +208,11 @@ class _GoodsListPageState extends State<GoodsListPage>
                             dividerHeight: 0.w,
                             dividerColor: Colors.white,
                             style: BaseText.style(
-                                fontSize: 15.sp,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.primaryBlackText),
                             dropDownStyle: BaseText.style(
-                                fontSize: 15.sp,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.navigationColor),
                             iconSize: 20.w,

@@ -162,7 +162,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
               TextSpan(
                 text: widget.goodsModel.name,
                 style: BaseText.style(
-                    fontSize: 12.0.sp,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.w400,
                     color: AppColors.primaryBlackText),
                 // recognizer: tapGestureRecognizer
@@ -194,7 +194,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                         Utils.formatStepCount(
                             double.parse(widget.goodsModel.listPrice)), // 商品原价
                     style: BaseText.style(
-                        fontSize: 10.0.sp,
+                        fontSize: 10.0,
                         fontWeight: FontWeight.w400,
                         color: AppColors.primaryBlackText.withOpacity(0.5),
                         decoration: TextDecoration.lineThrough),
@@ -217,7 +217,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 '￥',
                 style: BaseText.style(
                     color: AppColors.navigationColor,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                     fontWeight: FontWeight.w700),
               ),
               Text(
@@ -227,7 +227,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 style: BaseText.style(
                     height: 1.0,
                     color: AppColors.navigationColor,
-                    fontSize: 14.0.sp,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w700),
               ),
             ],
@@ -260,7 +260,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                itemSize: 12.sp,
+                itemSize: 12,
                 // itemBuilder: (context, _) => Icon(
                 //   Icons.star,
                 //   color: Colors.amber,
@@ -283,7 +283,7 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
                 widget.goodsModel.rating.toString(),
                 style: BaseText.style(
                     color: AppColors.color_FF333333,
-                    fontSize: 10.0.sp,
+                    fontSize: 10.0,
                     fontWeight: FontWeight.normal),
               ),
             ],

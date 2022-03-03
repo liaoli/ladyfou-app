@@ -92,7 +92,7 @@ class _RegisterViewState extends State<RegisterView> {
                 S.of(context).register_button_text,
                 style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),

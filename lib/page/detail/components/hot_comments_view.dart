@@ -49,7 +49,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
               "热评",
               style: TextStyle(
                 color: AppColors.color_9A9AA3,
-                fontSize: 12.sp,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -77,7 +77,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
                     "4.5/5",
                     style: TextStyle(
                       color: AppColors.color_FF333333,
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -98,7 +98,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
               "“衣服非常保暖~~样式还很好看！”",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -117,7 +117,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             "积分",
             style: TextStyle(
               color: AppColors.color_9A9AA3,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -129,7 +129,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             "P15",
             style: TextStyle(
               color: AppColors.color_F6AD2A,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -140,7 +140,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             "ポイントは獲得できます",
             style: TextStyle(
               color: AppColors.color_FF666666,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -165,7 +165,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             "配送",
             style: TextStyle(
               color: AppColors.color_9A9AA3,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -176,7 +176,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             "送料無料",
             style: TextStyle(
               color: AppColors.black,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -187,7 +187,7 @@ class _HotCommentsViewState extends State<HotCommentsView> {
             "買い物は999円で送料無料です~",
             style: TextStyle(
               color: AppColors.color_FF666666,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),

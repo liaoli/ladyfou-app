@@ -150,7 +150,7 @@ class _DiscountCountdownState extends State<DiscountCountdown> {
       text,
       style: TextStyle(
         color: AppColors.white,
-        fontSize: 14.sp,
+        fontSize: 14,
       ),
     );
   }

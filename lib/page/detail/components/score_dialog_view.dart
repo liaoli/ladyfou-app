@@ -28,7 +28,7 @@ class ScoreDialogView extends StatelessWidget {
                         "获取条件",
                         style: TextStyle(
                           color: AppColors.color_FF333333,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -39,7 +39,7 @@ class ScoreDialogView extends StatelessWidget {
                         "订单处于已付款状态",
                         style: TextStyle(
                           color: AppColors.color_FF333333,
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -55,7 +55,7 @@ class ScoreDialogView extends StatelessWidget {
                         "获取积分",
                         style: TextStyle(
                           color: AppColors.color_FF333333,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -66,7 +66,7 @@ class ScoreDialogView extends StatelessWidget {
                         "20p",
                         style: TextStyle(
                           color: AppColors.color_F6AD2A,
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -86,7 +86,7 @@ class ScoreDialogView extends StatelessWidget {
                       "注意：已付款的商品会奖励对应积分数额",
                       style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeight.w700,
                       ),
                     ),

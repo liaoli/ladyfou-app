@@ -61,7 +61,7 @@ class _CartPageState extends State<CartPage> {
                 S.of(context).charge_title,
                 style: TextStyle(
                   color: AppColors.color_FF000000,
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -156,7 +156,7 @@ class _CartPageState extends State<CartPage> {
                         '全选商品',
                         style: TextStyle(
                           color: AppColors.primaryBlackText51,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -171,7 +171,7 @@ class _CartPageState extends State<CartPage> {
                 '（已选择1件商品）',
                 style: TextStyle(
                   color: AppColors.primaryBlackText51,
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
               ),

@@ -56,7 +56,7 @@ class _AddressTextFieldState extends State<AddressTextField> {
             widget.title!,
             style: TextStyle(
               color: AppColors.color_C4C4C4,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -71,13 +71,13 @@ class _AddressTextFieldState extends State<AddressTextField> {
               onChanged: widget.onChanged,
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 12.sp,
+                fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),
               decoration: InputDecoration(
                 hintStyle: TextStyle(
                   color: AppColors.color_C4C4C4,
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
                 border: InputBorder.none,

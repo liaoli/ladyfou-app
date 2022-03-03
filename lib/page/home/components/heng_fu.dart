@@ -35,7 +35,7 @@ class _HengFUState extends State<HengFu> {
                 "WINTER SALE 開催中！ ＞",
                 style: TextStyle(
                   color: AppColors.Color_E34D59,
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
               ),

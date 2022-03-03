@@ -153,7 +153,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                             maxLines: 2,
                             style: TextStyle(
                               color: AppColors.color_FF222222,
-                              fontSize: 12.sp,
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -179,7 +179,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                                 "-21%",
                                 style: TextStyle(
                                   color: AppColors.white,
-                                  fontSize: 8.sp,
+                                  fontSize: 8,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -193,7 +193,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                           "￥8687",
                           style: TextStyle(
                             color: AppColors.color_FF353547,
-                            fontSize: 10.sp,
+                            fontSize: 10,
                             fontWeight: FontWeight.w400,
                             decoration: TextDecoration.lineThrough,
                           ),
@@ -209,7 +209,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                           "￥4475",
                           style: TextStyle(
                             color: AppColors.Color_E34D59,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -290,7 +290,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                           maxLines: 1,
                           style: TextStyle(
                             color: AppColors.color_FF222222,
-                            fontSize: 12.sp,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -316,7 +316,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                               "-21%",
                               style: TextStyle(
                                 color: AppColors.white,
-                                fontSize: 8.sp,
+                                fontSize: 8,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -330,7 +330,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                         "￥8687",
                         style: TextStyle(
                           color: AppColors.color_FF353547,
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
                           decoration: TextDecoration.lineThrough,
                         ),
@@ -346,7 +346,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                         "￥4475",
                         style: TextStyle(
                           color: AppColors.Color_E34D59,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -384,7 +384,7 @@ class LimitTimeDiscountScore extends StatelessWidget {
           "4.5",
           style: TextStyle(
             color: AppColors.Color_E34D59,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w700,
           ),
         ),

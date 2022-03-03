@@ -26,7 +26,7 @@ class CommonHead extends StatelessWidget {
                 title,
                 style: TextStyle(
                   color: AppColors.color_FF333333,
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
               ),

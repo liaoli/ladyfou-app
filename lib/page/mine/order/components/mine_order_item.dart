@@ -63,7 +63,7 @@ class _MineOrderItemState extends State<MineOrderItem> {
                       child: Text(
                         S.current.mine_page_order_sn + '${widget.orderModel.sn}',
                         style: BaseText.style(
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             color: AppColors.primaryBlackText,
                             fontWeight: FontWeight.w400),
                       ),
@@ -73,7 +73,7 @@ class _MineOrderItemState extends State<MineOrderItem> {
                 Text(
                   stateStr(widget.orderModel.code, context),
                   style: BaseText.style(
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.navigationColor,
                   ),
                 ),
