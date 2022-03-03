@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/http/request.dart';
+import '../../../core/http/response.dart';
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../../core/utils/toast.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -18,5 +20,16 @@ class HomeProvider extends ChangeNotifier {
 
       debugPrint("$onError");
     });
+  }
+
+  Future<MyResponse<DailyNewProductListModel>> getDailyNew() async {
+    try {
+      MyResponse<DailyNewProductListModel> result = await homeDailyNew();
+      ToastUtils.success(result.common.debugMessage);
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
   }
 }

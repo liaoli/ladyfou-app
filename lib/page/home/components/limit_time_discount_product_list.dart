@@ -4,12 +4,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../components/button/common_button.dart';
 import '../../../core/constant/constant.dart';
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../../core/utils/event.dart';
 import '../../../style/Color.dart';
+import '../store/limit_time_discount_provider.dart';
 
 class LimitTimeDiscountProductList extends StatefulWidget {
   final EdgeInsetsGeometry padding;
@@ -54,6 +57,8 @@ class _LimitTimeDiscountProductListState
 
   @override
   Widget build(BuildContext context) {
+    LimitTimeDiscountProvider provider = Provider.of(context, listen: true);
+
     return SliverPadding(
       padding: widget.padding,
       sliver: SliverGrid(
@@ -72,18 +77,18 @@ class _LimitTimeDiscountProductListState
               ),
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
-
+            DailyNewProduct product = provider.data[index];
             //创建子widget
-            if(style == 0){
-             return  DiscountProductItemViewTwo(
-               index: index,
-             );
+            if (style == 0) {
+              return DiscountProductItemViewTwo(
+                product: product,
+              );
             }
             return DiscountProductItemViewOne(
-              index: index,
+              product: product,
             );
           },
-          childCount: widget.count,
+          childCount: provider.data.length,
         ),
       ),
     );
@@ -91,11 +96,11 @@ class _LimitTimeDiscountProductListState
 }
 
 class DiscountProductItemViewOne extends StatelessWidget {
-  final int index;
+  final DailyNewProduct product;
 
   const DiscountProductItemViewOne({
     Key? key,
-    required this.index,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -148,7 +153,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
+                            product.name ?? "",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
@@ -176,7 +181,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "-21%",
+                                product.discount ?? "",
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontSize: 8,
@@ -190,7 +195,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                           width: 8.w,
                         ),
                         Text(
-                          "￥8687",
+                          "￥${product.listPrice ?? 0}",
                           style: TextStyle(
                             color: AppColors.color_FF353547,
                             fontSize: 10,
@@ -206,7 +211,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "￥4475",
+                          "￥${product.price ?? 0}",
                           style: TextStyle(
                             color: AppColors.Color_E34D59,
                             fontSize: 14,
@@ -216,7 +221,7 @@ class DiscountProductItemViewOne extends StatelessWidget {
                         Expanded(
                           child: SizedBox(),
                         ),
-                        LimitTimeDiscountScore(),
+                        LimitTimeDiscountScore(rating: product.rating ?? 0),
                       ],
                     ),
                   ],
@@ -232,11 +237,11 @@ class DiscountProductItemViewOne extends StatelessWidget {
 }
 
 class DiscountProductItemViewTwo extends StatelessWidget {
-  final int index;
+  final DailyNewProduct product;
 
   const DiscountProductItemViewTwo({
     Key? key,
-    required this.index,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -285,7 +290,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
+                          product.name ?? "",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
@@ -313,7 +318,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "-21%",
+                              product.discount ?? "",
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 8,
@@ -327,7 +332,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                         width: 8.w,
                       ),
                       Text(
-                        "￥8687",
+                        "￥${product.listPrice ?? 0}",
                         style: TextStyle(
                           color: AppColors.color_FF353547,
                           fontSize: 10,
@@ -343,7 +348,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "￥4475",
+                        "￥${product.price ?? 0}",
                         style: TextStyle(
                           color: AppColors.Color_E34D59,
                           fontSize: 14,
@@ -353,7 +358,9 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                       Expanded(
                         child: SizedBox(),
                       ),
-                      LimitTimeDiscountScore(),
+                      LimitTimeDiscountScore(
+                        rating: product.rating ?? 0,
+                      ),
                     ],
                   ),
                 ],
@@ -368,7 +375,9 @@ class DiscountProductItemViewTwo extends StatelessWidget {
 }
 
 class LimitTimeDiscountScore extends StatelessWidget {
-  const LimitTimeDiscountScore({Key? key}) : super(key: key);
+  final double rating;
+
+  const LimitTimeDiscountScore({Key? key, this.rating = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -381,7 +390,7 @@ class LimitTimeDiscountScore extends StatelessWidget {
           width: 2.w,
         ),
         Text(
-          "4.5",
+          "$rating",
           style: TextStyle(
             color: AppColors.Color_E34D59,
             fontSize: 10,

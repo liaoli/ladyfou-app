@@ -16,7 +16,8 @@ class DailyNewProductListModel {
 
   String toJson() => json.encode(toMap());
 
-  factory DailyNewProductListModel.fromMap(dynamic json) => DailyNewProductListModel(
+  factory DailyNewProductListModel.fromMap(dynamic json) =>
+      DailyNewProductListModel(
         data: json == null
             ? []
             : List<DailyNewProduct>.from(
@@ -84,7 +85,7 @@ class DailyNewProduct {
   String? weight;
   int? saled;
   int? popular;
-  int? rating;
+  double? rating;
   int? sort;
   int? reviewsCount;
   String? createdAt;
@@ -132,7 +133,7 @@ class DailyNewProduct {
         weight: json["weight"],
         saled: json["saled"],
         popular: json["popular"],
-        rating: json["rating"],
+        rating: parse2Double(json["rating"]),
         sort: json["sort"],
         reviewsCount: json["reviews_count"],
         createdAt: json["created_at"],
@@ -153,17 +154,22 @@ class DailyNewProduct {
         reviewsTotal: json["reviews_total"],
         wishlistTotal: json["wishlist_total"],
         cids: json["cids"] == null
-            ? null
+            ? []
             : List<int>.from(json["cids"].map((x) => x)),
-        featureImage: List<FeatureImage>.from(
-            json["feature_image"].map((x) => FeatureImage.fromMap(x))),
+        featureImage: json["feature_image"] == null
+            ? []
+            : List<FeatureImage>.from(
+                json["feature_image"].map((x) => FeatureImage.fromMap(x))),
         features:
             List<Feature>.from(json["features"].map((x) => Feature.fromMap(x))),
-        options:
-            List<Option>.from(json["options"].map((x) => Option.fromMap(x))),
+        options: json["options"] == null
+            ? []
+            : List<Option>.from(json["options"].map((x) => Option.fromMap(x))),
         ratNum: json["rat_num"],
         sales: json["sales"],
-        sku: List<Sku>.from(json["sku"].map((x) => Sku.fromMap(x))),
+        sku: json["sku"] == null
+            ? []
+            : List<Sku>.from(json["sku"].map((x) => Sku.fromMap(x))),
         stockpile: json["stockpile"],
         skuMinPrice: json["sku_min_price"],
         skuMaxPrice: json["sku_max_price"],
@@ -420,4 +426,11 @@ class Sku {
         "stockpile_status": stockpileStatus,
         "store_status": storeStatus,
       };
+}
+
+double? parse2Double(dynamic value) {
+  if (value is int) {
+    return value.toDouble();
+  }
+  return value;
 }

@@ -5,7 +5,7 @@ import 'package:ladyfou/core/model/sort_model.dart';
 import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
-import '../../page/home/components/daily_new_product.dart';
+import '../../page/home/components/daily_new_product_new.dart';
 import '../model/category_info_model.dart';
 import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
@@ -28,8 +28,7 @@ Future<MyResponse<TokenInfoModel>> register({
   required String email,
   required String password,
 }) async {
-  Map<String, dynamic> result =
-      await XHttp.post("/ladyfou/account/register", {
+  Map<String, dynamic> result = await XHttp.post("/ladyfou/account/register", {
     "chinese_name": chinese_name,
     "katakana_name": katakana_name,
     "email": email,
@@ -67,15 +66,41 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
 }
 
 /// home 每日新品
-Future<MyResponse<DailyNewProductListModel>> homeDailyNew() async {
+/// ladyfou/product/newProduct?page=1&page_size=3
+Future<MyResponse<DailyNewProductListModel>> homeDailyNew({
+  int page = 1,
+  int pageSize = 6,
+}) async {
   Map<String, dynamic> result = await XHttp.get(
-    "/ladyfou/index/getTopNewProducts",
+    "/ladyfou/product/newProduct",
+    {
+      "page" : page,
+      "page_size" : pageSize,
+    }
   );
   MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
 
   return response;
 }
 
+
+/// home 限时折扣
+/// ladyfou/product/discountProduct?page=1&page_size=3
+Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
+  int page = 1,
+  int pageSize = 6,
+}) async {
+  Map<String, dynamic> result = await XHttp.get(
+      "/ladyfou/product/discountProduct",
+      {
+        "page" : page,
+        "page_size" : pageSize,
+      }
+  );
+  MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
 /////////////////////////////////thw-start////////////////////////////////////
 
 Future handleResponse(MyResponse response) async {

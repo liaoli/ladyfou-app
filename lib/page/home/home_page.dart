@@ -8,7 +8,7 @@ import 'package:ladyfou/page/home/store/home_provider.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:provider/provider.dart';
 
-import 'components/daily_new_product.dart';
+import 'components/daily_new_product_new.dart';
 import 'components/game_entry.dart';
 import 'components/heng_fu.dart';
 import 'components/home_default_nav_bar.dart';
@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     homeProvider = HomeProvider();
-    homeProvider.getHomeDataList(context);
 
     scrollController = ScrollController();
     scrollController.addListener(() {
@@ -158,7 +157,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget dailyNewProduct() {
-    return DailyNewProduct();
+    return DailyNewProductView();
   }
 
   Widget productRankHead() {
