@@ -222,7 +222,7 @@ class SecondryCategory extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: BaseText.style(
-                    fontSize: 10.sp,
+                    fontSize: 10,
                     fontWeight: FontWeight.w700,
                     color: AppColors.color_FF3F3F3F),
               ),

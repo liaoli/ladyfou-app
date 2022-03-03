@@ -77,7 +77,7 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
             "请选择所在地区",
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
           ),

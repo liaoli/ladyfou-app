@@ -80,7 +80,7 @@ class OrderGoodsItemWidget extends StatelessWidget {
                 child: Text(
                   product.name,
                   style: BaseText.style(
-                    fontSize: 12.sp,
+                    fontSize: 12,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -97,7 +97,7 @@ class OrderGoodsItemWidget extends StatelessWidget {
                         Text(
                           '￥',
                           style: BaseText.style(
-                              fontSize: 10.sp,
+                              fontSize: 10,
                               fontWeight: FontWeight.bold,
                               color: AppColors.primaryBlackText),
                           overflow: TextOverflow.ellipsis,
@@ -105,7 +105,7 @@ class OrderGoodsItemWidget extends StatelessWidget {
                         Text(
                           Utils.formatStepCount(double.parse(product.price)),
                           style: BaseText.style(
-                              fontSize: 14.sp,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: AppColors.primaryBlackText),
                           overflow: TextOverflow.ellipsis,
@@ -116,7 +116,7 @@ class OrderGoodsItemWidget extends StatelessWidget {
                     Text(
                       '税込',
                       style: BaseText.style(
-                          fontSize: 12.sp, color: AppColors.color_FF999999),
+                          fontSize: 12, color: AppColors.color_FF999999),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
@@ -130,14 +130,14 @@ class OrderGoodsItemWidget extends StatelessWidget {
                 Text(
                   specStr,
                   style: BaseText.style(
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     color: AppColors.primaryGreyText,
                   ),
                 ),
                 Text(
                   'x${product.qty}',
                   style: BaseText.style(
-                      fontSize: 12.sp, color: AppColors.color_FF999999),
+                      fontSize: 12, color: AppColors.color_FF999999),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

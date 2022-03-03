@@ -102,7 +102,7 @@ class _MyBlurBottomViewState extends State<MyBlurBottomView> {
               e.title,
               style: TextStyle(
                 color: e.getTextColor(),
-                fontSize: 14.sp,
+                fontSize: 14,
               ),
             )
           ],

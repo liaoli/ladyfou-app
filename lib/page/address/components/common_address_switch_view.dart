@@ -33,7 +33,7 @@ class _CommonAddressSwitchViewState extends State<CommonAddressSwitchView> {
               "设为默认地址",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),

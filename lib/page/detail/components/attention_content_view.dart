@@ -91,7 +91,7 @@ class _AttentionContentViewState extends State<AttentionContentView> {
             title,
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -100,7 +100,7 @@ class _AttentionContentViewState extends State<AttentionContentView> {
             content,
             style: TextStyle(
               color: contentColor,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -130,7 +130,7 @@ class _AttentionContentViewState extends State<AttentionContentView> {
             "注意事项",
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
           ),

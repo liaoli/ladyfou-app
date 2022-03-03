@@ -38,7 +38,7 @@ class CustomNavBar extends StatelessWidget {
                 style: this.titleStyle ??
                     myTextStyle(
                       color: AppColors.black,
-                      fontSize: 18.sp,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
               ),

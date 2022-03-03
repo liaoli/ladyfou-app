@@ -249,7 +249,7 @@ class _LimitTimeDiscountListHeadState extends State<LimitTimeDiscountListHead> {
                   "综合",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -401,7 +401,7 @@ class _DiscountCountdownState extends State<DiscountCountdown> {
       text,
       style: TextStyle(
         color: AppColors.black,
-        fontSize: 12.sp,
+        fontSize: 12,
         fontWeight: FontWeight.w400,
       ),
     );
@@ -412,7 +412,7 @@ class _DiscountCountdownState extends State<DiscountCountdown> {
       text,
       style: TextStyle(
         color: AppColors.Color_E34D59,
-        fontSize: 18.sp,
+        fontSize: 18,
         fontWeight: FontWeight.w700,
       ),
     );

@@ -53,7 +53,7 @@ class _AboutListItemState extends State<AboutListItem> {
                       widget.title!,
                         style: myTextStyle(
                           color: AppColors.black,
-                          fontSize: 16.sp,
+                          fontSize: 16,
                           fontWeight: FontWeight.w300,
                         ),
                     )

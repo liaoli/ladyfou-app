@@ -71,7 +71,7 @@ class _BrowsingHistoryPageState extends State<BrowsingHistoryPage> {
             "今日浏览商品",
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
           ),

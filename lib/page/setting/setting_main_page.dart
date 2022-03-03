@@ -55,7 +55,7 @@ class _SettingMainPageState extends State<SettingMainPage> {
                   "退出登录",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

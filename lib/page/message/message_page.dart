@@ -132,7 +132,7 @@ class MessageItemView extends StatelessWidget {
                     item.title,
                     style: TextStyle(
                       color: AppColors.color_FF333333,
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

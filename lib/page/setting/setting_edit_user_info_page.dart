@@ -63,7 +63,7 @@ class _SettingEditUserInfoPageState extends State<SettingEditUserInfoPage> {
                   "确 认",
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

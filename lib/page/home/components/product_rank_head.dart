@@ -57,7 +57,7 @@ class _ProductRankHeadState extends State<ProductRankHead> {
               "商品排行榜",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -179,7 +179,7 @@ class ProductCategoryItemView extends StatelessWidget {
           "アウター",
           style: TextStyle(
             color: AppColors.color_FF333333,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w500,
           ),
         ),

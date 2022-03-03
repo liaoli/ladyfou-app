@@ -37,7 +37,7 @@ class _AboutPageState extends State<AboutPage> {
             "About Us",
             style: myTextStyle(
               color: AppColors.black,
-              fontSize: 18.sp,
+              fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -69,7 +69,7 @@ class _AboutPageState extends State<AboutPage> {
                       child: Text("FUD",
                           style: myTextStyle(
                             color: AppColors.black,
-                            fontSize: 18.sp,
+                            fontSize: 18,
                             fontWeight: FontWeight.w500,
                           )))),
               Padding(
@@ -79,7 +79,7 @@ class _AboutPageState extends State<AboutPage> {
                       child: Text("${S.of(context).versionName}: $_versionName",
                           style: myTextStyle(
                             color: AppColors.black,
-                            fontSize: 16.sp,
+                            fontSize: 16,
                             fontWeight: FontWeight.w300,
                           )))),
               Center(

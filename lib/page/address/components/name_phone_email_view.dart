@@ -53,7 +53,7 @@ class _NamePhoneEmailViewState extends State<NamePhoneEmailView> {
                       "JP+81",
                       style: TextStyle(
                         color: AppColors.color_FF333333,
-                        fontSize: 12.sp,
+                        fontSize: 12,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

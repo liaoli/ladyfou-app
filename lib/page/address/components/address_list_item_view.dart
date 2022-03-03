@@ -28,7 +28,7 @@ class AddressListItem extends StatelessWidget {
                text,
                 style: TextStyle(
                   color: AppColors.color_FF333333,
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -75,7 +75,7 @@ class AddressSusItem extends StatelessWidget {
         softWrap: false,
         style: TextStyle(
           color: AppColors.color_FF666666,
-          fontSize: 10.sp,
+          fontSize: 10,
           fontWeight: FontWeight.w400,
         ),
       ),

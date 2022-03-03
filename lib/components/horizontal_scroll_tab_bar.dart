@@ -42,7 +42,7 @@ class _HorizontalScrollTabBarState extends State<HorizontalScrollTabBar> {
               e.title,
               style: myTextStyle(
                 color: e.getTextColor(),
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
             ),

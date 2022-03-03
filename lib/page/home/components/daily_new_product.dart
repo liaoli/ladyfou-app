@@ -56,7 +56,7 @@ class _DailyNewProductState extends State<DailyNewProduct> {
               "NEW",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -75,7 +75,7 @@ class _DailyNewProductState extends State<DailyNewProduct> {
               "每日上新",
               style: TextStyle(
                 color: AppColors.color_FF999999,
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -93,7 +93,7 @@ class _DailyNewProductState extends State<DailyNewProduct> {
                     "立即查看",
                     style: TextStyle(
                       color: AppColors.color_FF999999,
-                      fontSize: 10.sp,
+                      fontSize: 10,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -197,7 +197,7 @@ class DailyNewProductItemView extends StatelessWidget {
           "4色展開スタン...",
           style: TextStyle(
             color: AppColors.color_FF666666,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -208,7 +208,7 @@ class DailyNewProductItemView extends StatelessWidget {
           "￥8687",
           style: TextStyle(
             color: AppColors.color_FF333333,
-            fontSize: 12.sp,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
         ),

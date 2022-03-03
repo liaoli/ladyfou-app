@@ -204,7 +204,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
               TextSpan(
                 text: widget.goodsModel.name,
                 style: BaseText.style(
-                    fontSize: 12.0.sp,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.w400,
                     color: AppColors.primaryBlackText),
                 recognizer: TapGestureRecognizer()..onTap = () {},
@@ -226,7 +226,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
               'P${widget.goodsModel.point}',
               style: BaseText.style(
                   color: AppColors.color_F6AD2A,
-                  fontSize: 10.sp,
+                  fontSize: 10,
                   fontWeight: FontWeight.w700),
             ),
           ],
@@ -248,7 +248,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
                   '￥',
                   style: BaseText.style(
                       color: AppColors.navigationColor,
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
@@ -258,7 +258,7 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
                   style: BaseText.style(
                       height: 1.0,
                       color: AppColors.navigationColor,
-                      fontSize: 18.sp,
+                      fontSize: 18,
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(width: 5.w),

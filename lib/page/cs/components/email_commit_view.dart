@@ -75,7 +75,7 @@ class _EmailCommitViewState extends State<EmailCommitView> {
             text,
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),

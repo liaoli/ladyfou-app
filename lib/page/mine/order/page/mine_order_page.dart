@@ -192,7 +192,7 @@ class _MineOrderPageState extends State<MineOrderPage>
   //       controller: _searchController,
   //       keyboardType: TextInputType.text,
   //       style: BaseText.style(
-  //         fontSize: 12.0.sp,
+  //         fontSize: 12.0,
   //         fontWeight: FontWeight.w400,
   //         color: AppColors.primaryBlackText,
   //       ),

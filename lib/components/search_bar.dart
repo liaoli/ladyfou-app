@@ -64,7 +64,7 @@ class SearchBar extends StatelessWidget {
                     hintStyle: TextStyle(
                       fontWeight: FontWeight.w400,
                       color: AppColors.color_FF999999,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                     ),
                   ),
                 ),
