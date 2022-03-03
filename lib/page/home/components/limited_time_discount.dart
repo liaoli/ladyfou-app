@@ -7,9 +7,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/utils/date_util.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../detail/product_detail_page.dart';
 import '../limit_time_discount_page.dart';
+import '../store/home_provider.dart';
 
 class LimitedTimeDiscount extends StatefulWidget {
   const LimitedTimeDiscount({Key? key}) : super(key: key);
@@ -19,8 +22,11 @@ class LimitedTimeDiscount extends StatefulWidget {
 }
 
 class _LimitedTimeDiscountState extends State<LimitedTimeDiscount> {
+  late HomeProvider homeProvider;
+
   @override
   Widget build(BuildContext context) {
+    homeProvider = Provider.of(context, listen: true);
     return ClipRRect(
       borderRadius: new BorderRadius.all(new Radius.circular(10.w)),
       child: Container(
@@ -30,7 +36,9 @@ class _LimitedTimeDiscountState extends State<LimitedTimeDiscount> {
         child: Column(
           children: [
             head(),
-            LimitDiscountList(),
+            LimitDiscountList(
+              data: homeProvider.discount,
+            ),
           ],
         ),
       ),
@@ -183,7 +191,9 @@ class _DiscountCountdownState extends State<DiscountCountdown> {
 }
 
 class LimitDiscountList extends StatelessWidget {
-  const LimitDiscountList({Key? key}) : super(key: key);
+  final List<DailyNewProduct> data;
+
+  const LimitDiscountList({Key? key, this.data = const []}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -194,8 +204,11 @@ class LimitDiscountList extends StatelessWidget {
         padding: EdgeInsets.only(left: 15.w, top: 12.w, bottom: 12.w),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          DailyNewProduct product = data[index];
           return GestureDetector(
-            child: DiscountItemView(),
+            child: DiscountItemView(
+              product: product,
+            ),
             onTap: () {
               Get.to(() => ProductDetailPage());
             },
@@ -206,15 +219,18 @@ class LimitDiscountList extends StatelessWidget {
             width: 12.w,
           );
         },
-        itemCount: 5,
+        itemCount: data.length,
       ),
     );
   }
 }
 
 class DiscountItemView extends StatelessWidget {
+  final DailyNewProduct product;
+
   const DiscountItemView({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -253,7 +269,7 @@ class DiscountItemView extends StatelessWidget {
                 height: 14.w,
                 child: Center(
                   child: Text(
-                    "50%",
+                    product.discount ?? "",
                     style: TextStyle(
                       color: AppColors.white,
                       fontSize: 8,
@@ -275,7 +291,7 @@ class DiscountItemView extends StatelessWidget {
           height: 4.w,
         ),
         Text(
-          "￥4475",
+          "￥${product.price ?? 0}",
           style: TextStyle(
             color: AppColors.Color_E34D59,
             fontSize: 14,
@@ -283,7 +299,7 @@ class DiscountItemView extends StatelessWidget {
           ),
         ),
         Text(
-          "￥8687",
+          "￥${product.listPrice ?? 0}",
           style: TextStyle(
             color: AppColors.color_FF353547,
             fontSize: 10,

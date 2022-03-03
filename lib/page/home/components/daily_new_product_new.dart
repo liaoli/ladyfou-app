@@ -20,22 +20,14 @@ class DailyNewProductView extends StatefulWidget {
 class _DailyNewProductViewState extends State<DailyNewProductView> {
   late HomeProvider homeProvider;
 
-  List<DailyNewProduct> data = [];
-
   @override
   void initState() {
-    homeProvider = Provider.of(context, listen: false);
-
-    homeProvider.getDailyNew().then((value) {
-      data.addAll(value.response!.data!.data);
-      setState(() {});
-    });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    homeProvider = Provider.of(context, listen: true);
     return ClipRRect(
       borderRadius: new BorderRadius.all(new Radius.circular(10.w)),
       child: Container(
@@ -46,7 +38,7 @@ class _DailyNewProductViewState extends State<DailyNewProductView> {
           children: [
             head(),
             DailyNewProductList(
-              data: data,
+              data: homeProvider.dailyNew,
             ),
           ],
         ),
