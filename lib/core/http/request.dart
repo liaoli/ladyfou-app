@@ -64,6 +64,16 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
   return response;
 }
 
+/// home 每日新品
+Future<MyResponse<HomeDataListModel>> homeDailyNew() async {
+  Map<String, dynamic> result = await XHttp.get(
+    "/otonastyle/index/getTopNewProducts",
+  );
+  MyResponse<HomeDataListModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
 /////////////////////////////////thw-start////////////////////////////////////
 
 Future handleResponse(MyResponse response) async {
@@ -77,7 +87,7 @@ Future handleResponse(MyResponse response) async {
 
 /// 获取分类接口
 Future<MyResponse<List<SortModel>>> getSortData() async {
-  Map<String, dynamic> result = await XHttp.get("/otonastyle/catalog/category");
+  Map<String, dynamic> result = await XHttp.get("/ladyfou/catalog/category");
   MyResponse<List<SortModel>> response =
       MyResponse<List<SortModel>>.fromJson(result);
   handleResponse(response);
@@ -88,7 +98,7 @@ Future<MyResponse<List<SortModel>>> getSortData() async {
 Future<MyResponse<List<GoodsInfoModel>>> getCategoryProduct(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/catalog/category_product", params);
+      await XHttp.get("/ladyfou/catalog/category_product", params);
   MyResponse<List<GoodsInfoModel>> response =
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -100,7 +110,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
   required int id,
 }) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/catalog/cate_child", {"category_id": id});
+      await XHttp.get("/ladyfou/catalog/cate_child", {"category_id": id});
   MyResponse<List<CategoryInfoModel>> response =
       MyResponse<List<CategoryInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -111,7 +121,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
 Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
     {required Map<String, dynamic> params, bool isLoadMore = false}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/account/order", params);
+      await XHttp.get("/ladyfou/account/order", params);
   MyResponse<List<OrderInfoModel>> response =
       MyResponse<List<OrderInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -122,7 +132,7 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
 Future<MyResponse<CollectionInfoModel>> getCollectionInfos(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/account/wish_list", params);
+      await XHttp.get("/ladyfou/account/wish_list", params);
   MyResponse<CollectionInfoModel> response =
       MyResponse<CollectionInfoModel>.fromJson(result);
   handleResponse(response);
@@ -133,7 +143,7 @@ Future<MyResponse<CollectionInfoModel>> getCollectionInfos(
 Future<MyResponse> operationIsWished(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-      await XHttp.post("/otonastyle/account/wish_product", params);
+      await XHttp.post("/ladyfou/account/wish_product", params);
   MyResponse response = MyResponse.fromJson(result);
   handleResponse(response);
   return response;
@@ -143,7 +153,7 @@ Future<MyResponse> operationIsWished(
 Future<MyResponse> cancleIsWished(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-      await XHttp.post("/otonastyle/account/delete_wish_batch", params);
+      await XHttp.post("/ladyfou/account/delete_wish_batch", params);
   MyResponse response = MyResponse.fromJson(result);
   handleResponse(response);
   return response;
@@ -155,7 +165,7 @@ Future<MyResponse> cancleIsWished(
 Future<MyResponse<CartModel>> getCartList(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/checkout/shopping_cart_list", params);
+      await XHttp.get("/ladyfou/checkout/shopping_cart_list", params);
   MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
   return response;
 }
@@ -164,7 +174,7 @@ Future<MyResponse<CartModel>> getCartList(
 ///
 Future<MyResponse<CountryListModel>> getCountryList() async {
   Map<String, dynamic> result = await XHttp.get(
-    "/otonastyle/common/country",
+    "/ladyfou/common/country",
   );
   MyResponse<CountryListModel> response =
       MyResponse<CountryListModel>.fromJson(result);
@@ -176,7 +186,7 @@ Future<MyResponse<CountryListModel>> getCountryList() async {
 Future<MyResponse<ProvinceListModel>> getProvinceList(
     {int country_id = 122}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/common/country", {"country_id": country_id});
+      await XHttp.get("/ladyfou/common/country", {"country_id": country_id});
   MyResponse<ProvinceListModel> response =
       MyResponse<ProvinceListModel>.fromJson(result);
   return response;
@@ -186,7 +196,7 @@ Future<MyResponse<ProvinceListModel>> getProvinceList(
 /// [country] int  省的名字
 Future<MyResponse<CityListModel>> getCityList({required String country}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/otonastyle/common/city", {"country": country});
+      await XHttp.get("/ladyfou/common/city", {"country": country});
   MyResponse<CityListModel> response =
       MyResponse<CityListModel>.fromJson(result);
   return response;
@@ -198,7 +208,7 @@ Future<MyResponse<CityListModel>> getCityList({required String country}) async {
 /// otonastyle/common/town?country=東京都&city=あきる野市
 Future<MyResponse<CountyListModel>> getCountyList(
     {required String country, required String city}) async {
-  Map<String, dynamic> result = await XHttp.get("/otonastyle/common/town", {
+  Map<String, dynamic> result = await XHttp.get("/ladyfou/common/town", {
     "country": country,
     "city": city,
   });

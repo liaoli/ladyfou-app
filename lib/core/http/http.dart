@@ -15,8 +15,8 @@ import 'package:ladyfou/utils/sputils.dart';
 // const String baseUrl = "https://release.ladyfou.com";
 
 /// 开发环境域名
-// const String baseUrl = "http://192.168.1.174";
-const String baseUrl = "https://release.ladyfou.com";
+const String baseUrl = "http://192.168.1.174";
+// const String baseUrl = "https://release.ladyfou.com";
 
 class XHttp {
   XHttp._internal();
