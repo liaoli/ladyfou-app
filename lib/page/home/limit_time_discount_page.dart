@@ -7,6 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
+import 'package:ladyfou/page/home/store/daily_new_provider.dart';
+import 'package:ladyfou/page/home/store/limit_time_discount_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/sliver_header_delegate.dart';
 import '../../core/constant/constant.dart';
@@ -23,13 +26,16 @@ class LimitTimeDiscountPage extends StatefulWidget {
 }
 
 class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
-  int count = 6;
   late ScrollController scrollController;
 
   bool showCountdown = false;
 
+  late LimitTimeDiscountProvider provider;
+
   @override
   void initState() {
+    provider = LimitTimeDiscountProvider();
+    provider.limitTimeDiscountList(isRefresh: true);
     scrollController = ScrollController();
     scrollController.addListener(() {
       debugPrint("controller.offset = ${scrollController.offset}");
@@ -47,22 +53,25 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      actions: [
-        ClickedImageAsset(
-          image: "assets/images/action_bar_shopping_cart_black.png",
-          width: 20.w,
-          height: 20.w,
-          onTap: () {
-            //TODO:跳转到购物车
-          },
-        ),
-        SizedBox(
-          width: 12.w,
-        ),
-      ],
-      title: "限时特惠",
-      body: refresh(),
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: BaseScaffold(
+        actions: [
+          ClickedImageAsset(
+            image: "assets/images/action_bar_shopping_cart_black.png",
+            width: 20.w,
+            height: 20.w,
+            onTap: () {
+              //TODO:跳转到购物车
+            },
+          ),
+          SizedBox(
+            width: 12.w,
+          ),
+        ],
+        title: "限时特惠",
+        body: refresh(),
+      ),
     );
   }
 
@@ -76,18 +85,10 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
         footer: MaterialFooter(),
         scrollController: scrollController,
         onRefresh: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {
-              count = 6;
-            });
-          });
+          provider.limitTimeDiscountList(isRefresh: true);
         },
         onLoad: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {
-              count += 10;
-            });
-          });
+          await provider.limitTimeDiscountList(isRefresh: false);
         },
         slivers: <Widget>[
           SliverToBoxAdapter(child: imageBanner()),
@@ -149,7 +150,6 @@ class _LimitTimeDiscountPageState extends State<LimitTimeDiscountPage> {
 
   Widget limitTimeDiscountProductList() {
     return LimitTimeDiscountProductList(
-      count: count,
       padding: EdgeInsets.symmetric(
         horizontal: 12.w,
         vertical: 12.w,
@@ -311,9 +311,7 @@ class _ChangeStyleViewState extends State<ChangeStyleView> {
           style = 1;
         }
 
-        setState(() {
-
-        });
+        setState(() {});
         XEvent.post(EVENT_KEY_CHANGE_LIMIT_PRODUCT_LIST_STYLE, style);
       },
     );

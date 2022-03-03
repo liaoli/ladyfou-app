@@ -157,4 +157,8 @@ class PageEnabled {
         "totalPage": totalPage,
         "pageSize": pageSize,
       };
+
+  bool hasMore() {
+    return currentPage < totalPage;
+  }
 }

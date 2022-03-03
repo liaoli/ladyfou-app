@@ -7,13 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
+import 'package:ladyfou/page/home/store/daily_new_provider.dart';
+import 'package:provider/provider.dart';
 
-import '../../components/sliver_header_delegate.dart';
-import '../../core/constant/constant.dart';
-import '../../core/utils/event.dart';
 import '../../style/Color.dart';
-import '../../utils/date_util.dart';
-import 'components/limit_time_discount_product_list.dart';
 import 'components/new_product_list.dart';
 
 class NewProductPage extends StatefulWidget {
@@ -24,46 +21,36 @@ class NewProductPage extends StatefulWidget {
 }
 
 class _NewProductPageState extends State<NewProductPage> {
-  int count = 6;
-  late ScrollController scrollController;
-
-  bool showCountdown = false;
+  late DailyNewProvider provider;
 
   @override
   void initState() {
-    scrollController = ScrollController();
-    scrollController.addListener(() {
-      debugPrint("controller.offset = ${scrollController.offset}");
-
-      if (scrollController.offset >= 182.w) {
-        showCountdown = true;
-      } else {
-        showCountdown = false;
-      }
-      XEvent.post(EVENT_KEY_SHOW_LIMIT_COUNTDOWN, showCountdown);
-    });
-
+    provider = DailyNewProvider();
+    provider.getDailyNew(isRefresh: true);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      actions: [
-        ClickedImageAsset(
-          image: "assets/images/action_bar_shopping_cart_black.png",
-          width: 20.w,
-          height: 20.w,
-          onTap: () {
-            //TODO:跳转到购物车
-          },
-        ),
-        SizedBox(
-          width: 12.w,
-        ),
-      ],
-      title: "新品专区",
-      body: refresh(),
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: BaseScaffold(
+        actions: [
+          ClickedImageAsset(
+            image: "assets/images/action_bar_shopping_cart_black.png",
+            width: 20.w,
+            height: 20.w,
+            onTap: () {
+              //TODO:跳转到购物车
+            },
+          ),
+          SizedBox(
+            width: 12.w,
+          ),
+        ],
+        title: "新品专区",
+        body: refresh(),
+      ),
     );
   }
 
@@ -73,22 +60,14 @@ class _NewProductPageState extends State<NewProductPage> {
         horizontal: 0.w,
       ),
       child: EasyRefresh.custom(
+        controller: provider.refreshController,
         header: MaterialHeader(),
         footer: MaterialFooter(),
-        scrollController: scrollController,
         onRefresh: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {
-              count = 6;
-            });
-          });
+          await provider.getDailyNew(isRefresh: true);
         },
         onLoad: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {
-              count += 10;
-            });
-          });
+          await provider.getDailyNew(isRefresh: false);
         },
         slivers: <Widget>[
           SliverToBoxAdapter(child: imageBanner()),
@@ -104,7 +83,7 @@ class _NewProductPageState extends State<NewProductPage> {
       width: 375.w,
       height: 120.w,
       imageUrl:
-      "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+          "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -124,10 +103,8 @@ class _NewProductPageState extends State<NewProductPage> {
     );
   }
 
-
   Widget newProductList() {
     return NewProductList(
-      count: count,
       padding: EdgeInsets.symmetric(
         horizontal: 12.w,
         vertical: 12.w,
@@ -142,6 +119,4 @@ class _NewProductPageState extends State<NewProductPage> {
       ),
     );
   }
-
 }
-

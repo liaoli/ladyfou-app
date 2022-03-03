@@ -4,21 +4,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../components/button/common_button.dart';
 import '../../../core/constant/constant.dart';
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../../core/utils/event.dart';
 import '../../../style/Color.dart';
+import '../store/daily_new_provider.dart';
 
 class NewProductList extends StatefulWidget {
   final EdgeInsetsGeometry padding;
-  final int count;
 
   const NewProductList({
     Key? key,
     required this.padding,
-    this.count = 20,
   }) : super(key: key);
 
   @override
@@ -34,12 +35,12 @@ class _NewProductListState extends State<NewProductList> {
   @override
   void dispose() {
     // TODO: implement dispose
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    DailyNewProvider provider = Provider.of(context, listen: true);
     return SliverPadding(
       padding: widget.padding,
       sliver: SliverGrid(
@@ -52,24 +53,25 @@ class _NewProductListState extends State<NewProductList> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             //创建子widget
+            DailyNewProduct product = provider.data[index];
+
             return DiscountProductItemViewTwo(
-              index: index,
+              product: product,
             );
           },
-          childCount: widget.count,
+          childCount: provider.data.length,
         ),
       ),
     );
   }
 }
 
-
 class DiscountProductItemViewTwo extends StatelessWidget {
-  final int index;
+  final DailyNewProduct product;
 
   const DiscountProductItemViewTwo({
     Key? key,
-    required this.index,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -118,7 +120,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
+                          product.name ?? "",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
@@ -139,7 +141,7 @@ class DiscountProductItemViewTwo extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "￥4475",
+                        "￥${product.price ?? 0}",
                         style: TextStyle(
                           color: AppColors.Color_E34D59,
                           fontSize: 14,
@@ -161,4 +163,3 @@ class DiscountProductItemViewTwo extends StatelessWidget {
     );
   }
 }
-
