@@ -226,3 +226,59 @@ class WishedModelReq {
   int id;
   bool isWished;
 }
+
+class OptionsReq {
+  OptionsReq({
+    required this.id,
+    required this.optionId,
+  });
+  int id;
+  int optionId;
+}
+
+class OptionsSizeReq {
+  OptionsSizeReq({
+    required this.id,
+    required this.sizeName,
+  });
+  int id;
+  String sizeName;
+
+  factory OptionsSizeReq.fromJson(Map<String, dynamic> json) => OptionsSizeReq(
+    id: json["id"],
+    sizeName: json["size_name"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "size_name": sizeName,
+  };
+
+  static List<OptionsSizeReq> fromToList(List json) {
+    List<OptionsSizeReq> lists = [];
+    for (int i = 0; i< json.length; i ++) {
+      String item = json[i].toString();
+      lists.add(OptionsSizeReq(id: i+1,sizeName: item));
+    }
+    return lists;
+  }
+
+  static List<OptionsSizeReq> fromList(List json) {
+    List<OptionsSizeReq> lists = [];
+    json.forEach((element) {
+      if (element is Map<String,dynamic>) {
+        lists.add(OptionsSizeReq.fromJson(element));
+      }
+    });
+    return lists;
+  }
+
+  static List<Map<String,dynamic>> toJsonList(List<OptionsSizeReq> models) {
+    List<Map<String,dynamic>> lists = [];
+    for (int i = 0; i< models.length; i ++) {
+      OptionsSizeReq model = models[i];
+      lists.add(model.toJson());
+    }
+    return lists;
+  }
+}

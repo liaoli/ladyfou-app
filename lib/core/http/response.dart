@@ -62,6 +62,8 @@ T fromJson<T>(dynamic json) {
     case "CartModel":
       CartModel cartModel = CartModel.fromJson(json);
       return cartModel as T;
+    case "List<OptionsSizeReq>":
+    return OptionsSizeReq.fromToList(json) as T;
     default:
       return [] as T;
   }

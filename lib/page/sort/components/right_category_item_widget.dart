@@ -196,7 +196,7 @@ class SecondryCategory extends StatelessWidget {
                 height: 50.w,
                 width: 50.w,
                 imageUrl:
-                    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                    data.thumb,
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(

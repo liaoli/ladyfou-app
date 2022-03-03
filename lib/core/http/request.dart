@@ -161,6 +161,24 @@ Future<MyResponse> cancleIsWished(
   return response;
 }
 
+/// 加入购物车
+Future<MyResponse> addCart({required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+  await XHttp.post("/ladyfou/checkout/add_to_cart", params);
+  MyResponse response = MyResponse.fromJson(result);
+  handleResponse(response);
+  return response;
+}
+
+/// 获取分类产品尺码规格
+Future<MyResponse<List<OptionsSizeReq>>> getOptionSize({required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+  await XHttp.get("/ladyfou/catalog/getOptionSize", params);
+  MyResponse<List<OptionsSizeReq>> response = MyResponse.fromJson(result);
+  handleResponse(response);
+  return response;
+}
+
 /////////////////////////////////thw-end//////////////////////////////////////
 
 /*-------------------------------购物车--------------------------------------*/

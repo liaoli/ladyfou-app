@@ -75,6 +75,29 @@ class ItemButtonModel {
     });
     return currentModels;
   }
+
+  static List<ItemButtonModel> fromToModels(
+      List<Map<String,dynamic>> models,String idKey, String nameKey) {
+    List<ItemButtonModel> currentModels = [];
+    models.forEach((m) {
+      currentModels.add(ItemButtonModel(
+          id: m[idKey], name: m[nameKey]));
+    });
+    return currentModels;
+  }
+
+  static List<Map<String,dynamic>> findToModels(
+      List<Map<String,dynamic>> models,String idKey, List<ItemButtonModel> list) {
+    List<Map<String,dynamic>> currentModels = [];
+    list.forEach((element) {
+      models.forEach((m) {
+        if (element.id == m[idKey]) {
+          currentModels.add(m);
+        }
+      });
+    });
+    return currentModels;
+  }
 }
 
 typedef CallBackWidget = void Function(List<ItemButtonModel> models);

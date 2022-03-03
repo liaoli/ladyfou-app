@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:gzx_dropdown_menu/gzx_dropdown_menu.dart';
 import 'package:ladyfou/core/constant/base_bloc.dart';
+import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/page/sort/components/comprehensive_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -75,7 +76,8 @@ class _GoodsListPageState extends State<GoodsListPage>
       provider.firstSelectModels(widget.title);
       setState(() {});
     });
-    provider.getConditionChildDatas(widget.shopId).then((value) {
+    // 请求尺码数据
+    provider.queryOptionSize(widget.shopId).then((value) {
       setState(() {});
     });
 
@@ -119,12 +121,6 @@ class _GoodsListPageState extends State<GoodsListPage>
   /// 点击跳转购物车
   void checkPushCartAction(BuildContext context) async {
     Get.to(()=> CartPage());
-  }
-
-  /// 点击tab切换
-  void selectTabItem(int index) {
-    // provider.getCategoryProducts(provider.inputKeyword,
-    //     shopId: widget.shopId, isFirstInt: true);
   }
 
   @override
@@ -294,7 +290,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                                 dropDownHeight: 40.w * 6.0,
                                 dropDownWidget: _buildClassification(context)),
                             GZXDropdownMenuBuilder(
-                                dropDownHeight: 40.w * 4.0,
+                                dropDownHeight: 40.w * 6.0,
                                 dropDownWidget: _buildConditions(context)),
                           ])
                     ],
@@ -385,18 +381,22 @@ class _GoodsListPageState extends State<GoodsListPage>
         builder: (ctx, snapshot) {
           List<ItemButtonModel> models = [];
           provider.conditionInfoModels.forEach((element) {
-            models.add(ItemButtonModel.fromModel(element.id, element.name2));
+            models.add(ItemButtonModel.fromModel(element.id, element.sizeName));
           });
+          List<Map<String,dynamic>> json_models = OptionsSizeReq.toJsonList(provider.selectConditionInfoModels);
           return ClassificationWidget(
             itemList: models,
-            selectItemList: ItemButtonModel.fromItemModels(provider.selectConditionInfoModels),
+            selectItemList: ItemButtonModel.fromToModels(json_models,'id','size_name'),
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
-              provider.selectConditionInfoModels = ItemButtonModel.toFindModels(provider.conditionInfoModels, infoModels);
-              provider.querySortCategoryProducts([widget.shopId]);
+              List<Map<String,dynamic>> json_models = OptionsSizeReq.toJsonList(provider.conditionInfoModels);
+              List<Map<String,dynamic>> models =  ItemButtonModel.findToModels(json_models, 'id',infoModels);
+              provider.selectConditionInfoModels = OptionsSizeReq.fromList(models);
+              provider.queryConditionInfoProducts([widget.shopId]);
             },
             finishCallBack:() {
               _dropdownMenuController.hide();
+              provider.queryConditionInfoProducts([widget.shopId]);
             },
           );
         });
