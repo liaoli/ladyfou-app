@@ -17,29 +17,19 @@ import 'package:provider/provider.dart';
 import '../../../../components/base_scaffold.dart';
 import '../../../../core/constant/base_bloc.dart';
 import '../../../../core/constant/base_enum.dart';
-import '../../../../core/model/category_info_model.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
 import '../../../sort/components/classification_widget.dart';
 import '../../../sort/components/shop_gradient_button.dart';
 import '../../../sort/components/wrap_gradient_widget.dart';
+import '../../../sort/page/goods_list_page.dart';
 import '../components/mine_collection_list_view.dart';
 import '../store/goods_operation_provider.dart';
+import '../../../../core/constant/constant.dart';
 
-class MineCollectionPage extends StatelessWidget {
+class MineCollectionPage extends StatefulWidget {
   MineCollectionPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ChangeNotifierProvider(
-        create: (_) => GoodsOperationProvider(), child: MineCollectionFul());
-  }
-}
-
-class MineCollectionFul extends StatefulWidget {
-  MineCollectionFul({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -48,7 +38,7 @@ class MineCollectionFul extends StatefulWidget {
   }
 }
 
-class _MineCollectionState extends State<MineCollectionFul> {
+class _MineCollectionState extends State<MineCollectionPage> {
   List<String> tabTitles = [];
   late GoodsOperationProvider provider;
   GZXDropdownMenuController _dropdownMenuController =
@@ -69,6 +59,12 @@ class _MineCollectionState extends State<MineCollectionFul> {
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -178,8 +174,18 @@ class _MineCollectionState extends State<MineCollectionFul> {
                                 ? Expanded(
                                     child: EasyRefresh.custom(
                                     controller: provider.refreshController,
-                                    onRefresh: () async {},
-                                    onLoad: () async {},
+                                    onRefresh: () async {
+                                      provider.currentPage += CURRENT_PAGE;
+                                      return provider.getCollectionLists(
+                                          isRefresh: true,
+                                          page: provider.currentPage);
+                                    },
+                                    onLoad: () async {
+                                      provider.currentPage += 1;
+                                      return provider.getCollectionLists(
+                                          isRefresh: false,
+                                          page: provider.currentPage);
+                                    },
                                     enableControlFinishLoad: false,
                                     enableControlFinishRefresh: false,
                                     header: MaterialHeader(),
@@ -217,20 +223,23 @@ class _MineCollectionState extends State<MineCollectionFul> {
                               }
                             },
                             menus: getBuilderMenus()),
-                        provider.isEditCollection ? Positioned(
-                          bottom: 0.w,
-                          child: Container(
-                            height: ScreenUtil().bottomBarHeight + 84.w,
-                            width: 375.w,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                    top: BorderSide(
-                                        width: 0.5.w,
-                                        color: AppColors.color_FFDADADA))),
-                            child: buildBottomWidget(),
-                          ),
-                        ) : SizedBox(),
+                        provider.isEditCollection
+                            ? Positioned(
+                                bottom: 0.w,
+                                child: Container(
+                                  height: ScreenUtil().bottomBarHeight + 84.w,
+                                  width: 375.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border(
+                                          top: BorderSide(
+                                              width: 0.5.w,
+                                              color:
+                                                  AppColors.color_FFDADADA))),
+                                  child: buildBottomWidget(),
+                                ),
+                              )
+                            : SizedBox(),
                       ],
                     ),
                   ),
@@ -307,28 +316,32 @@ class _MineCollectionState extends State<MineCollectionFul> {
   GZXDropdownMenuBuilder _menuBuilder(double height) {
     return GZXDropdownMenuBuilder(
         dropDownHeight: height,
-        dropDownWidget:height < 50.w ? Container() : StreamBuilder<bool>(
-          initialData: false,
-          stream: BaseBloc.instance.addListenerCollectionAlertShowStream,
-          builder: (ctx, snapshot) {
-            List<ItemButtonModel> models = [];
-            provider.categoryInfoModels.forEach((element) {
-              models.add(ItemButtonModel.fromModel(element.cid, element.name2));
-            });
-            return ClassificationWidget(
-              itemList: models,
-              selectItemList: ItemButtonModel.fromItemModels(
-                  provider.selectCategoryInfoModels),
-              isShow: snapshot.data ?? false,
-              callBack: (infoModels) {
-                setState(() {});
-              },
-              finishCallBack:() {
-
-              },
-            );
-          },
-        ));
+        dropDownWidget: height < 50.w
+            ? Container()
+            : StreamBuilder<bool>(
+                initialData: false,
+                stream: BaseBloc.instance.addListenerCollectionAlertShowStream,
+                builder: (ctx, snapshot) {
+                  List<ItemButtonModel> models = [];
+                  provider.categoryInfoModels.forEach((element) {
+                    models.add(
+                        ItemButtonModel.fromModel(element.cid, element.name2));
+                  });
+                  return ClassificationWidget(
+                    itemList: models,
+                    selectItemList: ItemButtonModel.fromCategoryListItemModels(
+                        provider.selectCategoryInfoModels),
+                    isShow: snapshot.data ?? false,
+                    callBack: (infoModels) {
+                      provider.selectCategoryInfoModels =
+                          ItemButtonModel.toFindCategoryListItemModels(
+                              provider.categoryInfoModels, infoModels);
+                      provider.querySortCategoryProducts();
+                    },
+                    finishCallBack: () {},
+                  );
+                },
+              ));
   }
 
   // 无数据缺省页
@@ -359,7 +372,9 @@ class _MineCollectionState extends State<MineCollectionFul> {
           fontSize: 14.sp,
           fontWeight: FontWeight.w700,
           text: '检索商品',
-          onTap: () => {},
+          onTap: () {
+            GoodsListPage(shopId: 0, title: '');
+          },
         ),
       ],
     );
@@ -411,7 +426,7 @@ class _MineCollectionState extends State<MineCollectionFul> {
                         decoration: BoxDecoration(
                             color: AppColors.color_FFF5F5F5,
                             borderRadius:
-                            BorderRadius.all(Radius.circular(16.5.w))),
+                                BorderRadius.all(Radius.circular(16.5.w))),
                         child: Text(
                             value.selectCollectionGoodList.length > 0
                                 ? '取消收藏(${value.selectCollectionGoodList.length})'
@@ -428,12 +443,12 @@ class _MineCollectionState extends State<MineCollectionFul> {
                     height: 33.w,
                     child: Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                      padding: EdgeInsets.only(left: 20.w, right: 20.w),
                       decoration: BoxDecoration(
                           color: AppColors.navigationColor,
                           borderRadius:
                               BorderRadius.all(Radius.circular(16.5.w))),
-                      child: Text('立即结算',
+                      child: Text('加入购物车',
                           style: BaseText.style(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,

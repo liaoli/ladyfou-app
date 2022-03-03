@@ -20,6 +20,7 @@ import '../../../core/constant/event_bus.dart';
 import '../../../core/model/category_info_model.dart';
 import '../../../core/model/good_info_model.dart';
 import '../../../core/utils/event.dart';
+import '../../../core/utils/toast.dart';
 
 class SortProvider with ChangeNotifier {
   List<SortModel> categoryList = [];
@@ -371,12 +372,11 @@ class SortProvider with ChangeNotifier {
 
   /// 获取二级分类商品列表
   Future getCategoryProducts(List<int> ids,
-      {bool isFirst = false,
-      bool isRefresh = true,
+      {bool isRefresh = true,
       int page = CURRENT_PAGE,
       int size = PAGE_SIZE,
       String order_type = ""}) async {
-    if (isFirst || isRefresh) page = CURRENT_PAGE;
+    if (isRefresh) page = CURRENT_PAGE;
 
     /*
     List data = [
@@ -609,25 +609,20 @@ class SortProvider with ChangeNotifier {
           await getCategoryProduct(params: params);
       if (response.common.statusCode == 1000) {
         List<GoodsInfoModel> modelList = response.response!.data!;
+        currentPage = response.common.pageEnabled.currentPage;
 
-        /// 第一次请求
-        if (isFirst) {
+        if (isRefresh) {
+          goodsInfoList.clear();
           goodsInfoList = modelList;
-          currentPage = response.common.pageEnabled.currentPage;
+          refreshController.finishRefresh();
+          refreshController.finishLoad();
         } else {
-          if (isRefresh) {
-            goodsInfoList.clear();
-            goodsInfoList = modelList;
-            refreshController.finishRefresh();
+          if (currentPage < response.common.pageEnabled.totalPage) {
             refreshController.finishLoad();
           } else {
-            if (goodsInfoList.length < response.common.pageEnabled.totalPage) {
-              refreshController.finishLoad();
-            } else {
-              refreshController.finishLoad(noMore: true);
-            }
-            goodsInfoList.addAll(modelList);
+            refreshController.finishLoad(noMore: true);
           }
+          goodsInfoList.addAll(modelList);
         }
         notifyListeners();
       } else {
@@ -644,18 +639,18 @@ class SortProvider with ChangeNotifier {
   }
 
   /// 通过分类查询数据
-  Future querySortCategoryProducts(List<int>  ids) async {
+  Future querySortCategoryProducts(List<int> ids) async {
     if (selectCategoryInfoModels.length > 0) {
       List<int> list = [];
       selectCategoryInfoModels.forEach((element) {
         list.add(element.id);
       });
       if (list.length > 0) {
-        getCategoryProducts(list, isRefresh: true, isFirst: true);
+        getCategoryProducts(list, isRefresh: true);
       }
-    }else {
-      if(ids.length >0 ) {
-        getCategoryProducts(ids, isRefresh: true, isFirst: true);
+    } else {
+      if (ids.length > 0) {
+        getCategoryProducts(ids, isRefresh: true);
       }
     }
   }
@@ -954,9 +949,9 @@ class SortProvider with ChangeNotifier {
 
   Future firstSelectModels(String name2) async {
     selectCategoryInfoModels = [];
-    for(int index = 0; index < categoryInfoModels.length;index ++) {
+    for (int index = 0; index < categoryInfoModels.length; index++) {
       CategoryInfoModel model = categoryInfoModels[index];
-      if(model.name2 == name2) {
+      if (model.name2 == name2) {
         selectCategoryInfoModels.add(model);
         notifyListeners();
         break;
@@ -1268,7 +1263,10 @@ class SortProvider with ChangeNotifier {
       /// 发送请求
       MyResponse response = await operationIsWished(params: params);
       if (response.common.statusCode == 1000) {
+        ToastUtils.success(
+            goodsInfoList[index].isWished == false ? '已取消收藏！' : '已取消收藏！');
       } else {
+        ToastUtils.error(response.common.debugMessage);
         product_id = goodsInfoList[index].id;
         goodsInfoList[index].isWished = !goodsInfoList[index].isWished;
 

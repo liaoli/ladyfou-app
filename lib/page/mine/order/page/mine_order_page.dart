@@ -21,19 +21,6 @@ import '../../../../style/text.dart';
 import '../components/mine_order_list.dart';
 import '../store/order_provider.dart';
 
-// class MineOrderPage extends StatelessWidget {
-//   final OrderStatus orderStatus;
-//
-//   MineOrderPage({Key? key, this.orderStatus = OrderStatus.all}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return ChangeNotifierProvider(
-//         create: (_) => OrderProvider(), child: MineOrderPageFul(orderStatus: orderStatus));
-//   }
-// }
-
 class MineOrderPage extends StatefulWidget {
   final OrderStatus orderStatus;
 
@@ -77,7 +64,7 @@ class _MineOrderPageState extends State<MineOrderPage>
 
     /// 默认获取所有订单列表
     provider = OrderProvider();
-    provider.getOrderList(selectOrderStatus, isFirst: true).then((value) {
+    provider.getOrderList(selectOrderStatus, isRefresh: true).then((value) {
       setState(() {});
     });
 
@@ -93,8 +80,7 @@ class _MineOrderPageState extends State<MineOrderPage>
           DateTime.now().difference(_lastRequestAdt) > Duration(seconds: 1)) {
         // 超过1秒允许再次请求
         _lastRequestAdt = DateTime.now();
-        provider.getOrderList(OrderStatus.values[_tabController.index],
-            isLoadMore: false);
+        provider.getOrderList(OrderStatus.values[_tabController.index]);
       }
     });
     super.initState();
