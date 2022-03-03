@@ -67,7 +67,7 @@ class _GoodsListPageState extends State<GoodsListPage>
     provider = SortProvider();
 
     // 请求分类数据
-    provider.getCategoryProducts([widget.shopId], isFirst: true).then((value) {
+    provider.getCategoryProducts([widget.shopId], isRefresh: true).then((value) {
       setState(() {});
     });
     // 请求筛选的数据
@@ -238,7 +238,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                               child: EasyRefresh.custom(
                             controller: provider.refreshController,
                             onRefresh: () {
-                              provider.currentPage += CURRENT_PAGE;
+                              provider.currentPage = CURRENT_PAGE;
                               return provider.getCategoryProducts([widget.shopId],
                                   isRefresh: true, page: provider.currentPage);
                             },

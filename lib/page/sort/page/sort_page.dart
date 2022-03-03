@@ -7,7 +7,6 @@
  * @LastEditors: tang
  */
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,17 +22,7 @@ import '../components/left_category_widget.dart';
 import '../components/right_category_widget.dart';
 import '../store/sort_provider.dart';
 
-// class SortPage extends StatelessWidget {
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return ChangeNotifierProvider(create: (_) => SortProvider(),child: SortPageFul());
-//   }
-// }
-
 class SortPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -42,13 +31,13 @@ class SortPage extends StatefulWidget {
   }
 }
 
-class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin {
-
+class _SortPageState extends State<SortPage>
+    with AutomaticKeepAliveClientMixin {
   int currentPage = 0;
   GlobalKey<RightListViewState> rightListviewKey =
-  new GlobalKey<RightListViewState>();
+      new GlobalKey<RightListViewState>();
   GlobalKey<CategoryMenueState> categoryMenueKey =
-  new GlobalKey<CategoryMenueState>();
+      new GlobalKey<CategoryMenueState>();
   late SortProvider provider;
 
   @override
@@ -61,12 +50,9 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
     provider = SortProvider();
 
     // 请求分类数据
-    provider.getSortAllDatas();
-    //     {
-    //   setState(() {
-    //
-    //   });
-    // });
+    provider.getSortAllDatas().then((value) {
+      setState(() {});
+    });
 
     super.initState();
   }
@@ -76,7 +62,6 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
     // TODO: implement build
     // super.build(context);
 
-
     double rightListViewHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top -
         MediaQuery.of(context).padding.bottom -
@@ -85,16 +70,16 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
     return ChangeNotifierProvider.value(
         value: provider,
         child: AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(children: <Widget>[
-          // 输入框
-          HomeSearchNavBar(),
-          _listWidget(context, rightListViewHeight),
-        ]),
-      ),
-    ));
+          value: SystemUiOverlayStyle.dark,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: Column(children: <Widget>[
+              // 输入框
+              HomeSearchNavBar(),
+              _listWidget(context, rightListViewHeight),
+            ]),
+          ),
+        ));
   }
 
   Widget _listWidget(BuildContext context, double listHeight) {
@@ -148,7 +133,8 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
       child: Container(
         width: 375.w,
         height: ScreenUtil().statusBarHeight + 44.w,
-        padding: EdgeInsets.fromLTRB(16.w, ScreenUtil().statusBarHeight, 16.w, 0),
+        padding:
+            EdgeInsets.fromLTRB(16.w, ScreenUtil().statusBarHeight, 16.w, 0),
         child: Row(
           children: [
             Expanded(
@@ -204,7 +190,6 @@ class _SortPageState extends State<SortPage> with AutomaticKeepAliveClientMixin 
   listViewChanged(i) {
     this.categoryMenueKey.currentState?.moveToTap(i);
   }
-
 
   @override
   // TODO: implement wantKeepAlive

@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/constant/base_bloc.dart';
 import '../../../core/model/category_info_model.dart';
+import '../../../core/model/good_collection_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -42,12 +43,35 @@ class ItemButtonModel {
     return currentModels;
   }
 
+  static List<CategoryListItem> toFindCategoryListItemModels(
+      List<CategoryListItem> models, List<ItemButtonModel> list) {
+    List<CategoryListItem> currentModels = [];
+    list.forEach((element) {
+      models.forEach((m) {
+        if (element.id == m.cid) {
+          currentModels.add(m);
+        }
+      });
+    });
+    return currentModels;
+  }
+
   static List<ItemButtonModel> fromItemModels(
       List<CategoryInfoModel> models) {
     List<ItemButtonModel> currentModels = [];
     models.forEach((m) {
       currentModels.add(ItemButtonModel(
           id: m.id, name: m.name2));
+    });
+    return currentModels;
+  }
+
+  static List<ItemButtonModel> fromCategoryListItemModels(
+      List<CategoryListItem> models) {
+    List<ItemButtonModel> currentModels = [];
+    models.forEach((m) {
+      currentModels.add(ItemButtonModel(
+          id: m.cid, name: m.name2));
     });
     return currentModels;
   }

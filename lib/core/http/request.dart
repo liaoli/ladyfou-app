@@ -69,11 +69,11 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
 Future handleResponse(MyResponse response) async {
   if (response.common.statusCode != 1000) {
     String error = response.common.debugMessage;
+
     /// 先屏蔽
     // ToastUtils.error(error);
   }
 }
-
 
 /// 获取分类接口
 Future<MyResponse<List<SortModel>>> getSortData() async {
@@ -134,6 +134,16 @@ Future<MyResponse> operationIsWished(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
       await XHttp.post("/otonastyle/account/wish_product", params);
+  MyResponse response = MyResponse.fromJson(result);
+  handleResponse(response);
+  return response;
+}
+
+/// 取消收藏
+Future<MyResponse> cancleIsWished(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result =
+      await XHttp.post("/otonastyle/account/delete_wish_batch", params);
   MyResponse response = MyResponse.fromJson(result);
   handleResponse(response);
   return response;
