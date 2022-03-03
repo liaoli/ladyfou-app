@@ -48,7 +48,7 @@ class _RecommendSetEntryViewState extends State<RecommendSetEntryView> {
             "夏祭りの商品がよく売れています",
             style: TextStyle(
               color: AppColors.color_FF999999,
-              fontSize: 10.sp,
+              fontSize: 10,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -68,7 +68,7 @@ class _RecommendSetEntryViewState extends State<RecommendSetEntryView> {
         "推荐特集",
         style: TextStyle(
           color: AppColors.color_FF333333,
-          fontSize: 14.sp,
+          fontSize: 14,
           fontWeight: FontWeight.w700,
         ),
       ),

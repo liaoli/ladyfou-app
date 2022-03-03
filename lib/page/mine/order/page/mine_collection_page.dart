@@ -109,7 +109,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                               child: Text(
                                 provider.isEditCollection ? '完成' : '管理',
                                 style: BaseText.style(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.normal),
                               ),
                             ),
@@ -150,11 +150,11 @@ class _MineCollectionState extends State<MineCollectionPage> {
                                     dividerHeight: 0.w,
                                     dividerColor: Colors.white,
                                     style: BaseText.style(
-                                        fontSize: 15.sp,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.primaryBlackText),
                                     dropDownStyle: BaseText.style(
-                                        fontSize: 15.sp,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.navigationColor),
                                     iconSize: 20.w,
@@ -360,7 +360,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
           child: Text(
             '您当前无收藏商品',
             style: BaseText.style(
-                fontSize: 12.sp,
+                fontSize: 12,
                 color: AppColors.color_FF999999,
                 fontWeight: FontWeight.w400),
           ),
@@ -369,7 +369,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
         GradientButton(
           width: 145.w,
           height: 35.w,
-          fontSize: 14.sp,
+          fontSize: 14,
           fontWeight: FontWeight.w700,
           text: '检索商品',
           onTap: () {
@@ -402,7 +402,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                     Text(
                       '全选',
                       style: BaseText.style(
-                          fontSize: 12.sp,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: AppColors.color_FF333333),
                     )
@@ -432,7 +432,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                                 ? '取消收藏(${value.selectCollectionGoodList.length})'
                                 : '取消收藏',
                             style: BaseText.style(
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.color_FF333333)),
                       ),
@@ -450,7 +450,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                               BorderRadius.all(Radius.circular(16.5.w))),
                       child: Text('加入购物车',
                           style: BaseText.style(
-                              fontSize: 14.sp,
+                              fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: AppColors.white)),
                     ),

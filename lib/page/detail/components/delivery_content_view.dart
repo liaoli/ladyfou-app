@@ -60,7 +60,7 @@ class _DeliveryContentViewState extends State<DeliveryContentView> {
             title,
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -69,7 +69,7 @@ class _DeliveryContentViewState extends State<DeliveryContentView> {
             content,
             style: TextStyle(
               color: contentColor,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -99,7 +99,7 @@ class _DeliveryContentViewState extends State<DeliveryContentView> {
             "配送",
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
           ),

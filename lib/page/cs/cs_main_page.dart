@@ -106,7 +106,7 @@ class _CSMainPageState extends State<CSMainPage> {
             "人工客服",
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
           ),

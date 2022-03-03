@@ -97,15 +97,15 @@ class _ComprehensiveState extends State<ComprehensiveWidget> {
                   });
                 },
                 child: Container(
-                  height: 40.sp,
-                  padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
+                  height: 40,
+                  padding: EdgeInsets.only(left: 20, right: 20.sp),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         child: Text(titleList[index]['title'],
                             style: BaseText.style(
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeight.normal,
                                 color: titleList[index]['isSelect'] == 0
                                     ? AppColors.jp_color153

@@ -64,7 +64,7 @@ class _EditPasswordItemViewState extends State<EditPasswordItemView> {
                           "发送验证码",
                           style: TextStyle(
                             color: AppColors.white,
-                            fontSize: 12.sp,
+                            fontSize: 12,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

@@ -59,14 +59,14 @@ class _ChangePasswordTextFieldState extends State<ChangePasswordTextField> {
                   onChanged: widget.onChanged,
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                   decoration: InputDecoration(
                     hintText: widget.hintText,
                     hintStyle: TextStyle(
                       color: AppColors.color_C4C4C4,
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeight.w400,
                     ),
                     border: InputBorder.none,
@@ -81,7 +81,7 @@ class _ChangePasswordTextFieldState extends State<ChangePasswordTextField> {
           widget.bottomText,
           style: TextStyle(
             color: AppColors.color_C4C4C4,
-            fontSize: 12.sp,
+            fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
         ),

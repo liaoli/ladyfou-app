@@ -136,7 +136,7 @@ class _MineOrderLogisticsState extends State<MineOrderLogisticsPage> {
                 Text(
                   '注文番号:${'201950548802021'}',
                   style: BaseText.style(
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: AppColors.color_FF333333),
                 ),
@@ -144,7 +144,7 @@ class _MineOrderLogisticsState extends State<MineOrderLogisticsPage> {
                 Text(
                   '配送方法:${'999速便'}',
                   style: BaseText.style(
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: AppColors.color_FF333333),
                 )

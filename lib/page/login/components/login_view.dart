@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                 S.of(context).login_button_text,
                 style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),

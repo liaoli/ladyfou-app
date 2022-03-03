@@ -44,7 +44,7 @@ class _ThumbsUpViewState extends State<ThumbsUpView> {
             "$count",
             style: TextStyle(
               color: AppColors.Color_E34D59,
-              fontSize: 10.sp,
+              fontSize: 10,
               fontWeight: FontWeight.w400,
             ),
           ),

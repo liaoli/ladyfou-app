@@ -136,7 +136,7 @@ class _OrderListPageState extends State<OrderListPage>
 
                     /// 为你推荐
                     style: BaseText.style(
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       color: AppColors.primaryBlackText,
                     ),
                   ),
@@ -190,7 +190,7 @@ class _OrderListPageState extends State<OrderListPage>
             child: Text(
               '您还没有相关订单',
               style: BaseText.style(
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   color: AppColors.color_FF999999,
                   fontWeight: FontWeight.w400),
             ),

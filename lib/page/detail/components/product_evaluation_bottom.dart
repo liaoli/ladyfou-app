@@ -43,7 +43,7 @@ class _ProductEvaluationBottomState extends State<ProductEvaluationBottom> {
                       "查看更多",
                       style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeight.w700,
                       ),
                     ),

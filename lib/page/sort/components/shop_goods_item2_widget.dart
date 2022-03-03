@@ -177,7 +177,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
               TextSpan(
                 text: widget.goodsModel.name,
                 style: BaseText.style(
-                    fontSize: 12.0.sp,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.w400,
                     color: AppColors.primaryBlackText),
                 recognizer: TapGestureRecognizer()..onTap = () {},
@@ -206,7 +206,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                         Utils.formatStepCount(
                             double.parse(widget.goodsModel.listPrice)), // 商品原价
                     style: BaseText.style(
-                        fontSize: 10.0.sp,
+                        fontSize: 10.0,
                         fontWeight: FontWeight.w400,
                         color: AppColors.primaryBlackText.withOpacity(0.5),
                         decoration: TextDecoration.lineThrough),
@@ -230,7 +230,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 '￥',
                 style: BaseText.style(
                     color: AppColors.primaryBlackText,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                     fontWeight: FontWeight.w700),
               ),
               Text(
@@ -240,7 +240,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 style: BaseText.style(
                     height: 1.0,
                     color: AppColors.primaryBlackText,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     fontWeight: FontWeight.w700),
               ),
             ],
@@ -284,7 +284,7 @@ class _ShopGoodsItem2State extends State<ShopGoodsItem2> {
                 widget.goodsModel.rating.toString(),
                 style: BaseText.style(
                     color: AppColors.color_FF333333,
-                    fontSize: 12.0.sp,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.normal),
               ),
             ],

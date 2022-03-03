@@ -55,7 +55,7 @@ class NextButton extends StatelessWidget {
                   "${text}",
                   style: TextStyle(
                       color: AppColors.white,
-                      fontSize: fontS.sp,
+                      fontSize: fontS,
                       fontWeight: fontW,
                       fontFamily: "Seravek"),
                 ),

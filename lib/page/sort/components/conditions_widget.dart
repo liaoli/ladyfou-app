@@ -66,7 +66,7 @@ class _ConditionsState extends State<ConditionsWidget> {
                         ],
                         titleNormalColor: AppColors.primaryBlackText,
                         titleSelectColor: AppColors.white,
-                        titleSize: 12.sp,
+                        titleSize: 12,
                         currentSelects: [],
                         padding: EdgeInsets.only(
                             left: 12.w, top: 5.w, bottom: 5.w, right: 12.w),

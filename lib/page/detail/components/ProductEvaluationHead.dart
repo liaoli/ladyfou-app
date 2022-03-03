@@ -34,7 +34,7 @@ class ProductEvaluationHead extends StatelessWidget {
                   "商品评价(68)",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -57,7 +57,7 @@ class ProductEvaluationHead extends StatelessWidget {
                   "好评96.8%",
                   style: TextStyle(
                     color: AppColors.color_FFDE0020,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

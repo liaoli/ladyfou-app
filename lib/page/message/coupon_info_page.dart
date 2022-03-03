@@ -132,7 +132,7 @@ class CouponInfoItemView extends StatelessWidget {
                                 "$value",
                                 style: TextStyle(
                                   color: AppColors.Color_E34D59,
-                                  fontSize: 64.sp,
+                                  fontSize: 64,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -145,7 +145,7 @@ class CouponInfoItemView extends StatelessWidget {
                                     "¥",
                                     style: TextStyle(
                                       color: AppColors.Color_E34D59,
-                                      fontSize: 13.sp,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -173,7 +173,7 @@ class CouponInfoItemView extends StatelessWidget {
                                       "优惠券就要到期啦 >   2022-10-7",
                                       style: TextStyle(
                                         color: AppColors.color_FF333333,
-                                        fontSize: 10.sp,
+                                        fontSize: 10,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -237,7 +237,7 @@ class CouponInfoItemView extends StatelessWidget {
             text,
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 10.sp,
+              fontSize: 10,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -262,7 +262,7 @@ class CouponInfoItemView extends StatelessWidget {
         e,
         style: TextStyle(
           color: AppColors.white,
-          fontSize: 12.sp,
+          fontSize: 12,
           fontWeight: FontWeight.w900,
         ),
       );

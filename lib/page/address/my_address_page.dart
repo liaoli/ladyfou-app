@@ -117,7 +117,7 @@ class SellInfoItemView extends StatelessWidget {
                   "胡仁杰",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -128,7 +128,7 @@ class SellInfoItemView extends StatelessWidget {
                   "18258489316",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -144,7 +144,7 @@ class SellInfoItemView extends StatelessWidget {
                         "编辑",
                         style: TextStyle(
                           color: AppColors.color_FF333333,
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -163,7 +163,7 @@ class SellInfoItemView extends StatelessWidget {
               "科兴科学园B4单元1402鲸派电商",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 12.sp,
+                fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -183,7 +183,7 @@ class SellInfoItemView extends StatelessWidget {
                         "默认地址",
                         style: TextStyle(
                           color: AppColors.color_FF999999,
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -198,7 +198,7 @@ class SellInfoItemView extends StatelessWidget {
                   address.address,
                   style: TextStyle(
                     color: AppColors.color_FF999999,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

@@ -47,7 +47,7 @@ class OrderOperationWidget extends StatelessWidget {
             Text(
               '共${qtys}件  合计  ',
               style: BaseText.style(
-                fontSize: 12.sp,
+                fontSize: 12,
                 color: AppColors.primaryGreyText,
               ),
             ),
@@ -56,12 +56,12 @@ class OrderOperationWidget extends StatelessWidget {
                 Text(
                   '￥',
                   style: BaseText.style(
-                      fontSize: 10.sp, color: AppColors.navigationColor),
+                      fontSize: 10, color: AppColors.navigationColor),
                 ),
                 Text(
                   Utils.formatStepCount(double.parse(orderModel.totalPrice)),
                   style: BaseText.style(
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: AppColors.navigationColor),
                 )
@@ -134,7 +134,7 @@ class ItemButtom extends StatelessWidget {
         child: Text(
           item['title'],
           style: BaseText.style(
-            fontSize: 10.sp,
+            fontSize: 10,
             color: color,
           ),
         ),

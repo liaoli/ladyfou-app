@@ -177,7 +177,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
             child: Text('待支付',
                 style: BaseText.style(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.white)),
           ),
           Container(
@@ -185,7 +185,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
             child: Text('23小时后将自动取消订单',
                 style: BaseText.style(
                     fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.white)),
           ),
         ],
@@ -216,7 +216,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                   child: Text('${'三浦惠子'}    ${'0262525159'}',
                       style: BaseText.style(
                           fontWeight: FontWeight.w700,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                           color: AppColors.primaryBlackText)),
                 ),
                 Container(
@@ -234,7 +234,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                 maxLines: 2,
                 style: BaseText.style(
                     fontWeight: FontWeight.w400,
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     color: AppColors.primaryBlackText)),
           ),
         ],
@@ -263,7 +263,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
               child: Text('暂无地址,请添加地址',
                   style: BaseText.style(
                       fontWeight: FontWeight.w500,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       color: AppColors.primaryBlackText)),
             ),
           ],
@@ -288,7 +288,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
             child: Text('配送方式',
                 style: BaseText.style(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.primaryBlackText)),
           ),
           Expanded(
@@ -323,7 +323,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                               Text(data['title'],
                                   style: BaseText.style(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 14.sp,
+                                      fontSize: 14,
                                       color: AppColors.primaryBlackText)),
                             ],
                           ),
@@ -332,7 +332,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                                 "￥${Utils.formatStepCount(double.parse(data['price']))}元",
                                 style: BaseText.style(
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 12.sp,
+                                    fontSize: 12,
                                     color: AppColors.navigationColor)),
                           ),
                         ],
@@ -362,7 +362,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
             child: Text('支付方式选择',
                 style: BaseText.style(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.primaryBlackText)),
           ),
           Expanded(
@@ -401,7 +401,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                               Text(data['title'],
                                   style: BaseText.style(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 14.sp,
+                                      fontSize: 14,
                                       color: AppColors.primaryBlackText)),
                             ],
                           ),
@@ -438,7 +438,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
             child: Text('订单信息',
                 style: BaseText.style(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.primaryBlackText)),
           ),
           Expanded(
@@ -454,7 +454,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                     Text(
                       '共${jumpQtys()}件  合计  ',
                       style: BaseText.style(
-                        fontSize: 12.sp,
+                        fontSize: 12,
                         color: AppColors.primaryGreyText,
                       ),
                     ),
@@ -463,14 +463,14 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                         Text(
                           '￥',
                           style: BaseText.style(
-                              fontSize: 10.sp,
+                              fontSize: 10,
                               color: AppColors.navigationColor),
                         ),
                         Text(
                           Utils.formatStepCount(
                               double.parse(widget.orderModel.totalPrice)),
                           style: BaseText.style(
-                              fontSize: 14.sp,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: AppColors.navigationColor),
                         )
@@ -502,7 +502,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
             child: Text('请求金额',
                 style: BaseText.style(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     color: AppColors.primaryBlackText)),
           ),
           Expanded(
@@ -524,7 +524,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                             child: Text(data['title'],
                                 style: BaseText.style(
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: AppColors.primaryBlackText)),
                           ),
                           Container(
@@ -534,7 +534,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                                     fontWeight: FontWeight.w700,
                                     fontSize: data['title'] == '总金额(税后)'
                                         ? 14.sp
-                                        : 12.sp,
+                                        : 12,
                                     color: (data['opr'] == '-' ||
                                             data['title'] == '总金额(税后)')
                                         ? AppColors.navigationColor
@@ -567,15 +567,15 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                 Text('合计金额:',
                     style: BaseText.style(
                         fontWeight: FontWeight.w400,
-                        fontSize: 12.sp,
+                        fontSize: 12,
                         color: AppColors.primaryBlackText)),
                 SizedBox(width: 5.w),
                 Text(
                     '￥${Utils.formatStepCount(double.parse(widget.orderModel.totalPrice))}',
                     style: BaseText.style(
-                        height: 1.5.sp,
+                        height: 1.5,
                         fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         color: AppColors.primaryBlackText)),
               ],
             ),
@@ -601,7 +601,7 @@ class _MineOrderDetailPageState extends State<MineOrderDetailPage>
                               BorderRadius.all(Radius.circular(17.w))),
                       child: Text('立即结算',
                           style: BaseText.style(
-                              fontSize: 14.sp,
+                              fontSize: 14,
                               fontWeight: FontWeight.w700,
                               color: AppColors.white)),
                     ),

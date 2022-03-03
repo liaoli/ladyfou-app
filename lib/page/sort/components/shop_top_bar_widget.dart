@@ -86,7 +86,7 @@ class _TopBarWidgetState extends State<TopBarWidget> {
                 color: selectIndex == index+1
                     ? AppColors.navigationColor
                     : AppColors.primaryBlackText,
-                fontSize: 15.sp,
+                fontSize: 15,
                 fontWeight: FontWeight.w400,
               ),
             ),

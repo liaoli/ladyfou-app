@@ -337,7 +337,7 @@ class _MinePageState extends State<MinePage> {
               style: TextStyle(
                 color: AppColors.color_FF333333,
                 fontWeight: FontWeight.w700,
-                fontSize: 12.sp,
+                fontSize: 12,
               ),
             ),
           ],
@@ -475,7 +475,7 @@ class _MinePageState extends State<MinePage> {
               e['name'],
               style: TextStyle(
                 color: AppColors.color_FF030319,
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -559,7 +559,7 @@ class _MinePageState extends State<MinePage> {
                                   "Game",
                                   style: TextStyle(
                                     color: AppColors.color_FF333333,
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -568,7 +568,7 @@ class _MinePageState extends State<MinePage> {
                                   "点击加入跳一跳游戏中，多重好礼优惠等你来拿",
                                   style: TextStyle(
                                     color: AppColors.color_FF333333,
-                                    fontSize: 10.sp,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -589,7 +589,7 @@ class _MinePageState extends State<MinePage> {
                                   "现在去玩>",
                                   style: TextStyle(
                                     color: AppColors.white,
-                                    fontSize: 10.sp,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),

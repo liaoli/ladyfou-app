@@ -98,7 +98,7 @@ class ProductEvaluationItemView extends StatelessWidget {
               "好人一生平安",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 12.sp,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -106,7 +106,7 @@ class ProductEvaluationItemView extends StatelessWidget {
               "2020-12-25",
               style: TextStyle(
                 color: AppColors.color_FF999999,
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -139,7 +139,7 @@ class ProductEvaluationItemView extends StatelessWidget {
               "尺码：L   颜色：黑色",
               style: TextStyle(
                 color: AppColors.color_FF666666,
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -152,7 +152,7 @@ class ProductEvaluationItemView extends StatelessWidget {
           "とても可愛いですすごくよいです，サイズもちょうどよく大人っぽいデザインで着心地も良いです。",
           style: TextStyle(
             color: AppColors.color_FF333333,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),

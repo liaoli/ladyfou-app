@@ -51,7 +51,7 @@ class _DetailBottomViewState extends State<DetailBottomView> {
                   like ? "已收藏" : "收 藏",
                   style: TextStyle(
                     color: AppColors.color_FF333333,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -75,7 +75,7 @@ class _DetailBottomViewState extends State<DetailBottomView> {
                   "加入购物车",
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

@@ -6,9 +6,12 @@ import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../model/category_info_model.dart';
+import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
 import '../model/good_collection_model.dart';
+import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
+import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import 'http.dart';
 
@@ -165,5 +168,41 @@ Future<MyResponse<CountryListModel>> getCountryList() async {
   );
   MyResponse<CountryListModel> response =
       MyResponse<CountryListModel>.fromJson(result);
+  return response;
+}
+
+/// 通过国家获取省
+/// [country_id] int  国家id
+Future<MyResponse<ProvinceListModel>> getProvinceList(
+    {int country_id = 122}) async {
+  Map<String, dynamic> result =
+      await XHttp.get("/otonastyle/common/country", {"country_id": country_id});
+  MyResponse<ProvinceListModel> response =
+      MyResponse<ProvinceListModel>.fromJson(result);
+  return response;
+}
+
+/// 通过省分获取城市
+/// [country] int  省的名字
+Future<MyResponse<CityListModel>> getCityList({required String country}) async {
+  Map<String, dynamic> result =
+      await XHttp.get("/otonastyle/common/city", {"country": country});
+  MyResponse<CityListModel> response =
+      MyResponse<CityListModel>.fromJson(result);
+  return response;
+}
+
+/// 通过省分获取城市
+/// [country] int  省的名字
+/// [city] int  城市
+/// otonastyle/common/town?country=東京都&city=あきる野市
+Future<MyResponse<CountyListModel>> getCountyList(
+    {required String country, required String city}) async {
+  Map<String, dynamic> result = await XHttp.get("/otonastyle/common/town", {
+    "country": country,
+    "city": city,
+  });
+  MyResponse<CountyListModel> response =
+      MyResponse<CountyListModel>.fromJson(result);
   return response;
 }

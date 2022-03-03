@@ -92,7 +92,7 @@ class _PhoneCommitViewState extends State<PhoneCommitView> {
             text,
             style: TextStyle(
               color: textColor,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),

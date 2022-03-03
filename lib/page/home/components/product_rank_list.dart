@@ -140,7 +140,7 @@ class RankProductItemView extends StatelessWidget {
               "NO.${index + 1}",
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -181,7 +181,7 @@ class RankProductItemView extends StatelessWidget {
           "月销量件数200件",
           style: TextStyle(
             color: AppColors.color_FF999999,
-            fontSize: 10.sp,
+            fontSize: 10,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -192,7 +192,7 @@ class RankProductItemView extends StatelessWidget {
           maxLines: 2,
           style: TextStyle(
             color: AppColors.color_FF222222,
-            fontSize: 12.sp,
+            fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
         )),
@@ -202,7 +202,7 @@ class RankProductItemView extends StatelessWidget {
               "￥4475",
               style: TextStyle(
                 color: AppColors.Color_E34D59,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -210,7 +210,7 @@ class RankProductItemView extends StatelessWidget {
               "￥8687",
               style: TextStyle(
                 color: AppColors.color_FF353547,
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.w400,
                 decoration: TextDecoration.lineThrough,
               ),

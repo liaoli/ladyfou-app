@@ -28,8 +28,6 @@ class _EditAddressPageState extends State<EditAddressPage> {
 
   @override
   void initState() {
-
-
     getCountryList().then((value){
       ToastUtils.success(value.common.debugMessage);
      if(value.common.statusCode == 1000) {
@@ -62,7 +60,7 @@ class _EditAddressPageState extends State<EditAddressPage> {
                   "保 存",
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

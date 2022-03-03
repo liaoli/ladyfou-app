@@ -86,7 +86,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
                         "￥4475",
                         style: TextStyle(
                           color: AppColors.Color_E34D59,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -107,7 +107,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
                               "-21%",
                               style: TextStyle(
                                 color: AppColors.white,
-                                fontSize: 8.sp,
+                                fontSize: 8,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -125,7 +125,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
                     maxLines: 1,
                     style: TextStyle(
                       color: AppColors.color_FF030319,
-                      fontSize: 10.sp,
+                      fontSize: 10,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -176,7 +176,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
         text,
         style: TextStyle(
           color: AppColors.color_FF333333,
-          fontSize: 14.sp,
+          fontSize: 14,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -293,7 +293,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
             "数量",
             style: TextStyle(
               color: AppColors.color_FF333333,
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
           ),

@@ -10,6 +10,7 @@ class AddressTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final Widget? leftChild;
   final Color borderColor;
+  final bool enable;
 
   const AddressTextField(
       {Key? key,
@@ -18,6 +19,7 @@ class AddressTextField extends StatefulWidget {
       this.title,
       this.onChanged,
       this.leftChild,
+      this.enable = true,
       this.borderColor = AppColors.color_EAEAEA,
       required this.controller})
       : super(key: key);
@@ -54,7 +56,7 @@ class _AddressTextFieldState extends State<AddressTextField> {
             widget.title!,
             style: TextStyle(
               color: AppColors.color_C4C4C4,
-              fontSize: 12.sp,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -63,18 +65,19 @@ class _AddressTextFieldState extends State<AddressTextField> {
           ),
           Expanded(
             child: TextField(
+              enabled: widget.enable,
               controller: widget.controller,
               obscureText: obscureText,
               onChanged: widget.onChanged,
               style: TextStyle(
                 color: AppColors.color_FF333333,
-                fontSize: 12.sp,
+                fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),
               decoration: InputDecoration(
                 hintStyle: TextStyle(
                   color: AppColors.color_C4C4C4,
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
                 border: InputBorder.none,
