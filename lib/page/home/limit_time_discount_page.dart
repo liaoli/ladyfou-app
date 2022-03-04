@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
-import 'package:ladyfou/page/home/store/daily_new_provider.dart';
 import 'package:ladyfou/page/home/store/limit_time_discount_provider.dart';
 import 'package:provider/provider.dart';
 
