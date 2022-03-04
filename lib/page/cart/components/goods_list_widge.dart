@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ladyfou/components/base_image_load.dart';
 import 'package:ladyfou/components/check_box_widget.dart';
+import 'package:ladyfou/core/utils/utils.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/style/text.dart';
@@ -20,13 +21,7 @@ class GoodsListWidget extends StatelessWidget {
             child: Slidable(
               key: Key(datas[index].toString()),
               child: Container(
-                height: 114,
-                width: double.infinity,
-                decoration: new BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                ),
-                child: GoodItemWidget(producModel: productList[index]),
+                child: GoodItemWidget(producModel: productList[index],index: index,allCount: productList.length,),
               ),
 
               // 侧滑选项
@@ -59,16 +54,26 @@ class GoodsListWidget extends StatelessWidget {
 }
 
 class GoodItemWidget extends StatelessWidget {
-  const GoodItemWidget({Key? key, required this.producModel}) : super(key: key);
+  const GoodItemWidget({Key? key, required this.producModel,required this.index, required this.allCount}) : super(key: key);
   final Product producModel;
+  final int index;
+  final int allCount;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _leftItem(context),
-        _rightDetail(context),
-      ],
+    return Container(
+      height: 114,
+      margin: EdgeInsets.only(top: index == 0 ? 0 : 5,bottom: index + 1 == allCount ? 0 : 5),
+      decoration: new BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _leftItem(context),
+          _rightDetail(context),
+        ],
+      ),
     );
   }
 
@@ -160,9 +165,9 @@ class GoodItemWidget extends StatelessWidget {
                 children: [
                   // 原价
                   Container(
-                    padding: EdgeInsets.only(top: 6),
+                    padding: EdgeInsets.only(top: 2),
                     child: Text(
-                      '1000',
+                      Utils.formatStepCount(double.parse('1000')),
                       style: BaseText.style(
                         fontSize: 12,
                         color: AppColors.jp_color153,
@@ -172,15 +177,14 @@ class GoodItemWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Container(
-                      padding: EdgeInsets.only(top: 3),
+                      padding: EdgeInsets.only(top: 2),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // 现价
                           Text(
-                            '999',
+                            Utils.formatStepCount(double.parse('999')),
                             style: BaseText.style(
                               fontSize: 12,
                               color: AppColors.primaryBlackText51,

@@ -1,6 +1,7 @@
 // 订单详情
 
 import 'package:flutter/material.dart';
+import 'package:ladyfou/core/utils/utils.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/style/text.dart';
 
@@ -18,10 +19,10 @@ class OrderDetailWidget extends StatelessWidget {
     ];
     List numList = [
       '19p',
-      '￥5,525',
-      '-￥1,999',
+      '￥${Utils.formatStepCount(double.parse("5525"))}',
+      '-￥${Utils.formatStepCount(double.parse("1999"))}',
       '暂无可使用优惠',
-      '￥7,399',
+      '￥${Utils.formatStepCount(double.parse("7399"))}',
     ];
     Color numColor = AppColors.primaryBlackText51;
     return SliverToBoxAdapter(

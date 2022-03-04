@@ -288,7 +288,7 @@ class DiscountItemView extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4.w,
+          height: 2.w,
         ),
         Text(
           "￥${product.price ?? 0}",

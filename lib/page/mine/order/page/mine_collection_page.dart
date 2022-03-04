@@ -79,7 +79,6 @@ class _MineCollectionState extends State<MineCollectionPage> {
           },
           child: Consumer<GoodsOperationProvider>(
               builder: (context, child, value) {
-            provider = child;
             return BaseScaffold(
               leadType: AppBarBackType.Back,
               brightness: Brightness.dark,
@@ -102,11 +101,11 @@ class _MineCollectionState extends State<MineCollectionPage> {
                           /// 管理-完成
                           GestureDetector(
                             onTap: () {
-                              provider.checkEditCollection();
+                              child.checkEditCollection();
                             },
                             child: Container(
                               child: Text(
-                                provider.isEditCollection ? '完成' : '管理',
+                                child.isEditCollection ? '完成' : '管理',
                                 style: BaseText.style(
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal),
@@ -164,7 +163,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                                       if (index < 2) {
                                         _dropdownMenuController.hide();
                                         _dropdownMenuController.isShow = true;
-                                        provider
+                                        child
                                             .getCollectionLists(
                                                 promotion: index,
                                                 isRefresh: true)
@@ -177,21 +176,21 @@ class _MineCollectionState extends State<MineCollectionPage> {
                                 : SizedBox(),
 
                             /// 商品列表
-                            provider.goodCollectionList.length > 0
+                            child.goodCollectionList.length > 0
                                 ? Expanded(
                                     child: EasyRefresh.custom(
-                                    controller: provider.refreshController,
+                                    controller: child.refreshController,
                                     onRefresh: () async {
-                                      provider.currentPage += CURRENT_PAGE;
-                                      return provider.getCollectionLists(
+                                      child.currentPage += CURRENT_PAGE;
+                                      return child.getCollectionLists(
                                           isRefresh: true,
-                                          page: provider.currentPage);
+                                          page: child.currentPage);
                                     },
                                     onLoad: () async {
-                                      provider.currentPage += 1;
-                                      return provider.getCollectionLists(
+                                      child.currentPage += 1;
+                                      return child.getCollectionLists(
                                           isRefresh: false,
-                                          page: provider.currentPage);
+                                          page: child.currentPage);
                                     },
                                     enableControlFinishLoad: false,
                                     enableControlFinishRefresh: false,
@@ -230,7 +229,7 @@ class _MineCollectionState extends State<MineCollectionPage> {
                               }
                             },
                             menus: getBuilderMenus()),
-                        provider.isEditCollection
+                        child.isEditCollection
                             ? Positioned(
                                 bottom: 0.w,
                                 child: Container(

@@ -166,7 +166,7 @@ class Product {
         status: json["status"],
         listPrice: json["list_price"],
         saled: json["saled"],
-        point: json["point"],
+        point: json["point"].toString(),
         cids: List<int>.from(json["cids"].map((x) => x)),
         featureImage: List<FeatureImage>.from(
             json["feature_image"].map((x) => FeatureImage.fromJson(x))),
@@ -189,7 +189,7 @@ class Product {
         "status": status,
         "list_price": listPrice,
         "saled": saled,
-        "point": point,
+        "point": point.toString(),
         "cids": List<dynamic>.from(cids.map((x) => x)),
         "feature_image":
             List<dynamic>.from(featureImage.map((x) => x.toJson())),
