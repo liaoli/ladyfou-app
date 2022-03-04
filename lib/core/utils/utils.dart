@@ -1,10 +1,10 @@
 
 import 'package:date_format/date_format.dart';
 import 'package:intl/intl.dart';
-import 'package:ladyfou/core/http/http.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../http/base_url.dart';
 import 'toast.dart';
 
 ///常用工具类

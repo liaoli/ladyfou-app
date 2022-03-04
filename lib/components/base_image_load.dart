@@ -15,6 +15,8 @@ import 'package:ladyfou/core/http/http.dart';
 import 'package:ladyfou/core/utils/utils.dart';
 import 'dart:io';
 
+import '../core/http/base_url.dart';
+
 typedef CallbackAction = void Function();
 
 class BaseImageLoading extends StatelessWidget {

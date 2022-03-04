@@ -8,15 +8,9 @@ import 'dart:io';
 
 import 'package:ladyfou/utils/sputils.dart';
 
-/// 生产环境域名
-// const String baseUrl = "http://aashop.neverdown.cc";
+import 'base_url.dart';
 
-/// 测试环境域名
-// const String baseUrl = "https://release.ladyfou.com";
 
-/// 开发环境域名
-// const String baseUrl = "http://192.168.1.174";
-const String baseUrl = "https://release.ladyfou.com";
 
 class XHttp {
   XHttp._internal();
