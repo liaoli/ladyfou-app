@@ -11,6 +11,7 @@ import '../../../core/utils/toast.dart';
 import '../components/city_list_view.dart';
 import '../components/county_list_view.dart';
 import '../components/province_list_view.dart';
+import '../model/province_city_county.dart';
 
 const int province_index = 0;
 const int city_index = 1;
@@ -18,6 +19,11 @@ const int county_index = 2;
 
 class SelectedAddressProvider extends ChangeNotifier {
   ProvinceModel? _provinceModel;
+
+  ProvinceCityCounty get result {
+    return ProvinceCityCounty(
+        province: _provinceModel, county: _county, city: _city);
+  }
 
   set provinceModel(ProvinceModel? provinceModel) {
     _provinceModel = provinceModel;
@@ -188,4 +194,3 @@ class SelectedAddressProvider extends ChangeNotifier {
     }
   }
 }
-

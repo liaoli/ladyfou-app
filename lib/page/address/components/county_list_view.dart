@@ -1,17 +1,12 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ladyfou/page/address/model/province_city_county.dart';
 import 'package:lpinyin/lpinyin.dart';
 import 'package:provider/provider.dart';
-
-import '../../../components/line.dart';
-import '../../../core/http/request.dart';
-import '../../../core/model/province_list_model.dart';
-import '../../../core/utils/toast.dart';
-import '../../../style/Color.dart';
-import '../../../utils/address_sort_util.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../style/Color.dart';
+import '../../../utils/address_sort_util.dart';
 import '../model/string_suspension_bean.dart';
 import '../store/select_address_provicer.dart';
 import 'address_list_item_view.dart';
@@ -138,8 +133,8 @@ class _CountyListViewState extends State<CountyListView>
         text: model.name,
       ),
       onTap: () {
-
-        Navigator.pop(context,);
+        provider.county = model.name;
+        Navigator.pop(context, provider.result);
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
@@ -12,6 +13,7 @@ import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
+import '../model/my_address_list_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import 'base_url.dart';
@@ -263,5 +265,68 @@ Future<MyResponse<CountyListModel>> getCountyList(
   });
   MyResponse<CountyListModel> response =
       MyResponse<CountyListModel>.fromJson(result);
+  return response;
+}
+
+/// 获取用户地址列表
+/// account/address?userId=109
+Future<MyResponse<MyAddressListModel>> getAddressList() async {
+  Map<String, dynamic> result = await XHttp.get(ADDRESS_LIST_URI, {
+    "userId": Global.tokenInfo.userId,
+  });
+  MyResponse<MyAddressListModel> response =
+      MyResponse<MyAddressListModel>.fromJson(result);
+  return response;
+}
+
+/// 更新/增加地址
+/// phone:18229031426
+/// zip:4750061      //邮编
+/// chinese_name:韩盼盼
+/// katakana_name:韩盼盼
+/// country_id:122
+/// state_id:286
+/// address_id:80897   不传address_id新增 传address_id是更新
+/// city:半田市
+/// address:丁田町
+/// email:hanpanpan@neverdown.cc
+/// address_detail:测试地址1
+/// is_default:1
+/// account/address?userId=109
+Future<MyResponse<AddressModel>> updateAddress({
+  required String phone,
+  required String zip,
+  required String chinese_name,
+  required String katakana_name,
+  int country_id = 122,
+  required int state_id,
+  int? address_id,
+  required String city,
+  required String address,
+  required String email,
+  required String address_detail,
+  int is_default = 0,
+}) async {
+  Map<String, dynamic> param = {
+    "phone": phone,
+    "zip": zip,
+    "chinese_name": chinese_name,
+    "katakana_name": katakana_name,
+    "country_id": country_id,
+    "state_id": state_id,
+    "address_id": address_id,
+    "city": city,
+    "address": address,
+    "email": email,
+    "address_detail": address_detail,
+    "is_default": is_default,
+  };
+
+  if (address_id == null) {
+    param.remove("address_id");
+  }
+
+  Map<String, dynamic> result = await XHttp.post(UPDATE_ADDRESS_URI, param);
+  MyResponse<AddressModel> response = MyResponse<AddressModel>.fromJson(result);
   return response;
 }

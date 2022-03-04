@@ -9,11 +9,6 @@
 
 const String baseUrl = "https://release.ladyfou.com/ladyfou";
 
-
-
-
-
-
 ///注册
 const String REGISTER_URI = "/account/register";
 
@@ -67,3 +62,9 @@ const String CITY_LIST_URI = "/common/city";
 
 /// 获取区
 const String TOWN_LIST_URI = "/common/town";
+
+/// 获取我的地址列表
+const String ADDRESS_LIST_URI = "/account/address";
+
+/// 新增更新地址
+const String UPDATE_ADDRESS_URI = "/account/update_address";

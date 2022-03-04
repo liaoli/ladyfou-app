@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../style/Color.dart';
 import '../../detail/components/arrow_forward.dart';
+import '../model/province_city_county.dart';
 import '../select_address_page.dart';
+import '../store/edit_address_provider.dart';
 import 'address_text_field.dart';
 
 class AddressView extends StatefulWidget {
@@ -16,9 +19,11 @@ class AddressView extends StatefulWidget {
 
 class _AddressViewState extends State<AddressView> {
   TextEditingController controller = TextEditingController();
+  late EditAddressProvider provider;
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
     return ClipRRect(
       borderRadius: BorderRadius.all(new Radius.circular(10.w)),
       child: Container(
@@ -28,14 +33,14 @@ class _AddressViewState extends State<AddressView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AddressTextField(
-                  controller: controller,
+                  controller: provider.postController,
                   title: "邮箱番号",
                   prefixIcon: "assets/images/must.png",
                   onChanged: (String text) {}),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 child: AddressTextField(
-                  controller: controller,
+                  controller: provider.cityController,
                   enable: false,
                   title: "都道府县",
                   prefixIcon: "assets/images/must.png",
@@ -70,11 +75,19 @@ class _AddressViewState extends State<AddressView> {
                         ),
                       );
                     },
-                  );
+                  ).then((value) {
+                    if (value == null) {
+                      return;
+                    }
+
+                    if (value is ProvinceCityCounty) {
+                      provider.setProvinceCityCounty(value);
+                    }
+                  });
                 },
               ),
               AddressTextField(
-                  controller: controller,
+                  controller: provider.addressController,
                   title: "住所",
                   prefixIcon: "assets/images/must.png",
                   onChanged: (String text) {}),

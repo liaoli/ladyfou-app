@@ -10,6 +10,7 @@ import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
 import '../model/home_data_list_model.dart';
+import '../model/my_address_list_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import '../model/order_info_model.dart';
@@ -31,12 +32,17 @@ class MyResponse<T> {
 }
 
 T fromJson<T>(dynamic json) {
+  //这里json  可能是map数组 也可能是map 所以在 fromMap 的时候要注意
   debugPrint("====>${T.toString()}");
   switch (T.toString()) {
     case "UserInfoModel":
       return UserInfoModel.fromMap(json) as T;
     case "DailyNewProductListModel":
       return DailyNewProductListModel.fromMap(json) as T;
+    case "AddressModel":
+      return AddressModel.fromMap(json) as T;
+    case "MyAddressListModel":
+      return MyAddressListModel.fromMap(json) as T;
     case "CountryListModel":
       return CountryListModel.fromMap(json) as T;
     case "ProvinceListModel":
@@ -63,7 +69,7 @@ T fromJson<T>(dynamic json) {
       CartModel cartModel = CartModel.fromJson(json);
       return cartModel as T;
     case "List<OptionsSizeReq>":
-    return OptionsSizeReq.fromToList(json) as T;
+      return OptionsSizeReq.fromToList(json) as T;
     default:
       return [] as T;
   }
@@ -76,9 +82,17 @@ class Response<T> {
 
   T? data;
 
-  factory Response.fromJson(Map<String, dynamic> json) => Response(
-        data: json["data"] == null ? null : fromJson<T>(json['data']),
-      );
+  factory Response.fromJson(Map<String, dynamic> json) {
+    dynamic data = json["data"];
+
+    if (data == null) {
+      data = json["list"];
+    }
+
+    return Response(
+      data: data == null ? null : fromJson<T>(data),
+    );
+  }
 }
 
 class Common {
