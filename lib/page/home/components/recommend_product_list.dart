@@ -5,13 +5,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../../components/button/common_button.dart';
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../../style/Color.dart';
 import '../../detail/product_detail_page.dart';
 
 class RecommendProductList extends StatefulWidget {
   final EdgeInsetsGeometry padding;
 
-  const RecommendProductList({Key? key, this.padding = EdgeInsets.zero})
+  final List<DailyNewProduct> data;
+  const RecommendProductList({Key? key, this.padding = EdgeInsets.zero,this.data = const []})
       : super(key: key);
 
   @override
@@ -34,11 +36,12 @@ class _RecommendProductListState extends State<RecommendProductList> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             //创建子widget
+            DailyNewProduct product = widget.data[index];
             return RecommendProductItemView(
-              index: index,
+              product: product,
             );
           },
-          childCount: 20,
+          childCount: widget.data.length,
         ),
       ),
     );
@@ -46,11 +49,11 @@ class _RecommendProductListState extends State<RecommendProductList> {
 }
 
 class RecommendProductItemView extends StatelessWidget {
-  final int index;
+  final DailyNewProduct product;
 
   const RecommendProductItemView({
     Key? key,
-    required this.index,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -87,29 +90,11 @@ class RecommendProductItemView extends StatelessWidget {
           SizedBox(
             height: 8.w,
           ),
-          // Text(
-          //   "月销量件数200件",
-          //   style: TextStyle(
-          //     color: AppColors.color_FF999999,
-          //     fontSize: 10,
-          //     fontWeight: FontWeight.w400,
-          //   ),
-          // ),
-          // Expanded(
-          //     child: Text(
-          //   "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
-          //   overflow: TextOverflow.ellipsis,
-          //   maxLines: 2,
-          //   style: TextStyle(
-          //     color: AppColors.color_FF222222,
-          //     fontSize: 12,
-          //     fontWeight: FontWeight.w400,
-          //   ),
-          // )),
+
           Row(
             children: [
               Text(
-                "￥4475",
+                "￥${product.price ?? 0}",
                 style: TextStyle(
                   color: AppColors.Color_E34D59,
                   fontSize: 14,
@@ -129,7 +114,7 @@ class RecommendProductItemView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "-21%",
+                      product.discount ?? "",
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 8,

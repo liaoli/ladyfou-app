@@ -34,7 +34,6 @@ class SPUtils {
   }
 
 
-
   static int getThemeIndex() {
     if (_spf.containsKey('key_theme_color')) {
       return _spf.getInt('key_theme_color')!;

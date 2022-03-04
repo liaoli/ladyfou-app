@@ -8,6 +8,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/clicked_Image_asset.dart';
+import 'package:ladyfou/page/game/store/game_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/sliver_header_delegate.dart';
 import '../../components/web_view_page.dart';
@@ -17,6 +19,7 @@ import '../home/components/new_product_list.dart';
 import '../home/components/recommend_product_bottom.dart';
 import '../home/components/recommend_product_head.dart';
 import '../home/components/recommend_product_list.dart';
+import 'components/game_recommend_list_view.dart';
 
 class GameMainPage extends StatefulWidget {
   const GameMainPage({Key? key}) : super(key: key);
@@ -27,31 +30,37 @@ class GameMainPage extends StatefulWidget {
 
 class _GameMainPageState extends State<GameMainPage> {
   bool showCountdown = false;
+  late GameProvider gameProvider;
 
   @override
   void initState() {
+    gameProvider = GameProvider();
+    gameProvider.getData(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      leadType: AppBarBackType.None,
-      actions: [
-        ClickedImageAsset(
-          image: "assets/images/action_bar_shopping_cart_black.png",
-          width: 20.w,
-          height: 20.w,
-          onTap: () {
-            //TODO:跳转到购物车
-          },
-        ),
-        SizedBox(
-          width: 12.w,
-        ),
-      ],
-      title: "游 戏",
-      body: refresh(),
+    return ChangeNotifierProvider.value(
+      value: gameProvider,
+      child: BaseScaffold(
+        leadType: AppBarBackType.None,
+        actions: [
+          ClickedImageAsset(
+            image: "assets/images/action_bar_shopping_cart_black.png",
+            width: 20.w,
+            height: 20.w,
+            onTap: () {
+              //TODO:跳转到购物车
+            },
+          ),
+          SizedBox(
+            width: 12.w,
+          ),
+        ],
+        title: "游 戏",
+        body: refresh(),
+      ),
     );
   }
 
@@ -64,9 +73,9 @@ class _GameMainPageState extends State<GameMainPage> {
         header: MaterialHeader(),
         footer: MaterialFooter(),
         onRefresh: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {});
-          });
+          await Future.delayed(Duration(seconds: 1), () {});
+
+          gameProvider.getData(context);
         },
         slivers: <Widget>[
           SliverToBoxAdapter(child: imageBanner()),
@@ -84,8 +93,7 @@ class _GameMainPageState extends State<GameMainPage> {
       child: CachedNetworkImage(
         width: 375.w,
         height: 513.w,
-        imageUrl:
-            "https://goerp.oss-cn-hongkong.aliyuncs.com/apk/erp/game.png",
+        imageUrl: "https://goerp.oss-cn-hongkong.aliyuncs.com/apk/erp/game.png",
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -141,11 +149,7 @@ class _GameMainPageState extends State<GameMainPage> {
   }
 
   Widget recommendProductList() {
-    return RecommendProductList(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-      ),
-    );
+    return GameRecommendListView();
   }
 
   Widget recommendProductBottom() {

@@ -101,6 +101,26 @@ Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
 
   return response;
 }
+
+///ladyfou/product/youLikeProduct
+/// home 限时折扣
+///ladyfou/product/youLikeProduct?page=1&page_size=3
+Future<MyResponse<DailyNewProductListModel>> recommendList({
+  int page = 1,
+  int pageSize = 6,
+}) async {
+  Map<String, dynamic> result = await XHttp.get(
+      "/ladyfou/product/youLikeProduct",
+      {
+        "page" : page,
+        "page_size" : pageSize,
+      }
+  );
+  MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
 /////////////////////////////////thw-start////////////////////////////////////
 
 Future handleResponse(MyResponse response) async {

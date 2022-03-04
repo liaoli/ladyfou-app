@@ -12,13 +12,14 @@ import 'components/daily_new_product_new.dart';
 import 'components/game_entry.dart';
 import 'components/heng_fu.dart';
 import 'components/home_default_nav_bar.dart';
+import 'components/home_recommend_list_view.dart';
 import 'components/home_search_nav_bar.dart';
 import 'components/limited_time_discount.dart';
 import 'components/product_rank_bottom.dart';
 import 'components/product_rank_head.dart';
 import 'components/product_rank_list.dart';
 import 'components/recommend_product_bottom.dart';
-import 'components/recommend_product_list.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,6 +38,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     homeProvider = HomeProvider();
+
+    homeProvider.getHomeDataList(context);
 
     scrollController = ScrollController();
     scrollController.addListener(() {
@@ -108,7 +111,9 @@ class _HomePageState extends State<HomePage> {
       child: EasyRefresh.custom(
         header: MaterialHeader(),
         footer: MaterialFooter(),
-        onRefresh: () async {},
+        onRefresh: () async {
+           homeProvider.getHomeDataList(context);
+        },
         scrollController: scrollController,
         slivers: <Widget>[
           SliverToBoxAdapter(child: hengFu()), // 28
@@ -203,7 +208,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget recommendProductList() {
-    return RecommendProductList();
+    return HomeRecommendListView();
   }
 
   Widget recommendProductBottom() {
