@@ -2,10 +2,9 @@ import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
 import 'package:ladyfou/core/model/sort_model.dart';
-import 'package:ladyfou/core/utils/toast.dart';
+
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
-import '../../page/home/components/daily_new_product_new.dart';
 import '../model/category_info_model.dart';
 import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
@@ -15,6 +14,7 @@ import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
+import 'base_url.dart';
 import 'http.dart';
 
 /// 注册接口
@@ -28,7 +28,7 @@ Future<MyResponse<TokenInfoModel>> register({
   required String email,
   required String password,
 }) async {
-  Map<String, dynamic> result = await XHttp.post("/ladyfou/account/register", {
+  Map<String, dynamic> result = await XHttp.post(REGISTER_URI, {
     "chinese_name": chinese_name,
     "katakana_name": katakana_name,
     "email": email,
@@ -46,7 +46,7 @@ Future<MyResponse<TokenInfoModel>> login({
   required String email,
   required String password,
 }) async {
-  Map<String, dynamic> result = await XHttp.post("/ladyfou/account/login", {
+  Map<String, dynamic> result = await XHttp.post(LOGIN_URI, {
     "email": email,
     "password": password,
   });
@@ -71,18 +71,14 @@ Future<MyResponse<DailyNewProductListModel>> homeDailyNew({
   int page = 1,
   int pageSize = 6,
 }) async {
-  Map<String, dynamic> result = await XHttp.get(
-    "/ladyfou/product/newProduct",
-    {
-      "page" : page,
-      "page_size" : pageSize,
-    }
-  );
+  Map<String, dynamic> result = await XHttp.get(DAILY_NEW_PRODUCT_URI, {
+    "page": page,
+    "page_size": pageSize,
+  });
   MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
 
   return response;
 }
-
 
 /// home 限时折扣
 /// ladyfou/product/discountProduct?page=1&page_size=3
@@ -90,32 +86,26 @@ Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
   int page = 1,
   int pageSize = 6,
 }) async {
-  Map<String, dynamic> result = await XHttp.get(
-      "/ladyfou/product/discountProduct",
-      {
-        "page" : page,
-        "page_size" : pageSize,
-      }
-  );
+  Map<String, dynamic> result = await XHttp.get(DISCOUNT_PRODUCT_URI, {
+    "page": page,
+    "page_size": pageSize,
+  });
   MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
 
   return response;
 }
 
 ///ladyfou/product/youLikeProduct
-/// home 限时折扣
+/// home 猜你喜欢
 ///ladyfou/product/youLikeProduct?page=1&page_size=3
 Future<MyResponse<DailyNewProductListModel>> recommendList({
   int page = 1,
   int pageSize = 6,
 }) async {
-  Map<String, dynamic> result = await XHttp.get(
-      "/ladyfou/product/youLikeProduct",
-      {
-        "page" : page,
-        "page_size" : pageSize,
-      }
-  );
+  Map<String, dynamic> result = await XHttp.get(YOU_LIKE_PRODUCT_URI, {
+    "page": page,
+    "page_size": pageSize,
+  });
   MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
 
   return response;
@@ -134,7 +124,7 @@ Future handleResponse(MyResponse response) async {
 
 /// 获取分类接口
 Future<MyResponse<List<SortModel>>> getSortData() async {
-  Map<String, dynamic> result = await XHttp.get("/ladyfou/catalog/category");
+  Map<String, dynamic> result = await XHttp.get(CATEGORY_URI);
   MyResponse<List<SortModel>> response =
       MyResponse<List<SortModel>>.fromJson(result);
   handleResponse(response);
@@ -144,8 +134,7 @@ Future<MyResponse<List<SortModel>>> getSortData() async {
 /// 获取二级分类
 Future<MyResponse<List<GoodsInfoModel>>> getCategoryProduct(
     {required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/catalog/category_product", params);
+  Map<String, dynamic> result = await XHttp.get(CATEGORY_PRODUCT_URI, params);
   MyResponse<List<GoodsInfoModel>> response =
       MyResponse<List<GoodsInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -157,7 +146,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
   required int id,
 }) async {
   Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/catalog/cate_child", {"category_id": id});
+      await XHttp.get(CATE_CHILD_URI, {"category_id": id});
   MyResponse<List<CategoryInfoModel>> response =
       MyResponse<List<CategoryInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -167,8 +156,7 @@ Future<MyResponse<List<CategoryInfoModel>>> getCategoryChilds({
 /// 获取订单列表
 Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
     {required Map<String, dynamic> params, bool isLoadMore = false}) async {
-  Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/account/order", params);
+  Map<String, dynamic> result = await XHttp.get(ORDER_LIST_URI, params);
   MyResponse<List<OrderInfoModel>> response =
       MyResponse<List<OrderInfoModel>>.fromJson(result);
   handleResponse(response);
@@ -178,8 +166,7 @@ Future<MyResponse<List<OrderInfoModel>>> getOrderInfos(
 /// 获取收藏列表
 Future<MyResponse<CollectionInfoModel>> getCollectionInfos(
     {required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/account/wish_list", params);
+  Map<String, dynamic> result = await XHttp.get(WISH_LIST_URI, params);
   MyResponse<CollectionInfoModel> response =
       MyResponse<CollectionInfoModel>.fromJson(result);
   handleResponse(response);
@@ -189,8 +176,7 @@ Future<MyResponse<CollectionInfoModel>> getCollectionInfos(
 /// 收藏
 Future<MyResponse> operationIsWished(
     {required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-      await XHttp.post("/ladyfou/account/wish_product", params);
+  Map<String, dynamic> result = await XHttp.post(WISH_PRODUCT_URI, params);
   MyResponse response = MyResponse.fromJson(result);
   handleResponse(response);
   return response;
@@ -199,8 +185,7 @@ Future<MyResponse> operationIsWished(
 /// 取消收藏
 Future<MyResponse> cancleIsWished(
     {required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-      await XHttp.post("/ladyfou/account/delete_wish_batch", params);
+  Map<String, dynamic> result = await XHttp.post(DELETE_WISH_BATCH_URI, params);
   MyResponse response = MyResponse.fromJson(result);
   handleResponse(response);
   return response;
@@ -208,18 +193,18 @@ Future<MyResponse> cancleIsWished(
 
 /// 加入购物车
 Future<MyResponse> addCart({required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-  await XHttp.post("/ladyfou/checkout/add_to_cart", params);
+  Map<String, dynamic> result = await XHttp.post(ADD_TO_CART_URI, params);
   MyResponse response = MyResponse.fromJson(result);
   handleResponse(response);
   return response;
 }
 
 /// 获取分类产品尺码规格
-Future<MyResponse<List<OptionsSizeReq>>> getOptionSize({required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-  await XHttp.get("/ladyfou/catalog/getOptionSize", params);
-  MyResponse<List<OptionsSizeReq>> response = MyResponse<List<OptionsSizeReq>>.fromJson(result);
+Future<MyResponse<List<OptionsSizeReq>>> getOptionSize(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result = await XHttp.get(GET_OPTION_SIZE_URI, params);
+  MyResponse<List<OptionsSizeReq>> response =
+      MyResponse<List<OptionsSizeReq>>.fromJson(result);
   handleResponse(response);
   return response;
 }
@@ -229,8 +214,7 @@ Future<MyResponse<List<OptionsSizeReq>>> getOptionSize({required Map<String, dyn
 /*-------------------------------购物车--------------------------------------*/
 Future<MyResponse<CartModel>> getCartList(
     {required Map<String, dynamic> params}) async {
-  Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/checkout/shopping_cart_list", params);
+  Map<String, dynamic> result = await XHttp.get(SHOPPING_CART_LIST_URI, params);
   MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
   return response;
 }
@@ -239,7 +223,7 @@ Future<MyResponse<CartModel>> getCartList(
 ///
 Future<MyResponse<CountryListModel>> getCountryList() async {
   Map<String, dynamic> result = await XHttp.get(
-    "/ladyfou/common/country",
+    COUNTRY_LIST_URI,
   );
   MyResponse<CountryListModel> response =
       MyResponse<CountryListModel>.fromJson(result);
@@ -251,7 +235,7 @@ Future<MyResponse<CountryListModel>> getCountryList() async {
 Future<MyResponse<ProvinceListModel>> getProvinceList(
     {int country_id = 122}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/common/country", {"country_id": country_id});
+      await XHttp.get(COUNTRY_LIST_URI, {"country_id": country_id});
   MyResponse<ProvinceListModel> response =
       MyResponse<ProvinceListModel>.fromJson(result);
   return response;
@@ -261,7 +245,7 @@ Future<MyResponse<ProvinceListModel>> getProvinceList(
 /// [country] int  省的名字
 Future<MyResponse<CityListModel>> getCityList({required String country}) async {
   Map<String, dynamic> result =
-      await XHttp.get("/ladyfou/common/city", {"country": country});
+      await XHttp.get(CITY_LIST_URI, {"country": country});
   MyResponse<CityListModel> response =
       MyResponse<CityListModel>.fromJson(result);
   return response;
@@ -273,7 +257,7 @@ Future<MyResponse<CityListModel>> getCityList({required String country}) async {
 /// otonastyle/common/town?country=東京都&city=あきる野市
 Future<MyResponse<CountyListModel>> getCountyList(
     {required String country, required String city}) async {
-  Map<String, dynamic> result = await XHttp.get("/ladyfou/common/town", {
+  Map<String, dynamic> result = await XHttp.get(TOWN_LIST_URI, {
     "country": country,
     "city": city,
   });
