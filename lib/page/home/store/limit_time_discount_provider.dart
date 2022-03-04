@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -15,6 +17,27 @@ class LimitTimeDiscountProvider extends ChangeNotifier {
   int page = 1;
 
   int pageSize = 10;
+
+  int count = 360000;
+
+  late Timer time;
+
+  LimitTimeDiscountProvider() {
+    time = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (count <= 0) {
+        // timer.cancel();
+        count = 360000;
+      }
+      count = count - 1;
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    time.cancel();
+    super.dispose();
+  }
 
   EasyRefreshController refreshController = EasyRefreshController();
 

@@ -328,38 +328,22 @@ class DiscountCountdown extends StatefulWidget {
 }
 
 class _DiscountCountdownState extends State<DiscountCountdown> {
-  late Timer time;
-
-  late int second;
-
   late DayHourMinSec dayHourMinSec;
 
   @override
   void initState() {
-    second = widget.second;
-    dayHourMinSec = getDayHourMinSec(second);
-
-    time = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (second < 0) {
-        timer.cancel();
-      }
-      second = second - 1;
-      setState(() {
-        dayHourMinSec = getDayHourMinSec(second);
-      });
-    });
-
     super.initState();
   }
 
   @override
   void dispose() {
-    time.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    LimitTimeDiscountProvider provider = Provider.of(context);
+    dayHourMinSec = getDayHourMinSec(provider.count);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
