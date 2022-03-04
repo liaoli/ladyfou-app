@@ -257,7 +257,12 @@ class OptionsSizeReq {
   static List<OptionsSizeReq> fromToList(List json) {
     List<OptionsSizeReq> lists = [];
     for (int i = 0; i< json.length; i ++) {
-      String item = json[i].toString();
+      String item = "全部";
+      if(i == 0) {
+        lists.add(OptionsSizeReq(id: i,sizeName: item));
+      }
+      item = json[i].toString();
+
       lists.add(OptionsSizeReq(id: i+1,sizeName: item));
     }
     return lists;

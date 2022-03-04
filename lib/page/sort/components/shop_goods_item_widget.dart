@@ -134,9 +134,9 @@ class _ShopGoodsItemState extends State<ShopGoodsItem> {
           child: BaseImageLoading(
             imgError: () {
               Future.delayed(Duration(milliseconds: 100)).then((e) {
-                setState(() {
-                  widget.isShowLike = false;
-                });
+                // setState(() {
+                //   widget.isShowLike = false;
+                // });
                 // _bloc.changeIsLike(widget.isShowLike);
               });
             },

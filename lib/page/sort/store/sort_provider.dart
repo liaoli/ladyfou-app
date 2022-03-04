@@ -129,7 +129,12 @@ class SortProvider with ChangeNotifier {
     if (selectConditionInfoModels.length > 0) {
       List<String> list = [];
       selectConditionInfoModels.forEach((element) {
-        list.add(element.sizeName);
+        if(element.id == 0) {
+          list.add('');
+        }else {
+          list.add(element.sizeName);
+        }
+
       });
       if (list.length > 0) {
         getCategoryProducts(ids,option_size: list, isRefresh: true);
@@ -150,7 +155,8 @@ class SortProvider with ChangeNotifier {
         };
         MyResponse response = await getOptionSize(params: params);
         if (response.common.statusCode == 1000) {
-          conditionInfoModels = response.response?.data;
+          List<OptionsSizeReq> modelList = response.response!.data!;
+          conditionInfoModels = modelList;
           selectConditionInfoModels = [];
         } else {
           conditionInfoModels = [];

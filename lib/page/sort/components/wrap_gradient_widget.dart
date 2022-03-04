@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import '../../../core/constant/base_bloc.dart';
 import '../../../core/model/category_info_model.dart';
 import '../../../core/model/good_collection_model.dart';
+import '../../../core/model/good_info_model.dart';
 import '../../../style/Color.dart';
 import '../../../style/text.dart';
 
@@ -72,6 +73,29 @@ class ItemButtonModel {
     models.forEach((m) {
       currentModels.add(ItemButtonModel(
           id: m.cid, name: m.name2));
+    });
+    return currentModels;
+  }
+
+  static List<ItemButtonModel> fromOptionsSizeModels(
+      List<OptionsSizeReq> models) {
+    List<ItemButtonModel> currentModels = [];
+    models.forEach((m) {
+      currentModels.add(ItemButtonModel(
+          id: m.id, name: m.sizeName));
+    });
+    return currentModels;
+  }
+
+  static List<OptionsSizeReq> toFindOptionsSizeReqModels(
+      List<OptionsSizeReq> models, List<ItemButtonModel> list) {
+    List<OptionsSizeReq> currentModels = [];
+    list.forEach((element) {
+      models.forEach((m) {
+        if (element.id == m.id) {
+          currentModels.add(m);
+        }
+      });
     });
     return currentModels;
   }
@@ -176,12 +200,21 @@ class _WrapGradientWidgetState extends State<WrapGradientWidget> {
           }
           return GestureDetector(
             onTap: () {
-              if (isExit(model)) {
-                widget.currentSelects
-                    .removeWhere((element) => element.id == model.id);
-              } else {
+              // 如果选中"全部"，需要取消其他选中的，如果有其他选中的，那么删除"全部"
+              if(model.id == 0) {
+                widget.currentSelects.clear();
                 widget.currentSelects.add(model);
+              }else {
+                widget.currentSelects
+                    .removeWhere((element) => element.id == 0);
+                if (isExit(model)) {
+                  widget.currentSelects
+                      .removeWhere((element) => element.id == model.id);
+                } else {
+                  widget.currentSelects.add(model);
+                }
               }
+
               widget.onClick(widget.currentSelects);
               setState(() {});
             },

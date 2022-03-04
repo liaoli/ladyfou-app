@@ -102,6 +102,7 @@ class _ClassificationState extends State<ClassificationWidget> {
                           ),
                           child: Text('重置',
                               style: BaseText.style(
+                                  height: 1.1,
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   color: AppColors.color_FF333333)),
@@ -116,15 +117,16 @@ class _ClassificationState extends State<ClassificationWidget> {
                           height: 24.w,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: AppColors.color_FFF5F5F5,
+                            color: AppColors.navigationColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(12.0.w)),
                           ),
                           child: Text('确定',
                               style: BaseText.style(
+                                height: 1.1,
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
-                                  color: AppColors.color_FF333333)),
+                                  color: AppColors.white)),
                         ),
                       )
                     ],

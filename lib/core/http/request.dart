@@ -199,7 +199,7 @@ Future<MyResponse> addCart({required Map<String, dynamic> params}) async {
 Future<MyResponse<List<OptionsSizeReq>>> getOptionSize({required Map<String, dynamic> params}) async {
   Map<String, dynamic> result =
   await XHttp.get("/ladyfou/catalog/getOptionSize", params);
-  MyResponse<List<OptionsSizeReq>> response = MyResponse.fromJson(result);
+  MyResponse<List<OptionsSizeReq>> response = MyResponse<List<OptionsSizeReq>>.fromJson(result);
   handleResponse(response);
   return response;
 }

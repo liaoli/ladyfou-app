@@ -68,7 +68,8 @@ class _GoodsListPageState extends State<GoodsListPage>
     provider = SortProvider();
 
     // 请求分类数据
-    provider.getCategoryProducts([widget.shopId], isRefresh: true).then((value) {
+    provider
+        .getCategoryProducts([widget.shopId], isRefresh: true).then((value) {
       setState(() {});
     });
     // 请求筛选的数据
@@ -85,8 +86,7 @@ class _GoodsListPageState extends State<GoodsListPage>
     tabController = TabController(length: tabTitles.length, vsync: this);
 
     if (tabController != null) {
-      tabController.addListener(() {
-      });
+      tabController.addListener(() {});
     }
 
     super.initState();
@@ -120,7 +120,7 @@ class _GoodsListPageState extends State<GoodsListPage>
 
   /// 点击跳转购物车
   void checkPushCartAction(BuildContext context) async {
-    Get.to(()=> CartPage());
+    Get.to(() => CartPage());
   }
 
   @override
@@ -235,12 +235,14 @@ class _GoodsListPageState extends State<GoodsListPage>
                             controller: provider.refreshController,
                             onRefresh: () {
                               provider.currentPage = CURRENT_PAGE;
-                              return provider.getCategoryProducts([widget.shopId],
+                              return provider.getCategoryProducts(
+                                  [widget.shopId],
                                   isRefresh: true, page: provider.currentPage);
                             },
                             onLoad: () {
                               provider.currentPage += 1;
-                              return provider.getCategoryProducts([widget.shopId],
+                              return provider.getCategoryProducts(
+                                  [widget.shopId],
                                   isRefresh: false, page: provider.currentPage);
                             },
                             enableControlFinishLoad: true,
@@ -261,7 +263,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                           animationMilliseconds: 300,
                           dropdownMenuChanging: (isShow, index) {
                             print("(已经${isShow ? '显示' : '隐藏'}$index)");
-                            if(!isShow) {
+                            if (!isShow) {
                               if (index == 1) {
                                 BaseBloc.instance.addListenerAlertShow(isShow);
                               }
@@ -271,7 +273,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                               }
                             }
                           },
-                          dropdownMenuChanged: (isShow,index) {
+                          dropdownMenuChanged: (isShow, index) {
                             if (isShow) {
                               if (index == 1) {
                                 BaseBloc.instance.addListenerAlertShow(isShow);
@@ -344,7 +346,10 @@ class _GoodsListPageState extends State<GoodsListPage>
 
   /// 综合筛选
   Widget _buildComprehensive(BuildContext context) {
-    return ComprehensiveWidget(callBack: (order_type) {});
+    return ComprehensiveWidget(callBack: (order_type) {
+      provider.getCategoryProducts([widget.shopId],
+          isRefresh: true, order_type: order_type);
+    });
   }
 
   /// 全部分类筛选
@@ -359,13 +364,15 @@ class _GoodsListPageState extends State<GoodsListPage>
           });
           return ClassificationWidget(
             itemList: models,
-            selectItemList: ItemButtonModel.fromItemModels(provider.selectCategoryInfoModels),
+            selectItemList: ItemButtonModel.fromItemModels(
+                provider.selectCategoryInfoModels),
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
-              provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(provider.categoryInfoModels, infoModels);
+              provider.selectCategoryInfoModels = ItemButtonModel.toFindModels(
+                  provider.categoryInfoModels, infoModels);
               provider.querySortCategoryProducts([widget.shopId]);
             },
-            finishCallBack:() {
+            finishCallBack: () {
               _dropdownMenuController.hide();
               provider.querySortCategoryProducts([widget.shopId]);
             },
@@ -383,18 +390,19 @@ class _GoodsListPageState extends State<GoodsListPage>
           provider.conditionInfoModels.forEach((element) {
             models.add(ItemButtonModel.fromModel(element.id, element.sizeName));
           });
-          List<Map<String,dynamic>> json_models = OptionsSizeReq.toJsonList(provider.selectConditionInfoModels);
           return ClassificationWidget(
             itemList: models,
-            selectItemList: ItemButtonModel.fromToModels(json_models,'id','size_name'),
+            selectItemList: ItemButtonModel.fromOptionsSizeModels(
+                provider.selectConditionInfoModels),
             isShow: snapshot.data ?? false,
             callBack: (infoModels) {
-              List<Map<String,dynamic>> json_models = OptionsSizeReq.toJsonList(provider.conditionInfoModels);
-              List<Map<String,dynamic>> models =  ItemButtonModel.findToModels(json_models, 'id',infoModels);
-              provider.selectConditionInfoModels = OptionsSizeReq.fromList(models);
+              // 如果选中"全部"，需要取消其他选中的，如果有其他选中的，那么删除"全部"
+              provider.selectConditionInfoModels =
+                  ItemButtonModel.toFindOptionsSizeReqModels(
+                      provider.conditionInfoModels, infoModels);
               provider.queryConditionInfoProducts([widget.shopId]);
             },
-            finishCallBack:() {
+            finishCallBack: () {
               _dropdownMenuController.hide();
               provider.queryConditionInfoProducts([widget.shopId]);
             },

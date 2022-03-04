@@ -53,12 +53,12 @@ class _ComprehensiveState extends State<ComprehensiveWidget> {
       {
         "title": S.current.price_news_asc, // 升序
         "isSelect": 0,
-        "order_type": "created_at|asc"
+        "order_type": "price|asc"
       },
       {
         "title": S.current.price_news_desc, // 降序
         "isSelect": 0,
-        "order_type": "created_at|desc"
+        "order_type": "price|desc"
       },
       {
         "title": S.current.best_high, // 最高人气
