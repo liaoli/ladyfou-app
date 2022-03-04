@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ladyfou/page/cart/view/discounts_tab_widget.dart';
+import 'package:ladyfou/page/cart/components/discounts_tab_widget.dart';
 import 'package:ladyfou/style/Color.dart';
+
+import '../../../core/utils/utils.dart';
 
 class BottomPayWidget extends StatelessWidget {
   const BottomPayWidget({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class BottomPayWidget extends StatelessWidget {
           top: BorderSide(width: 0.5, color: AppColors.transparent_Black3),
         ),
       ),
-      height: bottomSafeHg + 76,
+      height: bottomSafeHg + 110,
       width: screenWd,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +36,7 @@ class BottomPayWidget extends StatelessWidget {
                     color: AppColors.primaryBlackText51),
               ),
               TextSpan(
-                text: "3,479円 ",
+                text: "${Utils.formatStepCount(double.parse("3479"))}円 ",
                 style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
@@ -51,7 +53,7 @@ class BottomPayWidget extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(top: 8),
-            height: 33,
+            height: 42,
             child: Row(
               children: [
                 GestureDetector(
@@ -68,6 +70,7 @@ class BottomPayWidget extends StatelessWidget {
                       '使用积分/优惠券',
                       style: TextStyle(
                           fontSize: 14,
+                          height: 1.1,
                           fontWeight: FontWeight.w400,
                           color: AppColors.primaryBlackText51),
                     ),
@@ -85,6 +88,7 @@ class BottomPayWidget extends StatelessWidget {
                       '购入',
                       style: TextStyle(
                           fontSize: 14,
+                          height: 1.1,
                           fontWeight: FontWeight.w700,
                           color: Colors.white),
                     ),

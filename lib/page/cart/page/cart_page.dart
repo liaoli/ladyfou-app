@@ -15,11 +15,11 @@ import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/check_box_widget.dart';
 import 'package:ladyfou/components/sliver_header_delegate.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
-import 'package:ladyfou/page/cart/provider/cart_provider.dart';
-import 'package:ladyfou/page/cart/view/bottom_pay_widget.dart';
-import 'package:ladyfou/page/cart/view/goods_list_widge.dart';
-import 'package:ladyfou/page/cart/view/order_detail_widget.dart';
-import 'package:ladyfou/page/cart/view/preferential_list_widget.dart';
+import 'package:ladyfou/page/cart/store/cart_provider.dart';
+import 'package:ladyfou/page/cart/components/bottom_pay_widget.dart';
+import 'package:ladyfou/page/cart/components/goods_list_widge.dart';
+import 'package:ladyfou/page/cart/components/order_detail_widget.dart';
+import 'package:ladyfou/page/cart/components/preferential_list_widget.dart';
 import 'package:ladyfou/page/home/components/recommend_product_head.dart';
 import 'package:ladyfou/page/home/components/recommend_product_list.dart';
 import 'package:ladyfou/style/Color.dart';
@@ -39,7 +39,13 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     provider = CartProvider();
-    provider.getSortAllDatas();
+    provider.getSortAllDatas().then((value) {
+      setState(() {});
+    });
+
+    provider.getRecommendList().then((value) {
+      setState(() {});
+    });
 
     super.initState();
   }
@@ -85,11 +91,19 @@ class _CartPageState extends State<CartPage> {
                       children: [
                         Padding(
                           padding:
-                              EdgeInsets.fromLTRB(12, 0, 12, bottomSafeHg + 76),
+                              EdgeInsets.fromLTRB(12, 0, 12, bottomSafeHg + 110),
                           child: EasyRefresh.custom(
                               header: MaterialHeader(),
                               footer: MaterialFooter(),
-                              onRefresh: () async {},
+                              onRefresh: () async {
+                                provider.getSortAllDatas().then((value) {
+                                  setState(() {});
+                                });
+
+                                provider.getRecommendList().then((value) {
+                                  setState(() {});
+                                });
+                              },
                               // scrollController: scrollController,
                               slivers: <Widget>[
                                 _topNumHead(context),
@@ -97,7 +111,7 @@ class _CartPageState extends State<CartPage> {
                                 PreferentialListWidget(),
                                 OrderDetailWidget(),
                                 _recommendProductHead(),
-                                RecommendProductList(),
+                                RecommendProductList(data: provider.reCommend),
                               ]),
                         ),
                         Positioned(
