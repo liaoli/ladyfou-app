@@ -245,8 +245,8 @@ class DiscountItemView extends StatelessWidget {
               CachedNetworkImage(
                 width: 86.w,
                 height: 86.w,
-                imageUrl:
-                    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                // imageUrl: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                imageUrl: product.fThumb??"",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(

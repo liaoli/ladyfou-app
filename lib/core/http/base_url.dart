@@ -7,7 +7,15 @@
 /// 开发环境域名
 // const String baseUrl = "http://192.168.1.174";
 
-const String baseUrl = "https://release.ladyfou.com/ladyfou";
+const String baseUrl = "https://release.ladyfou.com";
+
+String getBaseUrl() {
+  if (baseUrl == "https://release.ladyfou.com") {
+    return baseUrl + "/ladyfou";
+  } else {
+    return baseUrl + "/otonastyle";
+  }
+}
 
 ///注册
 const String REGISTER_URI = "/account/register";

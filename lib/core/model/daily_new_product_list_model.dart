@@ -406,7 +406,7 @@ class Sku {
         skuPrice: json["sku_price"],
         skuStatus: json["sku_status"],
         skuListPrice: json["sku_list_price"],
-        skuStock: json["sku_stock"],
+        skuStock: json["sku_stock"]??0,
         presell: json["presell"],
         stockpileStatus: json["stockpile_status"],
         storeStatus: json["store_status"],

@@ -67,8 +67,8 @@ class RecommendProductItemView extends StatelessWidget {
             child: CachedNetworkImage(
               width: 170.w,
               height: 170.w,
-              imageUrl:
-                  "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+              // imageUrl: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+              imageUrl: product.fThumb??"",
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
