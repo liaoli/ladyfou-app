@@ -1,28 +1,16 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
-import 'package:ladyfou/components/clicked_Image_asset.dart';
+import 'package:ladyfou/page/setting/store/edit_user_info_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/button/common_button.dart';
-import '../../components/sliver_header_delegate.dart';
-import '../../components/web_view_page.dart';
 import '../../core/constant/base_enum.dart';
 import '../../style/Color.dart';
-import '../home/components/new_product_list.dart';
-import '../home/components/recommend_product_bottom.dart';
-import '../home/components/recommend_product_head.dart';
-import '../home/components/recommend_product_list.dart';
-import 'components/common_setting_view.dart';
 import 'components/edit_password_item_view.dart';
-import 'components/user_email_item_view.dart';
-import 'components/user_info_item_view.dart';
-import 'components/user_name_item_view.dart';
 
 class SettingEditUserInfoPage extends StatefulWidget {
   const SettingEditUserInfoPage({Key? key}) : super(key: key);
@@ -37,43 +25,30 @@ class _SettingEditUserInfoPageState extends State<SettingEditUserInfoPage> {
 
   bool enable = false;
 
+  late EditUserUserInfoProvider provider;
+
   @override
   void initState() {
+    provider = EditUserUserInfoProvider();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      leadType: AppBarBackType.Back,
-      title: "密码修改",
-      body: Column(
-        children: [
-          Expanded(child: refresh()),
-          CommonButton(
-            enable: enable,
-            height: 43.w,
-            width: 351.w,
-            borderRadius: BorderRadius.all(Radius.circular(10.w)),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "确 认",
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: BaseScaffold(
+        leadType: AppBarBackType.Back,
+        title: "密码修改",
+        body: Column(
+          children: [
+            Expanded(child: refresh()),
+            sureButton(),
+            SizedBox(
+              height: 100.w,
             ),
-          ),
-          SizedBox(
-            height: 100.w,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -107,6 +82,43 @@ class _SettingEditUserInfoPageState extends State<SettingEditUserInfoPage> {
     return SliverToBoxAdapter(
       child: SizedBox(
         height: height,
+      ),
+    );
+  }
+}
+
+class sureButton extends StatelessWidget {
+  const sureButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    EditUserUserInfoProvider provider = Provider.of(
+      context,
+    );
+    return CommonButton(
+      onTap: () {
+
+        provider.reset().then((value){
+
+        });
+      },
+      enable: provider.enable,
+      height: 43.w,
+      width: 351.w,
+      borderRadius: BorderRadius.all(Radius.circular(10.w)),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "确 认",
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
     );
   }

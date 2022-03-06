@@ -15,6 +15,12 @@ const String REGISTER_URI = "/account/register";
 ///登录
 const String LOGIN_URI = "/account/login";
 
+///发送邮箱验证码
+const String RESET_PASSWORD_START_URI = "/account/reset_password_start";
+
+///修改密码
+const String RRESET_PASSWORD_END_URI = "/account/reset_password_end";
+
 /// home 每日新品
 const String DAILY_NEW_PRODUCT_URI = "/product/newProduct";
 

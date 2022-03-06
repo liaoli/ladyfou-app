@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ladyfou/core/http/request.dart';
 import 'package:ladyfou/page/login/components/register_view.dart';
 import 'package:ladyfou/utils/sputils.dart';
@@ -8,6 +9,7 @@ import '../../../core/utils/toast.dart';
 import '../../../generated/l10n.dart';
 import '../../../style/Color.dart';
 import '../../../utils/provider.dart';
+import '../../setting/setting_edit_user_info_page.dart';
 import 'login_text_field.dart';
 
 class LoginView extends StatefulWidget {
@@ -51,6 +53,27 @@ class _LoginViewState extends State<LoginView> {
           onChanged: (String text) {
             isEnable();
           },
+        ),
+        SizedBox(
+          height: 16.w,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Get.to(() => SettingEditUserInfoPage());
+              },
+              child: Text(
+                "忘记密码?",
+                style: TextStyle(
+                  color: AppColors.color_FF333333,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 110.w,

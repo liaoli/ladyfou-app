@@ -373,3 +373,31 @@ Future<MyResponse<ZipAddressModel>> getZIPByAddress(
       MyResponse<ZipAddressModel>.fromJson(result);
   return response;
 }
+
+/// 通过邮编获取地址
+/// [email]邮箱
+Future<MyResponse<NoDataModel>> sendEmailCode({
+  required String email,
+}) async {
+  Map<String, dynamic> result = await XHttp.post(RESET_PASSWORD_START_URI, {
+    "email": email,
+  });
+  MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// [email]邮箱
+Future<MyResponse<NoDataModel>> resetPassword({
+  required String password,
+  required String re_password,
+  required String code,
+}) async {
+  Map<String, dynamic> result = await XHttp.post(RESET_PASSWORD_START_URI, {
+    "password": password,
+    "re_password": re_password,
+    "code": code,
+  });
+  MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
+  return response;
+}
