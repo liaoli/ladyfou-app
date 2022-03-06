@@ -11,6 +11,7 @@ class AddressTextField extends StatefulWidget {
   final Widget? leftChild;
   final Color borderColor;
   final bool enable;
+  final FocusNode? focusNode;
 
   const AddressTextField(
       {Key? key,
@@ -19,6 +20,7 @@ class AddressTextField extends StatefulWidget {
       this.title,
       this.onChanged,
       this.leftChild,
+      this.focusNode,
       this.enable = true,
       this.borderColor = AppColors.color_EAEAEA,
       required this.controller})
@@ -68,6 +70,7 @@ class _AddressTextFieldState extends State<AddressTextField> {
               enabled: widget.enable,
               controller: widget.controller,
               obscureText: obscureText,
+              focusNode: widget.focusNode,
               onChanged: widget.onChanged,
               style: TextStyle(
                 color: AppColors.color_FF333333,

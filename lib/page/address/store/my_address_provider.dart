@@ -8,7 +8,8 @@ import '../../../core/model/no_data_model.dart';
 import '../../../core/utils/toast.dart';
 
 class MyAddressProvider extends ChangeNotifier {
-  List<AddressModel> addressList = []; //猜你喜欢
+  List<AddressModel>? addressList ; //我的地址列表
+
 
   //验证通过提交数据
   Future<void> getData(BuildContext context) async {
@@ -20,8 +21,13 @@ class MyAddressProvider extends ChangeNotifier {
       MyResponse<MyAddressListModel> result = await getAddressList();
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
-        addressList.clear();
-        addressList.addAll(result.response!.data!.list);
+
+        if(addressList == null ){
+          addressList = [];
+        }
+
+        addressList!.clear();
+        addressList!.addAll(result.response!.data!.list);
       }
       notifyListeners();
       return result;

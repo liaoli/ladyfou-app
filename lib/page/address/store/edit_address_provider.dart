@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ladyfou/core/model/province_list_model.dart';
 
 import '../../../core/http/request.dart';
 import '../../../core/http/response.dart';
@@ -29,8 +30,18 @@ class EditAddressProvider extends ChangeNotifier {
   TextEditingController postController = TextEditingController();
   TextEditingController cityController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  FocusNode addressFocusNode = FocusNode();
 
   EditAddressProvider({required this.addressModel}) {
+    addressFocusNode.addListener(() {
+      if (addressFocusNode.hasFocus) {
+        String text = addressController.text;
+        addressController.selection = TextSelection.fromPosition(
+            TextPosition(
+                affinity: TextAffinity.downstream, offset: text.length));
+      }
+    });
+
     name1Controller.text = addressModel.chineseName;
     name2Controller.text = addressModel.katakanaName;
     phoneController.text = addressModel.phone;
@@ -44,7 +55,7 @@ class EditAddressProvider extends ChangeNotifier {
     List<String> list = addressModel.address.split(";");
 
     isDefault = addressModel.isDefault == 1;
-
+    city = addressModel.city;
     county = list[0];
     detailAddress = list[1];
   }
@@ -121,7 +132,7 @@ class EditAddressProvider extends ChangeNotifier {
   Future<MyResponse<ZipAddressModel>> getZip() async {
     try {
       MyResponse<ZipAddressModel> result =
-          await getZIPByAddress(country: state, city: city, town: county);
+      await getZIPByAddress(country: state, city: city, town: county);
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         ZipAddressModel model = result.response!.data!;
@@ -139,16 +150,18 @@ class EditAddressProvider extends ChangeNotifier {
   }
 
   Future<MyResponse<ZipAddressListModel>> getAddress() async {
-
     try {
-      MyResponse<ZipAddressListModel> result = await getAddressByZIP(zip: zip);
+      MyResponse<ZipAddressListModel> result =
+      await getAddressByZIP(zip: postController.text);
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         ZipAddressModel model = result.response!.data!.data[0];
+
         state = model.county;
         city = model.county;
         county = model.town;
         zip = model.zipCode;
+        state_id =  ProvinceListModel.getProvinceByName(state).id;
         updateAdd();
       }
 

@@ -36,7 +36,12 @@ class _AddressViewState extends State<AddressView> {
                   controller: provider.postController,
                   title: "邮箱番号",
                   prefixIcon: "assets/images/must.png",
-                  onChanged: (String text) {}),
+                  onChanged: (String text) {
+                    int length = text.length;
+                    if(length == 7){
+                      provider.getAddress();
+                    }
+                  }),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 child: AddressTextField(
@@ -88,9 +93,12 @@ class _AddressViewState extends State<AddressView> {
               ),
               AddressTextField(
                   controller: provider.addressController,
+                  focusNode: provider.addressFocusNode,
                   title: "住所",
                   prefixIcon: "assets/images/must.png",
-                  onChanged: (String text) {}),
+                  onChanged: (String text) {
+
+                  }),
             ],
           )),
     );

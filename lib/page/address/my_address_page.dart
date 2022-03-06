@@ -72,7 +72,12 @@ class _MyAddressPageState extends State<MyAddressPage> {
                 ],
               ),
               onTap: () {
-                Get.to(() => EditAddressPage(model: AddressModel(),));
+                Get.to(() => EditAddressPage(
+                          model: AddressModel(),
+                        ))!
+                    .then((value) {
+                  provider.getData(context);
+                });
               },
             ),
             SizedBox(

@@ -81,6 +81,7 @@ class SelectedAddressProvider extends ChangeNotifier {
   );
 
   SelectedAddressProvider() {
+    provinces = ProvinceListModel.provinces();
     getTabs();
   }
 

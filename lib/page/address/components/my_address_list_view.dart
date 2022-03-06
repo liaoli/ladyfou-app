@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/core/model/my_address_list_model.dart';
 import 'package:ladyfou/style/Color.dart';
@@ -20,6 +21,15 @@ class _MyAddressListViewState extends State<MyAddressListView> {
   @override
   Widget build(BuildContext context) {
     MyAddressProvider provider = Provider.of(context);
+
+    if (provider.addressList == null) {
+      return loading();
+    }
+
+    if (provider.addressList!.isEmpty) {
+      return noData();
+    }
+
     return SliverPadding(
       padding: EdgeInsets.zero,
       sliver: SliverGrid(
@@ -31,7 +41,7 @@ class _MyAddressListViewState extends State<MyAddressListView> {
         ),
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
-            AddressModel model = provider.addressList[index];
+            AddressModel model = provider.addressList![index];
             return GestureDetector(
               child: SellInfoItemView(
                 address: model,
@@ -48,8 +58,48 @@ class _MyAddressListViewState extends State<MyAddressListView> {
               },
             );
           },
-          childCount: provider.addressList.length,
+          childCount: provider.addressList!.length,
         ),
+      ),
+    );
+  }
+
+  Widget loading() {
+    return SliverToBoxAdapter(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+            padding: EdgeInsets.only(
+              top: 200.w,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget noData() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 84.w,
+          ),
+          Image.asset("assets/images/no_address.png"),
+          SizedBox(
+            height: 10.w,
+          ),
+          Text(
+            "暂无收货地址",
+            style: TextStyle(
+              color: AppColors.color_FF666666,
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -67,6 +117,7 @@ class SellInfoItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyAddressProvider provider = Provider.of(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.all(new Radius.circular(10.w)),
       child: Container(
@@ -119,8 +170,11 @@ class SellInfoItemView extends StatelessWidget {
                   ),
                   onTap: () {
                     Get.to(() => EditAddressPage(
-                          model: address,
-                        ));
+                              model: address,
+                            ))!
+                        .then((value) {
+                      provider.getData(context);
+                    });
                   },
                 ),
               ],
@@ -129,7 +183,7 @@ class SellInfoItemView extends StatelessWidget {
               height: 4.w,
             ),
             Text(
-              "科兴科学园B4单元1402鲸派电商",
+              address.address,
               style: TextStyle(
                 color: AppColors.color_FF333333,
                 fontSize: 12,
@@ -164,7 +218,7 @@ class SellInfoItemView extends StatelessWidget {
                   visible: address.isDefault == 1,
                 ),
                 Text(
-                  address.address,
+                  address.state + address.city,
                   style: TextStyle(
                     color: AppColors.color_FF999999,
                     fontSize: 10,
