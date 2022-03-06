@@ -14,8 +14,10 @@ import '../model/good_collection_model.dart';
 import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/my_address_list_model.dart';
+import '../model/no_data_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
+import '../model/zip_address_list_model.dart';
 import 'base_url.dart';
 import 'http.dart';
 
@@ -328,5 +330,46 @@ Future<MyResponse<AddressModel>> updateAddress({
 
   Map<String, dynamic> result = await XHttp.post(UPDATE_ADDRESS_URI, param);
   MyResponse<AddressModel> response = MyResponse<AddressModel>.fromJson(result);
+  return response;
+}
+
+/// 删除地址
+/// userId:122663 用户id
+/// token:FXj7PotmIH6qmzFHDfrk59THGPRUhU8E
+/// id:81048 // 地址
+Future<MyResponse<NoDataModel>> deleteAddress({required int id}) async {
+  Map<String, dynamic> result = await XHttp.post(DELETE_ADDRESS_URI, {
+    "userId": Global.tokenInfo.userId,
+    "id": id,
+  });
+  MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// userId:122663 用户id
+Future<MyResponse<ZipAddressListModel>> getAddressByZIP(
+    {required String zip}) async {
+  Map<String, dynamic> result = await XHttp.get(ADDRESS_BY_ZIP_URI, {
+    "zip": zip,
+  });
+  MyResponse<ZipAddressListModel> response =
+      MyResponse<ZipAddressListModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// common/zipCode?country=東京都&city=あきる野市&town=三内
+Future<MyResponse<ZipAddressModel>> getZIPByAddress(
+    {required String country,
+    required String city,
+    required String town}) async {
+  Map<String, dynamic> result = await XHttp.get(ZIP_BY_ADDRESS_URI, {
+    "country": country,
+    "city": city,
+    "town": town,
+  });
+  MyResponse<ZipAddressModel> response =
+      MyResponse<ZipAddressModel>.fromJson(result);
   return response;
 }

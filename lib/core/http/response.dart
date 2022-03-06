@@ -11,10 +11,12 @@ import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/my_address_list_model.dart';
+import '../model/no_data_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import '../model/order_info_model.dart';
 import '../model/user_info_model.dart';
+import '../model/zip_address_list_model.dart';
 
 class MyResponse<T> {
   MyResponse({
@@ -41,6 +43,10 @@ T fromJson<T>(dynamic json) {
       return DailyNewProductListModel.fromMap(json) as T;
     case "AddressModel":
       return AddressModel.fromMap(json) as T;
+    case "ZipAddressModel": //通过邮编获取地址
+      return ZipAddressModel.fromMap(json) as T;
+    case "ZipAddressListModel": //通过邮编获取地址
+      return ZipAddressListModel.fromMap(json) as T;
     case "MyAddressListModel":
       return MyAddressListModel.fromMap(json) as T;
     case "CountryListModel":
@@ -71,7 +77,7 @@ T fromJson<T>(dynamic json) {
     case "List<OptionsSizeReq>":
       return OptionsSizeReq.fromToList(json) as T;
     default:
-      return [] as T;
+      return NoDataModel() as T;
   }
 }
 

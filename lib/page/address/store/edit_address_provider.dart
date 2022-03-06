@@ -4,6 +4,7 @@ import '../../../core/http/request.dart';
 import '../../../core/http/response.dart';
 
 import '../../../core/model/my_address_list_model.dart';
+import '../../../core/model/zip_address_list_model.dart';
 import '../../../core/utils/toast.dart';
 import '../model/province_city_county.dart';
 
@@ -19,6 +20,7 @@ class EditAddressProvider extends ChangeNotifier {
   late String county;
 
   late String detailAddress;
+  late String zip;
 
   TextEditingController name1Controller = TextEditingController();
   TextEditingController name2Controller = TextEditingController();
@@ -38,8 +40,10 @@ class EditAddressProvider extends ChangeNotifier {
     addressController.text = addressModel.address;
     state_id = addressModel.stateId;
     state = addressModel.state;
-
+    zip = addressModel.zip;
     List<String> list = addressModel.address.split(";");
+
+    isDefault = addressModel.isDefault == 1;
 
     county = list[0];
     detailAddress = list[1];
@@ -53,7 +57,18 @@ class EditAddressProvider extends ChangeNotifier {
     String zip = postController.text;
     String chinese_name = name1Controller.text;
     String katakana_name = name2Controller.text;
-    String address_detail = addressController.text;
+
+    String text = addressController.text;
+
+    List<String> list = text.split(";");
+
+    if (list.length > 1) {
+      detailAddress = list[1];
+      detailAddress = detailAddress.replaceAll(";", "");
+    } else {
+      ToastUtils.error("请输入详细地址");
+    }
+
     String email = emailController.text;
 
     int is_default = isDefault ? 1 : 0;
@@ -72,7 +87,7 @@ class EditAddressProvider extends ChangeNotifier {
         city: city,
         address: county,
         email: email,
-        address_detail: address_detail,
+        address_detail: detailAddress,
         is_default: is_default,
         state_id: state_id,
       );
@@ -93,7 +108,54 @@ class EditAddressProvider extends ChangeNotifier {
     detailAddress = "";
     state = value.province!.name;
 
+    updateAdd();
+    getZip();
+  }
+
+  void updateAdd() {
     cityController.text = state + " " + city;
-    addressController.text = city + ";" + detailAddress;
+    postController.text = zip;
+    addressController.text = county + ";" + detailAddress;
+  }
+
+  Future<MyResponse<ZipAddressModel>> getZip() async {
+    try {
+      MyResponse<ZipAddressModel> result =
+          await getZIPByAddress(country: state, city: city, town: county);
+      ToastUtils.success(result.common.debugMessage);
+      if (result.common.statusCode == 1000) {
+        ZipAddressModel model = result.response!.data!;
+        state = model.county;
+        city = model.county;
+        county = model.town;
+        zip = model.zipCode;
+        updateAdd();
+      }
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
+  }
+
+  Future<MyResponse<ZipAddressListModel>> getAddress() async {
+
+    try {
+      MyResponse<ZipAddressListModel> result = await getAddressByZIP(zip: zip);
+      ToastUtils.success(result.common.debugMessage);
+      if (result.common.statusCode == 1000) {
+        ZipAddressModel model = result.response!.data!.data[0];
+        state = model.county;
+        city = model.county;
+        county = model.town;
+        zip = model.zipCode;
+        updateAdd();
+      }
+
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
   }
 }

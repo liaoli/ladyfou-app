@@ -5,6 +5,7 @@ import 'package:ladyfou/core/model/my_address_list_model.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:provider/provider.dart';
 
+import '../../../components/dialog/tip_dialog.dart';
 import '../edit_address_page.dart';
 import '../store/my_address_provider.dart';
 
@@ -34,6 +35,13 @@ class _MyAddressListViewState extends State<MyAddressListView> {
             return GestureDetector(
               child: SellInfoItemView(
                 address: model,
+                delete: (AddressModel addressModel) {
+                  provider
+                      .deleteAddressById(addressId: addressModel.id)
+                      .then((value) {
+                    provider.getData(context);
+                  });
+                },
               ),
               onTap: () {
                 // Get.to(() => ProductDetailPage());
@@ -49,10 +57,12 @@ class _MyAddressListViewState extends State<MyAddressListView> {
 
 class SellInfoItemView extends StatelessWidget {
   final AddressModel address;
+  final Function(AddressModel address) delete;
 
   const SellInfoItemView({
     Key? key,
     required this.address,
+    required this.delete,
   }) : super(key: key);
 
   @override
@@ -71,7 +81,7 @@ class SellInfoItemView extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  address.katakanaName ,
+                  address.katakanaName,
                   style: TextStyle(
                     color: AppColors.color_FF333333,
                     fontSize: 12,
@@ -82,7 +92,7 @@ class SellInfoItemView extends StatelessWidget {
                   width: 5.w,
                 ),
                 Text(
-                  address.phone ,
+                  address.phone,
                   style: TextStyle(
                     color: AppColors.color_FF333333,
                     fontSize: 12,
@@ -154,7 +164,7 @@ class SellInfoItemView extends StatelessWidget {
                   visible: address.isDefault == 1,
                 ),
                 Text(
-                  address.address ,
+                  address.address,
                   style: TextStyle(
                     color: AppColors.color_FF999999,
                     fontSize: 10,
@@ -171,7 +181,13 @@ class SellInfoItemView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    TipDialog(context, sure: () {
+                      delete(address);
+                    }, cancel: () {});
+
+                    // delete(address);
+                  },
                 ),
               ],
             ),

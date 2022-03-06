@@ -68,3 +68,12 @@ const String ADDRESS_LIST_URI = "/account/address";
 
 /// 新增更新地址
 const String UPDATE_ADDRESS_URI = "/account/update_address";
+
+/// 删除地址
+const String DELETE_ADDRESS_URI = "/account/delete_address";
+
+/// 通过邮编获取地址
+const String ADDRESS_BY_ZIP_URI = "/common/addressByZip";
+
+/// 通过地址获取邮编
+const String ZIP_BY_ADDRESS_URI = "/common/zipCode";

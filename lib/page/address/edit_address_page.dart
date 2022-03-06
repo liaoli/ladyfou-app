@@ -134,6 +134,11 @@ class _EditAddressPageState extends State<EditAddressPage> {
   }
 
   Widget commonAddressSwitch() {
-    return CommonAddressSwitchView();
+    return CommonAddressSwitchView(
+      onChanged: (bool value) {
+        provider.isDefault = value;
+      },
+      open: provider.isDefault,
+    );
   }
 }
