@@ -38,6 +38,12 @@ const String DISCOUNT_PRODUCT_URI = "/product/discountProduct";
 /// 猜你喜欢
 const String YOU_LIKE_PRODUCT_URI = "/product/youLikeProduct";
 
+
+/// 猜你喜欢
+const String PRODUCT_DETAIL_URI = "/catalog/product";
+
+
+
 ///获取分类
 const String CATEGORY_URI = "/catalog/category";
 

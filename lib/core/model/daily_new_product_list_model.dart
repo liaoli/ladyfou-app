@@ -109,7 +109,7 @@ class DailyNewProduct {
   List<Feature>? features;
   List<Option>? options;
   int? ratNum;
-  int? sales;
+  dynamic? sales;
   List<Sku>? sku;
   int? stockpile;
   int? skuMinPrice;

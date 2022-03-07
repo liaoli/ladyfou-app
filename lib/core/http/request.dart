@@ -15,6 +15,7 @@ import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/my_address_list_model.dart';
 import '../model/no_data_model.dart';
+import '../model/product_detail_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import '../model/zip_address_list_model.dart';
@@ -60,6 +61,7 @@ Future<MyResponse<TokenInfoModel>> login({
 }
 
 /// home页数据 限时折扣 新品 ，排行榜
+
 Future<MyResponse<HomeDataListModel>> homeData() async {
   Map<String, dynamic> result = await XHttp.get(
     "/ladyfou/product/getProductData",
@@ -71,6 +73,8 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
 
 /// home 每日新品
 /// ladyfou/product/newProduct?page=1&page_size=3
+/// [page] 页码
+/// [pageSize] 每页数量
 Future<MyResponse<DailyNewProductListModel>> homeDailyNew({
   int page = 1,
   int pageSize = 6,
@@ -86,6 +90,8 @@ Future<MyResponse<DailyNewProductListModel>> homeDailyNew({
 
 /// home 限时折扣
 /// ladyfou/product/discountProduct?page=1&page_size=3
+/// [page] 页码
+/// [pageSize] 每页数量
 Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
   int page = 1,
   int pageSize = 6,
@@ -102,6 +108,8 @@ Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
 ///ladyfou/product/youLikeProduct
 /// home 猜你喜欢
 ///ladyfou/product/youLikeProduct?page=1&page_size=3
+/// [page] 页码
+/// [pageSize] 每页数量
 Future<MyResponse<DailyNewProductListModel>> recommendList({
   int page = 1,
   int pageSize = 6,
@@ -111,6 +119,25 @@ Future<MyResponse<DailyNewProductListModel>> recommendList({
     "page_size": pageSize,
   });
   MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
+
+
+
+///商品详情
+///catalog/product?id=84242
+/// [id] 商品id
+/// release.ladyfou.com产品id   84242，84241 ，103790
+Future<MyResponse<ProductDetailModel>> productDetail({
+  int id = 84242,
+}) async {
+  Map<String, dynamic> result = await XHttp.get(PRODUCT_DETAIL_URI, {
+    "id": id,
+    // "ver":"1.0.0"
+  });
+  MyResponse<ProductDetailModel> response = MyResponse.fromJson(result);
 
   return response;
 }

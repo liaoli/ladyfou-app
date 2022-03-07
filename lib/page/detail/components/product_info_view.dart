@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/button/common_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../../style/Color.dart';
+import '../store/product_detail_provider.dart';
 
 class ProductInfoView extends StatefulWidget {
   const ProductInfoView({Key? key}) : super(key: key);
@@ -12,8 +14,11 @@ class ProductInfoView extends StatefulWidget {
 }
 
 class _ProductInfoViewState extends State<ProductInfoView> {
+  late ProductDetailProvider provider;
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context, listen: true);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: ClipRRect(
@@ -27,7 +32,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
             children: [
               Expanded(
                 child: Text(
-                  "小柄長袖カジュアルスウィート清新パフスリーブボウタイプリントショート丈クロス・ホルター・ネックボタンブラウス",
+                  getProductName(),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
@@ -148,5 +153,13 @@ class _ProductInfoViewState extends State<ProductInfoView> {
         ),
       ),
     );
+  }
+
+  String getProductName() {
+    if (provider.detailModel != null) {
+      return provider.detailModel!.name!;
+    }
+
+    return "正在加载...";
   }
 }

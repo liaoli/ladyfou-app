@@ -12,6 +12,7 @@ import '../model/good_info_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/my_address_list_model.dart';
 import '../model/no_data_model.dart';
+import '../model/product_detail_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
 import '../model/order_info_model.dart';
@@ -41,6 +42,8 @@ T fromJson<T>(dynamic json) {
       return UserInfoModel.fromMap(json) as T;
     case "DailyNewProductListModel":
       return DailyNewProductListModel.fromMap(json) as T;
+    case "ProductDetailModel":
+      return ProductDetailModel.fromMap(json) as T;
     case "AddressModel":
       return AddressModel.fromMap(json) as T;
     case "ZipAddressModel": //通过邮编获取地址
