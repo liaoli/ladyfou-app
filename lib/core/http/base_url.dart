@@ -1,5 +1,5 @@
 /// 生产环境域名
-// const String baseUrl = "http://aashop.neverdown.cc/otonastyle";
+// const String baseUrl = "http://aashop.neverdown.cc";
 
 /// 测试环境域名
 // const String baseUrl = "https://release.ladyfou.com";

@@ -69,21 +69,17 @@ class EditUserUserInfoProvider extends ChangeNotifier {
   Future<void> getData(BuildContext context) async {}
 
   Future<MyResponse<NoDataModel>> sendCode() async {
-    String email = codeController.text;
+    String email = emailController.text;
 
     if (email.isEmpty) {
-      if (email.isNotEmpty) {
-        ToastUtils.error("请输入新邮箱");
-        throw Exception("没输入新邮箱");
-      }
+      ToastUtils.error("请输入新邮箱");
+      throw Exception("没输入新邮箱");
     }
 
     try {
       MyResponse<NoDataModel> result = await sendEmailCode(email: email);
       ToastUtils.success(result.common.debugMessage);
-      if (result.common.statusCode == 1000) {
-
-      }
+      if (result.common.statusCode == 1000) {}
       startTime();
       notifyListeners();
       return result;

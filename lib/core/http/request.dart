@@ -393,9 +393,9 @@ Future<MyResponse<NoDataModel>> resetPassword({
   required String re_password,
   required String code,
 }) async {
-  Map<String, dynamic> result = await XHttp.post(RESET_PASSWORD_START_URI, {
+  Map<String, dynamic> result = await XHttp.post(RRESET_PASSWORD_END_URI, {
     "password": password,
-    "re_password": re_password,
+    "password_confirmation": re_password,
     "code": code,
   });
   MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
