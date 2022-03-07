@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/page/detail/store/product_detail_provider.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             children: [
               homeHead(),
               Expanded(
-                child: refresh(),
+                child: DetailListView(),
               ),
               DetailBottomView(),
             ],
@@ -65,8 +66,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget homeHead() {
     return DetailDefaultNavBar();
   }
+}
 
-  Widget refresh() {
+class DetailListView extends StatelessWidget {
+  const DetailListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ProductDetailProvider provider = Provider.of(context, listen: true);
+    return refresh(provider);
+  }
+
+  Widget refresh(ProductDetailProvider provider) {
+    if (provider.detailModel == null) {
+      return loading();
+    }
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 0.w,
@@ -102,6 +117,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           buildSliverToBoxAdapter(12.w),
         ],
       ),
+    );
+  }
+
+  Widget loading() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SpinKitFadingCircle(color: AppColors.Color_E34D59),
+      ],
     );
   }
 

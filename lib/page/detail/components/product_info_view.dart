@@ -57,7 +57,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "-21%",
+                          provider.detailModel!.discount ?? "",
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 8,
@@ -71,7 +71,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     width: 9.w,
                   ),
                   Text(
-                    "￥8687",
+                    "￥${provider.detailModel!.listPrice ?? ""}",
                     style: TextStyle(
                       color: AppColors.color_FF353547,
                       fontSize: 10,
@@ -96,7 +96,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                       ),
                       children: [
                         TextSpan(
-                          text: "4475",
+                          text: "${provider.detailModel!.price ?? ""}",
                           style: TextStyle(
                             color: AppColors.Color_E34D59,
                             fontSize: 14,
@@ -118,7 +118,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     child: SizedBox(),
                   ),
                   Text(
-                    "商品番号:433",
+                    "商品番号:${provider.detailModel!.id ?? ""}",
                     style: TextStyle(
                       color: AppColors.color_FF999999,
                       fontSize: 10,

@@ -372,4 +372,7 @@ class Sku {
         "sku_big_thumb": skuBigThumb,
         "sku_small_thumb": skuSmallThumb,
       };
+
+
+
 }
