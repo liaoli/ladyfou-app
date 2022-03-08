@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/page/setting/components/setting_item_view.dart';
 
 import '../../../style/Color.dart';
@@ -31,7 +32,7 @@ class _UserNameItemViewState extends State<UserNameItemView> {
             color: AppColors.white,
             child: SettingItemView(
                title: "用户名",
-              subTitle: "前田敦子",
+              subTitle: Global.tokenInfo.name,
             ),
           ),
         ),

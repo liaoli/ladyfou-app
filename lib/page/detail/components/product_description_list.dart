@@ -4,9 +4,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/page/detail/components/thumbs_up_view.dart';
+import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../style/Color.dart';
+import '../../../utils/net_image_url_util.dart';
+import '../store/product_detail_provider.dart';
 
 class ProductDescriptionList extends StatefulWidget {
   final Widget background;
@@ -27,6 +30,10 @@ class ProductDescriptionList extends StatefulWidget {
 class _ProductDescriptionListState extends State<ProductDescriptionList> {
   @override
   Widget build(BuildContext context) {
+    ProductDetailProvider provider = Provider.of(context, listen: false);
+
+    List<String> imgs = provider.detailModel!.contentImages!;
+
     return SliverStack(
       insetOnOverlap: false, // defaults to false
       children: <Widget>[
@@ -35,17 +42,6 @@ class _ProductDescriptionListState extends State<ProductDescriptionList> {
         ),
         SliverPadding(
           padding: widget.padding,
-
-          // sliver: SliverFixedExtentList(
-          //   itemExtent: 90.w,
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       //创建列表项
-          //       return ProductEvaluationItemView();
-          //     },
-          //     childCount: 2,
-          //   ),
-          // ),
           sliver: SliverGrid(
             //Grid
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -57,9 +53,11 @@ class _ProductDescriptionListState extends State<ProductDescriptionList> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 //创建子widget
-                return ProductDescriptionItemView();
+                return ProductDescriptionItemView(
+                  img: imgs[index],
+                );
               },
-              childCount: widget.count,
+              childCount: imgs.length,
             ),
           ),
         ),
@@ -69,19 +67,21 @@ class _ProductDescriptionListState extends State<ProductDescriptionList> {
 }
 
 class ProductDescriptionItemView extends StatelessWidget {
+  final String img;
+
   const ProductDescriptionItemView({
     Key? key,
+    required this.img,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  ClipRRect(
+    return ClipRRect(
       borderRadius: BorderRadius.all(new Radius.circular(10.w)),
       child: CachedNetworkImage(
         width: 327.w,
         height: 327.w,
-        imageUrl:
-        "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+        imageUrl: getImageUrl(img),
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(

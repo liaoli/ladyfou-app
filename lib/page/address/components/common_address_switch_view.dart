@@ -5,7 +5,12 @@ import '../../../style/Color.dart';
 import 'address_text_field.dart';
 
 class CommonAddressSwitchView extends StatefulWidget {
-  const CommonAddressSwitchView({Key? key}) : super(key: key);
+  final ValueChanged<bool>? onChanged;
+
+  final bool open;
+
+  const CommonAddressSwitchView({Key? key, this.onChanged, this.open = false})
+      : super(key: key);
 
   @override
   _CommonAddressSwitchViewState createState() =>
@@ -13,9 +18,13 @@ class CommonAddressSwitchView extends StatefulWidget {
 }
 
 class _CommonAddressSwitchViewState extends State<CommonAddressSwitchView> {
-  TextEditingController controller = TextEditingController(text: "Japan");
+  late bool open;
 
-  bool open = false;
+  @override
+  void initState() {
+    open = widget.open;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

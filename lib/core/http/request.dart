@@ -1,3 +1,4 @@
+import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/core/http/response.dart';
 import 'package:ladyfou/core/model/good_info_model.dart';
 import 'package:ladyfou/core/model/order_info_model.dart';
@@ -12,8 +13,12 @@ import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
+import '../model/my_address_list_model.dart';
+import '../model/no_data_model.dart';
+import '../model/product_detail_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
+import '../model/zip_address_list_model.dart';
 import 'base_url.dart';
 import 'http.dart';
 
@@ -56,6 +61,7 @@ Future<MyResponse<TokenInfoModel>> login({
 }
 
 /// home页数据 限时折扣 新品 ，排行榜
+
 Future<MyResponse<HomeDataListModel>> homeData() async {
   Map<String, dynamic> result = await XHttp.get(
     "/ladyfou/product/getProductData",
@@ -67,6 +73,8 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
 
 /// home 每日新品
 /// ladyfou/product/newProduct?page=1&page_size=3
+/// [page] 页码
+/// [pageSize] 每页数量
 Future<MyResponse<DailyNewProductListModel>> homeDailyNew({
   int page = 1,
   int pageSize = 6,
@@ -82,6 +90,8 @@ Future<MyResponse<DailyNewProductListModel>> homeDailyNew({
 
 /// home 限时折扣
 /// ladyfou/product/discountProduct?page=1&page_size=3
+/// [page] 页码
+/// [pageSize] 每页数量
 Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
   int page = 1,
   int pageSize = 6,
@@ -98,6 +108,8 @@ Future<MyResponse<DailyNewProductListModel>> homeLimitTimeDiscount({
 ///ladyfou/product/youLikeProduct
 /// home 猜你喜欢
 ///ladyfou/product/youLikeProduct?page=1&page_size=3
+/// [page] 页码
+/// [pageSize] 每页数量
 Future<MyResponse<DailyNewProductListModel>> recommendList({
   int page = 1,
   int pageSize = 6,
@@ -107,6 +119,25 @@ Future<MyResponse<DailyNewProductListModel>> recommendList({
     "page_size": pageSize,
   });
   MyResponse<DailyNewProductListModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
+
+
+
+///商品详情
+///catalog/product?id=84242
+/// [id] 商品id
+/// release.ladyfou.com产品id   84242，84241 ，103790
+Future<MyResponse<ProductDetailModel>> productDetail({
+  int id = 84242,
+}) async {
+  Map<String, dynamic> result = await XHttp.get(PRODUCT_DETAIL_URI, {
+    "id": id,
+    // "ver":"1.0.0"
+  });
+  MyResponse<ProductDetailModel> response = MyResponse.fromJson(result);
 
   return response;
 }
@@ -263,5 +294,137 @@ Future<MyResponse<CountyListModel>> getCountyList(
   });
   MyResponse<CountyListModel> response =
       MyResponse<CountyListModel>.fromJson(result);
+  return response;
+}
+
+/// 获取用户地址列表
+/// account/address?userId=109
+Future<MyResponse<MyAddressListModel>> getAddressList() async {
+  Map<String, dynamic> result = await XHttp.get(ADDRESS_LIST_URI, {
+    "userId": Global.tokenInfo.userId,
+  });
+  MyResponse<MyAddressListModel> response =
+      MyResponse<MyAddressListModel>.fromJson(result);
+  return response;
+}
+
+/// 更新/增加地址
+/// phone:18229031426
+/// zip:4750061      //邮编
+/// chinese_name:韩盼盼
+/// katakana_name:韩盼盼
+/// country_id:122
+/// state_id:286
+/// address_id:80897   不传address_id新增 传address_id是更新
+/// city:半田市
+/// address:丁田町
+/// email:hanpanpan@neverdown.cc
+/// address_detail:测试地址1
+/// is_default:1
+/// account/address?userId=109
+Future<MyResponse<AddressModel>> updateAddress({
+  required String phone,
+  required String zip,
+  required String chinese_name,
+  required String katakana_name,
+  int country_id = 122,
+  required int state_id,
+  int? address_id,
+  required String city,
+  required String address,
+  required String email,
+  required String address_detail,
+  int is_default = 0,
+}) async {
+  Map<String, dynamic> param = {
+    "phone": phone,
+    "zip": zip,
+    "chinese_name": chinese_name,
+    "katakana_name": katakana_name,
+    "country_id": country_id,
+    "state_id": state_id,
+    "address_id": address_id,
+    "city": city,
+    "address": address,
+    "email": email,
+    "address_detail": address_detail,
+    "is_default": is_default,
+  };
+
+  if (address_id == null) {
+    param.remove("address_id");
+  }
+
+  Map<String, dynamic> result = await XHttp.post(UPDATE_ADDRESS_URI, param);
+  MyResponse<AddressModel> response = MyResponse<AddressModel>.fromJson(result);
+  return response;
+}
+
+/// 删除地址
+/// userId:122663 用户id
+/// token:FXj7PotmIH6qmzFHDfrk59THGPRUhU8E
+/// id:81048 // 地址
+Future<MyResponse<NoDataModel>> deleteAddress({required int id}) async {
+  Map<String, dynamic> result = await XHttp.post(DELETE_ADDRESS_URI, {
+    "userId": Global.tokenInfo.userId,
+    "id": id,
+  });
+  MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// userId:122663 用户id
+Future<MyResponse<ZipAddressListModel>> getAddressByZIP(
+    {required String zip}) async {
+  Map<String, dynamic> result = await XHttp.get(ADDRESS_BY_ZIP_URI, {
+    "zip": zip,
+  });
+  MyResponse<ZipAddressListModel> response =
+      MyResponse<ZipAddressListModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// common/zipCode?country=東京都&city=あきる野市&town=三内
+Future<MyResponse<ZipAddressModel>> getZIPByAddress(
+    {required String country,
+    required String city,
+    required String town}) async {
+  Map<String, dynamic> result = await XHttp.get(ZIP_BY_ADDRESS_URI, {
+    "country": country,
+    "city": city,
+    "town": town,
+  });
+  MyResponse<ZipAddressModel> response =
+      MyResponse<ZipAddressModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// [email]邮箱
+Future<MyResponse<NoDataModel>> sendEmailCode({
+  required String email,
+}) async {
+  Map<String, dynamic> result = await XHttp.post(RESET_PASSWORD_START_URI, {
+    "email": email,
+  });
+  MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
+  return response;
+}
+
+/// 通过邮编获取地址
+/// [email]邮箱
+Future<MyResponse<NoDataModel>> resetPassword({
+  required String password,
+  required String re_password,
+  required String code,
+}) async {
+  Map<String, dynamic> result = await XHttp.post(RRESET_PASSWORD_END_URI, {
+    "password": password,
+    "password_confirmation": re_password,
+    "code": code,
+  });
+  MyResponse<NoDataModel> response = MyResponse<NoDataModel>.fromJson(result);
   return response;
 }

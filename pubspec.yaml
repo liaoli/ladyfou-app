@@ -266,6 +266,13 @@ flutter:
     - assets/images/selected.png
     - assets/images/trash.png
 
+    #address
+    - assets/images/edit_white.png
+    - assets/images/no_address.png
+    - assets/images/edit.png
+    - assets/images/selected.png
+    - assets/images/trash.png
+
   fonts:
     - family: xuifont
       fonts:

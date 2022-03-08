@@ -27,7 +27,7 @@ class BaseImageLoading extends StatelessWidget {
     this.height,
     this.placehold =
         'http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg', // 需要给UI要占位图
-    this.fill = BoxFit.fill,
+    this.fill = BoxFit.cover,
   });
   final CallbackAction? imgError;
   final String url;

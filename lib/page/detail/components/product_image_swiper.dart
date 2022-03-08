@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:provider/provider.dart';
 
 import '../../../style/Color.dart';
+import '../../../utils/net_image_url_util.dart';
 import '../../home/components/home_banner_swiper.dart';
+import '../store/product_detail_provider.dart';
 
 class ProductImageSwiper extends StatefulWidget {
   ProductImageSwiper();
@@ -57,10 +60,14 @@ class _ProductImageSwiperState extends State<ProductImageSwiper> {
   ];
 
   Widget _buildItem(BuildContext context, int index) {
+    if (provider.detailModel != null) {
+      img = provider.detailModel!.featureImage!;
+    }
+
     return CachedNetworkImage(
       width: double.infinity,
       height: double.infinity,
-      imageUrl: img[index],
+      imageUrl: getImageUrl(img[index]),
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -165,8 +172,11 @@ class _ProductImageSwiperState extends State<ProductImageSwiper> {
   late SwiperController _controller;
   TextEditingController numberController = new TextEditingController();
 
+  late ProductDetailProvider provider;
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context, listen: true);
     return ClipRRect(
       borderRadius: new BorderRadius.all(new Radius.circular(_radius)),
       child: Container(
@@ -175,4 +185,3 @@ class _ProductImageSwiperState extends State<ProductImageSwiper> {
     );
   }
 }
-

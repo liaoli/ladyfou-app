@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../components/horizontal_scroll_tab_bar.dart';
+import '../../../core/http/request.dart';
+import '../../../core/http/response.dart';
+import '../../../core/model/product_detail_model.dart';
+import '../../../core/utils/toast.dart';
 
 const int product_index = 1;
 const int comment_index = 2;
@@ -10,6 +14,8 @@ const int recommend_index = 4;
 
 class ProductDetailProvider extends ChangeNotifier {
   late ScrollController scrollController;
+
+  ProductDetailModel? detailModel;
 
   final List<TabData> tabS = [];
   TabData product = TabData(title: "商品", index: product_index, selected: true);
@@ -64,5 +70,24 @@ class ProductDetailProvider extends ChangeNotifier {
 
   void scrollTo(double position) {
     scrollController.jumpTo(position);
+  }
+
+  Future<void> getData() async {
+    await getProductDetail();
+  }
+
+  Future<MyResponse<ProductDetailModel>> getProductDetail() async {
+    try {
+      MyResponse<ProductDetailModel> result = await productDetail();
+      ToastUtils.success(result.common.debugMessage);
+      if (result.common.statusCode == 1000) {
+        detailModel = result.response!.data!;
+      }
+      notifyListeners();
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
   }
 }

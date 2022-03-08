@@ -5,35 +5,52 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/components/common_label.dart';
 import 'package:ladyfou/page/detail/components/detail_bottom_view.dart';
+import 'package:provider/provider.dart';
 
 import '../../../components/button/common_button.dart';
 import '../../../components/clicked_Image_asset.dart';
 import '../../../components/count_edit_view.dart';
+import '../../../core/model/product_detail_model.dart';
 import '../../../style/Color.dart';
+import '../store/select_color_size_provider.dart';
 
 class ColorAndSizeView extends StatefulWidget {
-  const ColorAndSizeView({Key? key}) : super(key: key);
+  final ProductDetailModel detailModel;
+
+  const ColorAndSizeView({Key? key, required this.detailModel})
+      : super(key: key);
 
   @override
   _ColorAndSizeViewState createState() => _ColorAndSizeViewState();
 }
 
 class _ColorAndSizeViewState extends State<ColorAndSizeView> {
+  late SelectColorSizeProvider provider;
+
+  @override
+  void initState() {
+    provider = SelectColorSizeProvider(productDetailModel: widget.detailModel);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          head(),
-          Container(
-            width: double.infinity,
-            height: 2.w,
-            color: AppColors.color_FFF5F5F5,
-          ),
-          Expanded(child: refresh()),
-          count(),
-          DetailBottomView(),
-        ],
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: Container(
+        child: Column(
+          children: [
+            head(),
+            Container(
+              width: double.infinity,
+              height: 2.w,
+              color: AppColors.color_FFF5F5F5,
+            ),
+            Expanded(child: refresh()),
+            count(),
+            DetailBottomView(),
+          ],
+        ),
       ),
     );
   }
@@ -54,8 +71,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
                 child: CachedNetworkImage(
                   width: 80.w,
                   height: 80.w,
-                  imageUrl:
-                      "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                  imageUrl: provider.featureImg(),
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -83,7 +99,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
                   Row(
                     children: [
                       Text(
-                        "￥4475",
+                        "￥${provider.productDetailModel.price}",
                         style: TextStyle(
                           color: AppColors.Color_E34D59,
                           fontSize: 14,
@@ -104,7 +120,7 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "-21%",
+                              "${provider.productDetailModel.discount}",
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 8,
@@ -191,7 +207,51 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
     );
   }
 
+  // Widget color() {
+  //   return SliverGrid(
+  //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //       crossAxisCount: 5, //Grid按两列显示
+  //       mainAxisSpacing: 12.w,
+  //       crossAxisSpacing: 12.w,
+  //       childAspectRatio: 1 / 1,
+  //     ),
+  //     delegate: SliverChildBuilderDelegate(
+  //       (BuildContext context, int index) {
+  //         //创建子widget
+  //         return ClipRRect(
+  //           borderRadius: BorderRadius.all(new Radius.circular(10.w)),
+  //           child: CachedNetworkImage(
+  //             width: 60.w,
+  //             height: 60.w,
+  //             imageUrl:
+  //                 "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+  //             imageBuilder: (context, imageProvider) => Container(
+  //               decoration: BoxDecoration(
+  //                 image: DecorationImage(
+  //                   image: imageProvider,
+  //                   fit: BoxFit.cover,
+  //                 ),
+  //               ),
+  //             ),
+  //             placeholder: (context, url) => Center(
+  //               child: SizedBox(
+  //                 width: 20.w,
+  //                 height: 20.w,
+  //                 child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+  //               ),
+  //             ),
+  //             errorWidget: (context, url, error) => Icon(Icons.error),
+  //           ),
+  //         );
+  //       },
+  //       childCount: 3,
+  //     ),
+  //   );
+  // }
+
   Widget color() {
+    List<CommonLabelData<Value>> colorLabel = provider.getColorList();
+
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5, //Grid按两列显示
@@ -202,58 +262,27 @@ class _ColorAndSizeViewState extends State<ColorAndSizeView> {
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           //创建子widget
-          return ClipRRect(
-            borderRadius: BorderRadius.all(new Radius.circular(10.w)),
-            child: CachedNetworkImage(
-              width: 60.w,
-              height: 60.w,
-              imageUrl:
-                  "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              placeholder: (context, url) => Center(
-                child: SizedBox(
-                  width: 20.w,
-                  height: 20.w,
-                  child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
-                ),
-              ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
+          CommonLabelData item = colorLabel[index];
+          //创建子widget
+          return GestureDetector(
+            child: CommonLabel(model: item),
+            onTap: () {
+              colorLabel.forEach((element) {
+                element.isSelected = false;
+              });
+              item.isSelected = true;
+
+              setState(() {});
+            },
           );
         },
-        childCount: 3,
+        childCount: colorLabel.length,
       ),
     );
   }
 
-  List<String> sizeList = ["XL", "L", "M", "S"];
-  List<CommonLabelData<String>> sizeLabel = [];
-
   Widget size() {
-    if (sizeLabel.length == 0) {
-      sizeLabel = sizeList
-          .map((e) => CommonLabelData(
-                label: e,
-                data: e,
-                height: 20.w,
-                width: 40.w,
-                default_bg: AppColors.transparent,
-                selected_bg: AppColors.Color_E34D59,
-                default_text_color: AppColors.color_FF333333,
-                selected_text_color: AppColors.white,
-                selected_borderColor: AppColors.Color_E34D59,
-                borderRadius: 16.w,
-                default_borderColor: AppColors.color_FF999999,
-              ))
-          .toList();
-    }
+    List<CommonLabelData<Value>> sizeLabel = provider.getSizeList();
 
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

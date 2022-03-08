@@ -15,7 +15,7 @@ class XHttp {
 
   ///网络请求配置
   static final Dio dio = Dio(BaseOptions(
-    baseUrl: baseUrl,
+    baseUrl: getBaseUrl(),
     connectTimeout: 5000,
     sendTimeout: 5000,
     receiveTimeout: 5000,

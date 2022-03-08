@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../style/Color.dart';
+import '../store/product_detail_provider.dart';
 import 'color_and_size_view.dart';
 import 'comon_forward_item_view.dart';
 
@@ -15,6 +17,7 @@ class ColorAndSizeEntryView extends StatefulWidget {
 class _ColorAndSizeEntryViewState extends State<ColorAndSizeEntryView> {
   @override
   Widget build(BuildContext context) {
+    ProductDetailProvider provider = Provider.of(context, listen: false);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: GestureDetector(
@@ -48,7 +51,9 @@ class _ColorAndSizeEntryViewState extends State<ColorAndSizeEntryView> {
                     height: 428.w,
                     color: AppColors.white,
                     alignment: Alignment.centerLeft,
-                    child: ColorAndSizeView(),
+                    child: ColorAndSizeView(
+                      detailModel: provider.detailModel!,
+                    ),
                   ),
                 ),
               );

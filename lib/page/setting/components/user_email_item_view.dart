@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/page/setting/components/setting_item_view.dart';
 
+import '../../../core/common/global.dart';
 import '../../../style/Color.dart';
 import '../../detail/components/attention_content_view.dart';
 import '../../detail/components/comon_forward_item_view.dart';
@@ -30,8 +31,8 @@ class _UserEmailItemViewState extends State<UserEmailItemView> {
             height: 41.w,
             color: AppColors.white,
             child: SettingItemView(
-               title: "邮箱号",
-              subTitle: "123459786@Gmail.com",
+              title: "邮箱号",
+              subTitle: Global.tokenInfo.email,
             ),
           ),
         ),

@@ -6,8 +6,6 @@ import 'package:ladyfou/page/setting/components/setting_item_view.dart';
 
 import '../../../components/line.dart';
 import '../../../style/Color.dart';
-import '../../address/components/address_text_field.dart';
-import '../../detail/components/arrow_forward.dart';
 import '../setting_edit_user_info_page.dart';
 
 class CommonSettingView extends StatefulWidget {

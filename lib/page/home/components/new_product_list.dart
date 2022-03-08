@@ -1,16 +1,10 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
-import '../../../components/button/common_button.dart';
-import '../../../core/constant/constant.dart';
 import '../../../core/model/daily_new_product_list_model.dart';
-import '../../../core/utils/event.dart';
 import '../../../style/Color.dart';
 import '../store/daily_new_provider.dart';
 
@@ -87,8 +81,8 @@ class DiscountProductItemViewTwo extends StatelessWidget {
               child: CachedNetworkImage(
                 width: 170.w,
                 height: 170.w,
-                imageUrl:
-                    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                // imageUrl: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                imageUrl: product.fThumb??"",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(

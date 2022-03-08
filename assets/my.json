@@ -1,917 +1,298 @@
+{
+  "id":84242,
+  "name":"由麦中长款蕾丝针织打底小衫女装秋冬装2020年新款修身洋气上衣服",
+  "name2":"",
+  "status":"instock",
+  "list_price":7057,
+  "price":4867,
+  "amount":99999,
+  "max_qty":99999,
+  "saled":0,
+  "rating":5,
+  "special_note":"",
+  "special_note_below":"",
+  "discount":"31%",
+  "reviews_total":"0",
+  "wishlist_total":317,
+  "cids":[
 
-  {
-    "data": [
+  ],
+  "feature_image":[
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c5c/61bc57c5c4e4c8122007311.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c5d/61bc57c5d867c4043172291.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c60/61bc57c6043230561933711.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c61/61bc57c61dbf72903866211.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c67/61bc57c6758a80857100161.jpg"
+  ],
+  "product_sizes":{
+    "size_value":[
       {
-        "id": 47751,
-        "name": "不規則カジュアル無地ワンピース",
-        "name2": "",
-        "slug": "irregular-casual-plain-dress",
-        "status": "instock",
-        "list_price": 2678,
-        "price": 1860,
-        "amount": 99999,
-        "weight": "0.000",
-        "saled": 0,
-        "popular": 0,
-        "rating": 5,
-        "sort": 9999,
-        "reviews_count": 11,
-        "created_at": "2021-09-13 08:43:06",
-        "instock_time": "2021-09-13 17:44:02",
-        "is_presell": 0,
-        "max_price": "0.00",
-        "is_store_s3": 0,
-        "src_price": "2825.00",
-        "promotion_price": 1860,
-        "discount": "30%",
-        "url": "/irregular-casual-plain-dress-p-47751.html",
-        "f_thumb": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b4/613f0f1b4b03c5837541951.jpg",
-        "s_thumb": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b6/613f0f1b66a42565724497.jpg",
-        "feed_thumb": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b4/613f0f1b4b03c583754195.jpg?x-oss-process=image/resize,w_602,h_602/quality,q_100",
-        "facebook_feed_thumb": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b4/613f0f1b4b03c583754195.jpg?x-oss-process=image/resize,w_602,h_602/quality,q_100",
-        "facebook_feed_thumbs": [
-          "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b4/613f0f1b4b03c583754195.jpg",
-          "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b6/613f0f1b66a42565724497.jpg",
-          "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b7/613f0f1b75445691454225.jpg",
-          "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b8/613f0f1b83d7d926415747.jpg"
-        ],
-        "reviews_total": "0",
-        "wishlist_total": "1",
-        "cids": [
-          55,
-          56
-        ],
-        "feature_image": [
-          {
-            "path": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b4/613f0f1b4b03c583754195.jpg"
-          },
-          {
-            "path": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b6/613f0f1b66a42565724497.jpg"
-          },
-          {
-            "path": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b7/613f0f1b75445691454225.jpg"
-          },
-          {
-            "path": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1b8/613f0f1b83d7d926415747.jpg"
-          }
-        ],
-        "features": [
-          {
-            "name": "図案",
-            "name2": "图案",
-            "value_name": "無地"
-          },
-          {
-            "name": "生地",
-            "name2": "女装面料材质",
-            "value_name": "ポリエステル"
-          },
-          {
-            "name": "袖丈",
-            "name2": "女装袖长",
-            "value_name": "長袖"
-          },
-          {
-            "name": "スタイル",
-            "name2": "女装风格",
-            "value_name": "カジュアル"
-          },
-          {
-            "name": "スリーブ",
-            "name2": "女装袖型",
-            "value_name": "一般"
-          },
-          {
-            "name": "デコレーション",
-            "name2": "女装流行元素",
-            "value_name": "スリット"
-          },
-          {
-            "name": "着丈",
-            "name2": "女装衣长",
-            "value_name": "膝丈"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "春"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "秋"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "冬"
-          },
-          {
-            "name": "ネックライン",
-            "name2": "女装领型",
-            "value_name": "ラウンドネック"
-          },
-          {
-            "name": "前立て",
-            "name2": "衣门襟",
-            "value_name": "プルオーバー"
-          },
-          {
-            "name": "カラー",
-            "name2": "颜色",
-            "value_name": "ダックグレー"
-          },
-          {
-            "name": "カラー",
-            "name2": "颜色",
-            "value_name": "ライトグレー"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "20代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "30代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "40代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "50代"
-          },
-          {
-            "name": "ウエスト",
-            "name2": "腰型",
-            "value_name": "レギュラーウエスト"
-          },
-          {
-            "name": "スカートタイプ",
-            "name2": "裙型",
-            "value_name": "不規則"
-          }
-        ],
-        "options": [
-          {
-            "id": 103689,
-            "name": "カラー",
-            "name2": "颜色",
-            "sort": 1,
-            "type": "radio",
-            "values": [
-              {
-                "id": 306891,
-                "option_id": 103689,
-                "name": "ダークグレー",
-                "name2": "深灰色",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": "",
-                "thumb": {
-                  "path": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1c3/613f0f1c3b853320352212.jpg"
-                }
-              },
-              {
-                "id": 306892,
-                "option_id": 103689,
-                "name": "ライトグレー",
-                "name2": "浅灰色",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": "",
-                "thumb": {
-                  "path": "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/1c4/613f0f1c4ae28792952520.jpg"
-                }
-              }
-            ]
-          },
-          {
-            "id": 103690,
-            "name": "サイズ",
-            "name2": "尺码",
-            "sort": 2,
-            "type": "radio",
-            "values": [
-              {
-                "id": 306893,
-                "option_id": 103690,
-                "name": "S",
-                "name2": "S 80-110斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306894,
-                "option_id": 103690,
-                "name": "M",
-                "name2": "M 110-120斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306895,
-                "option_id": 103690,
-                "name": "L",
-                "name2": "L 120-130斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306896,
-                "option_id": 103690,
-                "name": "XL",
-                "name2": "XL 130-140斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306897,
-                "option_id": 103690,
-                "name": "2XL",
-                "name2": "2XL 140-150斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306898,
-                "option_id": 103690,
-                "name": "3XL",
-                "name2": "3XL 150-155斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306899,
-                "option_id": 103690,
-                "name": "4XL",
-                "name2": "4XL 155-160斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              },
-              {
-                "id": 306900,
-                "option_id": 103690,
-                "name": "5XL",
-                "name2": "5XL 160-170斤",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              }
-            ]
-          }
-        ],
-        "rat_num": 0,
-        "sales": 0,
-        "sku": [
-          {
-            "id": 451283,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600001",
-            "item_id": "906431587565",
-            "sku_price": "26.00",
-            "sku_status": 0,
-            "sku_list_price": "57.00",
-            "sku_stock": 0,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451284,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600002",
-            "item_id": "906431587566",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 8,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451285,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600003",
-            "item_id": "906431587567",
-            "sku_price": "26.00",
-            "sku_status": 0,
-            "sku_list_price": "57.00",
-            "sku_stock": 0,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451286,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600004",
-            "item_id": "906431587568",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 12,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451287,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600005",
-            "item_id": "906431587569",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 14,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451288,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600006",
-            "item_id": "906431587570",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 3,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451289,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600007",
-            "item_id": "906431587571",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 15,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451290,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600008",
-            "item_id": "906431587572",
-            "sku_price": "26.00",
-            "sku_status": 0,
-            "sku_list_price": "57.00",
-            "sku_stock": 0,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451291,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600014",
-            "item_id": "906433057001",
-            "sku_price": "26.00",
-            "sku_status": 0,
-            "sku_list_price": "57.00",
-            "sku_stock": 0,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451292,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600015",
-            "item_id": "906433057002",
-            "sku_price": "26.00",
-            "sku_status": 0,
-            "sku_list_price": "57.00",
-            "sku_stock": 0,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451293,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600016",
-            "item_id": "906433057003",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 12,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451294,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600017",
-            "item_id": "906433057004",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 2,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451295,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600018",
-            "item_id": "906433057005",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 25,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451296,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600019",
-            "item_id": "906433057006",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 13,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451297,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600020",
-            "item_id": "906433057007",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 2,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          },
-          {
-            "id": 451298,
-            "product_id": 47751,
-            "option_values":"",
-            "sku": "000484073600021",
-            "item_id": "906433057008",
-            "sku_price": "26.00",
-            "sku_status": 1,
-            "sku_list_price": "57.00",
-            "sku_stock": 8,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          }
-        ],
-        "stockpile": 4,
-        "sku_min_price": 0,
-        "sku_max_price": 0,
-        "tag_icons": []
+        "id":10755,
+        "first_name":"尺码",
+        "trans_name":"サイズ（CM）",
+        "values":[
+          "M",
+          "2xl",
+          "XXL",
+          "XXXXL"
+        ]
       },
       {
-        "id": 47752,
-        "name": "ドローコードファスナー無地カジュアルワンピース",
-        "name2": "",
-        "slug": "drawcord-fastener-casual-dress",
-        "status": "instock",
-        "list_price": 4746,
-        "price": 3490,
-        "amount": 99999,
-        "weight": "0.000",
-        "saled": 5,
-        "popular": 0,
-        "rating": 5,
-        "sort": 9999,
-        "reviews_count": 6,
-        "created_at": "2021-09-13 08:45:36",
-        "instock_time": "2021-09-13 18:01:47",
-        "is_presell": 0,
-        "max_price": "0.00",
-        "is_store_s3": 0,
-        "src_price": "3605.00",
-        "promotion_price": 3490,
-        "discount": "26%",
-        "url": "/drawcord-fastener-casual-dress-p-47752.html",
-        "f_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb1552ef7650880341.jpg",
-        "s_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb15f3ab572030094.jpg",
-        "feed_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb1552ef765088034.jpg?x-oss-process=image/resize,w_602,h_602/quality,q_100",
-        "facebook_feed_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb1552ef765088034.jpg?x-oss-process=image/resize,w_602,h_602/quality,q_100",
-        "facebook_feed_thumbs": [
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb1552ef765088034.jpg",
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb15f3ab572030094.jpg",
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b16/613f0fb169783456489218.jpg",
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b17/613f0fb17230a694209825.jpg"
-        ],
-        "reviews_total": "0",
-        "wishlist_total": "1",
-        "feature_image": [
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb1552ef765088034.jpg"
-          },
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b15/613f0fb15f3ab572030094.jpg"
-          },
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b16/613f0fb169783456489218.jpg"
-          },
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b17/613f0fb17230a694209825.jpg"
-          }
-        ],
-        "features": [
-          {
-            "name": "図案",
-            "name2": "图案",
-            "value_name": "無地"
-          },
-          {
-            "name": "生地",
-            "name2": "女装面料材质",
-            "value_name": "ポリエステル"
-          },
-          {
-            "name": "袖丈",
-            "name2": "女装袖长",
-            "value_name": "長袖"
-          },
-          {
-            "name": "スタイル",
-            "name2": "女装风格",
-            "value_name": "簡約・シンプル"
-          },
-          {
-            "name": "スリーブ",
-            "name2": "女装袖型",
-            "value_name": "一般"
-          },
-          {
-            "name": "デコレーション",
-            "name2": "女装流行元素",
-            "value_name": "ファスナー"
-          },
-          {
-            "name": "デコレーション",
-            "name2": "女装流行元素",
-            "value_name": "ドローコード"
-          },
-          {
-            "name": "着丈",
-            "name2": "女装衣长",
-            "value_name": "すね丈"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "春"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "秋"
-          },
-          {
-            "name": "ネックライン",
-            "name2": "女装领型",
-            "value_name": "ラウンドネック"
-          },
-          {
-            "name": "前立て",
-            "name2": "衣门襟",
-            "value_name": "プルオーバー"
-          },
-          {
-            "name": "カラー",
-            "name2": "颜色",
-            "value_name": "グレー"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "20代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "30代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "40代"
-          },
-          {
-            "name": "ウエスト",
-            "name2": "腰型",
-            "value_name": "レギュラーウエスト"
-          },
-          {
-            "name": "スカートタイプ",
-            "name2": "裙型",
-            "value_name": "Aライン"
-          }
-        ],
-        "options": [
-          {
-            "id": 103691,
-            "name": "カラー",
-            "name2": "颜色",
-            "sort": 1,
-            "type": "radio",
-            "values": [
-              {
-                "id": 306901,
-                "option_id": 103691,
-                "name": "グレー",
-                "name2": "灰色",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": "",
-                "thumb": {
-                  "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b23/613f0fb23bea1818125751.jpg"
-                }
-              }
-            ]
-          },
-          {
-            "id": 103692,
-            "name": "サイズ",
-            "name2": "尺码",
-            "sort": 2,
-            "type": "radio",
-            "values": [
-              {
-                "id": 306902,
-                "option_id": 103692,
-                "name": "フリー",
-                "name2": "均码",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              }
-            ]
-          }
-        ],
-        "rat_num": 0,
-        "sales": 0,
-        "sku": [
-          {
-            "id": 451299,
-            "product_id": 47752,
-            "option_values":"",
-            "sku": "000484050400001",
-            "item_id": "4895638754833",
-            "sku_price": "69.00",
-            "sku_status": 1,
-            "sku_list_price": "128.00",
-            "sku_stock": 1195,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          }
-        ],
-        "stockpile": 4,
-        "sku_min_price": 0,
-        "sku_max_price": 0,
-        "tag_icons": []
+        "id":10756,
+        "first_name":"身高",
+        "trans_name":"身長",
+        "values":[
+          "M1",
+          "2x1",
+          "2xl",
+          "4xl"
+        ]
       },
       {
-        "id": 47753,
-        "name": "Vネック無地ギャザー飾りカジュアルワンピース",
-        "name2": "",
-        "slug": "vneck-plain-gather-casual-dress",
-        "status": "instock",
-        "list_price": 4417,
-        "price": 3398,
-        "amount": 99999,
-        "weight": "0.000",
-        "saled": 0,
-        "popular": 0,
-        "rating": 5,
-        "sort": 9999,
-        "reviews_count": 48,
-        "created_at": "2021-09-13 08:45:37",
-        "instock_time": "2021-09-13 18:00:25",
-        "is_presell": 0,
-        "max_price": "0.00",
-        "is_store_s3": 0,
-        "src_price": "3398.00",
-        "promotion_price": 3398,
-        "discount": "23%",
-        "url": "/vneck-plain-gather-casual-dress-p-47753.html",
-        "f_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b24/613f0fb24b0e58750106351.jpg",
-        "s_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b25/613f0fb256197018474611.jpg",
-        "feed_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b24/613f0fb24b0e5875010635.jpg?x-oss-process=image/resize,w_602,h_602/quality,q_100",
-        "facebook_feed_thumb": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b24/613f0fb24b0e5875010635.jpg?x-oss-process=image/resize,w_602,h_602/quality,q_100",
-        "facebook_feed_thumbs": [
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b24/613f0fb24b0e5875010635.jpg",
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b25/613f0fb256197018474611.jpg",
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b26/613f0fb26202d243989824.jpg",
-          "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b26/613f0fb26def2640454715.jpg"
-        ],
-        "reviews_total": "0",
-        "wishlist_total": "0",
-        "feature_image": [
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b24/613f0fb24b0e5875010635.jpg"
-          },
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b25/613f0fb256197018474611.jpg"
-          },
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b26/613f0fb26202d243989824.jpg"
-          },
-          {
-            "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b26/613f0fb26def2640454715.jpg"
-          }
-        ],
-        "features": [
-          {
-            "name": "図案",
-            "name2": "图案",
-            "value_name": "無地"
-          },
-          {
-            "name": "生地",
-            "name2": "女装面料材质",
-            "value_name": "ポリエステル"
-          },
-          {
-            "name": "袖丈",
-            "name2": "女装袖长",
-            "value_name": "長袖"
-          },
-          {
-            "name": "スタイル",
-            "name2": "女装风格",
-            "value_name": "簡約・シンプル"
-          },
-          {
-            "name": "スリーブ",
-            "name2": "女装袖型",
-            "value_name": "一般"
-          },
-          {
-            "name": "デコレーション",
-            "name2": "女装流行元素",
-            "value_name": "ギャザー飾り"
-          },
-          {
-            "name": "着丈",
-            "name2": "女装衣长",
-            "value_name": "一般"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "春"
-          },
-          {
-            "name": "季節",
-            "name2": "季节",
-            "value_name": "秋"
-          },
-          {
-            "name": "ネックライン",
-            "name2": "女装领型",
-            "value_name": "Vネック"
-          },
-          {
-            "name": "前立て",
-            "name2": "衣门襟",
-            "value_name": "プルオーバー"
-          },
-          {
-            "name": "カラー",
-            "name2": "颜色",
-            "value_name": "アプリコット"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "20代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "30代"
-          },
-          {
-            "name": "対象年齢",
-            "name2": "年龄层",
-            "value_name": "40代"
-          },
-          {
-            "name": "ウエスト",
-            "name2": "腰型",
-            "value_name": "なし"
-          },
-          {
-            "name": "スカートタイプ",
-            "name2": "裙型",
-            "value_name": "Aライン"
-          }
-        ],
-        "options": [
-          {
-            "id": 103693,
-            "name": "カラー",
-            "name2": "颜色",
-            "sort": 1,
-            "type": "radio",
-            "values": [
-              {
-                "id": 306903,
-                "option_id": 103693,
-                "name": "オフベージュ",
-                "name2": "浅杏色",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": "",
-                "thumb": {
-                  "path": "https://osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/613/f0f/b5d/613f0fb5d46d1494991239.jpg"
-                }
-              }
-            ]
-          },
-          {
-            "id": 103694,
-            "name": "サイズ",
-            "name2": "尺码",
-            "sort": 2,
-            "type": "radio",
-            "values": [
-              {
-                "id": 306904,
-                "option_id": 103694,
-                "name": "フリー",
-                "name2": "均码",
-                "price_variate": "+",
-                "variate_value": "0.00",
-                "hex": ""
-              }
-            ]
-          }
-        ],
-        "rat_num": 0,
-        "sales": 1,
-        "sku": [
-          {
-            "id": 451300,
-            "product_id": 47753,
-            "option_values":"",
-            "sku": "000484050900001",
-            "item_id": "4901296291747",
-            "sku_price": "65.00",
-            "sku_status": 1,
-            "sku_list_price": "124.00",
-            "sku_stock": 8888,
-            "presell": 0,
-            "stockpile_status": 0,
-            "store_status": 0
-          }
-        ],
-        "stockpile": 4,
-        "sku_min_price": 0,
-        "sku_max_price": 0,
-        "tag_icons": []
+        "id":10757,
+        "first_name":"肩宽",
+        "trans_name":"肩幅",
+        "values":[
+          "M3",
+          "2x2",
+          "2xl",
+          "4xl"
+        ]
+      },
+      {
+        "id":10758,
+        "first_name":"袖长",
+        "trans_name":"袖丈",
+        "values":[
+          "M4",
+          "2x1",
+          "2xl",
+          "4xl"
+        ]
+      },
+      {
+        "id":10759,
+        "first_name":"衣长",
+        "trans_name":"着丈",
+        "values":[
+          "M5",
+          "2x1",
+          "2xl",
+          "4xl"
+        ]
+      },
+      {
+        "id":10760,
+        "first_name":"身宽",
+        "trans_name":"身幅",
+        "values":[
+          "M6",
+          "2x3",
+          "2xl",
+          "4xl"
+        ]
+      },
+      {
+        "id":10761,
+        "first_name":"摆围",
+        "trans_name":"裾幅",
+        "values":[
+          "M7",
+          "2x1",
+          "2xl",
+          "4xl"
+        ]
+      },
+      {
+        "id":10762,
+        "first_name":"胸围",
+        "trans_name":"バスト",
+        "values":[
+          "M8",
+          "2x1",
+          "2xl",
+          "4xl"
+        ]
       }
     ]
-  }
+  },
+  "options":[
+    {
+      "id":103791,
+      "name":"カラー",
+      "values":[
+        {
+          "id":307351,
+          "option_id":103791,
+          "name":"アプリコット",
+          "hex":"",
+          "sku_big_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg",
+          "sku_small_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg"
+        }
+      ]
+    },
+    {
+      "id":103792,
+      "name":"サイズ",
+      "values":[
+        {
+          "id":307352,
+          "option_id":103792,
+          "name":"S",
+          "hex":"",
+          "sku_big_thumb":"",
+          "sku_small_thumb":""
+        },
+        {
+          "id":307353,
+          "option_id":103792,
+          "name":"M",
+          "hex":"",
+          "sku_big_thumb":"",
+          "sku_small_thumb":""
+        },
+        {
+          "id":307354,
+          "option_id":103792,
+          "name":"L",
+          "hex":"",
+          "sku_big_thumb":"",
+          "sku_small_thumb":""
+        },
+        {
+          "id":307355,
+          "option_id":103792,
+          "name":"XL",
+          "hex":"",
+          "sku_big_thumb":"",
+          "sku_small_thumb":""
+        }
+      ]
+    }
+  ],
+  "sku":[
+    {
+      "id":452700,
+      "option_values":"",
+      "sku_status":1,
+      "sku_big_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg",
+      "sku_small_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg"
+    },
+    {
+      "id":452701,
+      "option_values":"",
+      "sku_status":1,
+      "sku_big_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg",
+      "sku_small_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg"
+    },
+    {
+      "id":452702,
+      "option_values":"",
+      "sku_status":1,
+      "sku_big_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg",
+      "sku_small_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg"
+    },
+    {
+      "id":452703,
+      "option_values":"",
+      "sku_status":1,
+      "sku_big_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg",
+      "sku_small_thumb":"//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c7b/61bc57c7beb3e440157008.jpg"
+    }
+  ],
+  "web_url":"https://ladyfou.com/631710830049509463-p-84242.html",
+  "review_first":[
+
+  ],
+  "featuresRes":[
+    {
+      "title":"生地",
+      "items":"シルク生地"
+    },
+    {
+      "title":"袖丈",
+      "items":"半袖"
+    },
+    {
+      "title":"スタイル",
+      "items":"ボヘミアンスタイル"
+    },
+    {
+      "title":"スリーブ",
+      "items":"アメリカスリーブ"
+    },
+    {
+      "title":"デコレーション",
+      "items":"タッセル"
+    },
+    {
+      "title":"着丈",
+      "items":"ミニ丈"
+    },
+    {
+      "title":"季節",
+      "items":"春"
+    },
+    {
+      "title":"ネックライン",
+      "items":"キャミソール"
+    },
+    {
+      "title":"前立て",
+      "items":"ジッパー"
+    },
+    {
+      "title":"カラー",
+      "items":"ホワイト"
+    },
+    {
+      "title":"対象年齢",
+      "items":"大学生"
+    },
+    {
+      "title":"図案",
+      "items":"フルーツ"
+    }
+  ],
+  "content_images":[
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c43/61bc57c432f92473995102.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c45/61bc57c454132023206056.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c47/61bc57c47a334317890043.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c49/61bc57c49bf6f130181759.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c4b/61bc57c4bd15e834628111.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c4d/61bc57c4d25a5740191077.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c4f/61bc57c4f0680514800328.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c51/61bc57c51a626504659042.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c54/61bc57c54f5e9670776230.jpg",
+    "//osspre.oss-cn-hongkong.aliyuncs.com/uploads/public/61b/c57/c58/61bc57c58ad01272571798.jpg"
+  ],
+  "is_wished":0,
+  "is_lucky_bag":0,
+  "is_free_shipping":0,
+  "free_shipping_text":"合計9999円以上で送料無料。",
+  "free_shipping_label":"",
+  "is_restricted_blessing_bag":0,
+  "app_size_chart":"",
+  "activity_tags":[
+
+  ],
+  "attention":[
+    {
+      "title":"発送方法",
+      "content":"商品の準備期間3-8日間ぐらいかかりますので、何卒ご了承ください。"
+    },
+    {
+      "title":"色違い説明",
+      "content":"店頭及び屋外での撮影画像は、光の当たり具合で色味が違って見える場合があります。"
+    },
+    {
+      "title":"足の隙間の説明",
+      "content":"商品の素材や測り方によって、若干の誤差が発生する場合もございます。1-3cmの誤差はご了承ください。"
+    },
+    {
+      "title":"その他の指示",
+      "content":"量産服で工場から直接郵送に入るため、デニムパンツ、スカートなどの場合、穴を開けるのはお客様自分が行うことになります。"
+    }
+  ],
+  "point":340
+}

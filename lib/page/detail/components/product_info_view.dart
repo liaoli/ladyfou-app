@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/button/common_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../../style/Color.dart';
+import '../store/product_detail_provider.dart';
 
 class ProductInfoView extends StatefulWidget {
   const ProductInfoView({Key? key}) : super(key: key);
@@ -12,8 +14,11 @@ class ProductInfoView extends StatefulWidget {
 }
 
 class _ProductInfoViewState extends State<ProductInfoView> {
+  late ProductDetailProvider provider;
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context, listen: true);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: ClipRRect(
@@ -27,7 +32,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
             children: [
               Expanded(
                 child: Text(
-                  "小柄長袖カジュアルスウィート清新パフスリーブボウタイプリントショート丈クロス・ホルター・ネックボタンブラウス",
+                  getProductName(),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
@@ -52,7 +57,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "-21%",
+                          provider.detailModel!.discount ?? "",
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 8,
@@ -66,7 +71,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     width: 9.w,
                   ),
                   Text(
-                    "￥8687",
+                    "￥${provider.detailModel!.listPrice ?? ""}",
                     style: TextStyle(
                       color: AppColors.color_FF353547,
                       fontSize: 10,
@@ -91,7 +96,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                       ),
                       children: [
                         TextSpan(
-                          text: "4475",
+                          text: "${provider.detailModel!.price ?? ""}",
                           style: TextStyle(
                             color: AppColors.Color_E34D59,
                             fontSize: 14,
@@ -113,7 +118,7 @@ class _ProductInfoViewState extends State<ProductInfoView> {
                     child: SizedBox(),
                   ),
                   Text(
-                    "商品番号:433",
+                    "商品番号:${provider.detailModel!.id ?? ""}",
                     style: TextStyle(
                       color: AppColors.color_FF999999,
                       fontSize: 10,
@@ -148,5 +153,13 @@ class _ProductInfoViewState extends State<ProductInfoView> {
         ),
       ),
     );
+  }
+
+  String getProductName() {
+    if (provider.detailModel != null) {
+      return provider.detailModel!.name!;
+    }
+
+    return "正在加载...";
   }
 }

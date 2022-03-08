@@ -4,73 +4,84 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
-import 'package:ladyfou/core/utils/toast.dart';
+import 'package:ladyfou/core/model/my_address_list_model.dart';
+import 'package:ladyfou/page/address/store/edit_address_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/button/common_button.dart';
 import '../../core/constant/base_enum.dart';
-import '../../core/http/request.dart';
 import '../../style/Color.dart';
-import 'components/address_text_field.dart';
 import 'components/address_view.dart';
 import 'components/common_address_switch_view.dart';
 import 'components/country_item_view.dart';
 import 'components/name_phone_email_view.dart';
 
 class EditAddressPage extends StatefulWidget {
-  const EditAddressPage({Key? key}) : super(key: key);
+  final AddressModel model;
+
+  const EditAddressPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _EditAddressPageState createState() => _EditAddressPageState();
 }
 
 class _EditAddressPageState extends State<EditAddressPage> {
-  bool showCountdown = false;
+  late EditAddressProvider provider;
 
   @override
   void initState() {
-    getCountryList().then((value){
-      ToastUtils.success(value.common.debugMessage);
-     if(value.common.statusCode == 1000) {
-
-     }else{
-
-     }
-    });
+    provider = EditAddressProvider(addressModel: widget.model);
+    // getCountryList().then((value){
+    //   ToastUtils.success(value.common.debugMessage);
+    //  if(value.common.statusCode == 1000) {
+    //
+    //  }else{
+    //
+    //  }
+    // });
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      leadType: AppBarBackType.Back,
-      title: "配送地址",
-      body: Column(
-        children: [
-          Expanded(child: refresh()),
-          CommonButton(
-            height: 33.w,
-            width: 343.w,
-            borderRadius: BorderRadius.all(Radius.circular(17.w)),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "保 存",
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: BaseScaffold(
+        leadType: AppBarBackType.Back,
+        title: "配送地址",
+        body: Column(
+          children: [
+            Expanded(child: refresh()),
+            CommonButton(
+              height: 33.w,
+              width: 343.w,
+              borderRadius: BorderRadius.all(Radius.circular(17.w)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "保 存",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
+              onTap: () {
+                provider.saveAddress().then((value) {
+                  Navigator.pop(context);
+                });
+              },
             ),
-          ),
-          SizedBox(
-            height: 51.w,
-          ),
-        ],
+            SizedBox(
+              height: 51.w,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -110,22 +121,6 @@ class _EditAddressPageState extends State<EditAddressPage> {
     );
   }
 
-  Widget content() {
-    return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 0.w,
-        ),
-        child: Column(
-          children: [
-            AddressTextField(
-                controller: TextEditingController(),
-                title: "邮箱地址",
-                prefixIcon: "assets/images/must.png",
-                onChanged: (String text) {}),
-          ],
-        ));
-  }
-
   Widget country() {
     return CountryItemView();
   }
@@ -139,6 +134,11 @@ class _EditAddressPageState extends State<EditAddressPage> {
   }
 
   Widget commonAddressSwitch() {
-    return CommonAddressSwitchView();
+    return CommonAddressSwitchView(
+      onChanged: (bool value) {
+        provider.isDefault = value;
+      },
+      open: provider.isDefault,
+    );
   }
 }

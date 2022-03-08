@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/page/detail/store/product_detail_provider.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +31,13 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  late ProductDetailProvider provider;
 
-
-  late ProductDetailProvider productDetailProvider;
   @override
   void initState() {
+    provider = ProductDetailProvider();
 
-    productDetailProvider = ProductDetailProvider();
+    provider.getData();
 
     super.initState();
   }
@@ -44,28 +45,43 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-        value: productDetailProvider,
-        child:Scaffold(
-      body: Material(
-        color: AppColors.color_FFF5F5F5,
-        child: Column(
-          children: [
-            homeHead(),
-            Expanded(
-              child: refresh(),
-            ),
-            DetailBottomView(),
-          ],
+      value: provider,
+      child: Scaffold(
+        body: Material(
+          color: AppColors.color_FFF5F5F5,
+          child: Column(
+            children: [
+              homeHead(),
+              Expanded(
+                child: DetailListView(),
+              ),
+              DetailBottomView(),
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 
   Widget homeHead() {
     return DetailDefaultNavBar();
   }
+}
 
-  Widget refresh() {
+class DetailListView extends StatelessWidget {
+  const DetailListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ProductDetailProvider provider = Provider.of(context, listen: true);
+    return refresh(provider);
+  }
+
+  Widget refresh(ProductDetailProvider provider) {
+    if (provider.detailModel == null) {
+      return loading();
+    }
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 0.w,
@@ -74,7 +90,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         header: MaterialHeader(),
         footer: MaterialFooter(),
         onRefresh: () async {},
-        scrollController: productDetailProvider.scrollController,
+        scrollController: provider.scrollController,
         slivers: <Widget>[
           SliverToBoxAdapter(child: productImageSwiper()), //375
           SliverToBoxAdapter(child: limitTimeDiscount()), //40
@@ -89,18 +105,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           buildSliverToBoxAdapter(12.w),
           SliverToBoxAdapter(child: recommendSet()), //124
           buildSliverToBoxAdapter(12.w),
-          productEvaluationHead(),//40  //评论
-          productEvaluationList(),//180
+          productEvaluationHead(), //40  //评论
+          productEvaluationList(), //180
           SliverToBoxAdapter(child: productEvaluationBottom()), //50
           buildSliverToBoxAdapter(12.w),
-          productDescriptionHead(),//40 //详情
+          productDescriptionHead(), //40 //详情
           productDescription(), //327x2 + 12x 3
-          buildSliverToBoxAdapter(12.w),//
-          recommendProductHead(),// 推荐
+          buildSliverToBoxAdapter(12.w), //
+          recommendProductHead(), // 推荐
           RecommendProduct(),
           buildSliverToBoxAdapter(12.w),
         ],
       ),
+    );
+  }
+
+  Widget loading() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SpinKitFadingCircle(color: AppColors.Color_E34D59),
+      ],
     );
   }
 
