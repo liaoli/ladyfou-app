@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../components/horizontal_scroll_tab_bar.dart';
 import '../../../core/http/request.dart';
 import '../../../core/http/response.dart';
+import '../../../core/model/product_comment_list_model.dart';
 import '../../../core/model/product_detail_model.dart';
 import '../../../core/utils/toast.dart';
 
@@ -16,6 +17,7 @@ class ProductDetailProvider extends ChangeNotifier {
   late ScrollController scrollController;
 
   ProductDetailModel? detailModel;
+  ProductCommentListModel? comment;
 
   final List<TabData> tabS = [];
   TabData product = TabData(title: "商品", index: product_index, selected: true);
@@ -74,6 +76,7 @@ class ProductDetailProvider extends ChangeNotifier {
 
   Future<void> getData() async {
     await getProductDetail();
+    await getProductReviews();
   }
 
   Future<MyResponse<ProductDetailModel>> getProductDetail() async {
@@ -82,6 +85,21 @@ class ProductDetailProvider extends ChangeNotifier {
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         detailModel = result.response!.data!;
+      }
+      notifyListeners();
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
+  }
+
+  Future<MyResponse<ProductCommentListModel>> getProductReviews() async {
+    try {
+      MyResponse<ProductCommentListModel> result = await productReviews(id: 84229);
+      ToastUtils.success(result.common.debugMessage);
+      if (result.common.statusCode == 1000) {
+        comment = result.response!.data!;
       }
       notifyListeners();
       return result;

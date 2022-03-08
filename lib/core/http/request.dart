@@ -15,6 +15,7 @@ import '../model/county_list_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/my_address_list_model.dart';
 import '../model/no_data_model.dart';
+import '../model/product_comment_list_model.dart';
 import '../model/product_detail_model.dart';
 import '../model/province_list_model.dart';
 import '../model/token_info_model.dart';
@@ -135,6 +136,28 @@ Future<MyResponse<ProductDetailModel>> productDetail({
     // "ver":"1.0.0"
   });
   MyResponse<ProductDetailModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
+
+///商品评论
+///ladyfou/catalog/product_reviews?product_id=84229&filterimg=0&page=1&size=10
+/// [id] 商品id
+/// release.ladyfou.com产品id   84242，84241 ，103790
+Future<MyResponse<ProductCommentListModel>> productReviews({
+  int id = 84242,
+  int filterimg = 0,
+  int page = 1,
+  int size = 10
+}) async {
+  Map<String, dynamic> result = await XHttp.get(PRODUCT_REVIEWS_URI, {
+    "product_id": id,
+    "filterimg": filterimg,
+    "page": page,
+    "size": size,
+  });
+  MyResponse<ProductCommentListModel> response = MyResponse.fromJson(result);
 
   return response;
 }
