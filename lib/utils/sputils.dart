@@ -22,7 +22,6 @@ class SPUtils {
     return _spf;
   }
 
-
   ///删除某个key
   static Future<bool> removeKey(String key) {
     return _spf.remove(key);
@@ -32,7 +31,6 @@ class SPUtils {
   static Future<bool> saveThemeIndex(int value) {
     return _spf.setInt('key_theme_color', value);
   }
-
 
   static int getThemeIndex() {
     if (_spf.containsKey('key_theme_color')) {
@@ -72,7 +70,7 @@ class SPUtils {
   }
 
   static String? getToken() {
-    return /*_spf.getString('key_token')*/ '5LgZCkp9jSYtK94uvmveI29AEc9hVPld';
+    return _spf.getString('key_token') /*'5LgZCkp9jSYtK94uvmveI29AEc9hVPld'*/;
   }
 
   ///是否同意隐私协议
@@ -89,8 +87,8 @@ class SPUtils {
 
   ///是否已登陆
   static bool isLogined() {
-    String? token = getToken();
-    return token != null && token.isNotEmpty;
+    String token = Global.tokenInfo.token;
+    return token != "" && token.isNotEmpty;
   }
 
   /// 是否登录，未登录的跳转登录页

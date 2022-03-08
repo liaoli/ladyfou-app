@@ -10,6 +10,7 @@ import 'package:ladyfou/components/clicked_Image_asset.dart';
 import 'package:ladyfou/core/common/global.dart';
 import 'package:ladyfou/core/constant/base_enum.dart';
 import 'package:ladyfou/page/address/edit_address_page.dart';
+import 'package:ladyfou/page/cart/page/cart_page.dart';
 import 'package:ladyfou/page/message/sell_info_page.dart';
 import 'package:ladyfou/page/mine/order/page/mine_order_page.dart';
 import 'package:ladyfou/style/Color.dart';
@@ -20,6 +21,7 @@ import '../../components/web_view_page.dart';
 import '../../generated/l10n.dart';
 import '../../router/router.dart';
 import '../../utils/provider.dart';
+import '../../utils/sputils.dart';
 import '../address/my_address_page.dart';
 import '../cs/cs_main_page.dart';
 import '../history/browsing_history_page.dart';
@@ -127,7 +129,8 @@ class _MinePageState extends State<MinePage> {
             height: 20.w,
             fit: BoxFit.cover,
             onTap: () {
-              XRouter.goCartPage();
+              // XRouter.goCartPage();
+              Get.to(() => CartPage());
             },
           ),
           SizedBox(
@@ -282,7 +285,9 @@ class _MinePageState extends State<MinePage> {
         onTap: () {
           //TODO: 点击跳转
           if (e['name'] == S.current.collection) {
-            Get.to(() => MineCollectionPage());
+            if (SPUtils.tryToLogin(context)) {
+              Get.to(() => MineCollectionPage());
+            }
           } else if (e['name'] == S.current.discount_code) {
             Get.to(() => CouponInfoPage());
           } else if (e['name'] == S.current.footprint) {
@@ -402,7 +407,9 @@ class _MinePageState extends State<MinePage> {
                 GestureDetector(
                   onTap: () {
                     //TODO: 跳转到订单页面
-                    Get.to(() => MineOrderPage());
+                    if (SPUtils.tryToLogin(context)) {
+                      Get.to(() => Get.to(() => MineOrderPage()));
+                    }
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -457,8 +464,9 @@ class _MinePageState extends State<MinePage> {
           } else if (e['name'] == S.current.received) {
             orderStatus = OrderStatus.finished;
           }
-
-          Get.to(() => MineOrderPage(orderStatus: orderStatus));
+          if (SPUtils.tryToLogin(context)) {
+            Get.to(() => MineOrderPage(orderStatus: orderStatus));
+          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

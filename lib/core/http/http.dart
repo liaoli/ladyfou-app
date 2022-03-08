@@ -10,8 +10,6 @@ import 'package:ladyfou/utils/sputils.dart';
 
 import 'base_url.dart';
 
-
-
 class XHttp {
   XHttp._internal();
 
@@ -48,6 +46,7 @@ class XHttp {
       options.headers["token"] = Global.tokenInfo.token;
 
       print("请求之前");
+      print("请求之前token->${options.headers["token"]}");
       return handler.next(options);
     }, onResponse: (Response response, handler) {
       print("响应之前");

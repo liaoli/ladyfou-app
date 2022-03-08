@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ladyfou/components/base_scaffold.dart';
+import 'package:ladyfou/core/constant/base_enum.dart';
 import 'package:ladyfou/page/login/components/login_view.dart';
 import 'package:ladyfou/style/Color.dart';
 
@@ -68,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
     return ScreenUtilInit(
       builder: () => Scaffold(
         backgroundColor: AppColors.white,
+        appBar: BaseAppBar(leadingType: AppBarBackType.Back),
         body: GestureDetector(
           onTap: () {
             // 点击空白页面关闭键盘

@@ -21,8 +21,8 @@ import '../../../sort/components/shop_grid_list_view.dart';
 import 'mine_order_item.dart';
 
 class OrderListPage extends StatefulWidget {
-
-  OrderListPage({Key? key, required this.pageIndex,required this.provider}) : super(key: key);
+  OrderListPage({Key? key, required this.pageIndex, required this.provider})
+      : super(key: key);
   final int pageIndex;
   final OrderProvider provider;
 
@@ -162,12 +162,7 @@ class _OrderListPageState extends State<OrderListPage>
         child: ShopGridListView(
           goodsList: [],
           padding: EdgeInsets.only(top: 12),
-          loverClick: (index) {
-            // if (UserInfoManager().isLogin(context)) {
-            //   Provider.of<OrderProvider>(context, listen: false)
-            //       .isCollectionAction(index);
-            // }
-          },
+          loverClick: (index) {},
         ),
       );
     });

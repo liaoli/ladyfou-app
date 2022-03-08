@@ -48,28 +48,38 @@ class BaseBloc {
   }
 
   final _addListenerConditionShow = StreamController<bool>.broadcast();
-  Stream<bool> get addListenerConditionStream => _addListenerConditionShow.stream;
+  Stream<bool> get addListenerConditionStream =>
+      _addListenerConditionShow.stream;
 
   void addListenerConditionShow(bool isShow) {
     _addListenerConditionShow.add(isShow);
   }
 
   final _addListenerAllSortShow = StreamController<bool>.broadcast();
-  Stream<bool> get addListenerAllSortShowStream => _addListenerAllSortShow.stream;
+  Stream<bool> get addListenerAllSortShowStream =>
+      _addListenerAllSortShow.stream;
   void addListenerAllSortShow(bool isShow) {
     _addListenerAllSortShow.add(isShow);
   }
 
   final _addListenerCollectionAlertShow = StreamController<bool>.broadcast();
-  Stream<bool> get addListenerCollectionAlertShowStream => _addListenerCollectionAlertShow.stream;
+  Stream<bool> get addListenerCollectionAlertShowStream =>
+      _addListenerCollectionAlertShow.stream;
   void addListenerCollectionAlertShowShow(bool isShow) {
     _addListenerCollectionAlertShow.add(isShow);
   }
 
   final _addUpdateCollectionAlertShow = StreamController<bool>.broadcast();
-  Stream<bool> get addUpdateCollectionAlertStream => _addUpdateCollectionAlertShow.stream;
+  Stream<bool> get addUpdateCollectionAlertStream =>
+      _addUpdateCollectionAlertShow.stream;
   void addUpdateCollectionAlertShow(bool isUpdate) {
     _addUpdateCollectionAlertShow.add(isUpdate);
   }
 
+  final _addCartDiscountsListen = StreamController<bool>.broadcast();
+  Stream<bool> get addLisenerCartDiscountsStream =>
+      _addCartDiscountsListen.stream;
+  void addCartDiscountsLisenShow(bool isUpdate) {
+    _addCartDiscountsListen.add(isUpdate);
+  }
 }

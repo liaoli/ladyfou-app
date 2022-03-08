@@ -214,6 +214,8 @@ flutter:
     - assets/images/cart/checkbox_select.png # 复选框选中
     - assets/images/cart/checkbox_unselect.png # 复选框非选中
     - assets/images/cart/dropdown_arrow.png
+    - assets/images/cart/fi_cart_empty.png
+    - assets/images/cart/fi_cart_no_login.png
 
     # 通用
     - assets/images/action_bar_shopping_cart_black.png

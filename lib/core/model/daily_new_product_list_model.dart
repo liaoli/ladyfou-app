@@ -109,7 +109,7 @@ class DailyNewProduct {
   List<Feature>? features;
   List<Option>? options;
   int? ratNum;
-  int? sales;
+  String? sales;
   List<Sku>? sku;
   int? stockpile;
   int? skuMinPrice;
@@ -166,7 +166,7 @@ class DailyNewProduct {
             ? []
             : List<Option>.from(json["options"].map((x) => Option.fromMap(x))),
         ratNum: json["rat_num"],
-        sales: json["sales"],
+        sales: json["sales"].toString(),
         sku: json["sku"] == null
             ? []
             : List<Sku>.from(json["sku"].map((x) => Sku.fromMap(x))),
@@ -214,7 +214,7 @@ class DailyNewProduct {
         "features": List<dynamic>.from(features!.map((x) => x.toMap())),
         "options": List<dynamic>.from(options!.map((x) => x.toMap())),
         "rat_num": ratNum,
-        "sales": sales,
+        "sales": sales.toString(),
         "sku": List<dynamic>.from(sku!.map((x) => x.toMap())),
         "stockpile": stockpile,
         "sku_min_price": skuMinPrice,

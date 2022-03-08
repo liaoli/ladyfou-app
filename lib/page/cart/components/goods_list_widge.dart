@@ -7,21 +7,68 @@ import 'package:ladyfou/page/cart/model/cart_model.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/style/text.dart';
 
-class GoodsListWidget extends StatelessWidget {
-  const GoodsListWidget({Key? key, this.productList = const []})
+import '../../detail/components/color_and_size_entry_view.dart';
+import '../../detail/components/color_and_size_view.dart';
+
+typedef SelectCallBack = void Function(Product product);
+typedef SelectListCallBack = void Function(Product product);
+
+class GoodsListWidget extends StatefulWidget {
+  const GoodsListWidget(
+      {Key? key,
+      required this.selectListCallBack,
+      this.productList = const [],
+      this.selectProductList = const []})
       : super(key: key);
+
   final List<Product> productList;
+  final List<Product> selectProductList;
+  final SelectListCallBack selectListCallBack;
+
+  @override
+  State<GoodsListWidget> createState() => GoodsListWidgetState();
+}
+
+class GoodsListWidgetState extends State<GoodsListWidget> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final datas = ['1', '2', '3', '4'];
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
+          bool isSelect = false;
+          Product product = widget.productList[index];
+
+          widget.selectProductList.forEach((p) {
+            if (product.productId == p.productId) {
+              isSelect = true;
+            }
+          });
           return Container(
             child: Slidable(
               key: Key(datas[index].toString()),
               child: Container(
-                child: GoodItemWidget(producModel: productList[index],index: index,allCount: productList.length,),
+                child: GoodItemWidget(
+                  producModel: product,
+                  index: index,
+                  allCount: widget.productList.length,
+                  isSelect: isSelect,
+                  selectCallBack: (p) {
+                    widget.selectListCallBack(p);
+                  },
+                ),
               ),
 
               // 侧滑选项
@@ -47,22 +94,34 @@ class GoodsListWidget extends StatelessWidget {
             ),
           );
         },
-        childCount: productList.length,
+        childCount: widget.productList.length,
       ),
     );
   }
 }
 
 class GoodItemWidget extends StatelessWidget {
-  const GoodItemWidget({Key? key, required this.producModel,required this.index, required this.allCount}) : super(key: key);
+  const GoodItemWidget(
+      {Key? key,
+      required this.producModel,
+      required this.index,
+      required this.allCount,
+      required this.selectCallBack,
+      this.isSelect = false})
+      : super(key: key);
+
   final Product producModel;
   final int index;
   final int allCount;
+  final SelectCallBack selectCallBack;
+  final bool isSelect;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 114,
-      margin: EdgeInsets.only(top: index == 0 ? 0 : 5,bottom: index + 1 == allCount ? 0 : 5),
+      margin: EdgeInsets.only(
+          top: index == 0 ? 0 : 5, bottom: index + 1 == allCount ? 0 : 5),
       decoration: new BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -82,7 +141,12 @@ class GoodItemWidget extends StatelessWidget {
       padding: EdgeInsets.only(left: 4),
       child: Row(
         children: [
-          CheckBoxWidget(isSelect: true),
+          GestureDetector(
+            onTap: () {
+              selectCallBack(producModel);
+            },
+            child: CheckBoxWidget(isSelect: isSelect),
+          ),
           ClipRRect(
             borderRadius: BorderRadius.all(new Radius.circular(5)),
             child: BaseImageLoading(
@@ -120,39 +184,67 @@ class GoodItemWidget extends StatelessWidget {
                   ),
 
                   // 选项
-                  Container(
-                    padding: EdgeInsets.only(top: 6),
-                    child: Container(
-                      width: 77,
-                      height: 22,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryBackground,
-                        border: new Border.all(
-                          color: AppColors.color_FFDCDCDC,
-                          width: 1,
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        // backgroundColor: AppColors.transparent,
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: Text(
-                              'S码 蓝色',
-                              style: BaseText.style(
-                                  fontSize: 10,
-                                  color: AppColors.primaryBlackText51,
-                                  fontWeight: FontWeight.w400),
+                        context: context,
+                        builder: (context) {
+                          return SizedBox(
+                            height: 428,
+                            child: ClipRRect(
+                              //剪裁为圆角矩形
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                width: double.infinity,
+                                height: 428,
+                                color: AppColors.white,
+                                alignment: Alignment.centerLeft,
+                                child: ColorAndSizeView(),
+                              ),
                             ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(top: 6),
+                      child: Container(
+                        width: 77,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryBackground,
+                          border: new Border.all(
+                            color: AppColors.color_FFDCDCDC,
+                            width: 1,
                           ),
-                          Container(
-                            padding: EdgeInsets.only(right: 9),
-                            child: Image.asset(
-                              'assets/images/cart/dropdown_arrow.png',
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 8),
+                              child: Text(
+                                getSize(producModel),
+                                style: BaseText.style(
+                                    fontSize: 10,
+                                    color: AppColors.primaryBlackText51,
+                                    fontWeight: FontWeight.w400),
+                              ),
                             ),
-                          )
-                        ],
+                            Container(
+                              padding: EdgeInsets.only(right: 9),
+                              child: Image.asset(
+                                'assets/images/cart/dropdown_arrow.png',
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -167,7 +259,8 @@ class GoodItemWidget extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(top: 2),
                     child: Text(
-                      Utils.formatStepCount(double.parse('1000')),
+                      Utils.formatStepCount(
+                          double.parse(producModel.listPrice.toString())),
                       style: BaseText.style(
                         fontSize: 12,
                         color: AppColors.jp_color153,
@@ -184,7 +277,8 @@ class GoodItemWidget extends StatelessWidget {
                         children: [
                           // 现价
                           Text(
-                            Utils.formatStepCount(double.parse('999')),
+                            Utils.formatStepCount(
+                                double.parse(producModel.price)),
                             style: BaseText.style(
                               fontSize: 12,
                               color: AppColors.primaryBlackText51,
@@ -194,8 +288,8 @@ class GoodItemWidget extends StatelessWidget {
 
                           // 加减商品
                           Container(
-                              width: 20,
                               height: 20,
+                              padding: EdgeInsets.only(left: 2, right: 2),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: AppColors.primaryBackground,
@@ -206,7 +300,7 @@ class GoodItemWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Text(
-                                'x1',
+                                'x${producModel.qty}',
                                 style: BaseText.style(
                                   fontSize: 10,
                                   color: AppColors.primaryBlackText51,
@@ -222,5 +316,18 @@ class GoodItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getSize(Product product) {
+    List result = [];
+    product.options.forEach((option) {
+      option.value.forEach((element) {
+        result.add(element.name2);
+      });
+    });
+    if (result.length > 0) {
+      result = result.reversed.toList();
+    }
+    return result.join(" ");
   }
 }

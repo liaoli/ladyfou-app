@@ -22,12 +22,20 @@ class CartModel {
   List<dynamic> luckyBag;
 
   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
-        products: List<Product>.from(
-            json["products"].map((x) => Product.fromJson(x))),
-        cartInfo: CartInfo.fromJson(json["cart_info"]),
-        text: List<TextModel>.from(
-            json["text"].map((x) => TextModel.fromJson(x))),
-        luckyBag: List<dynamic>.from(json["lucky_bag"].map((x) => x)),
+        products: json["products"] == null
+            ? const []
+            : List<Product>.from(
+                json["products"].map((x) => Product.fromJson(x))),
+        cartInfo: json["cart_info"] == null
+            ? CartInfo()
+            : CartInfo.fromJson(json["cart_info"]),
+        text: json["text"] == null
+            ? const []
+            : List<TextModel>.from(
+                json["text"].map((x) => TextModel.fromJson(x))),
+        luckyBag: json["lucky_bag"] == null
+            ? const []
+            : List<dynamic>.from(json["lucky_bag"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {

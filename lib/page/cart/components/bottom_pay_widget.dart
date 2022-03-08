@@ -2,10 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:ladyfou/page/cart/components/discounts_tab_widget.dart';
 import 'package:ladyfou/style/Color.dart';
 
+import '../../../core/constant/base_bloc.dart';
 import '../../../core/utils/utils.dart';
 
-class BottomPayWidget extends StatelessWidget {
-  const BottomPayWidget({Key? key}) : super(key: key);
+class BottomPayWidget extends StatefulWidget {
+  BottomPayWidget({Key? key}) : super(key: key);
+
+  @override
+  _BottomPayWidgetState createState() => _BottomPayWidgetState();
+}
+
+class _BottomPayWidgetState extends State<BottomPayWidget> {
+  bool isSelectDiscounts = true;
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    controller = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +81,7 @@ class BottomPayWidget extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => _showDiscountsWidget(context, bottomSafeHg),
+                  onTap: () => showDiscountsWidget(context, bottomSafeHg),
                   child: Container(
                     alignment: Alignment.center,
                     width: couponsWd,
@@ -103,65 +127,75 @@ class BottomPayWidget extends StatelessWidget {
   }
 
   // 选择积分/优惠券弹框
-  void _showDiscountsWidget(BuildContext context, double bottomSafeHg) {
+  void showDiscountsWidget(BuildContext context, double bottomSafeHg) {
     showModalBottomSheet(
       context: context,
+      enableDrag: false,
       builder: (BuildContext bc) {
         return Container(
-          width: double.infinity,
-          height: 134 + bottomSafeHg,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 12, top: 12),
-                width: double.infinity,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 4,
-                      color: AppColors.primaryBackground,
-                    ),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DiscountsTabWidget(),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 7),
-                        width: 30,
-                        height: 30,
-                        child: Image.asset(
-                          'assets/images/close_icon.png',
-                          width: 12,
+            width: double.infinity,
+            height: 134 + bottomSafeHg,
+            child: StreamBuilder<bool>(
+                initialData: true,
+                stream: BaseBloc.instance.addLisenerCartDiscountsStream,
+                builder: (ctx, snapshot) {
+                  bool isSelect = snapshot.data != false ? true : false;
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 12, top: 0),
+                        width: double.infinity,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 4,
+                              color: AppColors.primaryBackground,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            DiscountsTabWidget(),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(right: 7),
+                                width: 30,
+                                height: 30,
+                                child: Image.asset(
+                                  'assets/images/close_icon.png',
+                                  width: 12,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              IntegralWidget(),
-              Container(
-                padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                child: Text(
-                  '*当前最大可使用积分为100pt',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.jp_color153,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+                      IntegralWidget(
+                        isSelectDiscounts: isSelect,
+                        controller: controller,
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                        child: Text(
+                          '*当前最大可使用积分为100pt',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.jp_color153,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }));
       },
     );
   }
@@ -169,7 +203,12 @@ class BottomPayWidget extends StatelessWidget {
 
 // 积分输入框
 class IntegralWidget extends StatelessWidget {
-  const IntegralWidget({Key? key}) : super(key: key);
+  const IntegralWidget(
+      {Key? key, required this.isSelectDiscounts, required this.controller})
+      : super(key: key);
+
+  final bool isSelectDiscounts;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -187,15 +226,51 @@ class IntegralWidget extends StatelessWidget {
                 border:
                     Border.all(width: 0.5, color: AppColors.primaryBlackText51),
               ),
-              child: TextField(
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.jp_color153,
-                ),
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration.collapsed(hintText: "输入积分数额"),
-              ),
+              child: isSelectDiscounts
+                  ? TextField(
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.jp_color153,
+                      ),
+                      keyboardType: TextInputType.number,
+                      controller: controller,
+                      decoration: InputDecoration.collapsed(hintText: "输入积分数额"),
+                    )
+                  : TextField(
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.jp_color153,
+                      ),
+                      keyboardType: TextInputType.number,
+                      controller: controller,
+                      decoration: InputDecoration.collapsed(hintText: "请选择优惠券"),
+                      readOnly: true,
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    title: Text('男'),
+                                    onTap: () {
+                                      controller.text = "男";
+                                    },
+                                  ),
+                                  ListTile(
+                                    title: Text('女'),
+                                    onTap: () {
+                                      controller.text = "女";
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                    ),
             ),
           ),
           Container(
@@ -204,7 +279,9 @@ class IntegralWidget extends StatelessWidget {
             width: 73,
             height: 40,
             decoration: new BoxDecoration(
-              color: AppColors.color_E34D59,
+              color: isSelectDiscounts == true
+                  ? AppColors.color_E34D59
+                  : AppColors.color_FF999999,
               borderRadius: BorderRadius.all(
                 Radius.circular(5.0),
               ),

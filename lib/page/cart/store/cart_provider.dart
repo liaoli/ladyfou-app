@@ -11,7 +11,9 @@ import '../../../core/utils/toast.dart';
 class CartProvider with ChangeNotifier {
   late CartModel cartModel;
   List<Product> productList = [];
+  List<Product> selectProductList = [];
   List<DailyNewProduct> reCommend = []; //猜你喜欢
+  bool isSelectAll = false;
 
   int requestStatus = 0; // 1请求成功  2请求失败
   int currentPage = CURRENT_PAGE;
@@ -24,6 +26,8 @@ class CartProvider with ChangeNotifier {
       if (response.common.statusCode == 1000) {
         cartModel = response.response!.data!;
         productList = cartModel.products;
+        selectProductList.clear();
+        isSelectAll = false;
         requestStatus = 1;
       } else {
         requestStatus = 2;
@@ -38,8 +42,7 @@ class CartProvider with ChangeNotifier {
 
   Future<MyResponse<DailyNewProductListModel>> getRecommendList() async {
     try {
-      MyResponse<DailyNewProductListModel> result =
-      await recommendList();
+      MyResponse<DailyNewProductListModel> result = await recommendList();
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         reCommend.clear();
@@ -51,5 +54,46 @@ class CartProvider with ChangeNotifier {
       debugPrint("$s");
       throw e;
     }
+  }
+
+  Future selectAllAction() async {
+    isSelectAll = !isSelectAll;
+    if (isSelectAll) {
+      selectProductList.clear();
+      productList.forEach((product) {
+        selectProductList.add(product);
+      });
+    } else {
+      selectProductList.clear();
+    }
+    notifyListeners();
+  }
+
+  Future selectProduct(Product product) async {
+    if (selectProductList.length == 0) {
+      selectProductList.add(product);
+    } else {
+      bool isExit = false;
+      selectProductList.forEach((p) {
+        if (product.productId == p.productId) {
+          isExit = true;
+        }
+      });
+      // 存在
+      if (isExit) {
+        selectProductList
+            .removeWhere((element) => element.productId == product.productId);
+      } else {
+        selectProductList.add(product);
+      }
+    }
+
+    if (selectProductList.length == productList.length) {
+      isSelectAll = true;
+    } else {
+      isSelectAll = false;
+    }
+
+    notifyListeners();
   }
 }
