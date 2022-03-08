@@ -123,9 +123,6 @@ Future<MyResponse<DailyNewProductListModel>> recommendList({
   return response;
 }
 
-
-
-
 ///商品详情
 ///catalog/product?id=84242
 /// [id] 商品id
@@ -243,10 +240,21 @@ Future<MyResponse<List<OptionsSizeReq>>> getOptionSize(
 /////////////////////////////////thw-end//////////////////////////////////////
 
 /*-------------------------------购物车--------------------------------------*/
+/// 购物车商品列表
 Future<MyResponse<CartModel>> getCartList(
     {required Map<String, dynamic> params}) async {
   Map<String, dynamic> result = await XHttp.get(SHOPPING_CART_LIST_URI, params);
   MyResponse<CartModel> response = MyResponse<CartModel>.fromJson(result);
+  handleResponse(response);
+  return response;
+}
+
+/// 获取购物车促销策略文本
+Future<MyResponse<List<String>>> getShoppingCartText(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result = await XHttp.get(SHOPING_CART_TEXT, params);
+  MyResponse<List<String>> response = MyResponse<List<String>>.fromJson(result);
+  handleResponse(response);
   return response;
 }
 

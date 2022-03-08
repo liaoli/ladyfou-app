@@ -48,6 +48,12 @@ class _CartPageState extends State<CartPage> {
 
     if (Global.isLogin()) {
       provider.getSortAllDatas().then((value) {
+        // 默认全选
+        provider.selectAllAction();
+        setState(() {});
+      });
+
+      provider.getShoppingCartList().then((value) {
         setState(() {});
       });
 
@@ -123,8 +129,12 @@ class _CartPageState extends State<CartPage> {
                                           child.selectProduct(p);
                                         },
                                       ),
-                                      PreferentialListWidget(),
-                                      OrderDetailWidget(),
+                                      PreferentialListWidget(
+                                        cartTextList: provider.cartTextList,
+                                      ),
+                                      OrderDetailWidget(
+                                        cartInfo: provider.cartModel.cartInfo,
+                                      ),
                                       _recommendProductHead(),
                                       RecommendProductList(
                                           data: provider.reCommend),
@@ -132,7 +142,8 @@ class _CartPageState extends State<CartPage> {
                               ),
                               Positioned(
                                 bottom: 0,
-                                child: BottomPayWidget(),
+                                child: BottomPayWidget(
+                                    cartInfo: provider.cartModel.cartInfo),
                               ),
                             ],
                           );

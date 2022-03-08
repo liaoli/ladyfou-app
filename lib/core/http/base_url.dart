@@ -38,11 +38,8 @@ const String DISCOUNT_PRODUCT_URI = "/product/discountProduct";
 /// 猜你喜欢
 const String YOU_LIKE_PRODUCT_URI = "/product/youLikeProduct";
 
-
 /// 猜你喜欢
 const String PRODUCT_DETAIL_URI = "/catalog/product";
-
-
 
 ///获取分类
 const String CATEGORY_URI = "/catalog/category";
@@ -73,6 +70,9 @@ const String GET_OPTION_SIZE_URI = "/catalog/getOptionSize";
 
 /// 购物车列表
 const String SHOPPING_CART_LIST_URI = "/checkout/shopping_cart_list";
+
+/// 购物车获取促销策略
+const String SHOPING_CART_TEXT = "/product/getShoppingCartText";
 
 /// 获取国家 省
 const String COUNTRY_LIST_URI = "/common/country";

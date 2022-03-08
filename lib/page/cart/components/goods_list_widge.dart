@@ -7,6 +7,7 @@ import 'package:ladyfou/page/cart/model/cart_model.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/style/text.dart';
 
+import '../../../core/model/product_detail_model.dart';
 import '../../detail/components/color_and_size_entry_view.dart';
 import '../../detail/components/color_and_size_view.dart';
 
@@ -204,7 +205,9 @@ class GoodItemWidget extends StatelessWidget {
                                 height: 428,
                                 color: AppColors.white,
                                 alignment: Alignment.centerLeft,
-                                child: ColorAndSizeView(),
+                                child: ColorAndSizeView(
+                                  detailModel: ProductDetailModel(),
+                                ),
                               ),
                             ),
                           );

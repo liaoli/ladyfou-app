@@ -79,6 +79,8 @@ T fromJson<T>(dynamic json) {
       return cartModel as T;
     case "List<OptionsSizeReq>":
       return OptionsSizeReq.fromToList(json) as T;
+    case "List<String>":
+      return Response.fromStringList(json) as T;
     default:
       return NoDataModel() as T;
   }
@@ -101,6 +103,16 @@ class Response<T> {
     return Response(
       data: data == null ? null : fromJson<T>(data),
     );
+  }
+
+  static List<String> fromStringList(List json) {
+    List<String> lists = [];
+    json.forEach((element) {
+      if (element is String) {
+        lists.add(element);
+      }
+    });
+    return lists;
   }
 }
 

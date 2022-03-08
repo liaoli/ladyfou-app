@@ -2,11 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:ladyfou/core/utils/utils.dart';
+import 'package:ladyfou/page/cart/model/cart_model.dart';
 import 'package:ladyfou/style/Color.dart';
 import 'package:ladyfou/style/text.dart';
 
 class OrderDetailWidget extends StatelessWidget {
-  const OrderDetailWidget({Key? key}) : super(key: key);
+  const OrderDetailWidget({Key? key, required this.cartInfo}) : super(key: key);
+
+  final CartInfo cartInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +21,11 @@ class OrderDetailWidget extends StatelessWidget {
       '总金额（含税）：',
     ];
     List numList = [
-      '19p',
-      '￥${Utils.formatStepCount(double.parse("5525"))}',
-      '-￥${Utils.formatStepCount(double.parse("1999"))}',
-      '暂无可使用优惠',
-      '￥${Utils.formatStepCount(double.parse("7399"))}',
+      '${cartInfo.sumRewardPoint}pt',
+      '￥${Utils.formatStepCount(double.parse(cartInfo.sumProductPrice))}',
+      '-￥${Utils.formatStepCount(double.parse(cartInfo.points))}',
+      '${cartInfo.coupon}',
+      '￥${Utils.formatStepCount(double.parse(cartInfo.totalPrice))}',
     ];
     Color numColor = AppColors.primaryBlackText51;
     return SliverToBoxAdapter(

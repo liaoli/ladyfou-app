@@ -1,12 +1,18 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/page/cart/components/discounts_tab_widget.dart';
 import 'package:ladyfou/style/Color.dart';
 
 import '../../../core/constant/base_bloc.dart';
 import '../../../core/utils/utils.dart';
+import '../model/cart_model.dart';
 
 class BottomPayWidget extends StatefulWidget {
-  BottomPayWidget({Key? key}) : super(key: key);
+  BottomPayWidget({Key? key, required this.cartInfo}) : super(key: key);
+
+  final CartInfo cartInfo;
 
   @override
   _BottomPayWidgetState createState() => _BottomPayWidgetState();
@@ -128,6 +134,9 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
 
   // 选择积分/优惠券弹框
   void showDiscountsWidget(BuildContext context, double bottomSafeHg) {
+    // 弹出时清空原来的
+    controller.text = '';
+
     showModalBottomSheet(
       context: context,
       enableDrag: false,
@@ -179,13 +188,14 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
                         ),
                       ),
                       IntegralWidget(
+                        cartInfo: widget.cartInfo,
                         isSelectDiscounts: isSelect,
                         controller: controller,
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
                         child: Text(
-                          '*当前最大可使用积分为100pt',
+                          '*当前最大可使用积分为${widget.cartInfo.userSumActiveRewardPoints}pt',
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -204,11 +214,41 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
 // 积分输入框
 class IntegralWidget extends StatelessWidget {
   const IntegralWidget(
-      {Key? key, required this.isSelectDiscounts, required this.controller})
+      {Key? key,
+      required this.isSelectDiscounts,
+      required this.controller,
+      required this.cartInfo})
       : super(key: key);
 
   final bool isSelectDiscounts;
   final TextEditingController controller;
+  final CartInfo cartInfo;
+
+  // 点击使用
+  void clickUserAction(BuildContext context) {
+    // 点击积分使用
+    if (isSelectDiscounts) {
+      int input = 0;
+      try {
+        input = int.parse(controller.text);
+      } catch (e) {
+        ToastUtils.toast("请输入正确的积分数！");
+        return;
+      }
+
+      if (input > cartInfo.userSumActiveRewardPoints) {
+        ToastUtils.toast("已超出最大可使用积分！");
+        return;
+      }
+      if (input < 0) {
+        ToastUtils.toast("请输入正确的积分数！");
+        return;
+      }
+      Navigator.pop(context);
+    }
+    // 点击优惠券使用
+    else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -273,25 +313,30 @@ class IntegralWidget extends StatelessWidget {
                     ),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(left: 10),
-            width: 73,
-            height: 40,
-            decoration: new BoxDecoration(
-              color: isSelectDiscounts == true
-                  ? AppColors.color_E34D59
-                  : AppColors.color_FF999999,
-              borderRadius: BorderRadius.all(
-                Radius.circular(5.0),
+          InkWell(
+            onTap: () {
+              clickUserAction(context);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(left: 10),
+              width: 73,
+              height: 40,
+              decoration: new BoxDecoration(
+                color: isSelectDiscounts == true
+                    ? AppColors.color_E34D59
+                    : AppColors.color_FF999999,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5.0),
+                ),
               ),
-            ),
-            child: Text(
-              '使用',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
+              child: Text(
+                '使用',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
               ),
             ),
           )

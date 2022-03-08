@@ -10,9 +10,10 @@ import '../../../core/utils/toast.dart';
 
 class CartProvider with ChangeNotifier {
   late CartModel cartModel;
-  List<Product> productList = [];
-  List<Product> selectProductList = [];
+  List<Product> productList = []; //购物车商品列表
+  List<Product> selectProductList = []; // 选中的商品
   List<DailyNewProduct> reCommend = []; //猜你喜欢
+  List<String> cartTextList = []; //促销文本
   bool isSelectAll = false;
 
   int requestStatus = 0; // 1请求成功  2请求失败
@@ -40,10 +41,10 @@ class CartProvider with ChangeNotifier {
     }
   }
 
+  /// 获取推荐商品列表
   Future<MyResponse<DailyNewProductListModel>> getRecommendList() async {
     try {
       MyResponse<DailyNewProductListModel> result = await recommendList();
-      ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         reCommend.clear();
         reCommend.addAll(result.response!.data!.data);
@@ -56,6 +57,23 @@ class CartProvider with ChangeNotifier {
     }
   }
 
+  /// 获取促销策略文本
+  Future<MyResponse> getShoppingCartList() async {
+    try {
+      MyResponse response = await getShoppingCartText(params: {});
+      if (response.common.statusCode == 1000) {
+        cartTextList.clear();
+        cartTextList = response.response!.data!;
+      }
+      notifyListeners();
+      return response;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
+  }
+
+  /// 全选
   Future selectAllAction() async {
     isSelectAll = !isSelectAll;
     if (isSelectAll) {
@@ -69,6 +87,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  /// 单选
   Future selectProduct(Product product) async {
     if (selectProductList.length == 0) {
       selectProductList.add(product);
