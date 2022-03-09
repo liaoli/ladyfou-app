@@ -108,7 +108,7 @@ class DailyNewProduct {
   List<FeatureImage>? featureImage;
   List<Feature>? features;
   List<Option>? options;
-  int? ratNum;
+  double? ratNum;
   String? sales;
   List<Sku>? sku;
   int? stockpile;
@@ -165,7 +165,7 @@ class DailyNewProduct {
         options: json["options"] == null
             ? []
             : List<Option>.from(json["options"].map((x) => Option.fromMap(x))),
-        ratNum: json["rat_num"],
+        ratNum: parse2Double(json["rat_num"]),
         sales: json["sales"].toString(),
         sku: json["sku"] == null
             ? []

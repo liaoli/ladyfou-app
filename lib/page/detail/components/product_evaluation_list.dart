@@ -125,7 +125,7 @@ class ProductEvaluationItemView extends StatelessWidget {
               width: 3.w,
             ),
             ThumbsUpView(
-              count: 2,
+              count: model.likeNum ?? 0,
             ),
           ],
         ),

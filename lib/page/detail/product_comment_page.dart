@@ -184,7 +184,7 @@ class ProductEvaluationItemView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "好人一生平安",
+                      comment.name ?? "",
                       style: TextStyle(
                         color: AppColors.color_FF333333,
                         fontSize: 12,
@@ -195,7 +195,7 @@ class ProductEvaluationItemView extends StatelessWidget {
                       height: 10.w,
                     ),
                     Text(
-                      "2020-12-25",
+                      comment.createdAt ?? "",
                       style: TextStyle(
                         color: AppColors.color_FF999999,
                         fontSize: 10,
@@ -246,7 +246,7 @@ class ProductEvaluationItemView extends StatelessWidget {
             Row(
               children: [
                 RatingBarIndicator(
-                  rating: 4.5,
+                  rating: comment.rating!.toDouble(),
                   itemBuilder: (context, index) => Icon(
                     Icons.star,
                     color: AppColors.Color_E34D59,
@@ -258,7 +258,7 @@ class ProductEvaluationItemView extends StatelessWidget {
                 ),
                 Expanded(child: SizedBox()),
                 ThumbsUpView(
-                  count: 2,
+                  count: comment.likeNum ?? 0,
                 ),
               ],
             ),
