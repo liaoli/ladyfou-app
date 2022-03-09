@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../components/horizontal_scroll_tab_bar.dart';
 import '../../../core/http/request.dart';
 import '../../../core/http/response.dart';
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../../core/model/product_comment_list_model.dart';
 import '../../../core/model/product_detail_model.dart';
 import '../../../core/utils/toast.dart';
@@ -18,7 +19,7 @@ class ProductDetailProvider extends ChangeNotifier {
 
   ProductDetailModel? detailModel;
   ProductCommentListModel? comment;
-
+  List<DailyNewProduct> reCommend = []; //猜你喜欢
   final List<TabData> tabS = [];
   TabData product = TabData(title: "商品", index: product_index, selected: true);
   TabData commend = TabData(
@@ -77,6 +78,7 @@ class ProductDetailProvider extends ChangeNotifier {
   Future<void> getData() async {
     await getProductDetail();
     await getProductReviews();
+    await getRecommendList();
   }
 
   Future<MyResponse<ProductDetailModel>> getProductDetail() async {
@@ -100,6 +102,23 @@ class ProductDetailProvider extends ChangeNotifier {
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         comment = result.response!.data!;
+      }
+      notifyListeners();
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
+  }
+
+  Future<MyResponse<DailyNewProductListModel>> getRecommendList() async {
+    try {
+      MyResponse<DailyNewProductListModel> result =
+      await recommendList();
+      ToastUtils.success(result.common.debugMessage);
+      if (result.common.statusCode == 1000) {
+        reCommend.clear();
+        reCommend.addAll(result.response!.data!.data);
       }
       notifyListeners();
       return result;

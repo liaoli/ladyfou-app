@@ -5,22 +5,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:ladyfou/page/detail/components/thumbs_up_view.dart';
+import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../components/button/common_button.dart';
+import '../../../core/model/daily_new_product_list_model.dart';
 import '../../../style/Color.dart';
 import '../product_detail_page.dart';
+import '../store/product_detail_provider.dart';
 
 class RecommendProductList extends StatefulWidget {
   final Widget background;
   final EdgeInsetsGeometry padding;
-  final int count;
 
   const RecommendProductList({
     Key? key,
     required this.background,
     required this.padding,
-    this.count = 10,
   }) : super(key: key);
 
   @override
@@ -30,6 +31,9 @@ class RecommendProductList extends StatefulWidget {
 class _RecommendProductListState extends State<RecommendProductList> {
   @override
   Widget build(BuildContext context) {
+    ProductDetailProvider provider = Provider.of(context, listen: false);
+    List<DailyNewProduct> data = provider.reCommend;
+
     return SliverStack(
       insetOnOverlap: false, // defaults to false
       children: <Widget>[
@@ -38,17 +42,6 @@ class _RecommendProductListState extends State<RecommendProductList> {
         ),
         SliverPadding(
           padding: widget.padding,
-
-          // sliver: SliverFixedExtentList(
-          //   itemExtent: 90.w,
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       //创建列表项
-          //       return ProductEvaluationItemView();
-          //     },
-          //     childCount: 2,
-          //   ),
-          // ),
           sliver: SliverGrid(
             //Grid
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -60,9 +53,12 @@ class _RecommendProductListState extends State<RecommendProductList> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 //创建子widget
-                return ProductDescriptionItemView();
+                DailyNewProduct product = data[index];
+                return RecommendProductItemView(
+                  product: product,
+                );
               },
-              childCount: widget.count,
+              childCount: data.length,
             ),
           ),
         ),
@@ -71,9 +67,12 @@ class _RecommendProductListState extends State<RecommendProductList> {
   }
 }
 
-class ProductDescriptionItemView extends StatelessWidget {
-  const ProductDescriptionItemView({
+class RecommendProductItemView extends StatelessWidget {
+  final DailyNewProduct product;
+
+  const RecommendProductItemView({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -88,7 +87,7 @@ class ProductDescriptionItemView extends StatelessWidget {
               width: 158.w,
               height: 158.w,
               imageUrl:
-                  "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+                  product.fThumb??"",
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -120,7 +119,7 @@ class ProductDescriptionItemView extends StatelessWidget {
           // ),
           Expanded(
               child: Text(
-            "小柄長袖カジュアルスウィート清新パフスリーブボウ...",
+            product.name ?? "",
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: TextStyle(
@@ -136,7 +135,7 @@ class ProductDescriptionItemView extends StatelessWidget {
           Row(
             children: [
               Text(
-                "￥4475",
+                "￥${product.price ?? 0}",
                 style: TextStyle(
                   color: AppColors.Color_E34D59,
                   fontSize: 14,
@@ -156,7 +155,7 @@ class ProductDescriptionItemView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "-21%",
+                      product.discount ?? "",
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 8,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/http/request.dart';
 import '../../../core/http/response.dart';
 import '../../../core/model/daily_new_product_list_model.dart';
+import '../../../core/model/home_banner_list_model.dart';
 import '../../../core/utils/toast.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -11,11 +12,29 @@ class HomeProvider extends ChangeNotifier {
   List<DailyNewProduct> discount = []; //限时折扣
   List<DailyNewProduct> reCommend = []; //猜你喜欢
 
+  HomeBannerListModel? banner;
+
   //验证通过提交数据
   Future<void> getHomeDataList(BuildContext context) async {
+    await getHomeBanner();
     await limitTimeDiscountList();
     await getDailyNew();
     await getRecommendList();
+  }
+
+  Future<MyResponse<HomeBannerListModel>> getHomeBanner() async {
+    try {
+      MyResponse<HomeBannerListModel> result = await homeBanner();
+      ToastUtils.success(result.common.debugMessage);
+      if (result.common.statusCode == 1000) {
+        banner = result.response!.data!;
+      }
+      notifyListeners();
+      return result;
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
   }
 
   Future<MyResponse<DailyNewProductListModel>> getDailyNew() async {
@@ -52,11 +71,9 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-
   Future<MyResponse<DailyNewProductListModel>> getRecommendList() async {
     try {
-      MyResponse<DailyNewProductListModel> result =
-      await recommendList();
+      MyResponse<DailyNewProductListModel> result = await recommendList();
       ToastUtils.success(result.common.debugMessage);
       if (result.common.statusCode == 1000) {
         reCommend.clear();
@@ -69,5 +86,4 @@ class HomeProvider extends ChangeNotifier {
       throw e;
     }
   }
-
 }

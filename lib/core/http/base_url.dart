@@ -29,6 +29,9 @@ const String RESET_PASSWORD_START_URI = "/account/reset_password_start";
 ///修改密码
 const String RRESET_PASSWORD_END_URI = "/account/reset_password_end";
 
+/// home banner
+const String HOME_BANNER_URI = "/index/getBannerUnderIndexNotify";
+
 /// home 每日新品
 const String DAILY_NEW_PRODUCT_URI = "/product/newProduct";
 

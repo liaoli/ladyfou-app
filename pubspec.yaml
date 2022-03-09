@@ -272,6 +272,7 @@ flutter:
     - assets/images/edit.png
     - assets/images/selected.png
     - assets/images/trash.png
+    - assets/images/icon_goods_placeholder.9.png
 
   fonts:
     - family: xuifont

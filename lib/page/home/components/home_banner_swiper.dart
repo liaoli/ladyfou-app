@@ -4,9 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
+import 'package:ladyfou/core/model/home_banner_list_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../style/Color.dart';
 import '../../detail/product_detail_page.dart';
+import '../store/home_provider.dart';
 
 class HomeBannerSwiper extends StatefulWidget {
   HomeBannerSwiper();
@@ -51,18 +54,15 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
 
   CustomLayoutOption? customLayoutOption;
 
-  List<String> img = [
-    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/5b3/6203715b36dcb268484339.jpg",
-    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/614/d32/3d5/614d323d524f2537290680.jpg",
-  ];
+  List<BannerModel> banners = [];
 
   Widget _buildItem(BuildContext context, int index) {
+    BannerModel model = banners[index];
     return GestureDetector(
       child: CachedNetworkImage(
         width: double.infinity,
         height: double.infinity,
-        imageUrl: img[index],
+        imageUrl: model.getImgRealUrl(),
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -72,13 +72,17 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
           ),
         ),
         placeholder: (context, url) => Center(
-          child: SizedBox(
-            width: 20,
-            height: 20,
-            child: SpinKitFadingCircle(color: AppColors.Color_E34D59),
+          child: Image.asset(
+            "assets/images/icon_goods_placeholder.9.png",
+            width: double.infinity,
+            height: double.infinity,
           ),
         ),
-        errorWidget: (context, url, error) => SizedBox(),
+        errorWidget: (context, url, error) => Image.asset(
+          "assets/images/icon_goods_placeholder.9.png",
+          width: double.infinity,
+          height: double.infinity,
+        ),
       ),
       onTap: () {
         Get.to(() => ProductDetailPage());
@@ -159,7 +163,7 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
       loop: _loop,
       autoplay: _autoplay,
       itemBuilder: _buildItem,
-      itemCount: img.length,
+      itemCount: banners.length,
       scrollDirection: _scrollDirection,
       indicatorLayout: PageIndicatorLayout.COLOR,
       autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
@@ -170,9 +174,16 @@ class _HomeBannerSwiperState extends State<HomeBannerSwiper> {
 
   late SwiperController _controller;
   TextEditingController numberController = new TextEditingController();
+  late HomeProvider provider;
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context, listen: true);
+
+    if (provider.banner != null) {
+      banners = provider.banner!.items;
+    }
+
     return ClipRRect(
       borderRadius: new BorderRadius.all(new Radius.circular(_radius)),
       child: Container(

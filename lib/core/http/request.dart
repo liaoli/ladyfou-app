@@ -13,6 +13,7 @@ import '../model/coupon_model.dart';
 import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/county_list_model.dart';
+import '../model/home_banner_list_model.dart';
 import '../model/home_data_list_model.dart';
 import '../model/my_address_list_model.dart';
 import '../model/no_data_model.dart';
@@ -69,6 +70,19 @@ Future<MyResponse<HomeDataListModel>> homeData() async {
     "/ladyfou/product/getProductData",
   );
   MyResponse<HomeDataListModel> response = MyResponse.fromJson(result);
+
+  return response;
+}
+
+/// home banner
+/// /ladyfou/index/getBannerUnderIndexNotify
+/// [page] 页码
+/// [pageSize] 每页数量
+Future<MyResponse<HomeBannerListModel>> homeBanner() async {
+  Map<String, dynamic> result = await XHttp.get(
+    HOME_BANNER_URI,
+  );
+  MyResponse<HomeBannerListModel> response = MyResponse.fromJson(result);
 
   return response;
 }
@@ -141,17 +155,12 @@ Future<MyResponse<ProductDetailModel>> productDetail({
   return response;
 }
 
-
 ///商品评论
 ///ladyfou/catalog/product_reviews?product_id=84229&filterimg=0&page=1&size=10
 /// [id] 商品id
 /// release.ladyfou.com产品id   84242，84241 ，103790
-Future<MyResponse<ProductCommentListModel>> productReviews({
-  int id = 84242,
-  int filterimg = 0,
-  int page = 1,
-  int size = 10
-}) async {
+Future<MyResponse<ProductCommentListModel>> productReviews(
+    {int id = 84242, int filterimg = 0, int page = 1, int size = 10}) async {
   Map<String, dynamic> result = await XHttp.get(PRODUCT_REVIEWS_URI, {
     "product_id": id,
     "filterimg": filterimg,
@@ -264,6 +273,7 @@ Future<MyResponse<List<OptionsSizeReq>>> getOptionSize(
 /////////////////////////////////thw-end//////////////////////////////////////
 
 /*-------------------------------购物车 start --------------------------------------*/
+
 /// 购物车商品列表
 Future<MyResponse<CartModel>> getCartList(
     {required Map<String, dynamic> params}) async {
