@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ladyfou/components/base_scaffold.dart';
 import 'package:ladyfou/components/circle_image.dart';
 import 'package:ladyfou/components/round_rect_image.dart';
+import 'package:ladyfou/core/model/product_comment_list_model.dart';
+import 'package:ladyfou/page/detail/store/comment_page_provider.dart';
+import 'package:ladyfou/utils/net_image_url_util.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/button/common_button.dart';
 import '../../core/constant/base_enum.dart';
@@ -22,67 +27,57 @@ class ProductCommentPage extends StatefulWidget {
 }
 
 class _ProductCommentPageState extends State<ProductCommentPage> {
-  List<Comment> comments = [];
-  List<String> img = [
-    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/5b3/6203715b36dcb268484339.jpg",
-    "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/614/d32/3d5/614d323d524f2537290680.jpg",
-  ];
-
-  List<CommonLabelData> labels = [];
+  late CommentPageProvider provider;
 
   @override
   void initState() {
-    resetData();
+    provider = CommentPageProvider();
 
-    labels.add(
-        CommonLabelData(label: "全部", isSelected: true, data: 1, height: 24.w,borderRadius: 12.w));
-    labels.add(
-      CommonLabelData(label: "带图评论", data: 2, height: 24.w,borderRadius: 12.w),
-    );
-
+    provider.getProductReviews(isRefresh: true);
     super.initState();
-  }
-
-  void resetData() {
-    comments.clear();
-    for (int i = 0; i < 10; i++) {
-      Comment comment = Comment("", i % 4 == 0 ? img : []);
-      comments.add(comment);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      leadType: AppBarBackType.Back,
-      title: "商品评价",
-      body: Column(
-        children: [head(), Expanded(child: refresh())],
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: BaseScaffold(
+        leadType: AppBarBackType.Back,
+        title: "商品评价",
+        body: ContentView(),
       ),
     );
   }
+}
 
-  Widget refresh() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 0.w,
-      ),
-      child: EasyRefresh(
-        header: MaterialHeader(),
-        footer: MaterialFooter(),
-        onRefresh: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {});
-          });
-        },
-        onLoad: () async {
-          await Future.delayed(Duration(seconds: 1), () {
-            setState(() {});
-          });
-        },
-        child: commentList(),
-      ),
+class ContentView extends StatefulWidget {
+  const ContentView({Key? key}) : super(key: key);
+
+  @override
+  _ContentViewState createState() => _ContentViewState();
+}
+
+class _ContentViewState extends State<ContentView> {
+  late CommentPageProvider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    provider = Provider.of(context);
+    return provider.comment == null ? loading() : hasContent();
+  }
+
+  Column hasContent() {
+    return Column(
+      children: [head(), Expanded(child: refresh())],
+    );
+  }
+
+  Widget loading() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SpinKitFadingCircle(color: AppColors.Color_E34D59),
+      ],
     );
   }
 
@@ -96,17 +91,10 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
       child: Row(
         children: [
           MyTabBar(
-            dataS: labels,
+            dataS: provider.labels,
             onTap: (CommonLabelData label) {
-              if (label.data == 1) {
-                resetData();
-              } else {
-                comments = comments.where((element) {
-                  return element.images.length > 0;
-                }).toList();
-              }
-
-              setState(() {});
+              provider.filterImg = label.data;
+              provider.refreshController.callRefresh();
             },
           ),
           Expanded(child: SizedBox()),
@@ -123,6 +111,26 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
     );
   }
 
+  Widget refresh() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 0.w,
+      ),
+      child: EasyRefresh(
+        controller: provider.refreshController,
+        header: MaterialHeader(),
+        footer: MaterialFooter(),
+        onRefresh: () async {
+          await provider.getProductReviews(isRefresh: true);
+        },
+        onLoad: () async {
+          await provider.getProductReviews(isRefresh: false);
+        },
+        child: commentList(),
+      ),
+    );
+  }
+
   Widget commentList() {
     return ListView.separated(
         padding: EdgeInsets.symmetric(
@@ -131,7 +139,7 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
         ),
         itemBuilder: (context, index) {
           return ProductEvaluationItemView(
-            comment: comments[index],
+            comment: provider.comments[index],
           );
         },
         separatorBuilder: (context, index) {
@@ -139,12 +147,12 @@ class _ProductCommentPageState extends State<ProductCommentPage> {
             height: 12.w,
           );
         },
-        itemCount: comments.length);
+        itemCount: provider.comments.length);
   }
 }
 
 class ProductEvaluationItemView extends StatelessWidget {
-  final Comment comment;
+  final CommentModel comment;
 
   const ProductEvaluationItemView({
     Key? key,
@@ -223,7 +231,7 @@ class ProductEvaluationItemView extends StatelessWidget {
               height: 8.w,
             ),
             Text(
-              "とても可愛いですすごくよいです，サイズもちょうどよく大人っぽいデザインで着心地も良いです。",
+              comment.content ?? "",
               style: TextStyle(
                 color: AppColors.color_FF333333,
                 fontSize: 10,
@@ -273,7 +281,7 @@ class ProductEvaluationItemView extends StatelessWidget {
             return RoundRectImage(
               height: 102.w,
               width: 102.w,
-              url: comment.images[index],
+              url: getImageUrl(comment.images[index].path),
               borderRadius: BorderRadius.all(new Radius.circular(10.w)),
             );
           },

@@ -53,63 +53,48 @@ class _ProductEvaluationListState extends State<ProductEvaluationList> {
         ),
         SliverPadding(
           padding: widget.padding,
-          sliver: //provider.comment == null
-              //? loading()
-              // :
-              SliverFixedExtentList(
-            itemExtent: 90.w,
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                // CommentModel model = provider.comment!.data[index];
-                //创建列表项
-                return ProductEvaluationItemView(
-                  // model: model,
-                );
-              },
-              // childCount: provider.comment!.data.length,
-              childCount: 2,
-            ),
-          ),
-          // sliver: SliverGrid(
-          //   //Grid
-          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //     crossAxisCount: 1, //Grid按两列显示
-          //     mainAxisSpacing: 12.w,
-          //     crossAxisSpacing: 12.w,
-          //     childAspectRatio: 158 / 270,
-          //   ),
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       //创建子widget
-          //       return ProductEvaluationItemView();
-          //     },
-          //     childCount: widget.count,
-          //   ),
-          // ),
+          sliver: provider.comment == null
+              ? loading()
+              : SliverFixedExtentList(
+                  itemExtent: 90.w,
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      CommentModel model = provider.comment!.data[index];
+                      //创建列表项
+                      return ProductEvaluationItemView(
+                        model: model,
+                      );
+                    },
+                    childCount: provider.comment!.data.length,
+                    // childCount: 2,
+                  ),
+                ),
         ),
       ],
     );
   }
 
   Widget loading() {
-    return Container(
-      height: 180.w,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SpinKitFadingCircle(color: AppColors.Color_E34D59),
-        ],
+    return SliverToBoxAdapter(
+      child: Container(
+        height: 180.w,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SpinKitFadingCircle(color: AppColors.Color_E34D59),
+          ],
+        ),
       ),
     );
   }
 }
 
 class ProductEvaluationItemView extends StatelessWidget {
-  // final CommentModel model;
+  final CommentModel model;
 
   const ProductEvaluationItemView({
     Key? key,
-    // required this.model,
+    required this.model,
   }) : super(key: key);
 
   @override
@@ -120,7 +105,7 @@ class ProductEvaluationItemView extends StatelessWidget {
         Row(
           children: [
             Text(
-              "好人一生平安",
+              model.name ?? "",
               style: TextStyle(
                 color: AppColors.color_FF333333,
                 fontSize: 12,
@@ -128,7 +113,7 @@ class ProductEvaluationItemView extends StatelessWidget {
               ),
             ),
             Text(
-              "2020-12-25",
+              model.createdAt ?? "",
               style: TextStyle(
                 color: AppColors.color_FF999999,
                 fontSize: 10,
@@ -150,7 +135,7 @@ class ProductEvaluationItemView extends StatelessWidget {
         Row(
           children: [
             RatingBarIndicator(
-              rating: 4.5,
+              rating: model.rating!.toDouble(),
               itemBuilder: (context, index) => Icon(
                 Icons.star,
                 color: AppColors.Color_E34D59,
@@ -174,7 +159,7 @@ class ProductEvaluationItemView extends StatelessWidget {
           height: 9.w,
         ),
         Text(
-          "とても可愛いですすごくよいです，サイズもちょうどよく大人っぽいデザインで着心地も良いです。",
+          model.content ?? "",
           style: TextStyle(
             color: AppColors.color_FF333333,
             fontSize: 10,
