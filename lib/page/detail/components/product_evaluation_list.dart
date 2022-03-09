@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ladyfou/core/model/product_comment_list_model.dart';
 import 'package:ladyfou/page/detail/components/thumbs_up_view.dart';
+import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../style/Color.dart';
+import '../store/product_detail_provider.dart';
 
 class ProductEvaluationList extends StatefulWidget {
   final Widget background;
@@ -27,6 +30,7 @@ class ProductEvaluationList extends StatefulWidget {
 class _ProductEvaluationListState extends State<ProductEvaluationList> {
   @override
   Widget build(BuildContext context) {
+    ProductDetailProvider provider = Provider.of(context);
     return SliverStack(
       insetOnOverlap: false, // defaults to false
       children: <Widget>[
@@ -49,14 +53,20 @@ class _ProductEvaluationListState extends State<ProductEvaluationList> {
         ),
         SliverPadding(
           padding: widget.padding,
-
-          sliver: SliverFixedExtentList(
+          sliver: //provider.comment == null
+              //? loading()
+              // :
+              SliverFixedExtentList(
             itemExtent: 90.w,
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
+                // CommentModel model = provider.comment!.data[index];
                 //创建列表项
-                return ProductEvaluationItemView();
+                return ProductEvaluationItemView(
+                  // model: model,
+                );
               },
+              // childCount: provider.comment!.data.length,
               childCount: 2,
             ),
           ),
@@ -80,11 +90,26 @@ class _ProductEvaluationListState extends State<ProductEvaluationList> {
       ],
     );
   }
+
+  Widget loading() {
+    return Container(
+      height: 180.w,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SpinKitFadingCircle(color: AppColors.Color_E34D59),
+        ],
+      ),
+    );
+  }
 }
 
 class ProductEvaluationItemView extends StatelessWidget {
+  // final CommentModel model;
+
   const ProductEvaluationItemView({
     Key? key,
+    // required this.model,
   }) : super(key: key);
 
   @override

@@ -75,7 +75,7 @@ class ProductDetailModel {
   String? appSizeChart;
   List<dynamic>? activityTags;
   List<Attention>? attention;
-  String? point;
+  dynamic? point;
 
   factory ProductDetailModel.fromJson(String str) =>
       ProductDetailModel.fromMap(json.decode(str));
