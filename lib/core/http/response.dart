@@ -6,6 +6,7 @@ import '../model/category_info_model.dart';
 import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
 import '../model/county_list_model.dart';
+import '../model/coupon_model.dart';
 import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/good_info_model.dart';
@@ -82,6 +83,8 @@ T fromJson<T>(dynamic json) {
       return cartModel as T;
     case "List<OptionsSizeReq>":
       return OptionsSizeReq.fromToList(json) as T;
+    case "List<CouponModel>":
+      return CouponModel.fromList(json) as T;
     case "List<String>":
       return Response.fromStringList(json) as T;
     default:

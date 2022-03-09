@@ -448,31 +448,31 @@ class _MineCollectionState extends State<MineCollectionPage> {
                     ),
                   ),
                   SizedBox(width: 15.w),
-                  GestureDetector(
-                    onTap: () {
-                      List<int> ids = [];
-                      value.selectCollectionGoodList.forEach((element) {
-                        ids.add(element.id);
-                      });
-                      value.addToCart(ids);
-                    },
-                    child: Container(
-                      height: 33.w,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                        decoration: BoxDecoration(
-                            color: AppColors.navigationColor,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.5.w))),
-                        child: Text('加入购物车',
-                            style: BaseText.style(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.white)),
-                      ),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     List<int> ids = [];
+                  //     value.selectCollectionGoodList.forEach((element) {
+                  //       ids.add(element.id);
+                  //     });
+                  //     value.addToCart(ids);
+                  //   },
+                  //   child: Container(
+                  //     height: 33.w,
+                  //     child: Container(
+                  //       alignment: Alignment.center,
+                  //       padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  //       decoration: BoxDecoration(
+                  //           color: AppColors.navigationColor,
+                  //           borderRadius:
+                  //               BorderRadius.all(Radius.circular(16.5.w))),
+                  //       child: Text('加入购物车',
+                  //           style: BaseText.style(
+                  //               fontSize: 14,
+                  //               fontWeight: FontWeight.w400,
+                  //               color: AppColors.white)),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             )),

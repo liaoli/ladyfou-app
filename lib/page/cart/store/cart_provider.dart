@@ -3,6 +3,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:ladyfou/core/constant/constant.dart';
 import 'package:ladyfou/core/http/request.dart';
 import 'package:ladyfou/core/http/response.dart';
+import 'package:ladyfou/core/model/coupon_model.dart';
 import 'package:ladyfou/page/cart/model/cart_model.dart';
 
 import '../../../core/model/daily_new_product_list_model.dart';
@@ -14,11 +15,14 @@ class CartProvider with ChangeNotifier {
   List<Product> selectProductList = []; // 选中的商品
   List<DailyNewProduct> reCommend = []; //猜你喜欢
   List<String> cartTextList = []; //促销文本
+  List<CouponModel> couponList = []; // 优惠券列表
   bool isSelectAll = false;
 
   int requestStatus = 0; // 1请求成功  2请求失败
   int currentPage = CURRENT_PAGE;
   EasyRefreshController refreshController = EasyRefreshController();
+  int currentIntegral = 0; //当前使用的积分
+  CouponModel currentCoupon = CouponModel(); //当前使用的优惠券
 
   /// 获取分类数据
   Future getSortAllDatas() async {
@@ -73,6 +77,21 @@ class CartProvider with ChangeNotifier {
     }
   }
 
+  /// 获取优惠券
+  Future getCouponCodeList() async {
+    try {
+      MyResponse<List<CouponModel>> response = await getCouponCode(params: {});
+      if (response.common.statusCode == 1000) {
+        couponList.clear();
+        couponList = response.response!.data!;
+      }
+      notifyListeners();
+    } catch (s, e) {
+      debugPrint("$s");
+      throw e;
+    }
+  }
+
   /// 全选
   Future selectAllAction() async {
     isSelectAll = !isSelectAll;
@@ -113,6 +132,20 @@ class CartProvider with ChangeNotifier {
       isSelectAll = false;
     }
 
+    notifyListeners();
+  }
+
+  /// 更新使用积分
+  Future updateUseIntegral(int integral) async {
+    currentIntegral = integral;
+    notifyListeners();
+  }
+
+  /// 更新使用的优惠券
+  Future updateUseCoupon(CouponModel? model) async {
+    if (model != null) {
+      currentCoupon = model;
+    }
     notifyListeners();
   }
 }

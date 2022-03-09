@@ -60,6 +60,10 @@ class _CartPageState extends State<CartPage> {
       provider.getRecommendList().then((value) {
         setState(() {});
       });
+
+      provider.getCouponCodeList().then((value) {
+        setState(() {});
+      });
     }
 
     super.initState();
