@@ -9,6 +9,7 @@ import 'package:ladyfou/page/cart/model/cart_model.dart';
 import '../model/category_info_model.dart';
 import '../model/city_list_model.dart';
 import '../model/country_list_model.dart';
+import '../model/coupon_model.dart';
 import '../model/daily_new_product_list_model.dart';
 import '../model/good_collection_model.dart';
 import '../model/county_list_model.dart';
@@ -239,7 +240,7 @@ Future<MyResponse<List<OptionsSizeReq>>> getOptionSize(
 
 /////////////////////////////////thw-end//////////////////////////////////////
 
-/*-------------------------------购物车--------------------------------------*/
+/*-------------------------------购物车 start --------------------------------------*/
 /// 购物车商品列表
 Future<MyResponse<CartModel>> getCartList(
     {required Map<String, dynamic> params}) async {
@@ -257,6 +258,18 @@ Future<MyResponse<List<String>>> getShoppingCartText(
   handleResponse(response);
   return response;
 }
+
+/// 获取优惠券
+Future<MyResponse<List<CouponModel>>> getCouponCode(
+    {required Map<String, dynamic> params}) async {
+  Map<String, dynamic> result = await XHttp.get(COUPON_CODE, params);
+  MyResponse<List<CouponModel>> response =
+      MyResponse<List<CouponModel>>.fromJson(result);
+  handleResponse(response);
+  return response;
+}
+
+/*-------------------------------购物车 end --------------------------------------*/
 
 /// 获取国家
 ///

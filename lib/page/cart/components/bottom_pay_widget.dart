@@ -1,13 +1,17 @@
 import 'dart:ffi';
 
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:ladyfou/core/utils/toast.dart';
 import 'package:ladyfou/page/cart/components/discounts_tab_widget.dart';
 import 'package:ladyfou/style/Color.dart';
+import 'package:ladyfou/style/text.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/constant/base_bloc.dart';
 import '../../../core/utils/utils.dart';
 import '../model/cart_model.dart';
+import '../store/cart_provider.dart';
 
 class BottomPayWidget extends StatefulWidget {
   BottomPayWidget({Key? key, required this.cartInfo}) : super(key: key);
@@ -20,13 +24,27 @@ class BottomPayWidget extends StatefulWidget {
 
 class _BottomPayWidgetState extends State<BottomPayWidget> {
   bool isSelectDiscounts = true;
-  late TextEditingController controller;
+  late TextEditingController discountController;
+  late TextEditingController couponController;
+  late CartProvider provider;
 
   @override
   void initState() {
     // TODO: implement initState
 
-    controller = TextEditingController();
+    discountController = TextEditingController();
+    couponController = TextEditingController();
+
+    discountController.addListener(() {
+      int input = 0;
+      try {
+        input = int.parse(discountController.text);
+      } catch (e) {
+        return;
+      }
+      provider.updateUseIntegral(input);
+    });
+    couponController.addListener(() {});
 
     super.initState();
   }
@@ -42,6 +60,8 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
     double bottomSafeHg = MediaQuery.of(context).padding.bottom;
     double screenWd = MediaQuery.of(context).size.width;
     double couponsWd = (screenWd - 36) / 2.6; // 优惠券按钮宽度
+
+    provider = Provider.of(context, listen: false);
 
     return Container(
       padding: EdgeInsets.fromLTRB(12, 13, 12, 0),
@@ -87,7 +107,8 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => showDiscountsWidget(context, bottomSafeHg),
+                  onTap: () => showDiscountsWidget(context, bottomSafeHg,
+                      provider, discountController, couponController),
                   child: Container(
                     alignment: Alignment.center,
                     width: couponsWd,
@@ -133,10 +154,12 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
   }
 
   // 选择积分/优惠券弹框
-  void showDiscountsWidget(BuildContext context, double bottomSafeHg) {
-    // 弹出时清空原来的
-    controller.text = '';
-
+  void showDiscountsWidget(
+      BuildContext context,
+      double bottomSafeHg,
+      CartProvider provider,
+      TextEditingController discountController,
+      TextEditingController couponController) {
     showModalBottomSheet(
       context: context,
       enableDrag: false,
@@ -190,7 +213,9 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
                       IntegralWidget(
                         cartInfo: widget.cartInfo,
                         isSelectDiscounts: isSelect,
-                        controller: controller,
+                        discountController: discountController,
+                        couponController: couponController,
+                        provider: provider,
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
@@ -211,32 +236,52 @@ class _BottomPayWidgetState extends State<BottomPayWidget> {
   }
 }
 
-// 积分输入框
-class IntegralWidget extends StatelessWidget {
-  const IntegralWidget(
+class IntegralWidget extends StatefulWidget {
+  IntegralWidget(
       {Key? key,
       required this.isSelectDiscounts,
-      required this.controller,
-      required this.cartInfo})
+      required this.discountController,
+      required this.couponController,
+      required this.cartInfo,
+      required this.provider})
       : super(key: key);
 
   final bool isSelectDiscounts;
-  final TextEditingController controller;
+  final TextEditingController discountController;
+  final TextEditingController couponController;
   final CartInfo cartInfo;
+  final CartProvider provider;
+
+  @override
+  IntegralWidgetState createState() => IntegralWidgetState();
+}
+
+// 积分输入框
+class IntegralWidgetState extends State<IntegralWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   // 点击使用
   void clickUserAction(BuildContext context) {
     // 点击积分使用
-    if (isSelectDiscounts) {
+    if (widget.isSelectDiscounts) {
       int input = 0;
       try {
-        input = int.parse(controller.text);
+        input = int.parse(widget.discountController.text);
       } catch (e) {
         ToastUtils.toast("请输入正确的积分数！");
         return;
       }
 
-      if (input > cartInfo.userSumActiveRewardPoints) {
+      if (input > widget.cartInfo.userSumActiveRewardPoints) {
         ToastUtils.toast("已超出最大可使用积分！");
         return;
       }
@@ -245,9 +290,13 @@ class IntegralWidget extends StatelessWidget {
         return;
       }
       Navigator.pop(context);
+      widget.provider.updateUseIntegral(input);
     }
     // 点击优惠券使用
-    else {}
+    else {
+      widget.provider.updateUseCoupon(null);
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -266,7 +315,7 @@ class IntegralWidget extends StatelessWidget {
                 border:
                     Border.all(width: 0.5, color: AppColors.primaryBlackText51),
               ),
-              child: isSelectDiscounts
+              child: widget.isSelectDiscounts
                   ? TextField(
                       style: TextStyle(
                         fontSize: 12,
@@ -274,7 +323,7 @@ class IntegralWidget extends StatelessWidget {
                         color: AppColors.jp_color153,
                       ),
                       keyboardType: TextInputType.number,
-                      controller: controller,
+                      controller: widget.discountController,
                       decoration: InputDecoration.collapsed(hintText: "输入积分数额"),
                     )
                   : TextField(
@@ -284,31 +333,12 @@ class IntegralWidget extends StatelessWidget {
                         color: AppColors.jp_color153,
                       ),
                       keyboardType: TextInputType.number,
-                      controller: controller,
+                      controller: widget.couponController,
                       decoration: InputDecoration.collapsed(hintText: "请选择优惠券"),
                       readOnly: true,
                       onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ListTile(
-                                    title: Text('男'),
-                                    onTap: () {
-                                      controller.text = "男";
-                                    },
-                                  ),
-                                  ListTile(
-                                    title: Text('女'),
-                                    onTap: () {
-                                      controller.text = "女";
-                                    },
-                                  ),
-                                ],
-                              );
-                            });
+                        showCouponsWidget(
+                            context, widget.couponController, widget.provider);
                       },
                     ),
             ),
@@ -323,9 +353,13 @@ class IntegralWidget extends StatelessWidget {
               width: 73,
               height: 40,
               decoration: new BoxDecoration(
-                color: isSelectDiscounts == true
-                    ? AppColors.color_E34D59
-                    : AppColors.color_FF999999,
+                color: widget.isSelectDiscounts == true
+                    ? widget.provider.currentIntegral > 0
+                        ? AppColors.color_E34D59
+                        : AppColors.color_FF999999
+                    : widget.provider.currentCoupon.tips.length > 0
+                        ? AppColors.color_E34D59
+                        : AppColors.color_FF999999,
                 borderRadius: BorderRadius.all(
                   Radius.circular(5.0),
                 ),
@@ -344,4 +378,29 @@ class IntegralWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+void showCouponsWidget(BuildContext context, TextEditingController controller,
+    CartProvider provider) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: provider.couponList.map((coupon) {
+            return ListTile(
+              title: Text(
+                coupon.tips,
+                style:
+                    BaseText.style(fontSize: 12, fontWeight: FontWeight.normal),
+              ),
+              onTap: () {
+                controller.text = coupon.tips;
+                provider.updateUseCoupon(coupon);
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      });
 }

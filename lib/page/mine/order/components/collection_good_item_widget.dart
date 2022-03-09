@@ -16,9 +16,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../../components/base_image_load.dart';
 import '../../../../core/model/good_info_model.dart';
+import '../../../../core/model/product_detail_model.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../style/Color.dart';
 import '../../../../style/text.dart';
+import '../../../detail/components/color_and_size_view.dart';
 import '../../../sort/components/shop_gradient_button.dart';
 
 typedef CallBackWidget = void Function();
@@ -273,7 +275,34 @@ class _CollectionGoodItemState extends State<CollectionGoodItem> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                // backgroundColor: AppColors.transparent,
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                context: context,
+                builder: (context) {
+                  return SizedBox(
+                    height: 428,
+                    child: ClipRRect(
+                      //剪裁为圆角矩形
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        width: double.infinity,
+                        height: 428,
+                        color: AppColors.white,
+                        alignment: Alignment.centerLeft,
+                        child: ColorAndSizeView(
+                          detailModel: ProductDetailModel(),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
             child: Container(
               width: 24.w,
               height: 24.w,

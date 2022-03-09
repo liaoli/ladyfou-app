@@ -74,6 +74,9 @@ const String SHOPPING_CART_LIST_URI = "/checkout/shopping_cart_list";
 /// 购物车获取促销策略
 const String SHOPING_CART_TEXT = "/product/getShoppingCartText";
 
+/// 获取优惠券
+const String COUPON_CODE = "/checkout/getCouponCode";
+
 /// 获取国家 省
 const String COUNTRY_LIST_URI = "/common/country";
 
