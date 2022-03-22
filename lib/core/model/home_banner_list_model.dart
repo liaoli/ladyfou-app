@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:ladyfou/utils/net_image_url_util.dart';
+
 import '../http/base_url.dart';
 
 class HomeBannerListModel {
@@ -63,6 +65,6 @@ class BannerModel {
         "imgUrl": imgUrl,
       };
   String getImgRealUrl() {
-    return baseUrl + imgUrl;
+    return getImageUrl(imgUrl);
   }
 }
