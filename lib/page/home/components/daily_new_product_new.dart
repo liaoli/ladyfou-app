@@ -147,10 +147,10 @@ class DailyNewProductList extends StatelessWidget {
         padding: EdgeInsets.only(left: 15.w, top: 0.w, bottom: 6.w),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          DailyNewProduct product = data[index];
+          // DailyNewProduct product = data[index];
           return GestureDetector(
             child: DailyNewProductItemView(
-              dailyNewProduct: product,
+              dailyNewProduct: DailyNewProduct(),
             ),
             onTap: () {
               Get.to(() => ProductDetailPage());
@@ -162,7 +162,7 @@ class DailyNewProductList extends StatelessWidget {
             width: 12.w,
           );
         },
-        itemCount: data.length,
+        itemCount: 10,
       ),
     );
   }
@@ -189,8 +189,8 @@ class DailyNewProductItemView extends StatelessWidget {
             child: CachedNetworkImage(
               width: 86.w,
               height: 86.w,
-              // imageUrl: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
-              imageUrl: dailyNewProduct.fThumb??"",
+              imageUrl: "http://ccshop-erp.neverdown.cc/storage/app/uploads/public/620/371/65e/62037165e02aa022387786.jpg",
+              // imageUrl: dailyNewProduct.fThumb??"",
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
